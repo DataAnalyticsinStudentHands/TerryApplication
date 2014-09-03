@@ -1,0 +1,14 @@
+<ion-view title="Forgot Password">
+        <ion-content padding="true">
+          <h1>Register</h1>
+    
+    <form name="registerform" ng-submit="registerUser()">
+        <input class="log_r" type="text" ng-model="register.username" placeholder="Username" required>
+        <input class="log_r" type="password" ng-model="register.password" placeholder="Password" required>
+        <input class="log_r" type="text" ng-model="register.firstName" placeholder="First Name">
+        <input class="log_r" type="text" ng-model="register.lastName" placeholder="Last Name">
+        <!--<input class="log" type="password" ng-model="register.pConf" placeholder="Password Confirmation">-->
+        <input class="log_r" type="submit" value="Submit" id="submit">
+    </form>
+        </ion-content>
+      </ion-view>

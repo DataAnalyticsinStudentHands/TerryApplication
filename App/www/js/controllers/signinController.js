@@ -1,0 +1,47 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name terry.controller:LoginController
+ * @description
+ * # LoginController
+ * Controller for the terry
+ */
+angular.module('TerryControllers')
+.controller('SignInController', function($scope, Auth, $state, ngNotify, $timeout) {
+    
+     $scope.signin = {};
+     if($scope.isAuthenticated() === true) {
+         //IF SUCCESSFULLY AUTH-ED USER IS TRYING TO GO TO LOGIN PAGE => SEND TO HOME PAGE OF APP
+         $state.go('tabs.myapplications');
+     }
+     $scope.salt = "nfp89gpe"; //PENDING - NEED TO GET ACTUAL SALT
+     $scope.submit = function() {
+         if ($scope.signin.userName && $scope.signin.passWord) {
+             document.activeElement.blur();
+             $timeout(function() {
+                 $scope.signin.passWordHashed = new String(CryptoJS.SHA512($scope.signin.passWord + $scope.signin.userName + $scope.salt));
+                 Auth.setCredentials($scope.signin.userName, $scope.signin.passWordHashed);
+                 $scope.signin.userName = '';
+                 $scope.signin.passWord = '';
+                 $scope.loginResultPromise = $scope.Restangular().all("users").getList();
+                 $scope.loginResultPromise.then(function(result) {
+                    $scope.loginResult = result;
+                    $scope.loginMsg = "You have logged in successfully!";
+                    Auth.confirmCredentials();
+                    $state.go("tabs.home", {}, {reload: true});
+                    ngNotify.set($scope.loginMsg, 'success');
+                 }, function(error) {
+                    $scope.loginMsg = "Incorrect username or password.";
+                    ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
+                    Auth.clearCredentials();
+                 });
+             }, 500);
+         } else {
+             $scope.loginMsg = "Please enter a username and password.";
+             ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
+         }
+     };
+    
+    
+ });

@@ -1,18 +1,19 @@
-<ion-view title="Users"> <ion-content class="has-header">
+<ion-view title="My Applications">
+    <ion-content class="has-header">
 
-<div class="buttons">
-	<button class="button button-icon icon ion-ios7-minus-outline"
-		ng-click="data.showDelete = !data.showDelete"></button>
-	<button class="button button-icon icon ion-compose"
-		ng-click="modal.show()"></button>
-</div>
+        <div class="buttons">
+	       <button class="button button-icon icon ion-ios7-minus-outline"
+		          ng-click="data.showDelete = !data.showDelete"></button>
+	       <button class="button button-icon icon ion-compose"
+		          ng-click="modal.show()"></button>
+        </div>
 
-<ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-<ion-item ng-repeat="user in $parent.users" type="item-text-wrap"
-	href="#/tab/user/{{user.id}}">
-{{user.username}} 
-<ion-delete-button class="ion-minus-circled"
-	ng-click="deleteUser(user.id)"> </ion-delete-button> 
+        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+            <ion-item ng-repeat="application in myapplications" type="item-text-wrap"
+	                           href="#/tab/user/{{user.id}}">
+                                {{application}} 
+                    <ion-delete-button class="ion-minus-circled"
+	               ng-click="deleteUser(user.id)"> </ion-delete-button> 
 	</ion-item> 
 	</ion-list> 
 	</ion-content> 
@@ -47,4 +48,6 @@
           </div>
         </ion-content>
       </div>
-    </script> </ion-view>
+    </script>
+  
+</ion-view>

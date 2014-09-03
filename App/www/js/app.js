@@ -1,17 +1,19 @@
-// Ionic Starter App
+// Honors Terry Application Web App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module(
-		'starter',
-		[ 'ionic', 'restangular', 'starter.filters', 'starter.services',
-				'starter.directives', 'starter.controllers' ])
+angular.module('terry',[ 
+    'ionic',
+    'restangular',
+    'ngNotify',
+    'databaseServicesModule',
+    'TerryControllers',
+    'TerryFilters',
+    'TerryServices',
+    'TerryDirectives'
+    
+    
+])
 
-.run(
-		function($ionicPlatform, Restangular, $rootScope, Auth, $q, $state) {
+.run(function($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {
 			$ionicPlatform.ready(function() {
 				// Hide the accessory bar by default (remove this to show the
 				// accessory bar above the keyboard
@@ -26,94 +28,132 @@ angular.module(
 			});
 
 			// Set Base URL to connect to DASH RESTFUL webservices
-			Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS/"); // localhost
-																			// IP
-																			// Address
+			Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
 			// Restangular.setBaseUrl("http://www.housuggest.org:8888/RESTFUL-WS-0.0.1/");
-			// // localhost IP Address
 
 			// have Restangular available whereever we need it
 			$rootScope.Restangular = function() {
 				return Restangular;
 			}
 
-			// check globally whether we have credentials
-			$rootScope.isAuthenticated = function() {
-				return Auth.hasCredentials();
-			}
+			//CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
+            $rootScope.isAuthenticated = function(authenticate) {
+                UserService.getMyUser().then(function(result) {
+                    console.log("authed");
+                    result = Restangular.stripRestangular(result)[0];
+                    //USERNAME & ID TO BE USED IN CONTROLLERS
+                    $rootScope.uid = result.id.toString();
+                    $rootScope.uin = result.username.toString();
+                }, function(error) {
+                    if(error.status === 0) { 
+                        ngNotify.set("INTERNET OR SERVER UNAVAILABLE", {type : "error", sticky : true});
+                    } else { // LOG THEM OUT
+                        Auth.clearCredentials();
+                        console.log("not-authed");
+                    if(authenticate) $state.go("login");
+                }
+            });
 
-			$rootScope.$on("$stateChangeStart", function(event, toState,
-					toParams, fromState, fromParams) {
-				console.log("$stateChangeStart");
-				console.log($rootScope.isAuthenticated());
-				if (toState.authenticate && !$rootScope.isAuthenticated()) {
-					console.log("non-authed");
-					// User isn’t authenticated
-					$state.go("login");
-					// What?
-					event.preventDefault();
-				} else
-					console.log("authed");
-			});
+            return Auth.hasCredentials();
+        }
+
+			//AUTHENTICATE ON CHANGE STATE
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        console.log("$stateChangeStart");
+        if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)){
+            console.log("non-authed");
+            // User isn’t authenticated
+            $state.go("signin");
+            //Prevents the switching of the state
+            event.preventDefault(); 
+        }
+    });
 
 		})
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-	// Ionic uses AngularUI Router which uses the concept of states
-	// Learn more here: https://github.com/angular-ui/ui-router
+	
 	// Set up the various states which the app can be in.
-	// Each state's controller can be found in controllers.js
-	$stateProvider
-
-	// setup an abstract state for the tabs directive
-	.state('tab', {
-		url : "/tab",
-		abstract : true,
-		templateUrl : "partials/tabs.html"
-	})
-
-	// Each tab has its own nav history stack:
-	.state('tab.dash', {
-		url : '/dash',
-		views : {
-			'tab-dash' : {
-				templateUrl : 'partials/tab-dash.html',
-				controller : 'loginCtrl',
-				authenticate : false
-			}
-		}
-	})
-
-	.state('tab.users', {
-		url : '/users',
-		views : {
-			'tab-users' : {
-				templateUrl : 'partials/tab-users.html',
-				controller : 'UsersCtrl'
-			}
-		}
-	}).state('tab.user-detail', {
+	
+    //signin, this is also the fallback
+    $stateProvider
+    .state('signin', {
+      url: '/signin',
+      templateUrl: 'templates/signin.html',
+      controller: 'SignInController',
+      authenticate : false
+    })
+    
+    
+    //register
+    .state('register', {
+          url: "/register",
+          templateUrl: "templates/register.html", 
+          controller: 'RegisterController',
+          authenticate: false
+      })
+    
+    // setup an abstract state for the tabs directive
+	.state('tabs', {
+      url: '/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html',
+        authenticate: false
+    })
+    
+    
+    
+    
+    .state('tabs.user-detail', {
 		url : '/user/:userId',
 		views : {
 			'tab-users' : {
-				templateUrl : 'partials/user-detail.html',
+				templateUrl : 'templates/user-detail.html',
 				controller : 'UserDetailCtrl'
 			}
 		}
 	})
-
-	.state('tab.account', {
-		url : '/account',
+    
+    .state('tabs.myapplications', {
+		url : '/myapplications',
 		views : {
-			'tab-account' : {
-				templateUrl : 'partials/tab-account.html',
-				controller : 'UserDetailCtrl'
+			'tab-myapplications' : {
+				templateUrl : 'templates/tab-myapplications.html',
+				controller : 'MyapplicationsController'
 			}
 		}
 	})
+    
+    .state('tabs.myapplications.terry', {
+		url : '/terry',
+		views : {
+			'tab-myapplications' : {
+				templateUrl : 'templates/tab-users.html',
+				controller : 'UsersCtrl'
+			}
+		}
+	})
+    
+    .state('tabs.contact', {
+		url : '/contact',
+		views : {
+			'tab-contact' : {
+				templateUrl : 'templates/tab-contact.html'
+				
+			}
+		}
+	})
+    
 
-	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/tab/dash');
+// if none of the above states are matched, use this as the fallback
+   $urlRouterProvider.otherwise('/signin');
+   
+    
+	
+
+	
+	
+
 
 });
