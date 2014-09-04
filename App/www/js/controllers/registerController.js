@@ -19,7 +19,7 @@ angular.module('TerryControllers')
                 function(success) {
                     Auth.clearCredentials();
                     ngNotify.set("User account created. Please login!", {position: 'top', type:     'success'});
-                $state.go("tabs.home", {}, {reload: true});
+                $state.go("tabs.myapplications", {}, {reload: true});
             },function(fail) {
                 Auth.clearCredentials();
                 ngNotify.set(fail.data.message, {position: 'top', type: 'error'});

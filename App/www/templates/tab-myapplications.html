@@ -9,11 +9,11 @@
         </div>
 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-            <ion-item ng-repeat="application in myapplications" type="item-text-wrap"
-	                           href="#/tab/user/{{user.id}}">
-                                {{application}} 
+            <ion-item ng-repeat="terry in myapplications" type="item-text-wrap"
+	                           href="#/tabs/terry/{{terry.id}}">
+                                {{terry.terry}} {{terry.date_created}}
                     <ion-delete-button class="ion-minus-circled"
-	               ng-click="deleteUser(user.id)"> </ion-delete-button> 
+	               ng-click="deleteApplication(application.id)"> </ion-delete-button> 
 	</ion-item> 
 	</ion-list> 
 	</ion-content> 
@@ -21,29 +21,28 @@
 	id="modal.html" type="text/ng-template">
       <div class="modal" ng-controller="ModalCtrl">
         <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">New User</h1>
+          <h1 class="title">Create New Terry Foundation Scholarship Applicationv</h1>
           <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content>
           <div class="padding">
             <div class="list">
 			<label class="item item-input">
+                <span class="input-label">UH ID</span>
+                <input ng-model="myterry.uhid" type="text">
+              </label> 
+              
+              <label class="item item-input">
                 <span class="input-label">First Name</span>
-                <input ng-model="User.firstName" type="text">
-              </label>
+                <input ng-model="myterry.First" type="text">
+              </label> 
               <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input ng-model="User.lastName" type="text">
-              </label>
-              <label class="item item-input">
-                <span class="input-label">Username</span>
-                <input ng-model="User.username"" type="text">
-              </label>              
-              <label class="item item-input">
-                <span class="input-label">Password</span>
-                <input ng-model="User.password" type="text">
-              </label>
-              <button class="button button-full button-positive" ng-click="createUser()">Create</button>
+                <input ng-model="myterry.Last" type="text">
+              </label> 
+                          
+              
+              <button class="button button-full button-positive" ng-click="createApplication()">Create</button>
             </div>
           </div>
         </ion-content>

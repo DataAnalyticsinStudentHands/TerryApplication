@@ -5,26 +5,17 @@
 -->
 <ion-tabs class="tabs-icon-top">
 
-
-  
-  <!-- Adopt Tab -->
-  <ion-tab title="Users" icon="icon ion-person-stalker" href="#/tab/users">
-    <ion-nav-view name="tab-users"></ion-nav-view>
-  </ion-tab>
-
-
   <!-- My Applications Tab -->
   <ion-tab title="My Applications" icon="icon ion-home" href="#/tab/myapplications">
     <ion-nav-view name="tab-myapplications"></ion-nav-view>
   </ion-tab>
     <!-- Contact Tab -->
-    <ion-tab title="Contact" icon="ion-ios7-information" href="#/tab/contact">
-          <ion-nav-view name="tab-contact"></ion-nav-view>
-        </ion-tab>
+  <ion-tab title="Contact" icon="ion-ios7-information" href="#/tab/contact">
+    <ion-nav-view name="tab-contact"></ion-nav-view>
+  </ion-tab>
     
     <!-- Sign Out Tab -->
-    <ion-tab title="Sign-Out" icon="ion-log-out" href="#/signin">
+  <ion-tab title="Sign-Out" icon="ion-log-out" ng-click="logout()">
         </ion-tab>
-
 
 </ion-tabs>

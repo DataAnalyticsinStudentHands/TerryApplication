@@ -5,23 +5,26 @@
  * @name terry.controller:LoginController
  * @description
  * # LoginController
- * Controller of the terry
+ * Controller of the app
  */
 angular.module('TerryServices')
-.factory('MyapplicationsService', function(Restangular, $q) {
-    
-    
-    var myapplications = ["terry1", "terry2", "terry3"];
-    
-    return {
-    all: function() {
-      return myapplications;
-    },
-    first: function() {
-      return myapplications[0];
-    }
-  }
-    
+    .factory('MyapplicationsService', function ($q, $http) {
+        return {
+            getMyApplications: function () {
+                var deferred = $q.defer(),
+                    httpPromise = $http.get('terry/myapplications.json');
+ 
+                httpPromise.then(function (response) {
+                    deferred.resolve(response);
+                }, function (error) {
+                    console.error(error);
+                });
+ 
+                return deferred.promise;
+            }
+        };
+    });
+
     /*return {
         getAllApplications:
             function() {
@@ -45,4 +48,4 @@ angular.module('TerryServices')
                 return Restangular.all("simple").all(pid).remove();
             },
     }*/
-});
+

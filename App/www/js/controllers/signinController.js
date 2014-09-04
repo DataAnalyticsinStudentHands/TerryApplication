@@ -29,19 +29,24 @@ angular.module('TerryControllers')
                     $scope.loginResult = result;
                     $scope.loginMsg = "You have logged in successfully!";
                     Auth.confirmCredentials();
-                    $state.go("tabs.home", {}, {reload: true});
-                    ngNotify.set($scope.loginMsg, 'success');
+                     ngNotify.set($scope.loginMsg, 'success');
+                    $state.go("tabs.myapplications", {}, {reload: true});
+                    
                  }, function(error) {
                     $scope.loginMsg = "Incorrect username or password.";
-                    ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
+                    ngNotify.set($scope.loginMsg, {position: 'bottom', type: 'error'});
                     Auth.clearCredentials();
                  });
              }, 500);
          } else {
              $scope.loginMsg = "Please enter a username and password.";
-             ngNotify.set($scope.loginMsg, {position: 'top', type: 'error'});
+             ngNotify.set($scope.loginMsg, {position: 'bottom', type: 'error'});
          }
      };
     
     
- });
+ })
+
+.controller('LogOutController', function($scope, AuthenticationService) {
+    AuthenticationService.logout();
+});
