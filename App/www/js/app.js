@@ -118,16 +118,16 @@ angular.module('HonorsApplications',[
         authenticate: true
 	})
     
-    .state('tabs.myapplications.terry', {
-		url : '/terry/:applicationId',
-		views : {
-			'tab-myapplications' : {
-				templateUrl : 'templates/terry.html',
-				controller : 'UsersCtrl'
-			}
-		},
+    .state('tabs.myapplication', {
+      url: '/myapplication/:applicationId',
+      views: {
+        'tab-myapplications': {
+          templateUrl: 'templates/myapplication.html',
+          controller: 'MyApplicationController'
+        }
+      },
         authenticate: true
-	})
+    })
     
     .state('tabs.contact', {
 		url : '/contact',

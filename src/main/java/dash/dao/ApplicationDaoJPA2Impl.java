@@ -1,5 +1,6 @@
 package dash.dao;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,7 @@ import javax.persistence.TypedQuery;
 
 import dash.pojo.Application;
 
-
-public class ApplicationDaoJPA2Impl implements
-ApplicationDao {
+public class ApplicationDaoJPA2Impl implements ApplicationDao {
 
 	@PersistenceContext(unitName = "dashPersistence")
 	private EntityManager entityManager;
@@ -21,14 +20,14 @@ ApplicationDao {
 	@Override
 	public List<ApplicationEntity> getApplications(String orderByInsertionDate) {
 		String sqlString = null;
-		if(orderByInsertionDate != null){
+		if (orderByInsertionDate != null) {
 			sqlString = "SELECT o FROM ApplicationEntity o"
 					+ " ORDER BY o.insertionDate " + orderByInsertionDate;
 		} else {
 			sqlString = "SELECT o FROM ApplicationEntity o";
 		}
-		TypedQuery<ApplicationEntity> query = entityManager.createQuery(sqlString,
-				ApplicationEntity.class);
+		TypedQuery<ApplicationEntity> query = entityManager.createQuery(
+				sqlString, ApplicationEntity.class);
 
 		return query.getResultList();
 	}
@@ -38,8 +37,8 @@ ApplicationDao {
 
 		try {
 			String qlString = "SELECT u FROM ApplicationEntity u WHERE u.id = ?1";
-			TypedQuery<ApplicationEntity> query = entityManager.createQuery(qlString,
-					ApplicationEntity.class);
+			TypedQuery<ApplicationEntity> query = entityManager.createQuery(
+					qlString, ApplicationEntity.class);
 			query.setParameter(1, id);
 
 			return query.getSingleResult();
@@ -47,14 +46,14 @@ ApplicationDao {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public ApplicationEntity getApplicationByName(String name) {
 
 		try {
 			String qlString = "SELECT o FROM ApplicationEntity o WHERE o.name = ?1";
-			TypedQuery<ApplicationEntity> query = entityManager.createQuery(qlString,
-					ApplicationEntity.class);
+			TypedQuery<ApplicationEntity> query = entityManager.createQuery(
+					qlString, ApplicationEntity.class);
 			query.setParameter(1, name);
 
 			return query.getSingleResult();
@@ -66,8 +65,8 @@ ApplicationDao {
 	@Override
 	public void deleteApplication(Application applicationPojo) {
 
-		ApplicationEntity application = entityManager
-				.find(ApplicationEntity.class, applicationPojo.getId());
+		ApplicationEntity application = entityManager.find(
+				ApplicationEntity.class, applicationPojo.getId());
 		entityManager.remove(application);
 	}
 
@@ -75,8 +74,25 @@ ApplicationDao {
 	public Long createApplication(ApplicationEntity application) {
 
 		application.setCreation_timestamp(new Date());
+
+		// create hashed folder name for documents
+		String fileName = application.getFirst_name()
+				+ application.getLast_name();
+		int hashcode = fileName.hashCode();
+		int mask = 255;
+		int firstDir = hashcode & mask;
+		int secondDir = (hashcode >> 8) & mask;
+		StringBuilder path = new StringBuilder(File.separator);
+		path.append(String.format("%03d", firstDir));
+		path.append(File.separator);
+		path.append(String.format("%03d", secondDir));
+		path.append(File.separator);
+		path.append(fileName);
+		application.setDocument_folder(fileName);
+		application.setName(fileName);
 		entityManager.persist(application);
-		entityManager.flush();// force insert to receive the id of the application
+		entityManager.flush();// force insert to receive the id of the
+								// application
 
 		// Give admin over new application to the new user
 		return application.getId();
@@ -84,13 +100,14 @@ ApplicationDao {
 
 	@Override
 	public void updateApplication(ApplicationEntity application) {
-		//TODO think about partial update and full update
+		// TODO think about partial update and full update
 		entityManager.merge(application);
 	}
 
 	@Override
 	public void deleteApplications() {
-		Query query = entityManager.createNativeQuery("TRUNCATE TABLE applications");
+		Query query = entityManager
+				.createNativeQuery("TRUNCATE TABLE applications");
 		query.executeUpdate();
 	}
 

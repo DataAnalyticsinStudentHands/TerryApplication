@@ -25,7 +25,7 @@ import dash.service.ApplicationService;
 
 /**
  * 
- * Service Class that handles REST requests for Simple Objects
+ * Service Class that handles REST requests for Applications
  * 
  * @author plindner
  */

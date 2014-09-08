@@ -1,17 +1,29 @@
 <ion-view title="My Applications">
-    <ion-content class="has-header">
-
-        <div class="buttons">
-	       <button class="button button-icon icon ion-ios7-minus-outline"
+    <!-- 
+The nav bar that will be updated as we navigate between views.
+-->
+        <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+            <button class="button button-icon button-clear ion-navicon-round">
+      </button>
+            <button class="button button-icon icon ion-ios7-minus-outline"
 		          ng-click="data.showDelete = !data.showDelete"></button>
 	       <button class="button button-icon icon ion-compose"
 		          ng-click="modal.show()"></button>
+            <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
+                Back
+            </ion-nav-back-button>
+        </ion-nav-bar>
+    <ion-content >
+        
+
+        <div class="buttons">
+	       
         </div>
 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-            <ion-item ng-repeat="application in myapplications" type="item-text-wrap"
-	                           href="#/tabs/terry/{{terry.id}}">
-                                {{application.name}} {{application.creation_timestamp}}
+            <ion-item ng-repeat="myapplication in myapplications" type="item-text-wrap"
+	                           href="#/tab/myapplication/{{myapplication.id}}">
+                                {{myapplication.name}} {{myapplication.creation_timestamp}}
                     <ion-delete-button class="ion-minus-circled"
 	               ng-click="deleteApplication(application.id)"> </ion-delete-button> 
 	</ion-item> 
@@ -29,16 +41,16 @@
             <div class="list">
 			<label class="item item-input">
                 <span class="input-label">UH ID</span>
-                <input ng-model="currentApplication.uhid" type="text">
+                <input ng-model="currentApplication.uh_id" type="text">
               </label> 
               
               <label class="item item-input">
                 <span class="input-label">First Name</span>
-                <input ng-model="currentApplication.First" type="text">
+                <input ng-model="currentApplication.first_name" type="text">
               </label> 
               <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input ng-model="currentApplication.Last" type="text">
+                <input ng-model="currentApplication.last_name" type="text">
               </label> 
                           
               

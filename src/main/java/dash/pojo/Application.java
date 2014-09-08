@@ -10,6 +10,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import dash.dao.ApplicationEntity;
 import dash.security.IAclObject;
 
+import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -30,24 +31,31 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "creation_timestamp")
 	private Date creation_timestamp;
 	
+	@XmlElement(name = "uh_id")
+	private Long uh_id;
+	
+	@XmlElement(name = "first_name")
+	private String first_name;
+	
+	@XmlElement(name = "last_name")
+	private String last_name;
+	
 	public Long getId() {
 		return id;
 	}	
 	
 	public Application(){}
 	
-	public Application(Long id, String document_folder, String name,
-			Date creation_timestamp) {
-		super();
-		this.id = id;
-		this.document_folder = document_folder;
-		this.name = name;
-		this.creation_timestamp = creation_timestamp;
-	}
+//	public Application(Long id, String name, Date creation_timestamp) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.creation_timestamp = creation_timestamp;
+//	}
 	
-	public Application(ApplicationEntity simpleObjectEntity) {
+	public Application(ApplicationEntity applicationEntity) {
 		try {
-			BeanUtils.copyProperties(this, simpleObjectEntity);
+			BeanUtils.copyProperties(this, applicationEntity);
 		} catch ( IllegalAccessException e) {
 
 			e.printStackTrace();
@@ -61,12 +69,12 @@ public class Application implements  Serializable, IAclObject{
 		this.id = id;
 	}
 
-	public String getImage_folder() {
+	public String getDocument_folder() {
 		return document_folder;
 	}
 
-	public void setImage_folder(String image_folder) {
-		this.document_folder = image_folder;
+	public void setDocument_folder(String document_folder) {
+		this.document_folder = document_folder;
 	}
 
 	public String getName() {
@@ -83,6 +91,30 @@ public class Application implements  Serializable, IAclObject{
 
 	public void setCreation_timestamp(Date creation_timestamp) {
 		this.creation_timestamp = creation_timestamp;
+	}
+
+	public Long getUh_id() {
+		return uh_id;
+	}
+
+	public void setUh_id(Long uh_id) {
+		this.uh_id = uh_id;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	

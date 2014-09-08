@@ -30,7 +30,7 @@ public interface ApplicationService {
 	public List<Application> getApplications(String orderByInsertionDate) throws AppException;
 
 	/**
-	 * Returns a simple object given its id
+	 * Returns a application given its id
 	 *
 	 * @param id
 	 * @return
@@ -51,7 +51,7 @@ public interface ApplicationService {
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#user, 'DELETE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteApplication(Application application);
 	
 	/** removes all applications

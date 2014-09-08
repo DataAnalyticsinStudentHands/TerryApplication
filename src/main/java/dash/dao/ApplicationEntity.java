@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import dash.pojo.Application;
 
 /**
- * SimpleObject entity
+ * Application entity
  * @author plindner
  *
  */
@@ -40,10 +41,19 @@ public class ApplicationEntity implements Serializable {
 	/** insertion date in the database */
 	@Column(name = "creation_timestamp")
 	private Date creation_timestamp;
+	
+	@Column(name = "uh_id")
+	private Long uh_id;
+	
+	@Column(name = "first_name")
+	private String first_name;
+	
+	@Column(name = "last_name")
+	private String last_name;
 
 	public ApplicationEntity(){}
 
-	public ApplicationEntity( String document_folder, String name) {
+	public ApplicationEntity(String document_folder, String name) {
 
 		this.document_folder = document_folder;
 		this.name = name;
@@ -91,5 +101,29 @@ public class ApplicationEntity implements Serializable {
 
 	public void setCreation_timestamp(Date creation_timestamp) {
 		this.creation_timestamp = creation_timestamp;
+	}
+
+	public Long getUh_id() {
+		return uh_id;
+	}
+
+	public void setUh_id(Long uh_id) {
+		this.uh_id = uh_id;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 }

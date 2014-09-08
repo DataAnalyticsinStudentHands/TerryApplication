@@ -8,22 +8,11 @@
  * Controller of the app
  */
 angular.module('TerryServices')
-    .factory('MyapplicationsService', function ($q, $http) {
-        return {
-            getMyApplications: function () {
-                var deferred = $q.defer(),
-                    httpPromise = $http.get('terry/myapplications.json');
- 
-                httpPromise.then(function (response) {
-                    deferred.resolve(response);
-                }, function (error) {
-                    console.error(error);
-                });
- 
-                return deferred.promise;
-            }
-        };
+    .factory('MyapplicationsService', function (Restangular) {
+        return Restangular.all('applications');
     });
+
+
 
     /*return {
         getAllApplications:

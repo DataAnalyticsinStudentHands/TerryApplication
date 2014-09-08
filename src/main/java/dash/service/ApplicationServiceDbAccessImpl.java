@@ -21,7 +21,6 @@ import dash.pojo.Application;
 import dash.security.CustomPermission;
 import dash.security.GenericAclController;
 
-
 public class ApplicationServiceDbAccessImpl extends ApplicationObjectSupport implements
 ApplicationService {
 
@@ -66,7 +65,7 @@ ApplicationService {
 	}
 
 	private void validateInputForCreation(Application application) throws AppException {
-		if (application.getName() == null) {
+		if (application.getFirst_name() == null || application.getLast_name() == null || application.getUh_id() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);
@@ -98,8 +97,8 @@ ApplicationService {
 
 	@Override
 	public Application getApplicationById(Long id) throws AppException {
-		ApplicationEntity simpleObjectById = applicationDao.getApplicationById(id);
-		if (simpleObjectById == null) {
+		ApplicationEntity applicationById = applicationDao.getApplicationById(id);
+		if (applicationById == null) {
 			throw new AppException(Response.Status.NOT_FOUND.getStatusCode(),
 					404,
 					"The object you requested with id " + id
@@ -148,7 +147,7 @@ ApplicationService {
 	}
 
 	/**
-	 * Verifies the "completeness" of simple object resource sent over the wire
+	 * Verifies the "completeness" of the application resource sent over the wire
 	 *
 	 * @param Application
 	 * @return
@@ -218,7 +217,5 @@ ApplicationService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}	
-
+	}
 }
