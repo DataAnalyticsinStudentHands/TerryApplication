@@ -12,61 +12,61 @@ import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.security.acls.model.MutableAclService;
 import org.springframework.transaction.annotation.Transactional;
 
-import dash.dao.SimpleObjectDao;
-import dash.dao.SimpleObjectEntity;
+import dash.dao.ApplicationDao;
+import dash.dao.ApplicationEntity;
 import dash.errorhandling.AppException;
 import dash.filters.AppConstants;
 import dash.helpers.NullAwareBeanUtilsBean;
-import dash.pojo.SimpleObject;
+import dash.pojo.Application;
 import dash.security.CustomPermission;
 import dash.security.GenericAclController;
 
 
-public class SimpleObjectServiceDbAccessImpl extends ApplicationObjectSupport implements
-SimpleObjectService {
+public class ApplicationServiceDbAccessImpl extends ApplicationObjectSupport implements
+ApplicationService {
 
 	@Autowired
-	SimpleObjectDao simpleObjectDao;
+	ApplicationDao applicationDao;
 
 	@Autowired
 	private MutableAclService mutableAclService;
 
 	@Autowired
-	private GenericAclController<SimpleObject> aclController;
+	private GenericAclController<Application> aclController;
 
 
 	/********************* Create related methods implementation ***********************/
 	@Override
 	@Transactional
-	public Long createSimpleObject(SimpleObject simpleObject) throws AppException {
+	public Long createApplication(Application application) throws AppException {
 
-		validateInputForCreation(simpleObject);
+		validateInputForCreation(application);
 
 		//verify existence of resource in the db (feed must be unique)
-		SimpleObjectEntity simpleObjectByName = simpleObjectDao.getSimpleObjectByName(simpleObject.getName());
-		if (simpleObjectByName != null) {
+		ApplicationEntity applicationByName = applicationDao.getApplicationByName(application.getName());
+		if (applicationByName != null) {
 			throw new AppException(
 					Response.Status.CONFLICT.getStatusCode(),
 					409,
 					"Object with name already existing in the database with the id "
-							+ simpleObjectByName.getId(),
+							+ applicationByName.getId(),
 							"Please verify that the name are properly generated",
 							AppConstants.DASH_POST_URL);
 		}
 
-		long simpleObjectId = simpleObjectDao.createSimpleObject(new SimpleObjectEntity(simpleObject));
-		simpleObject.setId(simpleObjectId);
+		long applicationId = applicationDao.createApplication(new ApplicationEntity(application));
+		application.setId(applicationId);
 		
-		aclController.createACL(simpleObject);
-		aclController.createAce(simpleObject, CustomPermission.READ);
-		aclController.createAce(simpleObject, CustomPermission.WRITE);
-		aclController.createAce(simpleObject, CustomPermission.DELETE);
+		aclController.createACL(application);
+		aclController.createAce(application, CustomPermission.READ);
+		aclController.createAce(application, CustomPermission.WRITE);
+		aclController.createAce(application, CustomPermission.DELETE);
 		
-		return simpleObjectId;
+		return applicationId;
 	}
 
-	private void validateInputForCreation(SimpleObject simpleObject) throws AppException {
-		if (simpleObject.getName() == null) {
+	private void validateInputForCreation(Application application) throws AppException {
+		if (application.getName() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);
@@ -76,7 +76,7 @@ SimpleObjectService {
 
 		// ******************** Read related methods implementation **********************
 	@Override
-	public List<SimpleObject> getSimpleObjects(String orderByInsertionDate) throws AppException {
+	public List<Application> getApplications(String orderByInsertionDate) throws AppException {
 
 		if(isOrderByInsertionDateParameterValid(orderByInsertionDate)){
 			throw new AppException(
@@ -85,9 +85,9 @@ SimpleObjectService {
 					"Please set either ASC or DESC for the orderByInsertionDate parameter",
 					null, AppConstants.DASH_POST_URL);
 		}
-		List<SimpleObjectEntity> simpleObjects = simpleObjectDao.getSimpleObjects(orderByInsertionDate);
+		List<ApplicationEntity> applictions = applicationDao.getApplications(orderByInsertionDate);
 
-		return getSimpleObjectsFromEntities(simpleObjects);
+		return getApplicationsFromEntities(applictions);
 	}
 
 	private boolean isOrderByInsertionDateParameterValid(
@@ -97,8 +97,8 @@ SimpleObjectService {
 	}
 
 	@Override
-	public SimpleObject getSimpleObjectById(Long id) throws AppException {
-		SimpleObjectEntity simpleObjectById = simpleObjectDao.getSimpleObjectById(id);
+	public Application getApplicationById(Long id) throws AppException {
+		ApplicationEntity simpleObjectById = applicationDao.getApplicationById(id);
 		if (simpleObjectById == null) {
 			throw new AppException(Response.Status.NOT_FOUND.getStatusCode(),
 					404,
@@ -108,13 +108,13 @@ SimpleObjectService {
 					+ " in the database", AppConstants.DASH_POST_URL);
 		}
 
-		return new SimpleObject(simpleObjectDao.getSimpleObjectById(id));
+		return new Application(applicationDao.getApplicationById(id));
 	}
 
-	private List<SimpleObject> getSimpleObjectsFromEntities(List<SimpleObjectEntity> simpleObjectEntities) {
-		List<SimpleObject> response = new ArrayList<SimpleObject>();
-		for (SimpleObjectEntity simpleObjectEntity : simpleObjectEntities) {
-			response.add(new SimpleObject(simpleObjectEntity));
+	private List<Application> getApplicationsFromEntities(List<ApplicationEntity> applicationEntities) {
+		List<Application> response = new ArrayList<Application>();
+		for (ApplicationEntity applicationEntity : applicationEntities) {
+			response.add(new Application(applicationEntity));
 		}
 
 		return response;
@@ -123,9 +123,9 @@ SimpleObjectService {
 	/********************* UPDATE-related methods implementation ***********************/
 	@Override
 	@Transactional
-	public void updateFullySimpleObject(SimpleObject simpleObject) throws AppException {
+	public void updateFullyApplication(Application application) throws AppException {
 		//do a validation to verify FULL update with PUT
-		if (isFullUpdate(simpleObject)) {
+		if (isFullUpdate(application)) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(),
 					400,
 					"Please specify all properties for Full UPDATE",
@@ -133,84 +133,84 @@ SimpleObjectService {
 					AppConstants.DASH_POST_URL);
 		}
 
-		SimpleObject verifySimpleObjectExistenceById = verifySimpleObjectExistenceById(simpleObject
+		Application verifyApplicationExistenceById = verifyApplicationExistenceById(application
 				.getId());
-		if (verifySimpleObjectExistenceById == null) {
+		if (verifyApplicationExistenceById == null) {
 			throw new AppException(Response.Status.NOT_FOUND.getStatusCode(),
 					404,
 					"The resource you are trying to update does not exist in the database",
 					"Please verify existence of data in the database for the id - "
-							+ simpleObject.getId(),
+							+ application.getId(),
 							AppConstants.DASH_POST_URL);
 		}
 
-		simpleObjectDao.updateSimpleObject(new SimpleObjectEntity(simpleObject));
+		applicationDao.updateApplication(new ApplicationEntity(application));
 	}
 
 	/**
 	 * Verifies the "completeness" of simple object resource sent over the wire
 	 *
-	 * @param SimpleObject
+	 * @param Application
 	 * @return
 	 */
-	private boolean isFullUpdate(SimpleObject simpleObject) {
-		return simpleObject.getId() == null
-				|| simpleObject.getName() == null;
+	private boolean isFullUpdate(Application application) {
+		return application.getId() == null
+				|| application.getName() == null;
 	}
 
 	/********************* DELETE-related methods implementation ***********************/
 
 	@Override
 	@Transactional
-	public void deleteSimpleObject(SimpleObject simpleObject) {
+	public void deleteApplication(Application application) {
 
-		simpleObjectDao.deleteSimpleObject(simpleObject);
-		aclController.deleteACL(simpleObject);
+		applicationDao.deleteApplication(application);
+		aclController.deleteACL(application);
 
 	}
 
 	@Override
 	@Transactional
 	// TODO: This shouldn't exist? If it must, then it needs to accept a list of
-	// Simple Objects to delete
-	public void deleteSimpleObjects() {
-		simpleObjectDao.deleteSimpleObjects();
+	// applications to delete
+	public void deleteApplications() {
+		applicationDao.deleteApplications();
 	}
 
 	@Override
 	// TODO: This doesn't need to exist. It is the exact same thing as
-	// getSimpleObjectById(Long)
-	public SimpleObject verifySimpleObjectExistenceById(Long id) {
-		SimpleObjectEntity simpleObjectById = simpleObjectDao.getSimpleObjectById(id);
-		if (simpleObjectById == null) {
+	// getApplicationById(Long)
+	public Application verifyApplicationExistenceById(Long id) {
+		ApplicationEntity applicationById = applicationDao.getApplicationById(id);
+		if (applicationById == null) {
 			return null;
 		} else {
-			return new SimpleObject(simpleObjectById);
+			return new Application(applicationById);
 		}
 	}
 
 	@Override
 	@Transactional
-	public void updatePartiallySimpleObject(SimpleObject simpleObject) throws AppException {
+	public void updatePartiallyApplication(Application application) throws AppException {
 		//do a validation to verify existence of the resource
-		SimpleObject verifySimpleObjectExistenceById = verifySimpleObjectExistenceById(simpleObject.getId());
-		if (verifySimpleObjectExistenceById == null) {
+		Application verifyApplicationExistenceById = verifyApplicationExistenceById(application.getId());
+		if (verifyApplicationExistenceById == null) {
 			throw new AppException(Response.Status.NOT_FOUND.getStatusCode(),
 					404,
 					"The resource you are trying to update does not exist in the database",
 					"Please verify existence of data in the database for the id - "
-							+ simpleObject.getId(), AppConstants.DASH_POST_URL);
+							+ application.getId(), AppConstants.DASH_POST_URL);
 		}
-		copyPartialProperties(verifySimpleObjectExistenceById, simpleObject);
-		simpleObjectDao.updateSimpleObject(new SimpleObjectEntity(verifySimpleObjectExistenceById));
+		copyPartialProperties(verifyApplicationExistenceById, application);
+		applicationDao.updateApplication(new ApplicationEntity(verifyApplicationExistenceById));
 
 	}
 
-	private void copyPartialProperties(SimpleObject verifySimpleObjectExistenceById, SimpleObject simpleObject) {
+	private void copyPartialProperties(Application verifyApplicationExistenceById, Application application) {
 
 		BeanUtilsBean notNull=new NullAwareBeanUtilsBean();
 		try {
-			notNull.copyProperties(verifySimpleObjectExistenceById, simpleObject);
+			notNull.copyProperties(verifyApplicationExistenceById, application);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

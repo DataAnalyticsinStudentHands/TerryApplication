@@ -41,13 +41,13 @@ angular.module('TerryControllers')
 .controller('ModalCtrl',
     function($scope, Restangular, ngNotify) {
 
-        $scope.myterry = {};
+        $scope.currentApplication = {};
 
         // callback for ng-click 'createApplication':
         $scope.createApplication = function() {
-            if ($scope.myterry.uhid && $scope.myterry.First && $scope.myterry.Last) {
+            if ($scope.currentApplication.uhid && $scope.currentApplication.First && $scope.currentApplication.Last) {
                 $scope.createNewUserResultPromise = Restangular
-                .all("users").post($scope.User).then(
+                .all("simple").post($scope.currentApplication).then(
                     function(users) {
                         $scope.modal.hide();
                     }, function(resultFail) {

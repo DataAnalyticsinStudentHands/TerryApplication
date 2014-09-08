@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import dash.errorhandling.AppException;
-import dash.pojo.SimpleObject;
+import dash.pojo.Application;
 
-public interface SimpleObjectService {
+public interface ApplicationService {
 	/*
 	 * ******************** Create related methods **********************
 	 *
 	 *Create a new image and set the current user as owner and manager.
 	 */
-	public Long createSimpleObject(SimpleObject image) throws AppException;	
+	public Long createApplication(Application application) throws AppException;	
 
 	/*
 	 * ******************* Read related methods ********************
@@ -27,7 +27,7 @@ public interface SimpleObjectService {
 	 * @throws AppException
 	 */
 	
-	public List<SimpleObject> getSimpleObjects(String orderByInsertionDate) throws AppException;
+	public List<Application> getApplications(String orderByInsertionDate) throws AppException;
 
 	/**
 	 * Returns a simple object given its id
@@ -37,29 +37,29 @@ public interface SimpleObjectService {
 	 * @throws AppException
 	 */
 	
-	public SimpleObject getSimpleObjectById(Long id) throws AppException;
+	public Application getApplicationById(Long id) throws AppException;
 	
 	/*
 	 * ******************** Update related methods **********************
 	 */
 	@PreAuthorize("hasPermission(#user, 'WRITE') or hasRole('ROLE_ADMIN')")
-	public void updateFullySimpleObject(SimpleObject simpleObject) throws AppException;
+	public void updateFullyApplication(Application application) throws AppException;
 
 	@PreAuthorize("hasPermission(#user, 'WRITE') or hasRole('ROLE_ADMIN')")
-	public void updatePartiallySimpleObject(SimpleObject simpleObject) throws AppException;
+	public void updatePartiallyApplication(Application application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
 	@PreAuthorize("hasPermission(#user, 'DELETE') or hasRole('ROLE_ADMIN')")
-	public void deleteSimpleObject(SimpleObject simpleObject);
+	public void deleteApplication(Application application);
 	
-	/** removes all simpleobjects
+	/** removes all applications
 	 * DO NOT USE, IMPROPERLY UPDATES ACL_OBJECT table
 	 * Functional but does not destroy old acl's which doesnt hurt anything
 	 * but they will take up space if this is commonly used */
 	@PreAuthorize("hasRole('ROLE_ROOT')")
-	public void deleteSimpleObjects();	
+	public void deleteApplications();	
 
 	/*
 	 * ******************** Helper methods **********************
@@ -67,6 +67,6 @@ public interface SimpleObjectService {
 	// TODO: This also should not exist, or it should be changed to
 	// private/protected. Redundant
 	// Could be made a boolean so it was not a security vulnerability
-	public SimpleObject verifySimpleObjectExistenceById(Long id);	
+	public Application verifyApplicationExistenceById(Long id);	
 
 }

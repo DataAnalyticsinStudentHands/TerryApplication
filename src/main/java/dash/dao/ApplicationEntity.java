@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import dash.pojo.SimpleObject;
+import dash.pojo.Application;
 
 /**
  * SimpleObject entity
@@ -20,8 +20,8 @@ import dash.pojo.SimpleObject;
  *
  */
 @Entity
-@Table(name="simple_object")
-public class SimpleObjectEntity implements Serializable {
+@Table(name="applications")
+public class ApplicationEntity implements Serializable {
 
 	/** id of the object */
 	@Id
@@ -29,9 +29,9 @@ public class SimpleObjectEntity implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	/** path to stored images for this object */
-	@Column(name = "image_folder")
-	private String image_folder;
+	/** path to stored documents for this object */
+	@Column(name = "document_folder")
+	private String document_folder;
 
 	/** description of the object */
 	@Column(name = "name")
@@ -41,17 +41,17 @@ public class SimpleObjectEntity implements Serializable {
 	@Column(name = "creation_timestamp")
 	private Date creation_timestamp;
 
-	public SimpleObjectEntity(){}
+	public ApplicationEntity(){}
 
-	public SimpleObjectEntity( String image_folder, String name) {
+	public ApplicationEntity( String document_folder, String name) {
 
-		this.image_folder = image_folder;
+		this.document_folder = document_folder;
 		this.name = name;
 	}
 
-	public SimpleObjectEntity(SimpleObject simpleObject) {
+	public ApplicationEntity(Application application) {
 		try {
-			BeanUtils.copyProperties(this, simpleObject);
+			BeanUtils.copyProperties(this, application);
 		} catch ( IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,12 +69,12 @@ public class SimpleObjectEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getImage_folder() {
-		return image_folder;
+	public String getDocument_folder() {
+		return document_folder;
 	}
 
-	public void setImage_folder(String image_folder) {
-		this.image_folder = image_folder;
+	public void setDocument_folder(String document_folder) {
+		this.document_folder = document_folder;
 	}
 
 	public String getName() {
@@ -92,7 +92,4 @@ public class SimpleObjectEntity implements Serializable {
 	public void setCreation_timestamp(Date creation_timestamp) {
 		this.creation_timestamp = creation_timestamp;
 	}
-
-	
-
 }

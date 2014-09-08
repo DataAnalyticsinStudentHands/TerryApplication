@@ -9,9 +9,9 @@
         </div>
 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-            <ion-item ng-repeat="terry in myapplications" type="item-text-wrap"
+            <ion-item ng-repeat="application in myapplications" type="item-text-wrap"
 	                           href="#/tabs/terry/{{terry.id}}">
-                                {{terry.terry}} {{terry.date_created}}
+                                {{application.name}} {{application.creation_timestamp}}
                     <ion-delete-button class="ion-minus-circled"
 	               ng-click="deleteApplication(application.id)"> </ion-delete-button> 
 	</ion-item> 
@@ -29,16 +29,16 @@
             <div class="list">
 			<label class="item item-input">
                 <span class="input-label">UH ID</span>
-                <input ng-model="myterry.uhid" type="text">
+                <input ng-model="currentApplication.uhid" type="text">
               </label> 
               
               <label class="item item-input">
                 <span class="input-label">First Name</span>
-                <input ng-model="myterry.First" type="text">
+                <input ng-model="currentApplication.First" type="text">
               </label> 
               <label class="item item-input">
                 <span class="input-label">Last Name</span>
-                <input ng-model="myterry.Last" type="text">
+                <input ng-model="currentApplication.Last" type="text">
               </label> 
                           
               

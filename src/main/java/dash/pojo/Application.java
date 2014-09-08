@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import dash.dao.SimpleObjectEntity;
+import dash.dao.ApplicationEntity;
 import dash.security.IAclObject;
 
 import java.io.Serializable;
@@ -16,13 +16,13 @@ import java.util.Date;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SimpleObject implements  Serializable, IAclObject{
+public class Application implements  Serializable, IAclObject{
 
 	@XmlElement(name = "id")
 	private Long id;	
 
-	@XmlElement(name = "image_folder")
-	private String image_folder;
+	@XmlElement(name = "document_folder")
+	private String document_folder;
 	
 	@XmlElement(name = "name")
 	private String name;
@@ -34,18 +34,18 @@ public class SimpleObject implements  Serializable, IAclObject{
 		return id;
 	}	
 	
-	public SimpleObject(){}
+	public Application(){}
 	
-	public SimpleObject(Long id, String image_folder, String name,
+	public Application(Long id, String document_folder, String name,
 			Date creation_timestamp) {
 		super();
 		this.id = id;
-		this.image_folder = image_folder;
+		this.document_folder = document_folder;
 		this.name = name;
 		this.creation_timestamp = creation_timestamp;
 	}
 	
-	public SimpleObject(SimpleObjectEntity simpleObjectEntity) {
+	public Application(ApplicationEntity simpleObjectEntity) {
 		try {
 			BeanUtils.copyProperties(this, simpleObjectEntity);
 		} catch ( IllegalAccessException e) {
@@ -62,11 +62,11 @@ public class SimpleObject implements  Serializable, IAclObject{
 	}
 
 	public String getImage_folder() {
-		return image_folder;
+		return document_folder;
 	}
 
 	public void setImage_folder(String image_folder) {
-		this.image_folder = image_folder;
+		this.document_folder = image_folder;
 	}
 
 	public String getName() {

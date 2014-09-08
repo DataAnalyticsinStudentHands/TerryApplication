@@ -13,18 +13,18 @@ import org.glassfish.jersey.message.filtering.EntityFiltering;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @EntityFiltering
-public @interface SimpleObjectDetailedView {
+public @interface ApplicationDetailedView {
 
 	/**
 	 * Factory class for creating instances of {@code ProjectDetailedView} annotation.
 	 */
-	public static class Factory extends AnnotationLiteral<SimpleObjectDetailedView>
-			implements SimpleObjectDetailedView {
+	public static class Factory extends AnnotationLiteral<ApplicationDetailedView>
+			implements ApplicationDetailedView {
 		
 		private Factory() {
 		}
 
-		public static SimpleObjectDetailedView get() {
+		public static ApplicationDetailedView get() {
 			return new Factory();
 		}
 	}
