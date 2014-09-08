@@ -133,8 +133,7 @@ angular.module('HonorsApplications',[
 		url : '/contact',
 		views : {
 			'tab-contact' : {
-				templateUrl : 'templates/tab-contact.html'
-				
+				templateUrl : 'templates/tab-contact.html'				
 			}
 		},
         authenticate: true
