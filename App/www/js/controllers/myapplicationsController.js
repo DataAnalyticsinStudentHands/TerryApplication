@@ -8,7 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-.controller('MyapplicationsController', function($scope, $location, $ionicModal, ngNotify, MyapplicationsService) {  
+.controller('MyapplicationsController', function($scope, $location, $ionicModal, ngNotify, MyapplicationsService, $ionicNavBarDelegate, Restangular) {  
 
     $scope.myapplications = {};
 
@@ -37,6 +37,25 @@ angular.module('TerryControllers')
                 console.error(error);
             });
     });
+    
+    $scope.myapplication = {};
+
+    // callback for ng-click 'createApplication':
+    $scope.createApplication = function() {
+        if ($scope.myapplication.uh_id && $scope.myapplication.first_name && $scope.myapplication.last_name) {
+
+            $scope.createNewApplicationResultPromise = Restangular
+            .all("applications").post($scope.myapplication).then(
+                function(applications) {
+                    $scope.modal.hide();
+                }, function(resultFail) {
+                    ngNotify.set("Could not contact server for application creation!", {position: 'bottom', type: 'error'});
+                });
+        }
+        else {
+            ngNotify.set("Remember to fill in everything!", {position: 'bottom', type: 'error'});
+        }
+    }
 
     // callback for ng-click 'deleteApplication':
     $scope.deleteApplication = function(applicationId) {
@@ -68,23 +87,6 @@ angular.module('TerryControllers')
 .controller('ModalCtrl',
             function($scope, Restangular, ngNotify) {
 
-    $scope.currentApplication = {};
-
-    // callback for ng-click 'createApplication':
-    $scope.createApplication = function() {
-        if ($scope.currentApplication.uh_id && $scope.currentApplication.first_name && $scope.currentApplication.last_name) {
-
-            $scope.createNewApplicationResultPromise = Restangular
-            .all("applications").post($scope.currentApplication).then(
-                function(applications) {
-                    $scope.modal.hide();
-                }, function(resultFail) {
-                    ngNotify.set("Could not contact server for application creation!", {position: 'bottom', type: 'error'});
-                });
-        }
-        else {
-            ngNotify.set("Remember to fill in everything!", {position: 'bottom', type: 'error'});
-        }
-    }
+    
 });
 

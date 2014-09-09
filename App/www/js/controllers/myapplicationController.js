@@ -8,7 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-.controller('MyApplicationController', function($scope, $stateParams, MyapplicationsService) {
+.controller('MyApplicationController', function($scope, $stateParams, MyapplicationsService, $ionicSideMenuDelegate) {
 
     $scope.myapplication = {};
 
@@ -19,4 +19,8 @@ angular.module('TerryControllers')
     }, function(resultFail) {
         // console.log(resultFail);
     });
+    
+    $scope.toggleLeft() = function() {
+        $ionicSidemneuDelegate.toggleLeft();
+    }
 });
