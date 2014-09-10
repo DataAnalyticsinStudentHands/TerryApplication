@@ -12,7 +12,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
 
+import dash.helpers.NullAwareBeanUtilsBean;
 import dash.pojo.Application;
 
 /**
@@ -113,13 +115,46 @@ public class ApplicationEntity implements Serializable {
 
 	public ApplicationEntity(){}
 
-	public ApplicationEntity(String document_folder, String name) {
+	public ApplicationEntity(String document_folder, String name, Date creation_timestamp, Long uh_id, String first_name, String last_name,
+			String middle_name, String preferred_name, String ssn, String permanent_address, String city, String state, Date dob,
+			Long zip_code, String county, String home_phone, String alt_cell_phone, String gender, String email, Boolean citizen,
+			Boolean permanent_resident, String texas_resident, String permenent_resident_card, String birthplace, String ethnic_background,
+			String anticapted_major) {
+		
+	
 
 		this.document_folder = document_folder;
 		this.name = name;
+		this.creation_timestamp = creation_timestamp;
+		this.uh_id = uh_id;		
+		this.first_name = first_name;		
+		this.last_name = last_name;		
+		this.middle_name = middle_name;		
+		this.preferred_name = preferred_name;		
+		this.ssn = ssn;		
+		this.permanent_address = permanent_address;		
+		this.city = city;		
+		this.state = state;		
+		this.dob = dob;		
+		this.zip_code  = zip_code;		
+		this.county  = county;		
+		this.home_phone = home_phone;		
+		this.alt_cell_phone = alt_cell_phone;		
+		this.gender = gender;		
+		this.email  = email;		
+		this.citizen  = citizen;		
+		this.permanent_resident = permanent_resident;		
+		this.texas_resident = texas_resident;		
+		this.permenent_resident_card = permenent_resident_card;		
+		this.birthplace = birthplace;		
+		this.ethnic_background = ethnic_background;		
+		this.anticapted_major = anticapted_major;
+	
 	}
 
 	public ApplicationEntity(Application application) {
+		
+		
 		try {
 			BeanUtils.copyProperties(this, application);
 		} catch ( IllegalAccessException e) {

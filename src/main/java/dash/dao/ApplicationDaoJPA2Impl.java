@@ -101,7 +101,7 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 	@Override
 	public void updateApplication(ApplicationEntity application) {
 		// TODO think about partial update and full update
-		entityManager.persist(application);
+		entityManager.merge(application);
 	}
 
 	@Override
