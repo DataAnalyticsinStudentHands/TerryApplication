@@ -20,7 +20,7 @@ angular.module('TerryControllers')
         // console.log(resultFail);
     });
     
-    $scope.toggleLeft() = function() {
-        $ionicSidemneuDelegate.toggleLeft();
-    }
+   $scope.toggleRight = function() {
+    $ionicSideMenuDelegate.toggleRight();
+  };
 });

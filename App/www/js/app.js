@@ -136,14 +136,12 @@ angular.module('HonorsApplications',[
         },
         authenticate: true
     })
-
     
-          
-    .state('tabs.myapplication', {
+    .state('tabs.student_information', {
         url: '/myapplication/:applicationId',
         views: {
             'tab-myapplications': {
-                templateUrl: 'templates/myapplication.html',
+                templateUrl: 'templates/student_information.html',
                 controller: 'MyApplicationController'
             }
         },

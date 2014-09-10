@@ -50,6 +50,66 @@ public class ApplicationEntity implements Serializable {
 	
 	@Column(name = "last_name")
 	private String last_name;
+	
+	@Column(name = "middle_name")
+	private String middle_name;
+	
+	@Column(name = "preferred_name")
+	private String preferred_name;
+	
+	@Column(name = "ssn")
+	private String ssn;
+	
+	@Column(name = "permanent_address")
+	private String permanent_address;
+	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "state")
+	private String state;
+	
+	@Column(name = "dob")
+	private Date dob;
+	
+	@Column(name = "zip_code")
+	private Long zip_code;
+	
+	@Column(name = "county")
+	private String county;
+	
+	@Column(name = "home_phone")
+	private String home_phone;
+	
+	@Column(name = "alt_cell_phone")
+	private String alt_cell_phone;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "citizen")
+	private Boolean citizen;
+	
+	@Column(name = "permanent_resident")
+	private Boolean permanent_resident;
+	
+	@Column(name = "texas_resident")
+	private String texas_resident;
+	
+	@Column(name = "permenent_resident_card")
+	private String permenent_resident_card;
+	
+	@Column(name = "birthplace")
+	private String birthplace;
+	
+	@Column(name = "ethnic_background")
+	private String ethnic_background;
+	
+	@Column(name = "anticapted_major")
+	private String anticapted_major;
 
 	public ApplicationEntity(){}
 
