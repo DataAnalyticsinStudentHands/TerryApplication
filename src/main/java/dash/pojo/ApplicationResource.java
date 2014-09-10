@@ -121,7 +121,7 @@ public class ApplicationResource {
 	@Produces({ MediaType.TEXT_HTML })
 	public Response partialUpdateApplication(@PathParam("id") Long id,
 			Application application) throws AppException {
-		application.setId(id);
+//		application.setId(id);
 		applicationService.updatePartiallyApplication(application);
 		return Response
 				.status(Response.Status.OK)

@@ -42,10 +42,10 @@ public interface ApplicationService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#user, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyApplication(Application application) throws AppException;
 
-	@PreAuthorize("hasPermission(#user, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyApplication(Application application) throws AppException;
 	
 	/*
