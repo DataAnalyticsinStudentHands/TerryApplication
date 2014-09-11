@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+#list {
+  
+}
+#list ul {
+  margin-top: 30px;
+}
+#list ul li {
+  text-align: left;
+  list-style: disc;
+  margin: 10px 0px;
+}

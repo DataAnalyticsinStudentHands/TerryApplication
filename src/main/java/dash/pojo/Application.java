@@ -142,7 +142,7 @@ public class Application implements  Serializable, IAclObject{
 	
 	public Application(ApplicationEntity applicationEntity) {
 		try {
-			BeanUtils.copyProperties(this, applicationEntity);
+			BeanUtils.copyProperties(this, applicationEntity);			
 		} catch ( IllegalAccessException e) {
 
 			e.printStackTrace();

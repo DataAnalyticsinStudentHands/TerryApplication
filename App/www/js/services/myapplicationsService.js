@@ -1,40 +1,38 @@
+/*global angular*/
 'use strict';
 
 /**
  * @ngdoc function
- * @name terry.controller:LoginController
+ * @name terry.services:MyapplicationsService
  * @description
- * # LoginController
- * Controller of the app
+ * # MyapplicationsService
+ * Sevice of the terry
  */
-angular.module('TerryServices')
-    .factory('MyapplicationsService', function (Restangular) {
-        return Restangular.all('applications');
-    });
+angular.module('TerryServices').factory('MyApplicationsService', function (Restangular) {
+    //  return Restangular.all('applications');
 
 
 
-    /*return {
+    return {
         getAllApplications:
-            function() {
-                return Restangular.all("simple").getList();
+            function () {
+                return Restangular.all("applications").getList();
             },
         getApplication:
-            function(application_id) {
-                return Restangular.all("simple").get(application_id);
+            function (application_id) {
+                return Restangular.all("applications").get(application_id);
             },
         createApplication:
-            function(application, uid) {
-                application.user_id = uid;
-                return Restangular.all("simple").post(application);
-            },
-        editApplication:
-            function(id, post) {
-                 return Restangular.all("simple").all(id).post(post);
+            function (application) {
+                return Restangular.all("applications").post(application);
             },
         deleteApplication:
-            function(pid) {
-                return Restangular.all("simple").all(pid).remove();
-            },
-    }*/
+            function (pid) {
+                return Restangular.all("applications").all(pid).remove();
+            }
+    };
+});
+
+
+
 
