@@ -10,7 +10,8 @@ angular.module('HonorsApplications', [
     'TerryControllers',
     'TerryFilters',
     'TerryServices',
-    'TerryDirectives'
+    'TerryDirectives',
+    'ui.bootstrap.datetimepicker'
 ])
 
     .run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {

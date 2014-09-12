@@ -8,20 +8,61 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-.controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, MyApplicationService, $ionicSideMenuDelegate) {
+.controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, MyApplicationService, $ionicSideMenuDelegate, $filter, $ionicPopup) {
 
     $scope.myapplication = {};
 
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function(result) {
             $scope.myapplication = result;
+            if ($scope.myapplication.state != null) {
+                $scope.test = $filter('filter')($scope.states, {name:$scope.myapplication.state}, true);
+                $scope.myState = $scope.test[0];
+            }
+            else {
+                $scope.myState = $scope.states[50];
+            }
         },  function(error) {
             if(error.status === 0) { 
                 ngNotify.set("Internet or Server unavailable.", {type : "error", sticky : true});
             } else { 
                 ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
             }
-    });    
+    });
+    
+    
+    $scope.newUser = {};
+
+  $scope.$watch('newUser.birthDate', function(unformattedDate){
+    $scope.newUser.formattedBirthDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
+  });
+
+  $scope.createContact = function() {
+    console.log('Create Contact', $scope.newUser);
+    $scope.modal.hide();
+  };
+    
+  $scope.openDatePicker = function() {
+    $scope.tmp = {};
+    $scope.tmp.newDate = $scope.newUser.birthDate;
+    
+    var birthDatePopup = $ionicPopup.show({
+     template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
+     title: "Date of Birth",
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel' },
+       {
+         text: '<b>Save</b>',
+         type: 'button-positive',
+         onTap: function(e) {
+           $scope.newUser.birthDate = $scope.tmp.newDate;
+         }
+       }
+     ]
+    });
+  }
+    
 
     $scope.toggleRight = function() {
         $ionicSideMenuDelegate.toggleRight();
@@ -29,6 +70,7 @@ angular.module('TerryControllers')
 
     // callback for ng-submit 'save':
     $scope.save = function() {
+        $scope.myapplication.state = $scope.myapplication.state.name;
         MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
             function(result) {
                 ngNotify.set("Saved to server.", {position: 'bottom', type: 'success'});
@@ -38,6 +80,8 @@ angular.module('TerryControllers')
 
         });
     }
+    
+    
     
     $scope.states = [
     {
@@ -277,4 +321,6 @@ angular.module('TerryControllers')
         "abbreviation": "WY"
     }
 ];
+    
+    
 });
