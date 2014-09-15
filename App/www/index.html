@@ -36,6 +36,7 @@
         <script src="js/controllers/controllers.js"></script>
         <script src="js/controllers/signinController.js"></script>
         <script src="js/controllers/registerController.js"></script>
+        <script src="js/controllers/mainController.js"></script>
         <script src="js/controllers/myapplicationsController.js"></script>
         <script src="js/controllers/myapplicationController.js"></script>
         <!-- Services -->
@@ -48,51 +49,46 @@
         <script src="js/directives/directives.js"></script>
     </head>
     
-    <body ng-app="HonorsApplications">
-        
-        <ion-nav-bar class="nav-title-slide-ios7" align-title="center">
-      <ion-nav-back-button class="button-icon ion-arrow-left-c">
-      </ion-nav-back-button>
-            
-    </ion-nav-bar>
+    <body ng-app="HonorsApplications" ng-controller="MainController">
         
         <ion-side-menus>
-        
-        <ion-side-menu-content>
-          <ion-nav-bar class="bar-positive">
+
+        <ion-pane ion-side-menu-content drag-content="main.dragContent">
+          <ion-nav-bar class="nav-title-slide-ios7">
             <ion-nav-back-button class="button-icon ion-arrow-left-c">
             </ion-nav-back-button>
           </ion-nav-bar>
-          <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
-            </button>
-          </ion-nav-buttons>
-          <ion-nav-view animation="no-animation" name="menuContent"></ion-nav-view>
-        </ion-side-menu-content> 
+
+          <ion-nav-view animation="slide-left-right"></ion-nav-view>
+        </ion-pane>
         
-        <ion-side-menu side="right">
-          <ion-header-bar class="bar-assertive">
-            <h1 class="title">Pages</h1>
+
+        <ion-side-menu side="right" ng-show="allowSideMenu">
+          <ion-header-bar class="bar bar-header bar-dark">
+            <h1 class="title">Application Package</h1>
           </ion-header-bar>
           <ion-content>
             <ul class="list">
-              <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
-              <a href="#/check-in" class="item" menu-close>Student Information</a>
-              <a href="#/event/attendees" class="item" menu-close>Attendees</a>
+              <li>
+                <a class="item" menu-close nav-clear href="#/search"> I. Student Information</a>
+              </li>
+              <li>
+                <a class="item" menu-close nav-clear href="#/settings">II. High School Information</a>
+              </li>
+                <li>
+                <a class="item" menu-close nav-clear href="#/settings">II. High School Information</a>
+              </li>
+                <li>
+                <a class="item" menu-close nav-clear href="#/settings">II. High School Information</a>
+              </li>
+                <li>
+                <a class="item" menu-close nav-clear href="#/settings">II. High School Information</a>
+              </li>
             </ul>
           </ion-content>
         </ion-side-menu>
-        
+
       </ion-side-menus>
-        
-        
-        
-        <!-- 
-The views will be rendered in the <ion-nav-view> directive below
-Templates are in the /templates folder (but you could also
-have templates inline in this html file if you'd like).
--->
-        <ion-nav-view class="slide-left-right"></ion-nav-view>
 
 
     </body>

@@ -6,7 +6,11 @@
 <ion-tabs class="tabs-icon-top">
 
   <!-- My Applications Tab -->
-  <ion-tab title="My Applications" icon="icon ion-home" href="#/tab/myapplications">
+  <ion-tab title="My Applications" 
+           icon="icon ion-home" 
+           href="#/tab/myapplications"
+           on-select="allowSideMenu(true)" 
+            on-deselect="allowSideMenu(false)">
     <ion-nav-view name="tab-myapplications"></ion-nav-view>
   </ion-tab>
     <!-- Contact Tab -->
