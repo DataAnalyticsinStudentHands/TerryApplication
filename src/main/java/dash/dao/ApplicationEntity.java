@@ -112,6 +112,39 @@ public class ApplicationEntity implements Serializable {
 	
 	@Column(name = "anticapted_major")
 	private String anticapted_major;
+	
+	@Column(name = "highschool_name")
+	private String highschool_name;
+	
+	@Column(name = "highschool_city")
+	private String highschool_city;
+	
+	@Column(name = "highschool_councelor")
+	private String highschool_councelor;
+	
+	@Column(name = "highschool_phone")
+	private String highschool_phone;
+	
+	@Column(name = "highschool_councelor_email")
+	private String highschool_councelor_email;
+	
+	@Column(name = "highschool_gpa")
+	private Float highschool_gpa;
+	
+	@Column(name = "highschool_scale")
+	private Float highschool_scale;
+	
+	@Column(name = "highschool_graduation_date")
+	private Date highschool_graduation_date;
+	  
+	@Column(name = "highschool_rank")
+	private Integer highschool_rank;
+	
+	@Column(name = "highschool_rank_out")
+	private Integer highschool_rank_out;
+	  
+	@Column(name = "highschool_rank_tied")
+	private Integer highschool_rank_tied; 
 
 	public ApplicationEntity(){}
 
@@ -378,5 +411,93 @@ public class ApplicationEntity implements Serializable {
 
 	public void setAnticapted_major(String anticapted_major) {
 		this.anticapted_major = anticapted_major;
+	}
+
+	public String getHighschool_name() {
+		return highschool_name;
+	}
+
+	public void setHighschool_name(String highschool_name) {
+		this.highschool_name = highschool_name;
+	}
+
+	public String getHighschool_city() {
+		return highschool_city;
+	}
+
+	public void setHighschool_city(String highschool_city) {
+		this.highschool_city = highschool_city;
+	}
+
+	public String getHighschool_councelor() {
+		return highschool_councelor;
+	}
+
+	public void setHighschool_councelor(String highschool_councelor) {
+		this.highschool_councelor = highschool_councelor;
+	}
+
+	public String getHighschool_phone() {
+		return highschool_phone;
+	}
+
+	public void setHighschool_phone(String highschool_phone) {
+		this.highschool_phone = highschool_phone;
+	}
+
+	public String getHighschool_councelor_email() {
+		return highschool_councelor_email;
+	}
+
+	public void setHighschool_councelor_email(String highschool_councelor_email) {
+		this.highschool_councelor_email = highschool_councelor_email;
+	}
+
+	public Float getHighschool_gpa() {
+		return highschool_gpa;
+	}
+
+	public void setHighschool_gpa(Float highschool_gpa) {
+		this.highschool_gpa = highschool_gpa;
+	}
+
+	public Float getHighschool_scale() {
+		return highschool_scale;
+	}
+
+	public void setHighschool_scale(Float highschool_scale) {
+		this.highschool_scale = highschool_scale;
+	}
+
+	public Date getHighschool_graduation_date() {
+		return highschool_graduation_date;
+	}
+
+	public void setHighschool_graduation_date(Date highschool_graduation_date) {
+		this.highschool_graduation_date = highschool_graduation_date;
+	}
+
+	public Integer getHighschool_rank() {
+		return highschool_rank;
+	}
+
+	public void setHighschool_rank(Integer highschool_rank) {
+		this.highschool_rank = highschool_rank;
+	}
+
+	public Integer getHighschool_rank_out() {
+		return highschool_rank_out;
+	}
+
+	public void setHighschool_rank_out(Integer highschool_rank_out) {
+		this.highschool_rank_out = highschool_rank_out;
+	}
+
+	public Integer getHighschool_rank_tied() {
+		return highschool_rank_tied;
+	}
+
+	public void setHighschool_rank_tied(Integer highschool_rank_tied) {
+		this.highschool_rank_tied = highschool_rank_tied;
 	}
 }

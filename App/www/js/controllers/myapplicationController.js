@@ -14,6 +14,8 @@ angular.module('TerryControllers')
 
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function(result) {
+            if ($stateParams.applicationId != "") {
+                
             $scope.myapplication = result;
             if ($scope.myapplication.state != null) {
                 $scope.test = $filter('filter')($scope.states, {name:$scope.myapplication.state}, true);
@@ -21,6 +23,7 @@ angular.module('TerryControllers')
             }
             else {
                 $scope.myState = $scope.states[50];
+            }
             }
         },  function(error) {
             if(error.status === 0) { 
@@ -31,20 +34,15 @@ angular.module('TerryControllers')
     });
     
     
-    $scope.newUser = {};
+    
 
-  $scope.$watch('newUser.birthDate', function(unformattedDate){
-    $scope.newUser.formattedBirthDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
+  $scope.$watch('myapplicaion.dob', function(unformattedDate){
+    $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
   });
 
-  $scope.createContact = function() {
-    console.log('Create Contact', $scope.newUser);
-    $scope.modal.hide();
-  };
-    
   $scope.openDatePicker = function() {
     $scope.tmp = {};
-    $scope.tmp.newDate = $scope.newUser.birthDate;
+    $scope.tmp.newDate = $scope.myapplication.dob;
     
     var birthDatePopup = $ionicPopup.show({
      template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
@@ -56,7 +54,7 @@ angular.module('TerryControllers')
          text: '<b>Save</b>',
          type: 'button-positive',
          onTap: function(e) {
-           $scope.newUser.birthDate = $scope.tmp.newDate;
+           $scope.myapplication.dob = $scope.tmp.newDate;
          }
        }
      ]

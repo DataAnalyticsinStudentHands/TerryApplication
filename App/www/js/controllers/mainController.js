@@ -3,21 +3,18 @@
 
 /**
  * @ngdoc function
- * @name terry.controller:MyapplicationsController
+ * @name terry.controller:MainController
  * @description
- * # MyapplicationsController
+ * # MainController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MainController', function($scope, $location) {
-
-    console.log('MainController');
+angular.module('TerryControllers').controller('MainController', function ($scope, $location) {
 
     $scope.main = {};
     $scope.main.dragContent = false;
     
-    $scope.allowSideMenu = function(allowOrNot) {
-      $scope.main.dragContent = allowOrNot;
-    }
-
+    $scope.allowSideMenu = function (allowOrNot) {
+        $scope.main.dragContent = allowOrNot;
+    };
   
-})
+});

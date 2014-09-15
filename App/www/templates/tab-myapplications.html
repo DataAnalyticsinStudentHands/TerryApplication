@@ -10,7 +10,7 @@
     <ion-content> 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
             <ion-item ng-repeat="myapplication in myapplications" type="item-text-wrap"
-                      href="#/tab/myapplication/{{myapplication.id}}">
+                      ui-sref="tabs.myapplication.student_information({ applicationId: myapplication.id })">
                 {{myapplication.name}} {{myapplication.id}}
                 <ion-delete-button class="ion-minus-circled"
                                    ng-click="deleteApplication(myapplication.id)"> </ion-delete-button> 

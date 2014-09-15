@@ -129,11 +129,94 @@ angular.module('HonorsApplications', [
             })
         
         
-            .state('tabs.student_information', {
+            .state('tabs.myapplication', {
                 url: '/myapplication/:applicationId',
+                abstract: true,
+                authenticate: true
+            })
+        
+            .state('tabs.myapplication.student_information', {
+                url: '/student_information',
                 views: {
-                    'tab-myapplications': {
+                    "tab-myapplications@tabs": {
                         templateUrl: 'templates/student_information.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+            .state('tabs.myapplication.highschool_information', {
+                url: '/highschool_information',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/highschool_information.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.highschool_coursework', {
+                url: '/highschool_coursework',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/highschool_coursework.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.employment', {
+                url: '/employment',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/employment.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.college_plans', {
+                url: '/college_plans',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/college_plans.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.financial_information', {
+                url: '/financial_information',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/financial_information.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.scholarship_information', {
+                url: '/scholarship_information',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/scholarship_information.html',
+                        controller: 'MyApplicationController'
+                    }
+                },
+                authenticate: true
+            })
+        
+        .state('tabs.myapplication.essays', {
+                url: '/essays',
+                views: {
+                    "tab-myapplications@tabs": {
+                        templateUrl: 'templates/essays.html',
                         controller: 'MyApplicationController'
                     }
                 },

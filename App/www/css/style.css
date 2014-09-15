@@ -11,6 +11,10 @@
   margin: 10px 0px;
 }
 
+.row.noPadding{
+  padding:0;
+}
+
 
 .popup-body .datetimepicker {
   min-height: 221px;
