@@ -1,3 +1,4 @@
+/*global angular, console*/
 'use strict';
 
 /**
@@ -8,68 +9,70 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-.controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, MyApplicationService, $ionicSideMenuDelegate, $filter, $ionicPopup) {
+    .controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, MyApplicationService, $ionicSideMenuDelegate, $filter, $ionicPopup) {
 
-    $scope.myapplication = {};
+        $scope.myapplication = {};
 
-    MyApplicationService.getMyApplication($stateParams.applicationId).then(
-        function(result) {
-            if ($stateParams.applicationId != "") {
+        MyApplicationService.getMyApplication($stateParams.applicationId).then(
+            function (result) {
+                if ($stateParams.applicationId !== "") {
                 
-            $scope.myapplication = result;
-            if ($scope.myapplication.state != null) {
-                $scope.test = $filter('filter')($scope.states, {name:$scope.myapplication.state}, true);
-                $scope.myState = $scope.test[0];
+                    $scope.myapplication = result;
+                    if ($scope.myapplication.state !== null) {
+                        $scope.test = $filter('filter')($scope.states, {name: $scope.myapplication.state}, true);
+                        $scope.myState = $scope.test[0];
+                    } else {
+                        $scope.myState = $scope.states[50];
+                    }
+                }
+            },
+            function (error) {
+                if (error.status === 0) {
+                    ngNotify.set("Internet or Server unavailable.", {type : "error", sticky : true});
+                } else {
+                    ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
+                }
             }
-            else {
-                $scope.myState = $scope.states[50];
-            }
-            }
-        },  function(error) {
-            if(error.status === 0) { 
-                ngNotify.set("Internet or Server unavailable.", {type : "error", sticky : true});
-            } else { 
-                ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
-            }
-    });
+        );
     
     
+        $scope.newUser = {};
+
+        $scope.$watch('newUser.birthDate', function (unformattedDate) {
+            $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+        });
+
+        $scope.openDatePicker = function () {
+            $scope.tmp = {};
+            $scope.tmp.newDate = $scope.newUser.birthDate;
+            var configdate = "{ startView:'year' }";
+    
+            var birthDatePopup = $ionicPopup.show({
+                template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
+                title: "Birth date",
+                scope: $scope,
+                buttons: [
+                    { text: 'Cancel' },
+                    {
+                        text: '<b>Save</b>',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            $scope.newUser.birthDate = $scope.tmp.newDate;
+                        }
+                    }
+                ]
+            });
+        };
     
 
-  $scope.$watch('myapplicaion.dob', function(unformattedDate){
-    $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
-  });
+        $scope.toggleRight = function() {
+            $ionicSideMenuDelegate.toggleRight();
+        };
 
-  $scope.openDatePicker = function() {
-    $scope.tmp = {};
-    $scope.tmp.newDate = $scope.myapplication.dob;
-    
-    var birthDatePopup = $ionicPopup.show({
-     template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
-     title: "Date of Birth",
-     scope: $scope,
-     buttons: [
-       { text: 'Cancel' },
-       {
-         text: '<b>Save</b>',
-         type: 'button-positive',
-         onTap: function(e) {
-           $scope.myapplication.dob = $scope.tmp.newDate;
-         }
-       }
-     ]
-    });
-  }
-    
-
-    $scope.toggleRight = function() {
-        $ionicSideMenuDelegate.toggleRight();
-    };
-
-    // callback for ng-submit 'save':
-    $scope.save = function() {
-        $scope.myapplication.state = $scope.myapplication.state.name;
-        MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
+        // callback for ng-submit 'save':
+        $scope.save = function() {
+            $scope.myapplication.state = $scope.myapplication.state.name;
+            MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
             function(result) {
                 ngNotify.set("Saved to server.", {position: 'bottom', type: 'success'});
             },

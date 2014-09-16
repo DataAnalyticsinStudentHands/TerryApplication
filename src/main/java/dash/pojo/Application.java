@@ -4,11 +4,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import dash.dao.ApplicationEntity;
 import dash.security.IAclObject;
+import dash.helpers.DateISO8601Adapter;
+import dash.helpers.SimpleDateAdapter;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -58,6 +61,8 @@ public class Application implements  Serializable, IAclObject{
 	private String state;
 	
 	@XmlElement(name = "dob")
+	@XmlJavaTypeAdapter(SimpleDateAdapter.class)
+	@ApplicationDetailedView
 	private Date dob;
 	
 	@XmlElement(name = "zip_code")

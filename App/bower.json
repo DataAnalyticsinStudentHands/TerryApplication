@@ -7,6 +7,7 @@
     "angular-cookies": "~1.2",
     "ng-notify": "~0.5.0",
     "lodash": "latest",
-    "restangular": "latest"
+    "restangular": "latest",
+    "angular-bootstrap-datetimepicker": "latest"
   }  
 }

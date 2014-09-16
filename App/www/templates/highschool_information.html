@@ -23,7 +23,7 @@
                     <input type="text" ng-model="myapplication.highschool_phone" placeholder="xxx-xxx-xxxx"></label></div>                            
             </div>
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Your High School Counselor's Email Address:</span>           <input type="text" ng-model="myapplication.highschool_councelor_email" placeholder="email"></label></div>                            
+                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Your High School Counselor's Email Address:</span>           <input type="email" ng-model="myapplication.highschool_councelor_email" placeholder="email"></label></div>                            
             </div>
 
             <div class="row">
@@ -38,22 +38,33 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input"> 
-                        <span class="input-label">Class Rank:</span> 
-                        <input type="text" ng-model="myapplication.highschool_rank" placeholder="#">
-                        <span>out off</span> 
-                        <input type="text" ng-model="myapplication.highschool_rank_out" placeholder="#">
-                        <span>&nbsp;students</span></label></div>
-                
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Number of students tied for this rank:</span> 
+                        <span class=" small-input-label input-label">Class Rank:</span> 
+                        <input class="small-input-label" type="text" ng-model="myapplication.highschool_rank" placeholder="#">
+                        <span class="small-input-label input-label">out off</span> 
+                        <input class="small-input-label" type="text" ng-model="myapplication.highschool_rank_out" placeholder="#">
+                        <span>&nbsp;students</span></label>
+                </div>
+                <div class="col">
+                    <label class="item item-input"> <span class="input-label">Number of students tied for this rank:</span> 
                     <input type="text" ng-model="myapplication.highschool_rank_tied" placeholder="#"></label></div> 
+                
             </div>
             
             <div class="row">
                 <div class="col">
                     <h4>Test Scores</h4></div>
+            </div>
+            
+            <div class="row">
+                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">PSAT Verbal:</span> 
+                    <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa"></label></div>
+                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Scale:</span> 
+                    <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale"></label></div>
+                <div class="col"><label class="item item-input" ng-click="openDatePicker()">
+                    <span class="input-label">Graduation Date:</span> 
+                    <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select"></label></div>
                 
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Number of students tied for this rank:</span> 
-                    <input type="text" ng-model="myapplication.highschool_rank_tied" placeholder="#"></label></div> 
+                
             </div>
             
             
