@@ -223,11 +223,11 @@ angular.module('HonorsApplications', [
                 authenticate: true
             })
 
-            .state('tabs.contact', {
-                url : '/contact',
+            .state('tabs.information', {
+                url : '/information',
                 views : {
-                    'tab-contact' : {
-                        templateUrl : 'templates/tab-contact.html'
+                    'tab-information' : {
+                        templateUrl : 'templates/tab-information.html'
                     }
                 },
                 authenticate: true

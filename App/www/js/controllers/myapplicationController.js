@@ -9,7 +9,34 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-    .controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, MyApplicationService, $ionicSideMenuDelegate, $filter, $ionicPopup) {
+    .controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, MyApplicationService, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal) {
+    
+    $scope.courses = [
+    {
+        "id": "1",
+        "level": "sophomore",
+        "name": "course one",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    },
+    {
+        "id": "2",
+        "level": "sophomore",
+        "name": "course two",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    },
+    {
+        "id": "3",
+        "level": "junior",
+        "name": "course three",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    }
+    ]
 
         $scope.myapplication = {};
 
@@ -39,13 +66,19 @@ angular.module('TerryControllers')
         $scope.newUser = {};
 
         $scope.$watch('newUser.birthDate', function (unformattedDate) {
-            $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+            if ($state.is('tabs.myapplication.highschool_information'))
+                {
+                    $scope.myapplication.highschool_graduation_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+                }
+                      else 
+                      {
+                $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+                      }
         });
 
         $scope.openDatePicker = function () {
             $scope.tmp = {};
-            $scope.tmp.newDate = $scope.newUser.birthDate;
-            var configdate = "{ startView:'year' }";
+            $scope.tmp.newDate = $scope.newUser.birthDate;            
     
             var birthDatePopup = $ionicPopup.show({
                 template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
@@ -62,8 +95,7 @@ angular.module('TerryControllers')
                     }
                 ]
             });
-        };
-    
+        };    
 
         $scope.toggleRight = function() {
             $ionicSideMenuDelegate.toggleRight();
@@ -82,7 +114,37 @@ angular.module('TerryControllers')
         });
     }
     
+    // callback for ng-click 'deleteCourse':
+    $scope.deleteCourse = function (courseId) {
+        MyApplicationService.deleteCourse(courseId);
+    };
     
+    // callback for ng-click 'addCourse':
+    $scope.addCourse = function (courseId) {
+        MyApplicationService.addCourse(courseId);
+    };
+    
+    // callback for ng-click 'modal'- open Modal dialog to create a new application
+    $ionicModal.fromTemplateUrl('modal.html', {
+        scope : $scope,
+        animation : 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    
+    $scope.mycourses = {};
+
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function () {
+        MyApplicationService.getAllCourses().then(
+            function (result) {
+                $scope.mycourses = result;
+            },
+            function (error) {
+                console.error(error);
+            }
+        );
+    });
     
     $scope.states = [
     {

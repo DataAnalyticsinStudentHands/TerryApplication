@@ -1,4 +1,4 @@
-<ion-view title="Terry Scholarship Application 2015/2016 High School Information"> 
+<ion-view title='<img class="title-image" src="img/honors_logo.png" /> Terry Scholarship Application 2015/2016'> 
 
     <!-- The nav bar that will be updated as we navigate between views.-->
     <ion-nav-buttons side="right">
@@ -7,45 +7,82 @@
     </ion-nav-buttons>
 
     <ion-content padding="true">  
-        
-         
-  
-  
-  
-        
-        <form class="submit" ng-submit="save()" novalidate>            
+        <h3>Pre-AP, Advanced Placement (AP), International Baccalaureate Program (IB), or Dual Credit (DC) coursework taken in Highschool</h3>
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">High School Name:</span> 
-                    <input type="text" ng-model="myapplication.highschool_name" placeholder="Highschool name"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">High School City/ST:</span> 
-                    <input type="text" ng-model="myapplication.highschool_city" placeholder="City"></label></div>                
-            </div>
-
-            <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Your High School Counselor:</span> 
-                    <input type="text" ng-model="myapplication.highschool_councelor" placeholder="Name"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">School Phone/Ext.:</span> 
-                    <input type="text" ng-model="myapplication.highschool_phone" placeholder="xxx-xxx-xxxx"></label></div>                            
-            </div>
-            <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Your High School Counselor's Email Address:</span>           <input type="text" ng-model="myapplication.highschool_councelor_email" placeholder="email"></label></div>                            
-            </div>
-
-            <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Zip Code:</span> 
-                    <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">County:</span> 
-                    <input type="text" ng-model="myapplication.county" placeholder="County"></label></div> 
+                <div class="col"><h4>Sophomore Level Coursework</h4></div>                
             </div>
             
             
+        <div class="row">
+                <div class="col">
+            <button class="button button-icon icon ion-compose"
+		          ng-click="modal.show()">Add Course</button>
+            <button class="button button-icon icon ion-ios7-minus-outline"
+                    ng-click="data.showDelete = !data.showDelete">Delete Courses</button>
+                    </div>                
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    <ion-list show-delete="data.showDelete">
+                        <ion-item ng-repeat="course in courses | filter: {level:'sophomore'}" type="item-text-wrap"
+                                  >
+                            {{course.name}} {{course.grade}}
+                            <ion-delete-button class="ion-minus-circled"
+                                               ng-click="deleteCourse(course.id)"> </ion-delete-button> 
+                        </ion-item> 
+                    </ion-list>
+
+
+                </div>                
+            </div>
+
+
             <!-- Submit button -->
             <div class="row">
                 <div class="col col-25 col-offset-75"><button type="submit" class="button button-block button-positive">Save</button></div>
 
 
             </div>
-        </form>
+        
     </ion-content>
+    
+    <script
+            id="modal.html" type="text/ng-template">
+            <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Add Coursework</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <div class="padding">
+            <div class="list">
+			<label class="item item-input">
+                <span class="input-label">Description/Name</span>
+                <input ng-model="mycourses.name" type="text">
+              </label> 
+              
+              <label class="item item-input">
+                <span class="input-label">Type</span>
+                <input ng-model="mycourses.type" type="text">
+              </label> 
+              <label class="item item-input">
+                <span class="input-label">Credit Hours</span>
+                <input ng-model="mycourses.credit_hours" type="text">
+              </label> 
+                          
+              
+              <button class="button button-full button-positive" ng-click="addCourse()">Add</button>
+            </div>
+          </div>
+        </ion-content>
+        </ion-modal-view>
+
+
+
+
+    </script>
 </ion-view>
+

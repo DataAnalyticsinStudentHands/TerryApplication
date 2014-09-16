@@ -125,6 +125,8 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "highschool_scale")
 	private Float highschool_scale;
 	
+	@XmlJavaTypeAdapter(SimpleDateAdapter.class)
+	@ApplicationDetailedView
 	@XmlElement(name = "highschool_graduation_date")
 	private Date highschool_graduation_date;
 	  
