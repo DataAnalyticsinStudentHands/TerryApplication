@@ -14,6 +14,8 @@ import dash.errorhandling.NotFoundExceptionMapper;
 import dash.filters.LoggingResponseFilter;
 import dash.pojo.ApplicationResource;
 import dash.pojo.ApplicationDetailedView;
+import dash.pojo.CourseworkResource;
+import dash.pojo.CourseworkDetailedView;
 import dash.pojo.UserDetailedView;
 import dash.pojo.UsersResource;
 
@@ -32,6 +34,7 @@ public class DashApplicationSetup extends ResourceConfig {
 		// register application resources
 		register(UsersResource.class);
 		register(ApplicationResource.class);
+		register(CourseworkResource.class);
 
 		// register filters
 		register(RequestContextFilter.class);
@@ -52,7 +55,8 @@ public class DashApplicationSetup extends ResourceConfig {
 		
 		property(EntityFilteringFeature.ENTITY_FILTERING_SCOPE,
 				new Annotation[] { ApplicationDetailedView.Factory.get() });
+		
+		property(EntityFilteringFeature.ENTITY_FILTERING_SCOPE,
+				new Annotation[] { CourseworkDetailedView.Factory.get() });
 	}
 }
-
-// This is a test comment. Please work.

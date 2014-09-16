@@ -30,7 +30,7 @@ import dash.service.CourseworkService;
  * @author plindner
  */
 @Component
-@Path("/courses")
+@Path("/coursework")
 public class CourseworkResource {
 
 	@Autowired

@@ -42,6 +42,12 @@
     <bean id="applicationDao" class="dash.dao.ApplicationDaoJPA2Impl"/>	
     <bean id="applicationService" class="dash.service.ApplicationServiceDbAccessImpl" />	
     <bean id="applicationResource" class="dash.pojo.ApplicationResource" />
+    
+    <bean id="courseworkDao" class="dash.dao.CourseworkDaoJPA2Impl"/>	
+    <bean id="courseworkService" class="dash.service.CourseworkServiceDbAccessImpl" />	
+    <bean id="courseworkResource" class="dash.pojo.CourseworkResource" />
+    
+    
     <bean id="aclController" class="dash.security.GenericAclController"/>
     
 	<bean id="dashDS" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
