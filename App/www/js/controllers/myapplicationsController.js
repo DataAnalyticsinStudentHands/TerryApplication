@@ -24,7 +24,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     );
 
     // callback for ng-click 'modal'- open Modal dialog to create a new application
-    $ionicModal.fromTemplateUrl('modal.html', {
+    $ionicModal.fromTemplateUrl('modal_createApplication.html', {
         scope : $scope,
         animation : 'slide-in-up'
     }).then(function (modal) {
@@ -50,6 +50,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
         if ($scope.myapplication.uh_id && $scope.myapplication.first_name && $scope.myapplication.last_name) {
             MyApplicationsService.createApplication($scope.myapplication).then(
                 function (result) {
+                    $scope.myapplication.state = "Texas";
                     $scope.modal.hide();
                     ngNotify.set("Succesfully created your application.", {position: 'bottom', type: 'success'});
                 },

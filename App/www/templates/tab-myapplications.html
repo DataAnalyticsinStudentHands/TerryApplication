@@ -4,9 +4,9 @@
         <button class="button button-icon icon ion-ios7-minus-outline"
                 ng-click="data.showDelete = !data.showDelete"></button>
         <button class="button button-icon icon ion-compose"
-		          ng-click="modal.show()"></button>
+                ng-click="modal.show()"></button>
     </ion-nav-buttons>        
-    
+
     <ion-content> 
         <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
             <ion-item ng-repeat="myapplication in myapplications" type="item-text-wrap"
@@ -16,41 +16,37 @@
                                    ng-click="deleteApplication(myapplication.id)"> </ion-delete-button> 
             </ion-item> 
         </ion-list> 
-    </ion-content> 
-    <script
-            id="modal.html" type="text/ng-template">
-            <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Create New Terry Foundation Scholarship Applicationv</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-        </ion-header-bar>
-        <ion-content>
-          <div class="padding">
-            <div class="list">
-			<label class="item item-input">
-                <span class="input-label">UH ID</span>
-                <input ng-model="myapplication.uh_id" type="text">
-              </label> 
-              
-              <label class="item item-input">
-                <span class="input-label">First Name</span>
-                <input ng-model="myapplication.first_name" type="text">
-              </label> 
-              <label class="item item-input">
-                <span class="input-label">Last Name</span>
-                <input ng-model="myapplication.last_name" type="text">
-              </label> 
-                          
-              
-              <button class="button button-full button-positive" ng-click="createApplication()">Create</button>
-            </div>
-          </div>
-        </ion-content>
+    </ion-content>
+    
+    <!-- Modal dialog for creating a new application -->
+    <script id="modal_createApplication.html" type="text/ng-template">
+        <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Create New Terry Foundation Scholarship Applicationv</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                </ion-header-bar>
+            <ion-content>
+                <div class="padding">
+                    <div class="list">
+			             <label class="item item-input">
+                            <span class="input-label">UH ID:</span>
+                            <input ng-model="myapplication.uh_id" type="text">
+                        </label> 
+
+                        <label class="item item-input">
+                            <span class="input-label">First Name:</span>
+                            <input ng-model="myapplication.first_name" type="text">
+                        </label> 
+
+                        <label class="item item-input">
+                            <span class="input-label">Last Name:</span>
+                            <input ng-model="myapplication.last_name" type="text">
+                        </label> 
+                        <button class="button button-full button-positive" ng-click="createApplication()">Create</button>
+                    </div>
+                </div>
+            </ion-content>
         </ion-modal-view>
-
-
-
-
     </script>
 
 </ion-view>

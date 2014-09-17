@@ -9,10 +9,7 @@
  * Sevice of the terry
  */
 angular.module('TerryServices').factory('MyApplicationsService', function (Restangular) {
-    //  return Restangular.all('applications');
-
-
-
+    
     return {
         getAllApplications:
             function () {
@@ -27,8 +24,8 @@ angular.module('TerryServices').factory('MyApplicationsService', function (Resta
                 return Restangular.all("applications").post(application);
             },
         deleteApplication:
-            function (pid) {
-                return Restangular.all("applications").all(pid).remove();
+            function (application_id) {
+                return Restangular.all("applications").all(application_id).remove();
             }
     };
 });

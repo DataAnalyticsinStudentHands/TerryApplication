@@ -19,5 +19,32 @@
   ]
 }
 
+$scope.courses = [
+    {
+        "id": "1",
+        "level": "sophomore",
+        "name": "course one",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    },
+    {
+        "id": "2",
+        "level": "sophomore",
+        "name": "course two",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    },
+    {
+        "id": "3",
+        "level": "junior",
+        "name": "course three",
+        "type": "AP",
+        "hours": "2",
+        "grade": "A+"
+    }
+    ]
+
 
 
