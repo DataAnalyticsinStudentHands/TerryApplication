@@ -68,11 +68,10 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     $scope.deleteApplication = function (applicationId) {
         MyApplicationsService.deleteApplication(applicationId).then(
             function (result) {
-                $scope.modal.hide();
                 ngNotify.set("Succesfully deleted your application.", {position: 'bottom', type: 'success'});
             },
             function (error) {
-                ngNotify.set("Could not contact server to create application!", {position: 'bottom', type: 'error'});
+                ngNotify.set("Could not contact server to delete application!", {position: 'bottom', type: 'error'});
             }
         );
     };

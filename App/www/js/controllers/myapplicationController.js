@@ -20,7 +20,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         function (result) {
             if ($stateParams.applicationId !== "") {
                 $scope.myapplication = result;
-                if ($scope.myapplication.state !== null) {
+                if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
                     $scope.test = $filter('filter')($scope.states, {name: $scope.myapplication.state}, true);
                     $scope.myState = $scope.test[0];
                 } else {
