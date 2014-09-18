@@ -33,8 +33,11 @@ angular.module('TerryControllers')
                     $state.go("tabs.myapplications", {}, {reload: true});
                     
                  }, function(error) {
-                    $scope.loginMsg = "Incorrect username or password.";
-                    ngNotify.set($scope.loginMsg, {position: 'bottom', type: 'error'});
+                    if (error.status === 0) {
+                        ngNotify.set("Internet or server unavailable.", {type : "error", sticky : true});
+                    } else {
+                        ngNotify.set("Incorrect username or password.", {position: 'bottom', type: 'error'});
+                    }
                     Auth.clearCredentials();
                  });
              }, 500);
