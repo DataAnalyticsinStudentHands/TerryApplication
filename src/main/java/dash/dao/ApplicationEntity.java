@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
 
 import dash.helpers.NullAwareBeanUtilsBean;
+import dash.helpers.SimpleDateAdapter;
 import dash.pojo.Application;
+import dash.pojo.ApplicationDetailedView;
 
 /**
  * Application entity
@@ -144,43 +147,51 @@ public class ApplicationEntity implements Serializable {
 	private Integer highschool_rank_out;
 	  
 	@Column(name = "highschool_rank_tied")
-	private Integer highschool_rank_tied; 
+	private Integer highschool_rank_tied;
+	
+	@Column(name = "psat_verbal")
+	private Float psat_verbal;
+	
+	@Column(name = "psat_math")
+	private Float psat_math;
+	
+	@Column(name = "psat_writing")
+	private Float psat_writing;
+	
+	@Column(name = "psat_selection")
+	private Float psat_selection;
+	
+	@Column(name = "psat_date")
+	private Date psat_date;
+	
+	@Column(name = "sat_reading")
+	private Float sat_reading;
+	
+	@Column(name = "sat_math")
+	private Float sat_math;
+	
+	@Column(name = "sat_writing")
+	private Float sat_writing;
+	
+	@Column(name = "sat_composite")
+	private Float sat_composite;
+	
+	@Column(name = "sat_date")
+	private Date sat_date;
+	
+	@Column(name = "act_composite")
+	private Float act_composite;
+	
+	@Column(name = "act_date")
+	private Date act_date;
 
 	public ApplicationEntity(){}
 
-	public ApplicationEntity(String document_folder, String name, Date creation_timestamp, Long uh_id, String first_name, String last_name,
-			String middle_name, String preferred_name, String ssn, String permanent_address, String city, String state, Date dob,
-			Long zip_code, String county, String home_phone, String alt_cell_phone, String gender, String email, Boolean citizen,
-			Boolean permanent_resident, String texas_resident, String permenent_resident_card, String birthplace, String ethnic_background,
-			String anticapted_major) {
+	public ApplicationEntity(String document_folder, String name, Date creation_timestamp) {
 	
 		this.document_folder = document_folder;
 		this.name = name;
 		this.creation_timestamp = creation_timestamp;
-		this.uh_id = uh_id;		
-		this.first_name = first_name;		
-		this.last_name = last_name;		
-		this.middle_name = middle_name;		
-		this.preferred_name = preferred_name;		
-		this.ssn = ssn;		
-		this.permanent_address = permanent_address;		
-		this.city = city;		
-		this.state = state;		
-		this.dob = dob;		
-		this.zip_code  = zip_code;		
-		this.county  = county;		
-		this.home_phone = home_phone;		
-		this.alt_cell_phone = alt_cell_phone;		
-		this.gender = gender;		
-		this.email  = email;		
-		this.citizen  = citizen;		
-		this.permanent_resident = permanent_resident;		
-		this.texas_resident = texas_resident;		
-		this.permenent_resident_card = permenent_resident_card;		
-		this.birthplace = birthplace;		
-		this.ethnic_background = ethnic_background;		
-		this.anticapted_major = anticapted_major;
-	
 	}
 
 	public ApplicationEntity(Application application) {
@@ -499,5 +510,101 @@ public class ApplicationEntity implements Serializable {
 
 	public void setHighschool_rank_tied(Integer highschool_rank_tied) {
 		this.highschool_rank_tied = highschool_rank_tied;
+	}
+
+	public Float getPsat_verbal() {
+		return psat_verbal;
+	}
+
+	public void setPsat_verbal(Float psat_verbal) {
+		this.psat_verbal = psat_verbal;
+	}
+
+	public Float getPsat_math() {
+		return psat_math;
+	}
+
+	public void setPsat_math(Float psat_math) {
+		this.psat_math = psat_math;
+	}
+
+	public Float getPsat_writing() {
+		return psat_writing;
+	}
+
+	public void setPsat_writing(Float psat_writing) {
+		this.psat_writing = psat_writing;
+	}
+
+	public Float getPsat_selection() {
+		return psat_selection;
+	}
+
+	public void setPsat_selection(Float psat_selection) {
+		this.psat_selection = psat_selection;
+	}
+
+	public Date getPsat_date() {
+		return psat_date;
+	}
+
+	public void setPsat_date(Date psat_date) {
+		this.psat_date = psat_date;
+	}
+
+	public Float getSat_reading() {
+		return sat_reading;
+	}
+
+	public void setSat_reading(Float sat_reading) {
+		this.sat_reading = sat_reading;
+	}
+
+	public Float getSat_math() {
+		return sat_math;
+	}
+
+	public void setSat_math(Float sat_math) {
+		this.sat_math = sat_math;
+	}
+
+	public Float getSat_writing() {
+		return sat_writing;
+	}
+
+	public void setSat_writing(Float sat_writing) {
+		this.sat_writing = sat_writing;
+	}
+
+	public Float getSat_composite() {
+		return sat_composite;
+	}
+
+	public void setSat_composite(Float sat_composite) {
+		this.sat_composite = sat_composite;
+	}
+
+	public Date getSat_date() {
+		return sat_date;
+	}
+
+	public void setSat_date(Date sat_date) {
+		this.sat_date = sat_date;
+	}
+
+	public Float getAct_composite() {
+		return act_composite;
+	}
+
+	public void setAct_composite(Float act_composite) {
+		this.act_composite = act_composite;
+	}
+
+	public Date getAct_date() {
+		return act_date;
+	}
+
+	public void setAct_date(Date act_date) {
+		this.act_date = act_date;
 	}
 }

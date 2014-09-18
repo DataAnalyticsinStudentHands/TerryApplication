@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name terry.controller:UserService
+ * @name terry.controller:MyApplicationService
  * @description
- * # UserService
+ * # MyApplicationService
  * Service for the terry
  */
 angular.module('TerryServices')

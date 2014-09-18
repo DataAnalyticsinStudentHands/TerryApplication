@@ -15,8 +15,8 @@ angular.module('HonorsApplications', [
 ]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {
 
     // Set Base URL to connect to DASH RESTFUL webservices
-    Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
-    // Restangular.setBaseUrl("http://www.housuggest.org:8888/RESTFUL-WS-0.0.1/");
+    //Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
+     Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
 
     // have Restangular available whereever we need it
     $rootScope.Restangular = function () {
@@ -25,7 +25,7 @@ angular.module('HonorsApplications', [
 
     //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
     $rootScope.isAuthenticated = function (authenticate) {
-        UserService.getMyUser().then(function (result) {
+        UserService.getUser().then(function (result) {
             console.log("authed");
             result = Restangular.stripRestangular(result)[0];
             //USERNAME & ID TO BE USED IN CONTROLLERS
@@ -226,6 +226,17 @@ angular.module('HonorsApplications', [
         views : {
             'tab-information' : {
                 templateUrl : 'templates/tab-information.html'
+            }
+        },
+        authenticate: true
+    })
+    
+    .state('tabs.user', {
+        url : '/user',
+        views : {
+            'tab-user' : {
+                templateUrl : 'templates/tab-user_detail.html',
+                controller : 'UserDetailController'
             }
         },
         authenticate: true

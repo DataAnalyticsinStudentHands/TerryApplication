@@ -26,11 +26,16 @@
                     <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
                 </ion-header-bar>
             <ion-content>
+            
+            <form novalidate class="submit" ng-submit="createApplication()">
                 <div class="padding">
                     <div class="list">
+                    
+                        
 			             <label class="item item-input">
                             <span class="input-label">UH ID:</span>
-                            <input ng-model="myapplication.uh_id" type="text">
+                            
+                            <input ng-model="myapplication.uh_id" type="text" required>
                         </label> 
 
                         <label class="item item-input">
@@ -42,9 +47,11 @@
                             <span class="input-label">Last Name:</span>
                             <input ng-model="myapplication.last_name" type="text">
                         </label> 
-                        <button class="button button-full button-positive" ng-click="createApplication()">Create</button>
+                        <div class="col col-25 col-offset-75"><button type="submit" class="button button-block button-positive">Create</button></div>
+                        
                     </div>
                 </div>
+        </form>
             </ion-content>
         </ion-modal-view>
     </script>

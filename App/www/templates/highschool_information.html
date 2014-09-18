@@ -5,10 +5,10 @@
         <button class="button button-icon button-clear ion-navicon-round"
                 ng-click="toggleRight()" ></button>
     </ion-nav-buttons>
-    
+
     <ion-content padding="true">
         <h3>High School Information</h3>
-        
+
         <form class="submit" ng-submit="save()" novalidate>            
 
             <div class="row">
@@ -33,10 +33,12 @@
                     <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa"></label></div>
                 <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Scale:</span> 
                     <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Graduation Date:</span> 
-                    <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="MM/DD/YYYY"></label></div>
+                <div class="col"><label class="item item-input item-stacked-label" ng-click="openTestDatePicker(1)"> 
+                    <span class="input-label">Graduation Date:</span>
+                    <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
+                    </label></div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input"> 
@@ -48,34 +50,59 @@
                 </div>
                 <div class="col">
                     <label class="item item-input"> <span class="input-label">Number of students tied for this rank:</span> 
-                    <input type="text" ng-model="myapplication.highschool_rank_tied" placeholder="#"></label></div> 
-                
+                        <input type="text" ng-model="myapplication.highschool_rank_tied" placeholder="#"></label></div> 
+
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <h4>Test Scores</h4></div>
             </div>
-            
+
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">PSAT Verbal:</span> 
-                    <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Scale:</span> 
-                    <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale"></label></div>
-                <div class="col"><label class="item item-input" ng-click="openDatePicker()">
-                    <span class="input-label">Graduation Date:</span> 
-                    <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select"></label></div>
-                
-                
-            </div>
-            
-            
-            <!-- Submit button -->
-            <div class="row">
-                <div class="col col-25 col-offset-75"><button type="submit" class="button button-block button-positive">Save</button></div>
+                <div class="col"><label class="item item-input item-stacked-label"><h2>PSAT</h2>
+                    <span>Verbal:</span>
+                    <input type="text" ng-model="myapplication.psat_verbal" placeholder="score">
+                    <span>Math:</span>                    
+                    <input type="text" ng-model="myapplication.psat_math" placeholder="score">
+                    <span>Writing Skills:</span>
+                    <input type="text" ng-model="myapplication.psat_writing" placeholder="score">
+                    <span>Selection Index:</span>
+                    <input type="text" ng-model="myapplication.psat_selection" placeholder="index">
+                    <label ng-click="openTestDatePicker(2)">Date of Test:
+                        <input  type="text" ng-model="myapplication.psat_date" placeholder="Select">
+                    </label>                                        
+                </div>
+
+                    <div class="col"><label class="item item-input item-stacked-label"><h2>SAT</h2>
+                        <span>Critical Reading:</span>
+                        <input type="text" ng-model="myapplication.sat_reading" placeholder="score">
+                        <span>Mathematics:</span>                    
+                        <input type="text" ng-model="myapplication.sat_math" placeholder="score">
+                        <span>Writing:</span>
+                        <input type="text" ng-model="myapplication.sat_writing" placeholder="score">
+                        <span>Composite:</span>
+                        <input type="text" ng-model="myapplication.sat_composite" placeholder="index">
+                        <label ng-click="openTestDatePicker(3)">Date of Test:
+                            <input  type="text" ng-model="myapplication.sat_date" placeholder="Select">
+                        </label>                                        
+                    </div>
+
+                        <div class="col"><label class="item item-input item-stacked-label"><h2>ACT</h2>
+                            <input type="text" ng-model="myapplication.act_composite" placeholder="index">
+                            <label ng-click="openTestDatePicker(4)">Date of Test:
+                                <input  type="text" ng-model="myapplication.act_date" placeholder="Select">
+                            </label>                                        
+                        </div>
+                </div>
 
 
-            </div>
-        </form>
-    </ion-content>
-</ion-view>
+                        <!-- Submit button -->
+                        <div class="row">
+                            <div class="col col-25 col-offset-75"><button type="submit" class="button button-block button-positive">Save</button></div>
+
+
+                        </div>
+                        </form>
+                    </ion-content>
+                </ion-view>

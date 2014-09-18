@@ -13,8 +13,10 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
+    
+    $scope.myVariables = {};
 
-    $scope.myapplication = {};    
+    $scope.myapplication = {};
     
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function (result) {
@@ -22,9 +24,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 $scope.myapplication = result;
                 if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
                     $scope.test = $filter('filter')($scope.states, {name: $scope.myapplication.state}, true);
-                    $scope.myState = $scope.test[0];
+                    $scope.myVariables.myState = $scope.test[0];
                 } else {
-                    $scope.myState = $scope.states[50];
+                    $scope.myVariables.myState = $scope.states[50];
                 }
             }
         },
@@ -38,19 +40,23 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     );
 
 
-    $scope.newUser = {};
+    $scope.pickedDates = {};
 
-    $scope.$watch('newUser.birthDate', function (unformattedDate) {
-        if ($state.is('tabs.myapplication.highschool_information')) {
-            $scope.myapplication.highschool_graduation_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-        } else {
-            $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-        }
+    $scope.$watch('pickedDates.birthDate', function (unformattedDate) {
+        $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.gradDate', function (unformattedDate) {
+        $scope.myapplication.highschool_graduation_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.testDate', function (unformattedDate) {
+        $scope.myapplication.psat_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
 
-    $scope.openDatePicker = function () {
+    $scope.openDOBPicker = function () {
         $scope.tmp = {};
-        $scope.tmp.newDate = $scope.newUser.birthDate;
+        $scope.tmp.newDate = $scope.pickedDates.birthDate;
         
         var birthDatePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
@@ -62,7 +68,33 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        $scope.newUser.birthDate = $scope.tmp.newDate;
+                        $scope.pickedDates.birthDate = $scope.tmp.newDate;
+                    }
+                }
+            ]
+        });
+    };
+    
+    $scope.openTestDatePicker = function (testvar) {
+        $scope.tmp = {};
+        $scope.tmp.newDate = $scope.pickedDates.birthDate;
+        
+        var birthDatePopup = $ionicPopup.show({
+            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
+            title: "Date of Test",
+            scope: $scope,
+            buttons: [
+                { text: 'Cancel' },
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        if (testvar === 1) {
+                            $scope.pickedDates.gradDate = $scope.tmp.newDate;
+                        }
+                        if (testvar === 2) {
+                            $scope.pickedDates.testDate = $scope.tmp.newDate;
+                        }
                     }
                 }
             ]
@@ -71,8 +103,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function () {
-        console.log ($scope.myState);
-        $scope.myapplication.state = $scope.myapplication.state.name;
+        $scope.myapplication.state = $scope.myVariables.myState.name;
+        
         MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
                 ngNotify.set("Saved to server.", {position: 'bottom', type: 'success'});

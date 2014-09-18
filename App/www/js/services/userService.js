@@ -42,15 +42,9 @@ angular.module('TerryServices')
                     return allUsers;
                 });
             },
-        getMyUser:
+        getUser:
             function() {
                 return Restangular.all("users").getList();
-            },
-        getUser:
-            function(user_id) {
-                return this.updateUsers().then(function(success) {
-                    return $filter('getById')(allUsers, user_id);
-                });
             },
         addUser:
             function(user) {
