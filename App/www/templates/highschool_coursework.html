@@ -1,4 +1,4 @@
-<ion-view title='<img class="title-image" src="img/honors_logo.png" /> Terry Scholarship Application 2015/2016'> 
+<ion-view title='<img class="title-image" src="img/honors_logo.png" /> <h4>Terry Scholarship Application 2015/2016</h4>'> 
 
     <!-- The nav bar that will be updated as we navigate between views.-->
     <ion-nav-buttons side="right">
@@ -7,12 +7,14 @@
     </ion-nav-buttons>
 
     <ion-content padding="true">  
-        <h3>Pre-AP, Advanced Placement (AP), International Baccalaureate Program (IB), or Dual Credit (DC) coursework taken in Highschool</h3>
+        <!--        <h4>Pre-AP, Advanced Placement (AP), International Baccalaureate Program (IB), or Dual Credit (DC) coursework taken in Highschool</h4>-->
+
+        <h4>High School Coursework</h4>
 
         <div class="row">
             <div class="col"><h4>Sophomore Level Coursework</h4></div>                
         </div>
-        
+
         <div class="row">
             <div class="col">
                 <button class="button button-icon icon ion-plus-circled"
@@ -34,11 +36,11 @@
                 </ion-list>
             </div>                
         </div>
-        
+
         <div class="row">
             <div class="col"><h4>Junior Level Coursework</h4></div>                
         </div>
-        
+
         <div class="row">
             <div class="col">
                 <button class="button button-icon icon ion-plus-circled"
@@ -60,7 +62,11 @@
                 </ion-list>
             </div>                
         </div>
-        
+
+        <div class="row">
+            <div class="col"><h4>Senior Level Coursework</h4></div>                
+        </div>
+
         <div class="row">
             <div class="col">
                 <button class="button button-icon icon ion-plus-circled"
@@ -92,31 +98,45 @@
         </ion-header-bar>
             <ion-content>
                 <div class="padding">
-                    <div class="list">
-			             <label class="item item-input">
-                            <span class="input-label">Description/Name:</span>
-                            <input ng-model="mycourse.name" type="text" placeholder="description">
-        </label>
-
-                        <label class="item item-input item-select">
-                            <span class="input-label">Type:</span>
-                            <select ng-model="myCourseType" 
-                                ng-options="type.abbreviation for type in course_types"> 
-        </select>
-        </label>
+                    <div class="row">
+                        <div class="col">
+			                 <label class="item item-input">
+                                <span class="input-label">Description/Name:</span>
+                                <input ng-model="mycourse.name" type="text" placeholder="description">
+                        </label>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="input-label">Type:</span>
+                                <select ng-model="myCourseType" 
+                                    ng-options="type.name for type in course_types"> 
+                                </select>
+                            </label>
+                    </div>
+                
+                
+                    <div class="col">
 
                         <label class="item item-input">
                             <span class="input-label">Credit Hours:</span>
-                            <input ng-model="mycourse.credit_hours" type="text">
-        </label>
-
+                            <input ng-model="mycourse.credit_hours" type="text" placeholder="credit hours">
+                        </label>
+                    </div>
+                <div class="col">
                         <label class="item item-input">
                             <span class="input-label">Final Grade:</span>
-                            <input ng-model="mycourse.final_grade" type="text">
-        </label>
+                            <input ng-model="mycourse.final_grade" type="text" placeholder="grade">
+                        </label>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col">
                         <button class="button button-full button-positive" ng-click="addCourse()">Add</button>
-        </div>
-        </div>
+                </div>
+            </div>
+            </div>
         </ion-content>
         </ion-modal-view>
     </script>

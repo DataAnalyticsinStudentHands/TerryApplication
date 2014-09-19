@@ -2,6 +2,8 @@ package dash.service;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import dash.errorhandling.AppException;
@@ -26,7 +28,7 @@ public interface ApplicationService {
 	 * @return list with objects corresponding to search criteria
 	 * @throws AppException
 	 */
-	
+	@PostFilter("hasPermission(filterObject, 'READ') or hasRole('ROLE_ADMIN')")
 	public List<Application> getApplications(String orderByInsertionDate) throws AppException;
 
 	/**
@@ -36,7 +38,7 @@ public interface ApplicationService {
 	 * @return
 	 * @throws AppException
 	 */
-	
+	@PostAuthorize("hasPermission(returnObject, 'READ') or hasRole('ROLE_ADMIN')")
 	public Application getApplicationById(Long id) throws AppException;
 	
 	/*

@@ -9,6 +9,7 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
     };
   }]);
 
+/*
 .directive('onValidSubmit', ['$parse', '$timeout', function($parse, $timeout) {
     return {
       require: '^form',
@@ -63,3 +64,4 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
     }
   }])
 ;
+*/
