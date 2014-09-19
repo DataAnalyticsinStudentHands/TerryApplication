@@ -89,7 +89,7 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 		path.append(File.separator);
 		path.append(fileName);
 		application.setDocument_folder(fileName);
-		application.setName(fileName);
+		application.setName(fileName+application.getCreation_timestamp());
 		entityManager.persist(application);
 		entityManager.flush();// force insert to receive the id of the
 								// application
