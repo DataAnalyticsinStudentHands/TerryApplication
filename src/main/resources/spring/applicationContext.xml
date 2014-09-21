@@ -33,20 +33,43 @@
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
             </bean>
         </property>
-    </bean>    
-         	
-	<bean id="userDao" class="dash.dao.UserDaoJPA2Impl"/>	
-    <bean id="userService" class="dash.service.UserServiceDbAccessImpl" />	
-    <bean id="userResource" class="dash.pojo.UsersResource" />
+    </bean>
+    
+    <bean id="activityDao" class="dash.dao.ActivityDaoJPA2Impl"/>	
+    <bean id="activityService" class="dash.service.ActivityServiceDbAccessImpl" />	
+    <bean id="activityResource" class="dash.pojo.ActivityResource" />
     
     <bean id="applicationDao" class="dash.dao.ApplicationDaoJPA2Impl"/>	
     <bean id="applicationService" class="dash.service.ApplicationServiceDbAccessImpl" />	
     <bean id="applicationResource" class="dash.pojo.ApplicationResource" />
     
+    <bean id="awardDao" class="dash.dao.AwardDaoJPA2Impl"/>	
+    <bean id="awardService" class="dash.service.AwardServiceDbAccessImpl" />	
+    <bean id="awardResource" class="dash.pojo.AwardResource" />
+    
+    <bean id="childDao" class="dash.dao.ChildDaoJPA2Impl"/>	
+    <bean id="childService" class="dash.service.ChildServiceDbAccessImpl" />	
+    <bean id="childResource" class="dash.pojo.ChildResource" />
+    
     <bean id="courseworkDao" class="dash.dao.CourseworkDaoJPA2Impl"/>	
     <bean id="courseworkService" class="dash.service.CourseworkServiceDbAccessImpl" />	
     <bean id="courseworkResource" class="dash.pojo.CourseworkResource" />
     
+    <bean id="employmentDao" class="dash.dao.EmploymentDaoJPA2Impl"/>	
+    <bean id="employmentService" class="dash.service.EmploymentServiceDbAccessImpl" />	
+    <bean id="employmentResource" class="dash.pojo.EmploymentResource" />
+    
+    <bean id="scholarshipDao" class="dash.dao.ScholarshipDaoJPA2Impl"/>	
+    <bean id="scholarshipService" class="dash.service.ScholarshipServiceDbAccessImpl" />	
+    <bean id="scholarshipResource" class="dash.pojo.ScholarshipResource" />      
+         	
+	<bean id="userDao" class="dash.dao.UserDaoJPA2Impl"/>	
+    <bean id="userService" class="dash.service.UserServiceDbAccessImpl" />	
+    <bean id="userResource" class="dash.pojo.UsersResource" />
+    
+    <bean id="volunteerDao" class="dash.dao.VolunteerDaoJPA2Impl"/>	
+    <bean id="volunteerService" class="dash.service.VolunteerServiceDbAccessImpl" />	
+    <bean id="volunteerResource" class="dash.pojo.VolunteerResource" />
     
     <bean id="aclController" class="dash.security.GenericAclController"/>
     
@@ -54,5 +77,4 @@
 	    <property name="jndiName" value="java:comp/env/jdbc/dashDB" />
 	    <property name="resourceRef" value="true" />        
 	</bean>
-	
 </beans>

@@ -10,7 +10,6 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import dash.dao.ApplicationEntity;
 import dash.security.IAclObject;
-import dash.helpers.DateISO8601Adapter;
 import dash.helpers.SimpleDateAdapter;
 
 import java.io.Serializable;

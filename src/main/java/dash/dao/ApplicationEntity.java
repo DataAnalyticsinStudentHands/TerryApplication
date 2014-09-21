@@ -9,16 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.BeanUtilsBean;
 
-import dash.helpers.NullAwareBeanUtilsBean;
-import dash.helpers.SimpleDateAdapter;
 import dash.pojo.Application;
-import dash.pojo.ApplicationDetailedView;
 
 /**
  * Application entity
@@ -194,9 +188,7 @@ public class ApplicationEntity implements Serializable {
 		this.creation_timestamp = creation_timestamp;
 	}
 
-	public ApplicationEntity(Application application) {
-		
-		
+	public ApplicationEntity(Application application) {		
 		try {
 			BeanUtils.copyProperties(this, application);
 		} catch ( IllegalAccessException e) {
