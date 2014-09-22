@@ -20,28 +20,14 @@ public class University implements  Serializable, IAclObject{
 	@XmlElement(name = "id")
 	private Long id;
 	
-	@XmlElement(name = "level")
-	private String level;
-
-	@XmlElement(name = "name")
-	private String name;
-	
-	@XmlElement(name = "type")
-	private String type;
-	
-	@XmlElement(name = "credit_hours")
-	private Long credit_hours;
-	
-	@XmlElement(name = "final_grade")
-	private String final_grade;
-	
 	@XmlElement(name = "application_id")
 	private Long application_id;
 	
+	@XmlElement(name = "name")
+	private String name;
 	
-	public Long getId() {
-		return id;
-	}	
+	@XmlElement(name = "rank")
+	private Long rank;
 	
 	public University(){}
 	
@@ -62,9 +48,21 @@ public class University implements  Serializable, IAclObject{
 			e.printStackTrace();
 		}
 	}
+	
+	public Long getId() {
+		return id;
+	}	
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getApplication_id() {
+		return application_id;
+	}
+
+	public void setApplication_id(Long application_id) {
+		this.application_id = application_id;
 	}
 
 	public String getName() {
@@ -75,44 +73,12 @@ public class University implements  Serializable, IAclObject{
 		this.name = name;
 	}
 
-	public String getLevel() {
-		return level;
+	public Long getRank() {
+		return rank;
 	}
 
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
-	public Long getApplication_id() {
-		return application_id;
-	}
-
-	public void setApplication_id(Long application_id) {
-		this.application_id = application_id;
+	public void setRank(Long rank) {
+		this.rank = rank;
 	}
 
 }

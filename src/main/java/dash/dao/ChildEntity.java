@@ -28,24 +28,26 @@ public class ChildEntity implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name = "level")
-	private String level;
+	@Column(name = "application_id")
+	private Long application_id;
 	
-	/** description of the object */
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "type")
-	private String type;
+	@Column(name = "age")
+	private Long age;
 	
-	@Column(name = "credit_hours")
-	private Long credit_hours;
+	@Column(name = "relationship")
+	private String relationship;
 	
-	@Column(name = "final_grade")
-	private String final_grade;
+	@Column(name = "school")
+	private String school;
 	
-	@Column(name = "application_id")
-	private Long application_id;
+	@Column(name = "year")
+	private String year;
+	
+	@Column(name = "self_supporting")
+	private Boolean self_supporting;
 	
 	public ChildEntity(){}
 
@@ -72,6 +74,14 @@ public class ChildEntity implements Serializable {
 	public void setId( Long id) {
 		this.id = id;
 	}
+	
+	public Long getApplication_id() {
+		return application_id;
+	}
+
+	public void setApplication_id(Long application_id) {
+		this.application_id = application_id;
+	}
 
 	public String getName() {
 		return name;
@@ -81,43 +91,43 @@ public class ChildEntity implements Serializable {
 		this.name = name;
 	}
 
-	public String getLevel() {
-		return level;
+	public Long getAge() {
+		return age;
 	}
 
-	public void setLevel(String level) {
-		this.level = level;
+	public void setAge(Long age) {
+		this.age = age;
 	}
 
-	public String getType() {
-		return type;
+	public String getRelationship() {
+		return relationship;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
 	}
 
-	public Long getCredit_hours() {
-		return credit_hours;
+	public String getSchool() {
+		return school;
 	}
 
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
+	public void setSchool(String school) {
+		this.school = school;
 	}
 
-	public String getFinal_grade() {
-		return final_grade;
+	public String getYear() {
+		return year;
 	}
 
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
+	public void setYear(String year) {
+		this.year = year;
 	}
 
-	public Long getApplication_id() {
-		return application_id;
+	public Boolean getSelf_supporting() {
+		return self_supporting;
 	}
 
-	public void setApplication_id(Long application_id) {
-		this.application_id = application_id;
+	public void setSelf_supporting(Boolean self_supporting) {
+		this.self_supporting = self_supporting;
 	}
 }

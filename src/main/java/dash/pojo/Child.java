@@ -20,24 +20,26 @@ public class Child implements  Serializable, IAclObject{
 	@XmlElement(name = "id")
 	private Long id;
 	
-	@XmlElement(name = "level")
-	private String level;
+	@XmlElement(name = "application_id")
+	private Long application_id;
 
 	@XmlElement(name = "name")
 	private String name;
 	
-	@XmlElement(name = "type")
-	private String type;
+	@XmlElement(name = "age")
+	private Long age;
 	
-	@XmlElement(name = "credit_hours")
-	private Long credit_hours;
+	@XmlElement(name = "relationship")
+	private String relationship;
 	
-	@XmlElement(name = "final_grade")
-	private String final_grade;
+	@XmlElement(name = "school")
+	private String school;
 	
-	@XmlElement(name = "application_id")
-	private Long application_id;
+	@XmlElement(name = "year")
+	private String year;
 	
+	@XmlElement(name = "self_supporting")
+	private Boolean self_supporting;
 	
 	public Long getId() {
 		return id;
@@ -67,46 +69,6 @@ public class Child implements  Serializable, IAclObject{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
 	public Long getApplication_id() {
 		return application_id;
 	}
@@ -115,4 +77,51 @@ public class Child implements  Serializable, IAclObject{
 		this.application_id = application_id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getAge() {
+		return age;
+	}
+
+	public void setAge(Long age) {
+		this.age = age;
+	}
+
+	public String getRelationship() {
+		return relationship;
+	}
+
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public Boolean getSelf_supporting() {
+		return self_supporting;
+	}
+
+	public void setSelf_supporting(Boolean self_supporting) {
+		this.self_supporting = self_supporting;
+	}
 }

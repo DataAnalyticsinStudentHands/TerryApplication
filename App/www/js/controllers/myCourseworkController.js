@@ -9,6 +9,10 @@
  * Controller for the terry
  */
 angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal, MyCourseworkService) {
+    
+    $scope.data = {
+        showDelete: true
+    };
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
@@ -31,7 +35,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     
     // callback for ng-click 'deleteCourse':
     $scope.deleteCourse = function (courseId) {
-        MyCourseworkService.deleteCourse(courseId);
+        MyCourseworkService.deleteCoursework(courseId);
     };
 
     // callback for ng-click 'addCourse':
@@ -53,7 +57,6 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         } else {
             ngNotify.set("Remember to fill in everything!", {position: 'bottom', type: 'error'});
         }
-        MyCourseworkService.addCourse();
     };
 
     // callback for ng-click 'modal'- open Modal dialog to add a new course

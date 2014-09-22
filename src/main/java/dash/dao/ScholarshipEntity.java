@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import org.apache.commons.beanutils.BeanUtils;
 
 import dash.pojo.Scholarship;
@@ -28,24 +27,20 @@ public class ScholarshipEntity implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name = "level")
-	private String level;
+	@Column(name = "application_id")
+	private Long application_id;
 	
-	/** description of the object */
+	@Column(name = "applied_received")
+	private Boolean applied_received;
+
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "type")
-	private String type;
+	@Column(name = "duration")
+	private String duration;
 	
-	@Column(name = "credit_hours")
-	private Long credit_hours;
-	
-	@Column(name = "final_grade")
-	private String final_grade;
-	
-	@Column(name = "application_id")
-	private Long application_id;
+	@Column(name = "amount")
+	private Long amount;
 	
 	public ScholarshipEntity(){}
 
@@ -73,6 +68,22 @@ public class ScholarshipEntity implements Serializable {
 		this.id = id;
 	}
 
+	public Long getApplication_id() {
+		return application_id;
+	}
+
+	public void setApplication_id(Long application_id) {
+		this.application_id = application_id;
+	}
+
+	public Boolean getApplied_received() {
+		return applied_received;
+	}
+
+	public void setApplied_received(Boolean applied_received) {
+		this.applied_received = applied_received;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -81,43 +92,19 @@ public class ScholarshipEntity implements Serializable {
 		this.name = name;
 	}
 
-	public String getLevel() {
-		return level;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setLevel(String level) {
-		this.level = level;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
-	public String getType() {
-		return type;
+	public Long getAmount() {
+		return amount;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
-	public Long getApplication_id() {
-		return application_id;
-	}
-
-	public void setApplication_id(Long application_id) {
-		this.application_id = application_id;
+	public void setAmount(Long amount) {
+		this.amount = amount;
 	}
 }

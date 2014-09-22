@@ -12,6 +12,10 @@
     right: 0px;
 }
 
+.really {
+    display: inline;
+}
+
 
 form i.icon.error {
   color: #ef4e3a; }

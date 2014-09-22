@@ -53,7 +53,7 @@ ScholarshipService {
 	}
 
 	private void validateInputForCreation(Scholarship scholarship) throws AppException {
-		if (scholarship.getName() == null || scholarship.getType() == null || scholarship.getApplication_id() == null) {
+		if (scholarship.getName() == null || scholarship.getApplication_id() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);

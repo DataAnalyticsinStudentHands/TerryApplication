@@ -20,24 +20,20 @@ public class Award implements  Serializable, IAclObject{
 	@XmlElement(name = "id")
 	private Long id;
 	
-	@XmlElement(name = "level")
-	private String level;
-
-	@XmlElement(name = "name")
-	private String name;
-	
-	@XmlElement(name = "type")
-	private String type;
-	
-	@XmlElement(name = "credit_hours")
-	private Long credit_hours;
-	
-	@XmlElement(name = "final_grade")
-	private String final_grade;
-	
 	@XmlElement(name = "application_id")
 	private Long application_id;
 	
+	@XmlElement(name = "award")
+	private String award;
+
+	@XmlElement(name = "description")
+	private String description;
+	
+	@XmlElement(name = "level")
+	private String level;
+	
+	@XmlElement(name = "year")
+	private String year;
 	
 	public Long getId() {
 		return id;
@@ -45,10 +41,10 @@ public class Award implements  Serializable, IAclObject{
 	
 	public Award(){}
 	
-	public Award(Long id, String name) {
+	public Award(Long id, String description) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.description = description;
 	}
 	
 	public Award(AwardEntity awardEntity) {
@@ -67,12 +63,28 @@ public class Award implements  Serializable, IAclObject{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Long getApplication_id() {
+		return application_id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setApplication_id(Long application_id) {
+		this.application_id = application_id;
+	}
+
+	public String getAward() {
+		return award;
+	}
+
+	public void setAward(String award) {
+		this.award = award;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getLevel() {
@@ -83,36 +95,12 @@ public class Award implements  Serializable, IAclObject{
 		this.level = level;
 	}
 
-	public String getType() {
-		return type;
+	public String getYear() {
+		return year;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
-	public Long getApplication_id() {
-		return application_id;
-	}
-
-	public void setApplication_id(Long application_id) {
-		this.application_id = application_id;
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 }

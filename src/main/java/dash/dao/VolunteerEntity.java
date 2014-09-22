@@ -2,6 +2,7 @@ package dash.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,29 +29,28 @@ public class VolunteerEntity implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name = "level")
-	private String level;
-	
-	/** description of the object */
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "type")
-	private String type;
-	
-	@Column(name = "credit_hours")
-	private Long credit_hours;
-	
-	@Column(name = "final_grade")
-	private String final_grade;
-	
 	@Column(name = "application_id")
 	private Long application_id;
 	
+	@Column(name = "place")
+	private String place;
+
+	@Column(name = "description")
+	private String description;
+
+	@Column(name = "hours")
+	private Long hours;
+	
+	@Column(name = "date_from")
+	private Date date_from;
+	
+	@Column(name = "date_to")
+	private Date date_to;
+	
 	public VolunteerEntity(){}
 
-	public VolunteerEntity(String name) {
-		this.name = name;
+	public VolunteerEntity(String place) {
+		this.place = place;
 	}
 
 	public VolunteerEntity(Volunteer volunteer) {
@@ -73,51 +73,51 @@ public class VolunteerEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
 	public Long getApplication_id() {
 		return application_id;
 	}
 
 	public void setApplication_id(Long application_id) {
 		this.application_id = application_id;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Long getHours() {
+		return hours;
+	}
+
+	public void setHours(Long hours) {
+		this.hours = hours;
+	}
+
+	public Date getDate_from() {
+		return date_from;
+	}
+
+	public void setDate_from(Date date_from) {
+		this.date_from = date_from;
+	}
+
+	public Date getDate_to() {
+		return date_to;
+	}
+
+	public void setDate_to(Date date_to) {
+		this.date_to = date_to;
 	}
 }

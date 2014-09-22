@@ -44,16 +44,16 @@ public interface CourseworkService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#coursework, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyCoursework(Coursework application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#coursework, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyCoursework(Coursework application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#coursework, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteCoursework(Coursework coursework);
 	
 	/** removes all applications

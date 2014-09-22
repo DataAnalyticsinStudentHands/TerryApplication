@@ -27,7 +27,7 @@ angular.module('TerryServices').factory('MyCourseworkService', function (Restang
             function (coursework_id, coursework) {
                 return Restangular.all("coursework").all(coursework_id).post(coursework);
             },
-        deleteMyCourse:
+        deleteCoursework:
             function (coursework_id) {
                 return Restangular.all("coursework").all(coursework_id).remove();
             }

@@ -44,16 +44,16 @@ public interface ChildService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#child, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyChild(Child application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#child, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyChild(Child application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#child, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteChild(Child child);
 	
 	/** removes all applications

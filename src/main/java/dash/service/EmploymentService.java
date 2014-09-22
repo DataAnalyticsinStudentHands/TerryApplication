@@ -44,16 +44,16 @@ public interface EmploymentService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#employment, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyEmployment(Employment application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#employment, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyEmployment(Employment application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#employment, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteEmployment(Employment employment);
 	
 	/** removes all applications

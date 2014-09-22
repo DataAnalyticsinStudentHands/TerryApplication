@@ -44,16 +44,16 @@ public interface AwardService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#award, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyAward(Award application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#award, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyAward(Award application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#award, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteAward(Award award);
 	
 	/** removes all applications

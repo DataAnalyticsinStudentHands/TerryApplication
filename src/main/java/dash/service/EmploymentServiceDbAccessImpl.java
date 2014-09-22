@@ -53,7 +53,7 @@ EmploymentService {
 	}
 
 	private void validateInputForCreation(Employment employment) throws AppException {
-		if (employment.getName() == null || employment.getType() == null || employment.getApplication_id() == null) {
+		if (employment.getPosition() == null || employment.getApplication_id() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);
@@ -141,7 +141,7 @@ EmploymentService {
 	 */
 	private boolean isFullUpdate(Employment employment) {
 		return employment.getId() == null
-				|| employment.getName() == null;
+				|| employment.getPosition() == null;
 	}
 
 	/********************* DELETE-related methods implementation ***********************/

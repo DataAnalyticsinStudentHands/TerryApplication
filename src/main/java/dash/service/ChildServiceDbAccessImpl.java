@@ -53,7 +53,7 @@ ChildService {
 	}
 
 	private void validateInputForCreation(Child child) throws AppException {
-		if (child.getName() == null || child.getType() == null || child.getApplication_id() == null) {
+		if (child.getName() == null || child.getApplication_id() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);

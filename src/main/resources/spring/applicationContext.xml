@@ -61,7 +61,11 @@
     
     <bean id="scholarshipDao" class="dash.dao.ScholarshipDaoJPA2Impl"/>	
     <bean id="scholarshipService" class="dash.service.ScholarshipServiceDbAccessImpl" />	
-    <bean id="scholarshipResource" class="dash.pojo.ScholarshipResource" />      
+    <bean id="scholarshipResource" class="dash.pojo.ScholarshipResource" />
+    
+    <bean id="universityDao" class="dash.dao.UniversityDaoJPA2Impl"/>	
+    <bean id="universityService" class="dash.service.UniversityServiceDbAccessImpl" />	
+    <bean id="universityResource" class="dash.pojo.UniversityResource" />      
          	
 	<bean id="userDao" class="dash.dao.UserDaoJPA2Impl"/>	
     <bean id="userService" class="dash.service.UserServiceDbAccessImpl" />	

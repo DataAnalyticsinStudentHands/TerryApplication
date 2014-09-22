@@ -28,29 +28,26 @@ public class AwardEntity implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name = "level")
-	private String level;
-	
-	/** description of the object */
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "type")
-	private String type;
-	
-	@Column(name = "credit_hours")
-	private Long credit_hours;
-	
-	@Column(name = "final_grade")
-	private String final_grade;
-	
 	@Column(name = "application_id")
 	private Long application_id;
 	
+	@Column(name = "award")
+	private String award;
+	
+	/** description of the object */
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "level")
+	private String level;
+	
+	@Column(name = "year")
+	private String year;
+	
 	public AwardEntity(){}
 
-	public AwardEntity(String name) {
-		this.name = name;
+	public AwardEntity(String description) {
+		this.description = description;
 	}
 
 	public AwardEntity(Award award) {
@@ -73,12 +70,28 @@ public class AwardEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Long getApplication_id() {
+		return application_id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setApplication_id(Long application_id) {
+		this.application_id = application_id;
+	}
+
+	public String getAward() {
+		return award;
+	}
+
+	public void setAward(String award) {
+		this.award = award;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getLevel() {
@@ -89,35 +102,11 @@ public class AwardEntity implements Serializable {
 		this.level = level;
 	}
 
-	public String getType() {
-		return type;
+	public String getYear() {
+		return year;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Long getCredit_hours() {
-		return credit_hours;
-	}
-
-	public void setCredit_hours(Long credit_hours) {
-		this.credit_hours = credit_hours;
-	}
-
-	public String getFinal_grade() {
-		return final_grade;
-	}
-
-	public void setFinal_grade(String final_grade) {
-		this.final_grade = final_grade;
-	}
-
-	public Long getApplication_id() {
-		return application_id;
-	}
-
-	public void setApplication_id(Long application_id) {
-		this.application_id = application_id;
+	public void setYear(String year) {
+		this.year = year;
 	}
 }

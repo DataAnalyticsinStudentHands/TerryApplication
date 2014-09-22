@@ -44,16 +44,16 @@ public interface VolunteerService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#volunteer, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyVolunteer(Volunteer application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#volunteer, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyVolunteer(Volunteer application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#volunteer, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteVolunteer(Volunteer volunteer);
 	
 	/** removes all applications

@@ -44,16 +44,16 @@ public interface ScholarshipService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#scholarship, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyScholarship(Scholarship application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#scholarship, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyScholarship(Scholarship application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#scholarship, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteScholarship(Scholarship scholarship);
 	
 	/** removes all applications

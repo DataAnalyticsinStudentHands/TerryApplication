@@ -53,7 +53,7 @@ VolunteerService {
 	}
 
 	private void validateInputForCreation(Volunteer volunteer) throws AppException {
-		if (volunteer.getName() == null || volunteer.getType() == null || volunteer.getApplication_id() == null) {
+		if (volunteer.getPlace() == null || volunteer.getApplication_id() == null) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, "Provided data not sufficient for insertion",
 					"Please verify that the name is properly generated/set",
 					AppConstants.DASH_POST_URL);
@@ -141,7 +141,7 @@ VolunteerService {
 	 */
 	private boolean isFullUpdate(Volunteer volunteer) {
 		return volunteer.getId() == null
-				|| volunteer.getName() == null;
+				|| volunteer.getPlace() == null;
 	}
 
 	/********************* DELETE-related methods implementation ***********************/

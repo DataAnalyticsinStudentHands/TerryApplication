@@ -44,16 +44,16 @@ public interface ActivityService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#activity, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyActivity(Activity application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#activity, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyActivity(Activity application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#activity, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteActivity(Activity activity);
 	
 	/** removes all applications

@@ -15,8 +15,8 @@ angular.module('HonorsApplications', [
 ]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {
 
     // Set Base URL to connect to DASH RESTFUL webservices
-    //Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
-     Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
+    // Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
 
     // have Restangular available whereever we need it
     $rootScope.Restangular = function () {
@@ -171,7 +171,7 @@ angular.module('HonorsApplications', [
         views: {
             "tab-myapplications@tabs": {
                 templateUrl: 'templates/employment.html',
-                controller: 'MyApplicationController'
+                controller: 'MyEmploymentController'
             }
         },
         authenticate: true

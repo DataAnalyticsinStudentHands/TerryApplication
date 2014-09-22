@@ -44,16 +44,16 @@ public interface UniversityService {
 	/*
 	 * ******************** Update related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#university, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updateFullyUniversity(University application) throws AppException;
 
-	@PreAuthorize("hasPermission(#application, 'WRITE') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#university, 'WRITE') or hasRole('ROLE_ADMIN')")
 	public void updatePartiallyUniversity(University application) throws AppException;
 	
 	/*
 	 * ******************** Delete related methods **********************
 	 */
-	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasPermission(#university, 'delete') or hasRole('ROLE_ADMIN')")
 	public void deleteUniversity(University university);
 	
 	/** removes all applications
