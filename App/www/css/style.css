@@ -16,6 +16,13 @@
     display: inline;
 }
 
+.left-side {
+  float: left;
+}
+
+ 
+
+
 
 form i.icon.error {
   color: #ef4e3a; }

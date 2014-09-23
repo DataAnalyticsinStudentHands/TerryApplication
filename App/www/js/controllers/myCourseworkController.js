@@ -8,17 +8,13 @@
  * # MyCourseworkController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal, MyCourseworkService) {
+angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, MyCourseworkService) {
     
-    $scope.data = {
-        showDelete: true,
-        listCanSwipe: true
+    $scope.myVariables = {
+        current_mode: 'Add',
     };
     
-
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
+    
     
     $scope.mycourses = {};
     $scope.mycourse = {};
@@ -33,7 +29,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             console.error(error);
             ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
         }
-    ); 
+    );
     
     // callback for ng-click 'deleteCourse':
     $scope.deleteCourse = function (courseId) {
@@ -41,26 +37,46 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     };
     
     // callback for ng-click 'editCourse':
-    $scope.editCourse = function (course) {
-        console.log("here");
+    $scope.editCourse = function (course, level) {
+        $scope.myVariables.current_mode = "Edit";
+        $scope.mycourse = course;
+        var test = $filter('filter')($scope.course_types, {abbreviation: $scope.mycourse.type}, true);
+        $scope.myVariables.myCourseType = test[0];
+                
+        $scope.modal.show();
+        var test = $filter('filter')($scope.levels, {id: level}, true);
+        currentLevel = test[0].name;
     };
 
-    // callback for ng-click 'addCourse':
-    $scope.addCourse = function () {
+    // callback for ng-click 'saveModal':
+    $scope.saveModal = function () {
         $scope.mycourse.application_id = $stateParams.applicationId;
         $scope.mycourse.level = currentLevel;
-      //  $scope.mycourse.type = $scope.mycourse.type.abbreviation;
-        $scope.mycourse.type = "AP";
+        $scope.mycourse.type = $scope.myVariables.myCourseType.abbreviation;        
+        
         if ($scope.mycourse.name && $scope.mycourse.credit_hours && $scope.mycourse.final_grade) {
-            MyCourseworkService.addCoursework($scope.mycourse).then(
-                function (result) {
-                    $scope.modal.hide();
-                    ngNotify.set("Succesfully added your coursework.", {position: 'bottom', type: 'success'});
-                },
-                function (error) {
-                    ngNotify.set("Could not contact server to add coursework!", {position: 'bottom', type: 'error'});
-                }
-            );
+            
+            if ($scope.myVariables.current_mode === 'Add') {
+                MyCourseworkService.addCoursework($scope.mycourse).then(
+                    function (result) {
+                        $scope.modal.hide();
+                        ngNotify.set("Succesfully added your coursework.", {position: 'bottom', type: 'success'});
+                    },
+                    function (error) {
+                        ngNotify.set("Could not contact server to add coursework!", {position: 'bottom', type: 'error'});
+                    }
+                );
+            } else {
+                MyCourseworkService.updateCoursework($scope.mycourse.id, $scope.mycourse).then(
+                    function (result) {
+                        $scope.modal.hide();
+                        ngNotify.set("Succesfully updated your coursework.", {position: 'bottom', type: 'success'});
+                    },
+                    function (error) {
+                        ngNotify.set("Could not contact server to update coursework!", {position: 'bottom', type: 'error'});
+                    }
+                );
+            }
         } else {
             ngNotify.set("Remember to fill in everything!", {position: 'bottom', type: 'error'});
         }
@@ -72,13 +88,16 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         animation : 'slide-in-up'
     }).then(function (modal) {
         $scope.myCourseType = $scope.course_types[0];
-        $scope.modal = modal; 
+        $scope.modal = modal;
     });
     
     // Open the modal
-    $scope.showAddCourse = function(level) {
-  	    $scope.modal.show();
-        var test = $filter('filter')($scope.levels, {id: level}, true);        
+    $scope.showAddCourse = function (level) {
+        // Set some variables to default values
+        $scope.myVariables.current_mode = "Add";        
+        $scope.myVariables.myCourseType = $scope.course_types[0];
+        $scope.modal.show();
+        var test = $filter('filter')($scope.levels, {id: level}, true);       
         currentLevel = test[0].name;
     };
 
@@ -93,6 +112,11 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             }
         );
     });
+    
+    // Toggle open/close side menu
+    $scope.toggleRight = function () {
+        $ionicSideMenuDelegate.toggleRight();
+    };
     
     $scope.course_types = [
         {
@@ -123,7 +147,4 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             "name": "senior"
         }
     ];
-    
-    
-
 });
