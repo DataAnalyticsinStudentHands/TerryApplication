@@ -16,20 +16,21 @@
             </div>  
         </div>
 
-        <div class="row">
-            <div class="col">
-                <ion-list show-delete="data.showDelete">
+        
+                <ion-list show-delete="true" can-swipe="true">
                     <ion-item ng-repeat="course in mycourses | filter: {level:'sophomore'}" >
+                        <button class="button button-icon ion-compose"
+                                            ng-click="editCourse(course)">
+                        </button>
                         {{course.name}} {{course.grade}}
                         <ion-delete-button class="ion-minus-circled" 
                                            ng-click="deleteCourse(course.id)">
                         </ion-delete-button>
-
+                        
 
                     </ion-item> 
                 </ion-list>
-            </div>                
-        </div>
+            
 
         <div class="row">
             <div class="col"><h4 class="really">Junior Level Coursework</h4>

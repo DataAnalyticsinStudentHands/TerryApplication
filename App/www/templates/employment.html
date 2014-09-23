@@ -32,7 +32,7 @@
             <div class="col">
                 <ion-list show-delete="data.showDelete">
                     <ion-item ng-repeat="item in mydata" >
-                        {{course.name}} {{course.grade}}
+                        {{item.position}}  {{item.date_from}} - {{item.date_to}}
                         <ion-delete-button class="ion-minus-circled" 
                                            ng-click="deleteData(item.id)">
                         </ion-delete-button>
@@ -65,7 +65,7 @@
                         <div class="col">
 			                 <label class="item item-input">
                                 <span class="input-label">Position/Job Title:</span>
-                                <input ng-model="myemployment.position" type="text" placeholder="title">
+                                <input ng-model="mynewdata.position" type="text" placeholder="title">
                             </label>
                         </div>
                     </div>
@@ -73,29 +73,29 @@
                         <div class="col">
 			                 <label class="item item-input">
                                 <span class="input-label">Employer:</span>
-                                <input ng-model="myemployment.employer" type="text" placeholder="employer">
+                                <input ng-model="mynewdata.employer" type="text" placeholder="employer">
                             </label>
                         </div>
                     </div>
                     <div class="row">
                     <div class="col">
                         <label class="item item-input">
-                            <span class="input-label">Credit Hours:</span>
-                            <input ng-model="myemployment.hours" type="text" placeholder="hours">
+                            <span class="input-label">Hours:</span>
+                            <input ng-model="mynewdata.hours" type="text" placeholder="hours">
                         </label>
                     </div>
                     <div class="col"><label class="item item-input item-stacked-label" ng-click="openDatePicker(1)"> 
                     <span class="input-label">From Date:</span>
-                    <input type="text" ng-model="myemployment.date_from" placeholder="Select">
+                    <input type="text" ng-model="mynewdata.date_from" placeholder="Select">
                     </label></div>
-                    <div class="col"><label class="item item-input item-stacked-label" ng-click="openDatePicker(2)"> 
+                    <div class="col"><label class="item item-input" ng-click="openDatePicker(2)"> 
                     <span class="input-label">To Date:</span>
-                    <input type="text" ng-model="myemployment.date_to" placeholder="Select">
+                    <input type="text" ng-model="mynewdata.date_to" placeholder="Select">
                     </label></div>
                 </div>
             <div class="row">
                 <div class="col">
-                        <button class="button button-full button-positive" ng-click="addEmployment()">Add</button>
+                        <button class="button button-full button-positive" ng-click="addData()">Add</button>
         </div>
         </div>
         </div>

@@ -19,7 +19,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     };
     
     $scope.mydata = {};
-   
+    $scope.mynewdata = {};
     
     // GET 
     MyEmploymentService.getAllEmployment().then(
@@ -39,9 +39,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
     // callback for ng-click 'addData':
     $scope.addData = function () {
-        $scope.mydata.application_id = $stateParams.applicationId;
-        if ($scope.mymydata.position && $scope.mydata.hours) {
-            MyEmploymentService.addEmployment($scope.mydata).then(
+        $scope.mynewdata.application_id = $stateParams.applicationId;
+        if ($scope.mynewdata.position && $scope.mynewdata.hours) {
+            MyEmploymentService.addEmployment($scope.mynewdata).then(
                 function (result) {
                     $scope.modal.hide();
                     ngNotify.set("Succesfully added your employment.", {position: 'bottom', type: 'success'});
@@ -83,11 +83,11 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     $scope.pickedDates = {};
 
     $scope.$watch('pickedDates.date_from', function (unformattedDate) {
-        $scope.mydata.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+        $scope.mynewdata.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
     
     $scope.$watch('pickedDates.date_to', function (unformattedDate) {
-        $scope.mydata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+        $scope.mynewdata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
     
     $scope.openDatePicker = function (testvar) {

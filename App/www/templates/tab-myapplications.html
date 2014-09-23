@@ -8,7 +8,7 @@
         <button class="button button-icon icon ion-plus-circled"
                 ng-click="modal.show()"> Create Application</button>
         
-        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-list show-delete="data.showDelete">
             <ion-item ng-repeat="myapplication in myapplications" type="item-text-wrap"
                       ui-sref="tabs.myapplication.student_information({ applicationId: myapplication.id })">
                 {{myapplication.name}} {{myapplication.id}}

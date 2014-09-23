@@ -11,8 +11,10 @@
 angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal, MyCourseworkService) {
     
     $scope.data = {
-        showDelete: true
+        showDelete: true,
+        listCanSwipe: true
     };
+    
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
@@ -36,6 +38,11 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     // callback for ng-click 'deleteCourse':
     $scope.deleteCourse = function (courseId) {
         MyCourseworkService.deleteCoursework(courseId);
+    };
+    
+    // callback for ng-click 'editCourse':
+    $scope.editCourse = function (course) {
+        console.log("here");
     };
 
     // callback for ng-click 'addCourse':
