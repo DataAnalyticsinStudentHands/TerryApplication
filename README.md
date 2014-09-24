@@ -6,9 +6,9 @@ RESTFUL-WS Branch Terry Application
 Collection of RESTful web service implementation for core DASH functions to be used with the Terry Application Web App. 
 
 =======
-1. Java backend provides a RESTful web service.
+1. Java backend provides a RESTful web service. (under /src)
 
-2. AngularJS consumes the web service.
+2. AngularJS consumes the web service. (under /App)
 
 
 
