@@ -8,19 +8,23 @@
  * # MyEmploymentController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal, MyEmploymentService) {
-    
-    $scope.data = {
-        showDelete: true
+angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, MyEmploymentService, MyActivityService, MyVolunteerService) {
+
+    $scope.myVariables = {
+        current_mode: 'Add',
     };
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
-    
+
     $scope.mydata = {};
     $scope.mynewdata = {};
-    
+    $scope.myactivities = {};
+    $scope.mynewactivity = {};
+    $scope.myvolunteers = {};
+    $scope.mynewvolunteer = {};
+
     // GET 
     MyEmploymentService.getAllEmployment().then(
         function (result) {
@@ -28,44 +32,122 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         },
         function (error) {
             console.error(error);
-            ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
         }
-    ); 
-    
+    );
+
+    // GET 
+    MyActivityService.getAllActivity().then(
+        function (result) {
+            $scope.myactivities = result;
+        },
+        function (error) {
+            console.error(error);
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
+
+    // GET 
+    MyVolunteerService.getAllVolunteer().then(
+        function (result) {
+            $scope.myvolunteers = result;
+        },
+        function (error) {
+            console.error(error);
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
+
     // callback for ng-click 'deleteData':
-    $scope.deleteData = function (dataId) {
-        MyEmploymentService.deleteEmployment(dataId);
+    $scope.deleteData = function (dataId, acType) {
+        switch (acType) {
+        case 1:
+            {
+                MyEmploymentService.deleteEmployment(dataId);
+                break;
+            }
+        case 2:
+            {
+                MyActivityService.deleteActivity(dataId);
+                break;
+            }
+        default:
+            MyVolunteerService.deleteVolunteer(dataId);
+        }
+    };
+
+    // callback for ng-click 'editData':
+    $scope.editData = function (item, acType) {
+        $scope.myVariables.current_mode = "Edit";
+        
+        switch (acType) {
+        case 1:
+            {
+                $scope.mydata = item;
+                break;
+            }
+        case 2:
+            {
+                $scope.myactivities = item;
+                break;
+            }
+        default:
+            $scope.myvolunteers = item;
+        }
+        
+        $scope.modal.show();
     };
 
     // callback for ng-click 'addData':
-    $scope.addData = function () {
+    $scope.addData = function (acType) {
+        
+        
+        
         $scope.mynewdata.application_id = $stateParams.applicationId;
         if ($scope.mynewdata.position && $scope.mynewdata.hours) {
             MyEmploymentService.addEmployment($scope.mynewdata).then(
                 function (result) {
                     $scope.modal.hide();
-                    ngNotify.set("Succesfully added your employment.", {position: 'bottom', type: 'success'});
+                    ngNotify.set("Succesfully added your employment.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
                 },
                 function (error) {
-                    ngNotify.set("Could not contact server to add employment!", {position: 'bottom', type: 'error'});
+                    ngNotify.set("Could not contact server to add employment!", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
                 }
             );
         } else {
-            ngNotify.set("Remember to fill in everything!", {position: 'bottom', type: 'error'});
+            ngNotify.set("Remember to fill in everything!", {
+                position: 'bottom',
+                type: 'error'
+            });
         }
     };
 
     // callback for ng-click 'modal'- open Modal dialog to add new data
-    $ionicModal.fromTemplateUrl('modal_addEmployment.html', {
-        scope : $scope,
-        animation : 'slide-in-up'
+    $ionicModal.fromTemplateUrl('modal_Employment.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
     }).then(function (modal) {
-        $scope.modal = modal; 
+        $scope.modal = modal;
     });
-    
+
     // Open the modal
-    $scope.showAddData = function() {
-  	    $scope.modal.show();
+    $scope.showAddData = function () {
+        $scope.modal.show();
     };
 
     // Execute action on hide modal
@@ -79,27 +161,29 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
         );
     });
-    
+
     $scope.pickedDates = {};
 
     $scope.$watch('pickedDates.date_from', function (unformattedDate) {
         $scope.mynewdata.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.date_to', function (unformattedDate) {
         $scope.mynewdata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.openDatePicker = function (testvar) {
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.pickedDates.birthDate;
-        
+
         var birthDatePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
             title: "Date",
             scope: $scope,
             buttons: [
-                { text: 'Cancel' },
+                {
+                    text: 'Cancel'
+                },
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',

@@ -1,5 +1,4 @@
 /*global angular, console*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -8,22 +7,29 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate,  $ionicPopup, $ionicModal, MyApplicationService, MyCourseworkService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService) {
+    'use strict';
+
+    $scope.$watch('myapplication.citizen', function (value) {
+        console.log(value);
+    });
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
-    
+
     $scope.myVariables = {};
 
     $scope.myapplication = {};
-    
+
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function (result) {
             if ($stateParams.applicationId !== "") {
                 $scope.myapplication = result;
                 if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
-                    $scope.test = $filter('filter')($scope.states, {name: $scope.myapplication.state}, true);
+                    $scope.test = $filter('filter')($scope.states, {
+                        name: $scope.myapplication.state
+                    }, true);
                     $scope.myVariables.myState = $scope.test[0];
                 } else {
                     $scope.myVariables.myState = $scope.states[50];
@@ -32,9 +38,15 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         },
         function (error) {
             if (error.status === 0) {
-                ngNotify.set("Internet or Server unavailable.", {type : "error", sticky : true});
+                ngNotify.set("Internet or Server unavailable.", {
+                    type: "error",
+                    sticky: true
+                });
             } else {
-                ngNotify.set("Something went wrong retrieving data.", {type : "error", sticky : true});
+                ngNotify.set("Something went wrong retrieving data.", {
+                    type: "error",
+                    sticky: true
+                });
             }
         }
     );
@@ -45,25 +57,35 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.$watch('pickedDates.birthDate', function (unformattedDate) {
         $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.gradDate', function (unformattedDate) {
         $scope.myapplication.highschool_graduation_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
-    $scope.$watch('pickedDates.testDate', function (unformattedDate) {
+
+    $scope.$watch('pickedDates.psatDate', function (unformattedDate) {
         $scope.myapplication.psat_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+
+    $scope.$watch('pickedDates.satDate', function (unformattedDate) {
+        $scope.myapplication.sat_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+
+    $scope.$watch('pickedDates.actDate', function (unformattedDate) {
+        $scope.myapplication.act_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
 
     $scope.openDOBPicker = function () {
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.pickedDates.birthDate;
-        
+
         var birthDatePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
             title: "Birth date",
             scope: $scope,
             buttons: [
-                { text: 'Cancel' },
+                {
+                    text: 'Cancel'
+                },
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
@@ -74,17 +96,19 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
-    
+
     $scope.openTestDatePicker = function (testvar) {
         $scope.tmp = {};
         $scope.tmp.newDate = $scope.pickedDates.birthDate;
-        
+
         var birthDatePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
             title: "Date of Test",
             scope: $scope,
             buttons: [
-                { text: 'Cancel' },
+                {
+                    text: 'Cancel'
+                },
                 {
                     text: '<b>Save</b>',
                     type: 'button-positive',
@@ -93,7 +117,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                             $scope.pickedDates.gradDate = $scope.tmp.newDate;
                         }
                         if (testvar === 2) {
-                            $scope.pickedDates.testDate = $scope.tmp.newDate;
+                            $scope.pickedDates.psatDate = $scope.tmp.newDate;
+                        }
+                        if (testvar === 3) {
+                            $scope.pickedDates.satDate = $scope.tmp.newDate;
+                        }
+                        if (testvar === 4) {
+                            $scope.pickedDates.actDate = $scope.tmp.newDate;
                         }
                     }
                 }
@@ -102,15 +132,23 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     };
 
     // callback for ng-submit 'save': save application updates to server
-    $scope.save = function () {
+    $scope.save = function (nextstate) {
         $scope.myapplication.state = $scope.myVariables.myState.name;
-        
+
         MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
-                ngNotify.set("Saved to server.", {position: 'bottom', type: 'success'});
+                ngNotify.set("Saved to server.", {
+                    position: 'bottom',
+                    type: 'success'
+                });
+                //if succesful => send to next page
+                $state.go(nextstate);
             },
             function (error) {
-                ngNotify.set("Could not contact server to save application!", {position: 'bottom', type: 'error'});
+                ngNotify.set("Could not contact server to save application!", {
+                    position: 'bottom',
+                    type: 'error'
+                });
 
             }
         );

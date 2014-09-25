@@ -1,15 +1,13 @@
+/*global angular*/
 'use strict';
 
 /* Directives */
-
-
 angular.module('TerryDirectives', []).directive('appVersion', ['version', function(version) {
     return function(scope, elm, attrs) {
       elm.text(version);
     };
-  }]);
+  }])
 
-/*
 .directive('onValidSubmit', ['$parse', '$timeout', function($parse, $timeout) {
     return {
       require: '^form',
@@ -29,7 +27,7 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
           });
         });
       }
-    }
+    };
  
   }])
   .directive('validated', ['$parse', function($parse) {
@@ -47,7 +45,7 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
                 scope.$watch(function() {
                   return form.$submitted + "_" + field.$valid;
                 }, function() {
-                  if (form.$submitted != true) return;
+                  if (form.$submitted !== true) return;
                   var inp = angular.element(input);
                   if (inp.hasClass('ng-invalid')) {
                     element.removeClass('has-success');
@@ -61,7 +59,6 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
           })(inputs[i]);
         }
       }
-    }
-  }])
-;
-*/
+    };
+  }]);
+

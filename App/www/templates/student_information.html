@@ -1,118 +1,202 @@
-<ion-view title="Terry Scholarship Application 2015/2016"> 
+<ion-view title="Terry Scholarship Application 2015/2016">
 
     <!-- The nav bar that will be updated as we navigate between views.-->
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon-round"
-                ng-click="toggleRight()" ></button>
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
 
-    <ion-content padding="true">  
-        <p>Fill out each section of the application form completely, taking care to respond to each question in the space provided.  </p>
+    <ion-content padding="true">
+        <p>Fill out each section of the application form completely, taking care to respond to each question in the space provided.</p>
         <h3>Student Information</h3>
 
-        <form novalidate class="submit" ng-submit="save()">            
+        <form name="student_information" novalidate on-valid-submit="save('tabs.myapplication.highschool_information')">
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Last Name:</span> 
-                    <input type="text" ng-model="myapplication.last_name" placeholder="Lastname"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">First Name:</span> 
-                    <input type="text" ng-model="myapplication.first_name" placeholder="Firstname"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Middle Name:</span> 
-                    <input type="text" ng-model="myapplication.middle_name" placeholder="Middlename"></label></div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Last Name:</span> 
+                        <input name="last_name" type="text" ng-model="myapplication.last_name" placeholder="Lastname" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">First Name:</span> 
+                        <input type="text" ng-model="myapplication.first_name" placeholder="Firstname" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label"> <span class="input-label">Middle Name:</span> 
+                        <input type="text" ng-model="myapplication.middle_name" placeholder="Middlename">
+                    </label>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Preferred Name:</span> 
-                    <input type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">UH ID:</span> 
-                    <input type="text" ng-model="myapplication.uh_id" placeholder="0123456"></label></div>                            
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Preferred Name:</span> 
+                        <input name="preferred_name" type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname">                        
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">UH ID:</span> 
+                        <input name="uh_id" type="number" ng-model="myapplication.uh_id" placeholder="0123456" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Permanent Address:</span> 
-                    <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress"></label></div>                            
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated"> 
+                        <span class="input-label">Permanent Address:</span> 
+                        <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">City:</span> 
-                    <input type="text" ng-model="myapplication.city" placeholder="City"></label></div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated"> 
+                        <span class="input-label">City:</span> 
+                        <input type="text" ng-model="myapplication.city" placeholder="City" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
                 <div class="col">
                     <label class="item item-input item-select">
                         <span class="input-label">State:</span>
-                        <select ng-model="myVariables.myState" 
-                                ng-options="state.name for state in states"> 
+                        <select ng-model="myVariables.myState" ng-options="state.name for state in states">
                         </select>
-                    </label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Zip Code:</span> 
-                    <input type="text" ng-model="myapplication.zip_code" placeholder="01234"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">County:</span> 
-                    <input type="text" ng-model="myapplication.county" placeholder="County"></label></div> 
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated"> 
+                        <span class="input-label">Zip Code:</span> 
+                        <input type="text" ng-model="myapplication.zip_code" placeholder="01234" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">County:</span> 
+                        <input type="text" ng-model="myapplication.county" placeholder="County" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Home Phone:</span> 
-                    <input type="text" ng-model="myapplication.home_phone" placeholder="xxx-xxx-xxx"></label></div>
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Alternate/Cell Phone:</span> 
-                    <input type="text" ng-model="myapplication.alt_cell_phone" placeholder="xxx-xxx-xxx"></label></div>                            
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Home Phone:</span>
+                        <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" required />
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Alternate/Cell Phone:</span>
+                        <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" required/>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col"><label class="item item-input" ng-click="openDOBPicker()">
-                    <span class="input-label">Date of Birth:</span> 
-                    <input type="text" ng-model="myapplication.dob" placeholder="Select"></label></div>
-                
-                
-                <div class="col"><label class="item item-input"> <span class="input-label">Gender:</span>
-                    <ion-radio ng-model="myapplication.gender" ng-value="'Female'">Female</ion-radio>
-                    <ion-radio ng-model="myapplication.gender" ng-value="'Male'">Male</ion-radio></label> </div> 
-            </div>
-
-
-            <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Email Address:</span> 
-                    <input type="text" ng-model="myapplication.email" placeholder="email address"></label></div> 
-            </div>
-
-            <div class="row">
-
-                <div class="col"><label class="item item-input"> <span class="input-label">U.S. Citizen:</span>
-                    <ion-radio ng-model="myapplication.citizen" ng-value="'true'">Yes</ion-radio>
-                    <ion-radio ng-model="myapplication.citizen" ng-value="'false'">No</ion-radio></label> </div> 
-
-
-                <div class="col" ng-hide="myapplication.citizen"><label class="item item-input"> <span class="input-label">Permanent Resident:</span>
-                    <ion-radio ng-model="myapplication.permanent_resident" ng-value="'true'">Yes</ion-radio>
-                    <ion-radio ng-model="myapplication.permanent_resident" ng-value="'false'">No</ion-radio></label> </div> 
-                
-                <div class="col" ng-show="myapplication.permanent_resident"><label class="item item-input"> <span class="input-label">Permanet Resident Type of Card:</span>
-                    <ion-radio ng-model="myapplication.permanent_resident_card" ng-value="'true'">1551</ion-radio>
-                    <ion-radio ng-model="myapplication.permanent_resident_card" ng-value="'false'">1551C</ion-radio></label> </div>
-            </div>
-            
-            <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Texas Resident:</span> 
-                    <input type="text" ng-model="myapplication.texas_resident" placeholder="Are you a Texas resident?"></label></div> 
-
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Birthplace:</span> 
-                    <input type="text" ng-model="myapplication.birthplace" placeholder="birthplace"></label></div> 
-
+                <div class="col">
+                    <label class="item item-input" ng-click="openDOBPicker()">
+                        <span class="input-label">Date of Birth:</span> 
+                        <input type="text" ng-model="myapplication.dob" placeholder="Select">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Gender:</span>
+                        <ion-radio name="gender" ng-model="myapplication.gender" ng-value="'Female'">Female</ion-radio>
+                        <ion-radio name="gender" ng-model="myapplication.gender" ng-value="'Male'">Male</ion-radio>
+                    </label>
+                </div>
             </div>
             
             <div class="row">
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Ethnic Background:</span> 
-                    <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?"></label></div> 
+                <div class="col">
+                    <label class="item item-input validated">
+                        <span class="input-label">Email Address:</span> 
+                        <input name="email" type="email" ng-model="myapplication.email" placeholder="email address" required>
+                    </label>
+                </div>
+            </div>
 
-                <div class="col"><label class="item item-input item-stacked-label"> <span class="input-label">Anticipated College Major::</span> 
-                    <input type="text" ng-model="myapplication.anticipated_major" placeholder="Major"></label></div> 
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input"> 
+                        <span class="input-label">U.S. Citizen:</span>
+                        <ion-radio name="citizen" ng-model="myapplication.citizen" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="citizen" ng-model="myapplication.citizen" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+    
+                <div class="col" ng-hide="myapplication.citizen">
+                    <label class="item item-input"> <span class="input-label">Permanent Resident:</span>
+                        <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col" ng-show="myapplication.permanent_resident">
+                    <label class="item item-input"> <span class="input-label">Permanent Resident Type of Card:</span>
+                        <ion-radio name="permanent_resident_card" ng-model="myapplication.permanent_resident_card" ng-value="'true'">1551</ion-radio>
+                        <ion-radio name="permanent_resident_card" ng-model="myapplication.permanent_resident_card" ng-value="'false'">1551C</ion-radio>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input"> 
+                        <span class="input-label">Texas Resident:</span>
+                        <ion-radio name="texas_resident" ng-model="myapplication.texas_resident" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="texas_resident" ng-model="myapplication.texas_resident" ng-value="'false'">No</ion-radio>
+                    </label>
+                    
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Birthplace:</span> 
+                        <input type="text" ng-model="myapplication.birthplace" placeholder="birthplace" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
 
             </div>
 
-
-            <!-- Submit button -->
             <div class="row">
-                <div class="col col-25 col-offset-75"><button type="submit" class="button button-block button-positive">Save</button></div>
-
-
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Ethnic Background:</span> 
+                        <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?" required>
+                    <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Anticipated College Major:</span> 
+                        <input type="text" ng-model="myapplication.anticipated_major" placeholder="Major" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+            </div>
+            <!-- Next/Save button -->
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button type="submit" class="button button-block button-positive">Next</button>
+                </div>
             </div>
         </form>
     </ion-content>

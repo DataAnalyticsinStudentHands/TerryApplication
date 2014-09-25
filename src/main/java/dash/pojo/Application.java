@@ -83,16 +83,16 @@ public class Application implements  Serializable, IAclObject{
 	private String email;
 	
 	@XmlElement(name = "citizen")
-	private Boolean citizen;
+	private String citizen;
 	
 	@XmlElement(name = "permanent_resident")
-	private Boolean permanent_resident;
+	private String permanent_resident;
 	
 	@XmlElement(name = "texas_resident")
 	private String texas_resident;
 	
-	@XmlElement(name = "permenent_resident_card")
-	private String permenent_resident_card;
+	@XmlElement(name = "permanent_resident_card")
+	private String permanent_resident_card;
 	
 	@XmlElement(name = "birthplace")
 	private String birthplace;
@@ -100,8 +100,8 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "ethnic_background")
 	private String ethnic_background;
 	
-	@XmlElement(name = "anticapted_major")
-	private String anticapted_major;
+	@XmlElement(name = "anticipated_major")
+	private String anticipated_major;
 	
 	@XmlElement(name = "highschool_name")
 	private String highschool_name;
@@ -268,7 +268,7 @@ public class Application implements  Serializable, IAclObject{
 	private String guardian_level_education;
 	
 	@XmlElement(name = "income_same")
-	private Boolean income_same;
+	private String income_same;
 	  
 	@XmlElement(name = "increased")
 	private Integer increased;
@@ -280,7 +280,7 @@ public class Application implements  Serializable, IAclObject{
 	private Integer family_attending_college;
 	  
 	@XmlElement(name = "financial_assistance")
-	private Boolean financial_assistance;
+	private String financial_assistance;
 	
 	@XmlElement(name = "assistance_amount")
 	private Integer assistance_amount;
@@ -500,19 +500,19 @@ public class Application implements  Serializable, IAclObject{
 		this.email = email;
 	}
 
-	public Boolean getCitizen() {
+	public String getCitizen() {
 		return citizen;
 	}
 
-	public void setCitizen(Boolean citizen) {
+	public void setCitizen(String citizen) {
 		this.citizen = citizen;
 	}
 
-	public Boolean getPermanent_resident() {
+	public String getPermanent_resident() {
 		return permanent_resident;
 	}
 
-	public void setPermanent_resident(Boolean permanent_resident) {
+	public void setPermanent_resident(String permanent_resident) {
 		this.permanent_resident = permanent_resident;
 	}
 
@@ -524,12 +524,12 @@ public class Application implements  Serializable, IAclObject{
 		this.texas_resident = texas_resident;
 	}
 
-	public String getPermenent_resident_card() {
-		return permenent_resident_card;
+	public String getPermanent_resident_card() {
+		return permanent_resident_card;
 	}
 
-	public void setPermenent_resident_card(String permenent_resident_card) {
-		this.permenent_resident_card = permenent_resident_card;
+	public void setPermanent_resident_card(String permanent_resident_card) {
+		this.permanent_resident_card = permanent_resident_card;
 	}
 
 	public String getBirthplace() {
@@ -548,12 +548,12 @@ public class Application implements  Serializable, IAclObject{
 		this.ethnic_background = ethnic_background;
 	}
 
-	public String getAnticapted_major() {
-		return anticapted_major;
+	public String getAnticipated_major() {
+		return anticipated_major;
 	}
 
-	public void setAnticapted_major(String anticapted_major) {
-		this.anticapted_major = anticapted_major;
+	public void setAnticipated_major(String anticipated_major) {
+		this.anticipated_major = anticipated_major;
 	}
 
 	public String getHighschool_name() {
@@ -972,11 +972,11 @@ public class Application implements  Serializable, IAclObject{
 		this.guardian_level_education = guardian_level_education;
 	}
 
-	public Boolean getIncome_same() {
+	public String getIncome_same() {
 		return income_same;
 	}
 
-	public void setIncome_same(Boolean income_same) {
+	public void setIncome_same(String income_same) {
 		this.income_same = income_same;
 	}
 
@@ -1004,11 +1004,11 @@ public class Application implements  Serializable, IAclObject{
 		this.family_attending_college = family_attending_college;
 	}
 
-	public Boolean getFinancial_assistance() {
+	public String getFinancial_assistance() {
 		return financial_assistance;
 	}
 
-	public void setFinancial_assistance(Boolean financial_assistance) {
+	public void setFinancial_assistance(String financial_assistance) {
 		this.financial_assistance = financial_assistance;
 	}
 

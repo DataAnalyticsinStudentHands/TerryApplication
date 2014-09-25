@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.19)
 # Database: terry2015
-# Generation Time: 2014-09-16 18:49:18 +0000
+# Generation Time: 2014-09-25 04:52:11 +0000
 # ************************************************************
 
 
@@ -96,6 +96,25 @@ CREATE TABLE `acl_sid` (
 
 
 
+# Dump of table activity
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `activity`;
+
+CREATE TABLE `activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activity` char(40) DEFAULT NULL,
+  `position` varchar(100) NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `year` char(4) DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `activity_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table applications
 # ------------------------------------------------------------
 
@@ -122,13 +141,13 @@ CREATE TABLE `applications` (
   `alt_cell_phone` varchar(40) DEFAULT '',
   `gender` varchar(11) DEFAULT NULL,
   `email` varchar(40) DEFAULT NULL,
-  `citizen` tinyint(11) DEFAULT NULL,
-  `permanent_resident` tinyint(11) DEFAULT NULL,
-  `permenent_resident_card` varchar(11) DEFAULT NULL,
-  `texas_resident` varchar(40) DEFAULT NULL,
+  `citizen` varchar(11) DEFAULT NULL,
+  `permanent_resident` varchar(11) DEFAULT NULL,
+  `permanent_resident_card` varchar(11) DEFAULT NULL,
+  `texas_resident` varchar(11) DEFAULT NULL,
   `birthplace` varchar(40) DEFAULT NULL,
   `ethnic_background` varchar(40) DEFAULT NULL,
-  `anticapted_major` varchar(40) DEFAULT NULL,
+  `anticipated_major` varchar(40) DEFAULT NULL,
   `highschool_name` varchar(40) DEFAULT NULL,
   `highschool_city` varchar(40) DEFAULT NULL,
   `highschool_councelor` varchar(40) DEFAULT NULL,
@@ -152,6 +171,53 @@ CREATE TABLE `applications` (
   `sat_date` date DEFAULT NULL,
   `act_composite` float DEFAULT NULL,
   `act_date` date DEFAULT NULL,
+  `first_graduate` tinyint(11) DEFAULT NULL,
+  `why_apply` varchar(400) DEFAULT NULL,
+  `why_major` varchar(400) DEFAULT NULL,
+  `educational_plans` varchar(400) DEFAULT NULL,
+  `life_goals` varchar(400) DEFAULT NULL,
+  `marital_status` char(11) DEFAULT NULL,
+  `marital_status_parents` char(11) DEFAULT NULL,
+  `total_annual_income` int(11) DEFAULT NULL,
+  `present_partner` varchar(100) DEFAULT NULL,
+  `father_occupation` varchar(100) DEFAULT NULL,
+  `stepparent_occupation` varchar(100) DEFAULT NULL,
+  `father_employer` varchar(100) DEFAULT NULL,
+  `stepparent_employer` varchar(100) DEFAULT NULL,
+  `father_total_income` int(11) DEFAULT NULL,
+  `stepparent_total_income` int(11) DEFAULT NULL,
+  `father_age` int(11) DEFAULT NULL,
+  `stepparent_age` int(11) DEFAULT NULL,
+  `father_level_education` varchar(40) DEFAULT NULL,
+  `stepparent_level_education` varchar(40) DEFAULT NULL,
+  `mother_occupation` varchar(100) DEFAULT NULL,
+  `guardian_occupation` varchar(100) DEFAULT NULL,
+  `mother_employer` varchar(100) DEFAULT NULL,
+  `guardian_employer` varchar(100) DEFAULT NULL,
+  `mother_total_income` int(11) DEFAULT NULL,
+  `guardian_total_income` int(11) DEFAULT NULL,
+  `mother_age` int(11) DEFAULT NULL,
+  `guardian_age` int(11) DEFAULT NULL,
+  `mother_level_education` varchar(40) DEFAULT NULL,
+  `guardian_level_education` varchar(40) DEFAULT NULL,
+  `income_same` varchar(11) DEFAULT NULL,
+  `increased` int(11) DEFAULT NULL,
+  `decreased` int(11) DEFAULT NULL,
+  `family_attending_college` int(11) DEFAULT NULL,
+  `financial_assistance` varchar(11) DEFAULT NULL,
+  `assistance_type` varchar(40) DEFAULT NULL,
+  `assistance_amount` int(11) DEFAULT NULL,
+  `funds_saved_you` int(11) DEFAULT NULL,
+  `funds_saved_others` int(11) DEFAULT NULL,
+  `total_savings` int(11) DEFAULT NULL,
+  `total_investments` int(11) DEFAULT NULL,
+  `net_value` int(11) DEFAULT NULL,
+  `adjusted_cross_income` int(11) DEFAULT NULL,
+  `projected_support` int(11) DEFAULT NULL,
+  `description_special_circumstances` varchar(400) DEFAULT NULL,
+  `texas_tomorrow_fund` varchar(400) DEFAULT NULL,
+  `sibling_terry` varchar(400) DEFAULT NULL,
+  `department_scholarship` varchar(400) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -172,6 +238,46 @@ CREATE TABLE `authorities` (
 
 
 
+# Dump of table award
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `award`;
+
+CREATE TABLE `award` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `award` char(100) DEFAULT NULL,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `level` varchar(100) NOT NULL DEFAULT '',
+  `year` char(4) DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `award_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table child
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `child`;
+
+CREATE TABLE `child` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(11) DEFAULT NULL,
+  `age` int(2) NOT NULL,
+  `relationship` varchar(100) NOT NULL DEFAULT '',
+  `school` varchar(100) NOT NULL,
+  `year` varchar(100) NOT NULL,
+  `self_supporting` tinyint(11) DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `child_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table coursework
 # ------------------------------------------------------------
 
@@ -180,12 +286,34 @@ DROP TABLE IF EXISTS `coursework`;
 CREATE TABLE `coursework` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` char(11) DEFAULT NULL,
-  `application_id` int(11) NOT NULL,
-  `content` varchar(100) NOT NULL,
-  `ap` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `type` varchar(100) NOT NULL DEFAULT '',
   `credit_hours` int(11) NOT NULL,
-  `final_grade` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
+  `final_grade` varchar(10) NOT NULL DEFAULT '',
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `coursework_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table employment
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `employment`;
+
+CREATE TABLE `employment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `position` char(100) DEFAULT NULL,
+  `employer` varchar(100) NOT NULL DEFAULT '',
+  `hours` int(11) NOT NULL,
+  `date_from` date DEFAULT NULL,
+  `date_to` date DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `employment_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -224,6 +352,42 @@ CREATE TABLE `login` (
 
 
 
+# Dump of table scholarship
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `scholarship`;
+
+CREATE TABLE `scholarship` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `applied_received` tinyint(10) DEFAULT NULL,
+  `name` char(11) DEFAULT NULL,
+  `duration` varchar(100) NOT NULL DEFAULT '',
+  `amount` int(10) DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `scholarship_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table university
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `university`;
+
+CREATE TABLE `university` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(50) DEFAULT NULL,
+  `rank` int(2) NOT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `university_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table user_data
 # ------------------------------------------------------------
 
@@ -243,6 +407,26 @@ CREATE TABLE `user_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table volunteer
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `volunteer`;
+
+CREATE TABLE `volunteer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `place` varchar(100) DEFAULT NULL,
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `hours` int(11) NOT NULL,
+  `date_from` date DEFAULT NULL,
+  `date_to` date DEFAULT NULL,
+  `application_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_id` (`application_id`),
+  CONSTRAINT `volunteer_application` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

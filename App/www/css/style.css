@@ -1,130 +1,142 @@
-/* Empty. Add your own CSS if you like */
+/* Our own CSS */
+
 
 
 .small-input-label {
     max-width: 100px;
 }
-
 .title-image {
     margin-top: 8px;
     height: 27px;
     position: absolute;
     right: 0px;
 }
-
 .really {
     display: inline;
 }
-
 .left-side {
-  float: left;
+    float: left;
 }
+/*
+* "Standard" HTML list style for some text
+*/
 
- 
-
-
+#list {
+    width: 90%;
+    margin: 30px auto;
+}
+#list ul {
+    margin-top: 30px;
+}
+#list ul li {
+    text-align: left;
+    list-style: disc;
+    margin: 10px 0px;
+}
+/*
+* CSS for form validation
+*/
 
 form i.icon.error {
-  color: #ef4e3a; }
-
+    color: #ef4e3a;
+}
 form input + i.icon.error {
-  display: none;
-  margin-left: 8px; }
-
+    display: none;
+    margin-left: 8px;
+}
 form.ng-submitted input.ng-invalid + i.icon.error {
-  display: block; }
-
+    display: inline-block;
+}
 form .has-error {
-  border-left: 3px solid #cc2511; 
-  border-right: 3px solid #cc2511; 
+    border-left: 3px solid #cc2511;
+    border-right: 3px solid #cc2511;
 }
-
 form .has-success {
-  border-left: 3px solid #3d8b3d; 
-  border-right: 3px solid #3d8b3d; 
+    border-left: 3px solid #3d8b3d;
+    border-right: 3px solid #3d8b3d;
 }
-
 form.ng-submitted input.ng-valid + i.icon.error {
-  display: none; }
-
+    display: none;
+}
 .validated {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0px;
-  width: 100%; }
-
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0px;
+    width: 100%;
+}
 .validated .input-label {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 30%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 30%;
-  -ms-flex: 0 0 30%;
-  flex: 0 0 30%;
-  max-width: 30%; 
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 30%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 30%;
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
 }
-
 .validated input {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 60%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 60%;
-  -ms-flex: 0 0 60%;
-  flex: 0 0 60%;
-  max-width: 60%; 
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 60%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 60%;
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    max-width: 60%;
 }
-
 .validated error {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 10%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 10%;
-  -ms-flex: 0 0 10%;
-  flex: 0 0 10%;
-  max-width: 10%; 
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 10%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 10%;
+    -ms-flex: 0 0 10%;
+    flex: 0 0 10%;
+    max-width: 10%;
 }
 
-
+/*
+* CSS for datetimepicker
+*/
 
 .popup-body .datetimepicker {
-  min-height: 221px;
+    min-height: 221px;
 }
 .popup-body .datetimepicker table {
-  width: 100%;
+    width: 100%;
 }
 /*
  * Use ionic icons instead of bootstrap's glyphicons 
  * for arrows in the datetimepicker.
  */
+
 .glyphicon {
-  vertical-align: top;
-  display: inline-block;
-  font-family: "Ionicons";
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  text-rendering: auto;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    vertical-align: top;
+    display: inline-block;
+    font-family: "Ionicons";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .glyphicon:before {
-  vertical-align: top;
-  font-size: 32px;
-  line-height: 32px;
-  padding-right: 2px;
-  padding-left: 2px;
-  display: inline-block;
-  padding: 0 0 1px 0;
+    vertical-align: top;
+    font-size: 32px;
+    line-height: 32px;
+    padding-right: 2px;
+    padding-left: 2px;
+    display: inline-block;
+    padding: 0 0 1px 0;
 }
 .glyphicon-arrow-right:before {
-  content: "\f10a";
+    content: "\f10a";
 }
-.glyphicon-arrow-left:before{
-  content: "\f107";
+.glyphicon-arrow-left:before {
+    content: "\f107";
 }

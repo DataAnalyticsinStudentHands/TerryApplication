@@ -1,5 +1,4 @@
 /*global angular, cordova, console*/
-'use strict';
 
 // Honors Application Web App
 angular.module('HonorsApplications', [
@@ -11,8 +10,11 @@ angular.module('HonorsApplications', [
     'TerryFilters',
     'TerryServices',
     'TerryDirectives',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'ui.utils',
+    'angularFileUpload'
 ]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {
+    'use strict';
 
     // Set Base URL to connect to DASH RESTFUL webservices
     Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
@@ -215,7 +217,7 @@ angular.module('HonorsApplications', [
         views: {
             "tab-myapplications@tabs": {
                 templateUrl: 'templates/essays.html',
-                controller: 'MyApplicationController'
+                controller: 'UploadController'
             }
         },
         authenticate: true

@@ -8,6 +8,9 @@
     "ng-notify": "~0.5.0",
     "lodash": "latest",
     "restangular": "latest",
-    "angular-bootstrap-datetimepicker": "latest"
+    "angular-bootstrap-datetimepicker": "latest",
+    "angular-ui-utils": "latest",
+    "ng-file-upload-shim": "latest",
+    "ng-file-upload": "latest"
   }  
 }

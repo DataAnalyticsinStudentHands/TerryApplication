@@ -14,13 +14,11 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         current_mode: 'Add',
     };
     
-    
-    
     $scope.mycourses = {};
     $scope.mycourse = {};
     var currentLevel = "sophomore";
 
-    // GET /coursework
+    // GET
     MyCourseworkService.getAllCoursework().then(
         function (result) {
             $scope.mycourses = result;
@@ -37,7 +35,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     };
     
     // callback for ng-click 'editCourse':
-    $scope.editCourse = function (course, level) {
+    $scope.editCourse = function (course) {
         $scope.myVariables.current_mode = "Edit";
         $scope.mycourse = course;
         var test = $filter('filter')($scope.course_types, {abbreviation: $scope.mycourse.type}, true);
@@ -83,7 +81,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     };
 
     // callback for ng-click 'modal'- open Modal dialog to add a new course
-    $ionicModal.fromTemplateUrl('modal_addCoursework.html', {
+    $ionicModal.fromTemplateUrl('modal_Coursework.html', {
         scope : $scope,
         animation : 'slide-in-up'
     }).then(function (modal) {
@@ -96,6 +94,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         // Set some variables to default values
         $scope.myVariables.current_mode = "Add";        
         $scope.myVariables.myCourseType = $scope.course_types[0];
+        $scope.mycourse = {};
         $scope.modal.show();
         var test = $filter('filter')($scope.levels, {id: level}, true);       
         currentLevel = test[0].name;
