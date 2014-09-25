@@ -20,7 +20,7 @@
                  item="item"
                  >
                 <button title="Delete" class="button button-icon icon ion-minus-circled"
-                        ng-click="deleteData(item.id)"></button>
+                        ng-click="deleteData(item.id, 1)"></button>
                 <button title="Edit" class="button button-icon icon ion-compose"
                         ng-click="editData(item, 1)"> &nbsp;&nbsp;&nbsp;&nbsp;{{item.position}}  {{item.date_from}} - {{item.date_to}}</button> 
             </div>
@@ -40,7 +40,7 @@
                  item="item"
                  >
                 <button title="Delete" class="button button-icon icon ion-minus-circled"
-                        ng-click="deleteData(item.id)"></button>
+                        ng-click="deleteData(item.id, 2)"></button>
                 <button title="Edit" class="button button-icon icon ion-compose"
                         ng-click="editData(item, 2)"> &nbsp;&nbsp;&nbsp;&nbsp;{{item.organization}}  {{item.postion}} {{item.description}} </button> 
             </div>
@@ -53,119 +53,4 @@
             </div>
         </div>
   </ion-content>
-
-
-<script id="modal_Employment.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">{{myVariables.current_mode}} Employment</h1>
-                
-                
-
-                <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-    </ion-header-bar>
-            <ion-content>
-                <div class="padding">
-                <form novalidate name="employment" class="submit" ng-submit="addData()">
-
-                                <p>List <b>all</b> of your previous and current jobs or internships. <b>List your most recent activities first.</b> </p>
-
-                    <div class="row">
-                        <div class="col">
-			                 <label class="item item-input">
-                                <span class="input-label">Position/Job Title:</span>
-                                <input name="position" ng-model="mynewdata.position" type="text" placeholder="title" required>
-    </label>
-    </div>
-    </div>
-                    <div class="row">
-                        <div class="col">
-			                 <label class="item item-input">
-                                <span class="input-label">Employer:</span>
-                                <input ng-model="mynewdata.employer" type="text" placeholder="employer">
-    </label>
-    </div>
-    </div>
-                    <div class="row">
-                    <div class="col">
-                        <label class="item item-input">
-                            <span class="input-label">Hours:</span>
-                            <input ng-model="mynewdata.hours" type="text" placeholder="hours">
-    </label>
-    </div>
-                    <div class="col">
-                    <label class="item item-input" ng-click="openDatePicker(1)"> 
-                    <span class="input-label">From Date:</span>
-                    <input type="text" ng-model="mynewdata.date_from" placeholder="Select">
-    </label></div>
-                    <div class="col"><label class="item item-input" ng-click="openDatePicker(2)"> 
-                    <span class="input-label">To Date:</span>
-                    <input type="text" ng-model="mynewdata.date_to" placeholder="Select">
-    </label></div>
-    </div>
-            <div class="row">
-                <div class="col">
-                        <button class="button button-full button-positive"  type="submit" ng-click="addData()">Add</button>
-                        </div>
-    </div>
-    </div>
-    </form>
-    </ion-content>
-    </ion-modal-view>
-</script>
-    
-    <script id="modal_Activities.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">{{myVariables.current_mode}} Activities</h1>
-
-                <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-    </ion-header-bar>
-            <ion-content>
-                <div class="padding">
-
-                                
-
-                    <div class="row">
-                        <div class="col">
-			                 <label class="item item-input">
-                                <span class="input-label">Position/Job Title:</span>
-                                <input ng-model="mynewdata.position" type="text" placeholder="title">
-    </label>
-    </div>
-    </div>
-                    <div class="row">
-                        <div class="col">
-			                 <label class="item item-input">
-                                <span class="input-label">Employer:</span>
-                                <input ng-model="mynewdata.employer" type="text" placeholder="employer">
-    </label>
-    </div>
-    </div>
-                    <div class="row">
-                    <div class="col">
-                        <label class="item item-input">
-                            <span class="input-label">Hours:</span>
-                            <input ng-model="mynewdata.hours" type="text" placeholder="hours">
-    </label>
-    </div>
-                    <div class="col">
-                    <label class="item item-input" ng-click="openDatePicker(1)"> 
-                    <span class="input-label">From Date:</span>
-                    <input type="text" ng-model="mynewdata.date_from" placeholder="Select">
-    </label></div>
-                    <div class="col"><label class="item item-input" ng-click="openDatePicker(2)"> 
-                    <span class="input-label">To Date:</span>
-                    <input type="text" ng-model="mynewdata.date_to" placeholder="Select">
-    </label></div>
-    </div>
-            <div class="row">
-                <div class="col">
-                        <button class="button button-full button-positive" ng-click="addData()">Add</button>
-    </div>
-    </div>
-    </div>
-    </ion-content>
-    </ion-modal-view>
-</script>
 </ion-view>

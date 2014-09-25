@@ -1,0 +1,51 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Activities</h1>
+        <button class="button button-clear button-primary" ng-click="modal4.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Position/Job Title:</span>
+                        <input ng-model="mynewdata.position" type="text" placeholder="title">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Employer:</span>
+                        <input ng-model="mynewdata.employer" type="text" placeholder="employer">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Hours:</span>
+                        <input ng-model="mynewdata.hours" type="text" placeholder="hours">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input" ng-click="openDatePicker(1)">
+                        <span class="input-label">From Date:</span>
+                        <input type="text" ng-model="mynewdata.date_from" placeholder="Select">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input" ng-click="openDatePicker(2)">
+                        <span class="input-label">To Date:</span>
+                        <input type="text" ng-model="mynewdata.date_to" placeholder="Select">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-full button-positive" ng-click="saveModal(2)">Save</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

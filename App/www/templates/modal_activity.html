@@ -1,0 +1,51 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Activities</h1>
+        <button class="button button-clear button-primary" ng-click="modal2.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <form novalidate class="submit" on-valid-submit="saveModal(2)">
+            <div class="padding">
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Organization/Activity:</span>
+                            <input name="activity" ng-model="mynewactivity.activity" type="text" placeholder="activity">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Position(s) held:</span>
+                            <input name="position" ng-model="mynewactivity.position" type="text" placeholder="position">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Description of Activity:</span>
+                            <input name="description" ng-model="mynewactivity.description" type="text" placeholder="description">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <ion-checkbox ng-repeat="item in yearInSchoolList"
+                                ng-model="item.checked" 
+                                ng-checked="item.checked">
+                                {{ item.text }}
+                        </ion-checkbox>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-25 col-offset-75">
+                        <button class="button button-full button-positive" type="submit">Save</button>
+                    </div>
+                </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

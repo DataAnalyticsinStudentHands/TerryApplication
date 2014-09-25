@@ -111,7 +111,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             }
         );
     });
-    
+        
     // Toggle open/close side menu
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();

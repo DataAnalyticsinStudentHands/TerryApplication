@@ -24,7 +24,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     );
 
     // callback for ng-click 'modal'- open Modal dialog to create a new application
-    $ionicModal.fromTemplateUrl('modal_createApplication.html', {
+    $ionicModal.fromTemplateUrl('templates/modal_createApplication.html', {
         scope : $scope,
         animation : 'slide-in-up'
     }).then(function (modal) {
