@@ -3,12 +3,13 @@
         <h1 class="title">{{myVariables.current_mode}} Employment</h1>
         <button class="button button-clear button-primary" ng-click="modal1.hide()">Cancel</button>
     </ion-header-bar>
-    
+
     <ion-content>
         <div class="padding">
             <form novalidate class="submit" on-valid-submit="saveModal(1)">
 
-                <p>List <b>all</b> of your previous and current jobs or internships. <b>List your most recent activities first.</b> 
+                <p class="item item-icon-left"> <i class="icon ion-information"></i>
+                    List <b>all</b> of your previous and current jobs or internships. <b>List your most recent activities first.</b>
                 </p>
 
                 <div class="row">
@@ -52,6 +53,6 @@
                         <button class="button button-full button-positive" type="submit">Save</button>
                     </div>
                 </div>
-        </form>
+            </form>
     </ion-content>
 </ion-modal-view>

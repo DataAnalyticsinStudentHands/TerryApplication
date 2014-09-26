@@ -18,7 +18,7 @@ angular.module('HonorsApplications', [
 
     // Set Base URL to connect to DASH RESTFUL webservices
     Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
-    // Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    //Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
 
     // have Restangular available whereever we need it
     $rootScope.Restangular = function () {
@@ -35,7 +35,7 @@ angular.module('HonorsApplications', [
             $rootScope.uin = result.username.toString();
         },  function (error) {
             if (error.status === 0) {
-                ngNotify.set("INTERNET OR SERVER UNAVAILABLE", {type : "error", sticky : true});
+                ngNotify.set("Internet or server unavailable.", {type : "error", sticky : true});
             } else { // LOG THEM OUT
                 Auth.clearCredentials();
                 console.log("not-authed");

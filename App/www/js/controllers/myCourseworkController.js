@@ -56,7 +56,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             
             if ($scope.myVariables.current_mode === 'Add') {
                 MyCourseworkService.addCoursework($scope.mycourse).then(
-                    function (result) {
+                    function c(result) {
                         $scope.modal.hide();
                         ngNotify.set("Succesfully added your coursework.", {position: 'bottom', type: 'success'});
                     },

@@ -7,7 +7,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService, MyUniversityService) {
     'use strict';
 
     $scope.$watch('myapplication.citizen', function (value) {
@@ -21,6 +21,21 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.myVariables = {};
 
     $scope.myapplication = {};
+    $scope.myuniversities = {};
+    $scope.myuniversity = {};
+    
+    // GET 
+    MyUniversityService.getAllUniversity().then(
+        function (result) {
+            $scope.myuniversities = result;
+        },
+        function (error) {
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
 
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function (result) {
@@ -50,6 +65,54 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             }
         }
     );
+    
+    
+    
+    // Open the modal
+    $scope.showAddData = function () {
+        
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="mynewuniversity.name">',
+            title: 'Name University',
+            subTitle: 'You can reorder the list later',
+            scope: $scope,
+            buttons: [
+                { text: 'Cancel' },
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        if (!$scope.mynewuniversity.name) {
+                            //don't allow the user to close unless he enters wifi password
+                            e.preventDefault();
+                        } else {
+                            return $scope.mynewuniversity.name;
+                        }
+                    }
+                },
+            ]
+        });
+            myPopup.then(function(res) {
+            console.log('Tapped!', res);
+  });
+  
+    };
+
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function () {
+        MyUniversityService.getAllUniversity().then(
+        function (result) {
+            $scope.myuniversities = result;
+        },
+        function (error) {
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
+    });
 
 
     $scope.pickedDates = {};
@@ -72,6 +135,18 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     $scope.$watch('pickedDates.actDate', function (unformattedDate) {
         $scope.myapplication.act_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.national_merit_date', function (unformattedDate) {
+        $scope.myapplication.national_merit_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.national_achievement_date', function (unformattedDate) {
+        $scope.myapplication.national_achievement_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.national_hispanic_date', function (unformattedDate) {
+        $scope.myapplication.national_hispanic_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
 
     $scope.openDOBPicker = function () {
@@ -113,17 +188,30 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        if (testvar === 1) {
+                        switch (testvar) {
+                        case 1:
                             $scope.pickedDates.gradDate = $scope.tmp.newDate;
-                        }
-                        if (testvar === 2) {
+                            break;
+                        case 2:
                             $scope.pickedDates.psatDate = $scope.tmp.newDate;
-                        }
-                        if (testvar === 3) {
+                            break;
+                        case 3:
                             $scope.pickedDates.satDate = $scope.tmp.newDate;
-                        }
-                        if (testvar === 4) {
+                            break;
+                        case 4:
                             $scope.pickedDates.actDate = $scope.tmp.newDate;
+                            break;
+                        case 5:
+                            $scope.pickedDates.national_merit_date = $scope.tmp.newDate;
+                            break;
+                        case 6:
+                            $scope.pickedDates.national_achievement_date = $scope.tmp.newDate;
+                            break;
+                        case 7:
+                            $scope.pickedDates.national_hispanic_date = $scope.tmp.newDate;
+                            break;
+                        default:
+                            //need to define a default
                         }
                     }
                 }

@@ -71,7 +71,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input">
+                    <label class="item item-input item-text-wrap">
                         <span class=" small-input-label input-label">Class Rank:</span> 
                         <input class="small-input-label" type="text" ng-model="myapplication.highschool_rank" placeholder="#">
                         <span class="small-input-label input-label">out of</span> 
@@ -90,7 +90,9 @@
 
             <div class="row">
                 <div class="col">
-                    <h4>Test Scores</h4>
+                    
+                    <div class="item item-divider">Test Scores</div>
+                
                 </div>
             </div>
 
@@ -123,9 +125,9 @@
                         <span>Mathematics:</span> 
                         <input type="text" ng-model="myapplication.sat_math" placeholder="score">
                         <span>Writing:</span>
-                        <input type="text" ng-model="myapplication.sat_writing" placeholder="score">
+                        <input type="number" ng-model="myapplication.sat_writing" placeholder="score">
                         <span>Composite:</span>
-                        <input type="text" ng-model="myapplication.sat_composite" placeholder="index">
+                        <input type="number" ng-model="myapplication.sat_composite" placeholder="index">
                         <label ng-click="openTestDatePicker(3)">Date of Test:
                             <input type="text" ng-model="myapplication.sat_date" placeholder="Select">
                         </label>
@@ -134,12 +136,55 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <h2>ACT</h2>
-                        <input type="text" ng-model="myapplication.act_composite" placeholder="index">
+                        <span>Composite:</span>
+                        <input type="number" ng-model="myapplication.act_composite" placeholder="index">
                         <label ng-click="openTestDatePicker(4)">Date of Test:
                             <input type="text" ng-model="myapplication.act_date" placeholder="Select">
                         </label>
                 </div>
+
+
             </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="item item-divider">Indicate the level of recognition you have achieved in the following scholarship competition(s)</div>
+                </div>
+                    </div>
+                    <div class="row">
+                <div class="col">
+                    
+                    <label class="item item-input item-stacked-label">
+                        
+                        <span>National Merit:</span>
+                        <input type="text" ng-model="myapplication.national_merit" placeholder="level of recognition">
+                        <span>NationalAchievement:</span> 
+                        <input type="text" ng-model="myapplication.national_achievement" placeholder="level of recognition">
+                        <span>National Hispanic:</span>
+                        <input type="text" ng-model="myapplication.national_hispanic" placeholder="level of recognition">
+                        
+                        </label>
+                    </div>
+                <div class="col">
+                        
+                        <label class="item item-input item-stacked-label">
+                        
+                        
+                        
+                        <label ng-click="openTestDatePicker(5)">Date of Test:
+                            <input type="text" ng-model="myapplication.national_merit_date" placeholder="Select">
+                        </label>
+                            <label ng-click="openTestDatePicker(6)">Date of Test:
+                            <input type="text" ng-model="myapplication.national_achievement_date" placeholder="Select">
+                        </label>
+                            <label ng-click="openTestDatePicker(7)">Date of Test:
+                            <input type="text" ng-model="myapplication.national_hispanic_date" placeholder="Select">
+                        </label>
+                
+                    </div>
+                </div>
+                    
+            
 
             <!-- Save/next button -->
             <div class="row">

@@ -15,8 +15,8 @@
                 <i class="icon ion-information"></i>
                 
             </p>
-            <p class="item item-icon-left"> <i class="icon ion-information"></i>
-                Fill all sections provided. Use the "Add button" in each section to add individual items. Do not submit a resume in lieu of completing sections listed here. Important: If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.
+            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                Fill all sections provided. Use the "Add" button in each section to add individual items. Do not submit a resume in lieu of completing sections listed here. <b>Important:</b> If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.
             </p>
             <div class="item item-divider">
                 Employment, Internships, and Summer Activities
@@ -34,12 +34,7 @@
                 Extracurricular Activities and Leadership Positions
                 <button class="button button-icon icon ion-plus-circled" ng-click="showAddData(2)">Add</button>
             </div>
-
-            <p class="item item-icon-left">
-                <i class="icon ion-information"></i>
-                <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.
-            </p>
-    
+            
             <div class="item" ng-repeat="item in myactivities" item="item">
                 <button title="Delete" class="button button-icon icon ion-minus-circled" ng-click="deleteData(item.id, 2)"></button>
                 <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData(item, 2)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.organization}} {{item.position}} {{item.description}}</button>
@@ -67,18 +62,11 @@
                 Awards, Special Honors, and Distinctions
                 <button class="button button-icon icon ion-plus-circled" ng-click="showAddData(4)">Add</button>
             </div>
-
-            <p class="item item-icon-left">
-                <i class="icon ion-information"></i>
-                <b>In order of importance to you</b>, list up to six major awards, honors, or distinctions that you received both in and out of school during grades 9-12.
-            </p>
-
-        </div>
-
+            
         <div class="list">
             <div class="item" ng-repeat="item in myawards" item="item">
                 <button title="Delete" class="button button-icon icon ion-minus-circled" ng-click="deleteData(item.id, 4)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData(item, 4)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.award}} {{item.year}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData(item, 4)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.award}} </button>
             </div>
         </div>
 

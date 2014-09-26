@@ -178,6 +178,24 @@ public class ApplicationEntity implements Serializable {
 	@Column(name = "act_date")
 	private Date act_date;
 	
+	@Column(name = "national_merit")
+	private String national_merit;
+	
+	@Column(name = "national_merit_date")
+	private Date national_merit_date;
+	
+	@Column(name = "national_achievement")
+	private String national_achievement;
+	
+	@Column(name = "national_achievement_date")
+	private Date national_achievement_date;
+	
+	@Column(name = "national_hispanic")
+	private String national_hispanic;
+	
+	@Column(name = "national_hispanic_date")
+	private Date national_hispanic_date;
+	
 	@Column(name = "first_graduate")
 	private Boolean first_graduate;
 	
@@ -315,6 +333,9 @@ public class ApplicationEntity implements Serializable {
 	
 	@Column(name = "department_scholarship")
 	private String department_scholarship;
+	
+	@Column(name = "status")
+	private String status;
 
 	public ApplicationEntity(){}
 
@@ -737,6 +758,54 @@ public class ApplicationEntity implements Serializable {
 		this.act_date = act_date;
 	}
 
+	public String getNational_merit() {
+		return national_merit;
+	}
+
+	public void setNational_merit(String national_merit) {
+		this.national_merit = national_merit;
+	}
+
+	public Date getNational_merit_date() {
+		return national_merit_date;
+	}
+
+	public void setNational_merit_date(Date national_merit_date) {
+		this.national_merit_date = national_merit_date;
+	}
+
+	public String getNational_achievement() {
+		return national_achievement;
+	}
+
+	public void setNational_achievement(String national_achievement) {
+		this.national_achievement = national_achievement;
+	}
+
+	public Date getNational_achievement_date() {
+		return national_achievement_date;
+	}
+
+	public void setNational_achievement_date(Date national_achievement_date) {
+		this.national_achievement_date = national_achievement_date;
+	}
+
+	public String getNational_hispanic() {
+		return national_hispanic;
+	}
+
+	public void setNational_hispanic(String national_hispanic) {
+		this.national_hispanic = national_hispanic;
+	}
+
+	public Date getNational_hispanic_date() {
+		return national_hispanic_date;
+	}
+
+	public void setNational_hispanic_date(Date national_hispanic_date) {
+		this.national_hispanic_date = national_hispanic_date;
+	}
+
 	public Boolean getFirst_graduate() {
 		return first_graduate;
 	}
@@ -1104,5 +1173,13 @@ public class ApplicationEntity implements Serializable {
 
 	public void setDepartment_scholarship(String department_scholarship) {
 		this.department_scholarship = department_scholarship;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

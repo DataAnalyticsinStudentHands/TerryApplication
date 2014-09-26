@@ -74,6 +74,7 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 	public Long createApplication(ApplicationEntity application) {
 
 		application.setCreation_timestamp(new Date());
+		application.setStatus("Editing");
 
 		// create hashed folder name for documents
 		String fileName = application.getFirst_name()

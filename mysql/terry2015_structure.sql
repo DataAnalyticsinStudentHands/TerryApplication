@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.19)
 # Database: terry2015
-# Generation Time: 2014-09-25 04:52:11 +0000
+# Generation Time: 2014-09-26 21:33:59 +0000
 # ************************************************************
 
 
@@ -23,8 +23,6 @@
 # Dump of table acl_class
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `acl_class`;
-
 CREATE TABLE `acl_class` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `class` varchar(255) NOT NULL,
@@ -36,8 +34,6 @@ CREATE TABLE `acl_class` (
 
 # Dump of table acl_entry
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `acl_entry`;
 
 CREATE TABLE `acl_entry` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -60,8 +56,6 @@ CREATE TABLE `acl_entry` (
 # Dump of table acl_object_identity
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `acl_object_identity`;
-
 CREATE TABLE `acl_object_identity` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `object_id_class` bigint(20) NOT NULL,
@@ -73,17 +67,15 @@ CREATE TABLE `acl_object_identity` (
   UNIQUE KEY `unique_uk_3` (`object_id_class`,`object_id_identity`),
   KEY `foreign_fk_1` (`parent_object`),
   KEY `foreign_fk_3` (`owner_sid`),
-  CONSTRAINT `foreign_fk_3` FOREIGN KEY (`owner_sid`) REFERENCES `acl_sid` (`id`) ON DELETE SET NULL,
   CONSTRAINT `foreign_fk_1` FOREIGN KEY (`parent_object`) REFERENCES `acl_object_identity` (`id`),
-  CONSTRAINT `foreign_fk_2` FOREIGN KEY (`object_id_class`) REFERENCES `acl_class` (`id`)
+  CONSTRAINT `foreign_fk_2` FOREIGN KEY (`object_id_class`) REFERENCES `acl_class` (`id`),
+  CONSTRAINT `foreign_fk_3` FOREIGN KEY (`owner_sid`) REFERENCES `acl_sid` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
 # Dump of table acl_sid
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `acl_sid`;
 
 CREATE TABLE `acl_sid` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -99,14 +91,12 @@ CREATE TABLE `acl_sid` (
 # Dump of table activity
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `activity`;
-
 CREATE TABLE `activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `activity` char(40) DEFAULT NULL,
   `position` varchar(100) NOT NULL DEFAULT '',
   `description` varchar(100) NOT NULL DEFAULT '',
-  `year` char(4) DEFAULT NULL,
+  `year` varchar(400) DEFAULT NULL,
   `application_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `application_id` (`application_id`),
@@ -118,11 +108,9 @@ CREATE TABLE `activity` (
 # Dump of table applications
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `applications`;
-
 CREATE TABLE `applications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) NOT NULL,
+  `name` varchar(200) NOT NULL DEFAULT '',
   `document_folder` varchar(200) DEFAULT NULL,
   `creation_timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
   `first_name` varchar(40) NOT NULL DEFAULT '',
@@ -144,7 +132,7 @@ CREATE TABLE `applications` (
   `citizen` varchar(11) DEFAULT NULL,
   `permanent_resident` varchar(11) DEFAULT NULL,
   `permanent_resident_card` varchar(11) DEFAULT NULL,
-  `texas_resident` varchar(11) DEFAULT NULL,
+  `texas_resident` varchar(40) DEFAULT NULL,
   `birthplace` varchar(40) DEFAULT NULL,
   `ethnic_background` varchar(40) DEFAULT NULL,
   `anticipated_major` varchar(40) DEFAULT NULL,
@@ -171,6 +159,12 @@ CREATE TABLE `applications` (
   `sat_date` date DEFAULT NULL,
   `act_composite` float DEFAULT NULL,
   `act_date` date DEFAULT NULL,
+  `national_merit` varchar(100) NOT NULL,
+  `national_merit_date` date DEFAULT NULL,
+  `national_achievement` varchar(100) NOT NULL,
+  `national_achievement_date` date DEFAULT NULL,
+  `national_hispanic` varchar(100) NOT NULL,
+  `national_hispanic_date` date DEFAULT NULL,
   `first_graduate` tinyint(11) DEFAULT NULL,
   `why_apply` varchar(400) DEFAULT NULL,
   `why_major` varchar(400) DEFAULT NULL,
@@ -218,6 +212,7 @@ CREATE TABLE `applications` (
   `texas_tomorrow_fund` varchar(400) DEFAULT NULL,
   `sibling_terry` varchar(400) DEFAULT NULL,
   `department_scholarship` varchar(400) DEFAULT NULL,
+  `status` varchar(40) NOT NULL DEFAULT 'in progress',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -226,8 +221,6 @@ CREATE TABLE `applications` (
 
 # Dump of table authorities
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `authorities`;
 
 CREATE TABLE `authorities` (
   `username` varchar(50) NOT NULL,
@@ -241,14 +234,12 @@ CREATE TABLE `authorities` (
 # Dump of table award
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `award`;
-
 CREATE TABLE `award` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `award` char(100) DEFAULT NULL,
   `description` varchar(100) NOT NULL DEFAULT '',
   `level` varchar(100) NOT NULL DEFAULT '',
-  `year` char(4) DEFAULT NULL,
+  `year` varchar(400) DEFAULT NULL,
   `application_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `application_id` (`application_id`),
@@ -259,8 +250,6 @@ CREATE TABLE `award` (
 
 # Dump of table child
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `child`;
 
 CREATE TABLE `child` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -281,8 +270,6 @@ CREATE TABLE `child` (
 # Dump of table coursework
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `coursework`;
-
 CREATE TABLE `coursework` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` char(11) DEFAULT NULL,
@@ -300,8 +287,6 @@ CREATE TABLE `coursework` (
 
 # Dump of table employment
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `employment`;
 
 CREATE TABLE `employment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -321,8 +306,6 @@ CREATE TABLE `employment` (
 # Dump of table group_data
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `group_data`;
-
 CREATE TABLE `group_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
@@ -337,8 +320,6 @@ CREATE TABLE `group_data` (
 # Dump of table login
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `login`;
-
 CREATE TABLE `login` (
   `username` varchar(50) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -346,16 +327,14 @@ CREATE TABLE `login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  CONSTRAINT `login->user_data (username)` FOREIGN KEY (`username`) REFERENCES `user_data` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `login->user_data (id)` FOREIGN KEY (`id`) REFERENCES `user_data` (`id`) ON DELETE CASCADE
+  CONSTRAINT `login->user_data (id)` FOREIGN KEY (`id`) REFERENCES `user_data` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `login->user_data (username)` FOREIGN KEY (`username`) REFERENCES `user_data` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
 # Dump of table scholarship
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `scholarship`;
 
 CREATE TABLE `scholarship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -374,8 +353,6 @@ CREATE TABLE `scholarship` (
 # Dump of table university
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `university`;
-
 CREATE TABLE `university` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(50) DEFAULT NULL,
@@ -390,8 +367,6 @@ CREATE TABLE `university` (
 
 # Dump of table user_data
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `user_data`;
 
 CREATE TABLE `user_data` (
   `username` varchar(50) NOT NULL,
@@ -413,13 +388,12 @@ CREATE TABLE `user_data` (
 # Dump of table volunteer
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `volunteer`;
-
 CREATE TABLE `volunteer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `place` varchar(100) DEFAULT NULL,
   `description` varchar(100) NOT NULL DEFAULT '',
-  `hours` int(11) NOT NULL,
+  `hours_total` int(11) NOT NULL,
+  `hours_week` int(11) NOT NULL,
   `date_from` date DEFAULT NULL,
   `date_to` date DEFAULT NULL,
   `application_id` int(11) NOT NULL,

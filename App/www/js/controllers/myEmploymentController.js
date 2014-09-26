@@ -46,6 +46,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     MyActivityService.getAllActivity().then(
         function (result) {
             $scope.myactivities = result;
+            
         },
         function (error) {
             ngNotify.set("Something went wrong retrieving data.", {
@@ -81,68 +82,51 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         }
     );
     
-    $scope.showConfirm = function() {
-            var confirmPopup = $ionicPopup.confirm({
-     title: 'Consume Ice Cream',
-     template: 'Are you sure you want to eat this ice cream?'
-   });
-   confirmPopup.then(function(res) {
-     if(res) {
-       console.log('You are sure');
-     } else {
-       console.log('You are not sure');
-     }
-   });
- };
-
     // callback for ng-click 'deleteData':
     $scope.deleteData = function (itemId, acType) {
         $ionicPopup.confirm({
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete one item from the list?'
         }).then(function (res) {
-        if(res) {
-                console.log('You are sure');
-            
+            if (res) {
+                switch (acType) {
+                case 1:
+                    MyEmploymentService.deleteEmployment(itemId).then(
+                        function (success) {
+                            $scope.updateLists(acType);
+                            $scope.modal1.hide();
+                        }
+                    );
+                    break;
+                case 2:
+                    MyActivityService.deleteActivity(itemId).then(
+                        function (success) {
+                            $scope.updateLists(acType);
+                            $scope.modal2.hide();
+                        }
+                    );
+                    break;
+                case 3:
+                    MyVolunteerService.deleteVolunteer(itemId).then(
+                        function (success) {
+                            $scope.updateLists(acType);
+                            $scope.modal3.hide();
+                        }
+                    );
+                    break;
+                case 4:
+                    MyAwardService.deleteAward(itemId).then(
+                        function (success) {
+                            $scope.updateLists(acType);
+                            $scope.modal4.hide();
+                        }
+                    );
+                    break;
+                default:
+                    MyEmploymentService.deleteEmployment(itemId);
 
-        switch (acType) {
-        case 1:
-            MyEmploymentService.deleteEmployment(itemId).then(
-                function (success) {
-                    $scope.updateLists(acType);
-                    $scope.modal1.hide();
                 }
-            );
-            break;
-        case 2:
-            MyActivityService.deleteActivity(itemId).then(
-                function (success) {
-                    $scope.updateLists(acType);
-                    $scope.modal2.hide();
-                }
-            );
-            break;
-        case 3:
-            MyVolunteerService.deleteVolunteer(itemId).then(
-                function (success) {
-                    $scope.updateLists(acType);
-                    $scope.modal3.hide();
-                }
-            );
-            break;
-        case 4:
-            MyAwardService.deleteAward(itemId).then(
-                function (success) {
-                    $scope.updateLists(acType);
-                    $scope.modal4.hide();
-                }
-            );
-            break;
-        default:
-            MyEmploymentService.deleteEmployment(itemId);
-            
-        }
-            
+
             } else {
                 console.log('You are not sure to delete');
             }
@@ -159,7 +143,8 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             $scope.modal1.show();
             break;
         case 2:
-            $scope.mynewactivities = item;
+            $scope.mynewactivity = item;
+            $scope.yearInSchoolList = angular.fromJson($scope.mynewactivity.year);
             $scope.modal2.show();
             break;
         case 3:
@@ -168,6 +153,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             break;
         case 4:
             $scope.mynewaward = item;
+            $scope.yearInSchoolList = angular.fromJson($scope.mynewaward.year);
             $scope.modal4.show();
             break;
         default:
@@ -180,8 +166,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                 
         switch (acType) {
         case 1:
+            $scope.mynewdata.application_id = $stateParams.applicationId;
+                
             if ($scope.myVariables.current_mode === "Add") {
-                $scope.mynewdata.application_id = $stateParams.applicationId;
                 MyEmploymentService.addEmployment($scope.mynewdata).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -197,8 +184,12 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 2:
+            $scope.mynewactivity.application_id = $stateParams.applicationId;
+            // convert year in school to string
+            $scope.mynewactivity.year = angular.toJson($scope.yearInSchoolList);
+                
             if ($scope.myVariables.current_mode === "Add") {
-                $scope.mynewactivity.application_id = $stateParams.applicationId;
+                
                 MyActivityService.addActivity($scope.mynewactivity).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -214,8 +205,8 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 3:
+            $scope.mynewvolunteer.application_id = $stateParams.applicationId;
             if ($scope.myVariables.current_mode === "Add") {
-                $scope.mynewvolunteer.application_id = $stateParams.applicationId;
                 MyVolunteerService.addVolunteer($scope.mynewvolunteer).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -223,7 +214,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     }
                 );
             } else {
-                MyVolunteerService.updateVolunteer($scope.myvolunteer.id, $scope.myvolunteer).then(
+                MyVolunteerService.updateVolunteer($scope.mynewvolunteer.id, $scope.mynewvolunteer).then(
                     function (success) {
                         $scope.modal3.hide();
                     }
@@ -231,8 +222,10 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 4:
+            $scope.mynewaward.application_id = $stateParams.applicationId;
+            // convert year in school to string
+            $scope.mynewaward.year = angular.toJson($scope.yearInSchoolList);
             if ($scope.myVariables.current_mode === "Add") {
-                $scope.mynewaward.application_id = $stateParams.applicationId;
                 MyAwardService.addAward($scope.mynewaward).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -430,7 +423,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             checked: true
         },
         {
-            text: "Sohomore",
+            text: "Sophomore",
             checked: false
         },
         {
