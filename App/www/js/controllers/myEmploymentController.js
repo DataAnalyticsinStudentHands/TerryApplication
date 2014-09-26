@@ -80,9 +80,31 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
         }
     );
+    
+    $scope.showConfirm = function() {
+            var confirmPopup = $ionicPopup.confirm({
+     title: 'Consume Ice Cream',
+     template: 'Are you sure you want to eat this ice cream?'
+   });
+   confirmPopup.then(function(res) {
+     if(res) {
+       console.log('You are sure');
+     } else {
+       console.log('You are not sure');
+     }
+   });
+ };
 
     // callback for ng-click 'deleteData':
     $scope.deleteData = function (itemId, acType) {
+        $ionicPopup.confirm({
+            title: 'Confirm Delete',
+            template: 'Are you sure you want to delete one item from the list?'
+        }).then(function (res) {
+        if(res) {
+                console.log('You are sure');
+            
+
         switch (acType) {
         case 1:
             MyEmploymentService.deleteEmployment(itemId).then(
@@ -120,6 +142,11 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             MyEmploymentService.deleteEmployment(itemId);
             
         }
+            
+            } else {
+                console.log('You are not sure to delete');
+            }
+        });
     };
 
     // callback for ng-click 'editData':
@@ -188,7 +215,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             break;
         case 3:
             if ($scope.myVariables.current_mode === "Add") {
-                $scope.mymynewvolunteer.application_id = $stateParams.applicationId;
+                $scope.mynewvolunteer.application_id = $stateParams.applicationId;
                 MyVolunteerService.addVolunteer($scope.mynewvolunteer).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -260,6 +287,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
     // Open a modal
     $scope.showAddData = function (acType) {
+        $scope.myVariables.current_mode = "Add";
         
         switch (acType) {
         case 1:
@@ -341,12 +369,20 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     
     $scope.pickedDates = {};
 
-    $scope.$watch('pickedDates.date_from', function (unformattedDate) {
+    $scope.$watch('pickedDates.empl_date_from', function (unformattedDate) {
         $scope.mynewdata.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
 
-    $scope.$watch('pickedDates.date_to', function (unformattedDate) {
+    $scope.$watch('pickedDates.empl_date_to', function (unformattedDate) {
         $scope.mynewdata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+    
+    $scope.$watch('pickedDates.vol_date_from', function (unformattedDate) {
+        $scope.mynewvolunteer.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
+    });
+
+    $scope.$watch('pickedDates.vol_date_to', function (unformattedDate) {
+        $scope.mynewvolunteer.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
 
     $scope.openDatePicker = function (testvar) {
@@ -365,11 +401,21 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        if (testvar === 1) {
-                            $scope.pickedDates.date_from = $scope.tmp.newDate;
-                        }
-                        if (testvar === 2) {
-                            $scope.pickedDates.date_to = $scope.tmp.newDate;
+                        switch (testvar) {
+                        case 1:
+                            $scope.pickedDates.empl_date_from = $scope.tmp.newDate;
+                            break;
+                        case 2:
+                            $scope.pickedDates.empl_date_to = $scope.tmp.newDate;
+                            break;
+                        case 3:
+                            $scope.pickedDates.vol_date_from = $scope.tmp.newDate;
+                            break;
+                        case 4:
+                            $scope.pickedDates.vol_date_to = $scope.tmp.newDate;
+                            break;
+                        default:
+                            //need to define a default
                         }
                     }
                 }

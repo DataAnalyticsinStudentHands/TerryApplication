@@ -39,7 +39,7 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
         updateEmployment: function (employment_id, employment) {
             return Restangular.all("employment").all(employment_id).post(employment).then(
                 function (result) {
-                    ngNotify.set("Succesfully saved your employment to the server.", {
+                    ngNotify.set("Succesfully updated your employment on the server.", {
                         position: 'bottom',
                         type: 'success'
                     });

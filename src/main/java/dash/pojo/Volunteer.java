@@ -32,8 +32,11 @@ public class Volunteer implements  Serializable, IAclObject{
 	@XmlElement(name = "description")
 	private String description;
 
-	@XmlElement(name = "hours")
-	private Long hours;
+	@XmlElement(name = "hours_week")
+	private Long hours_week;
+	
+	@XmlElement(name = "hours_total")
+	private Long hours_total;
 	
 	@XmlElement(name = "date_from")
 	@XmlJavaTypeAdapter(SimpleDateAdapter.class)
@@ -97,12 +100,20 @@ public class Volunteer implements  Serializable, IAclObject{
 		this.description = description;
 	}
 
-	public Long getHours() {
-		return hours;
+	public Long getHours_week() {
+		return hours_week;
 	}
 
-	public void setHours(Long hours) {
-		this.hours = hours;
+	public void setHours_week(Long hours_week) {
+		this.hours_week = hours_week;
+	}
+
+	public Long getHours_total() {
+		return hours_total;
+	}
+
+	public void setHours_total(Long hours_total) {
+		this.hours_total = hours_total;
 	}
 
 	public Date getDate_from() {

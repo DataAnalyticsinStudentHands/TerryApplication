@@ -38,8 +38,11 @@ public class VolunteerEntity implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "hours")
-	private Long hours;
+	@Column(name = "hours_week")
+	private Long hours_week;
+	
+	@Column(name = "hours_total")
+	private Long hours_total;
 	
 	@Column(name = "date_from")
 	private Date date_from;
@@ -97,12 +100,20 @@ public class VolunteerEntity implements Serializable {
 		this.description = description;
 	}
 
-	public Long getHours() {
-		return hours;
+	public Long getHours_week() {
+		return hours_week;
 	}
 
-	public void setHours(Long hours) {
-		this.hours = hours;
+	public void setHours_week(Long hours_week) {
+		this.hours_week = hours_week;
+	}
+
+	public Long getHours_total() {
+		return hours_total;
+	}
+
+	public void setHours_total(Long hours_total) {
+		this.hours_total = hours_total;
 	}
 
 	public Date getDate_from() {
