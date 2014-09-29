@@ -17,8 +17,8 @@ angular.module('HonorsApplications', [
     'use strict';
 
     // Set Base URL to connect to DASH RESTFUL webservices
-    Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
-    //Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    //Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
+    Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
 
     // have Restangular available whereever we need it
     $rootScope.Restangular = function () {
@@ -218,6 +218,17 @@ angular.module('HonorsApplications', [
             "tab-myapplications@tabs": {
                 templateUrl: 'templates/essays.html',
                 controller: 'UploadController'
+            }
+        },
+        authenticate: true
+    })
+    
+    .state('tabs.myapplication.submit', {
+        url: '/submit',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/submit.html',
+                controller: 'MyApplicationController'
             }
         },
         authenticate: true

@@ -13,20 +13,20 @@
         <p class="item item-icon-left"> <i class="icon ion-information"></i>
             Fill out each section of the application form completely, taking care to respond to each question in the space provided.</b>
         </p>
-        <form name="student_information" novalidate on-valid-submit="save('tabs.myapplication.highschool_information')">
+        <form name="student_information" novalidate class="submit" on-valid-submit="save('tabs.myapplication.highschool_information')">
 
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Last Name:</span> 
-                        <input name="last_name" type="text" ng-model="myapplication.last_name" placeholder="Lastname" required>
+                        <input name="last_name" type="text" ng-model="myapplication.last_name" placeholder="Lastname" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">First Name:</span> 
-                        <input type="text" ng-model="myapplication.first_name" placeholder="Firstname" required>
+                        <input type="text" ng-model="myapplication.first_name" placeholder="Firstname" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">UH ID:</span> 
-                        <input name="uh_id" type="number" ng-model="myapplication.uh_id" placeholder="0123456" required>
+                        <input name="uh_id" type="number" ng-model="myapplication.uh_id" placeholder="0123456" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Permanent Address:</span> 
-                        <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress" required>
+                        <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress" ng-ng-required="finalSubmit"="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">City:</span> 
-                        <input type="text" ng-model="myapplication.city" placeholder="City" required>
+                        <input type="text" ng-model="myapplication.city" placeholder="City" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -81,14 +81,14 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Zip Code:</span> 
-                        <input type="text" ng-model="myapplication.zip_code" placeholder="01234" required>
+                        <input type="text" ng-model="myapplication.zip_code" placeholder="01234" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">County:</span> 
-                        <input type="text" ng-model="myapplication.county" placeholder="County" required>
+                        <input type="text" ng-model="myapplication.county" placeholder="County" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -98,14 +98,14 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Home Phone:</span>
-                        <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" required />
+                        <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit" />
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Alternate/Cell Phone:</span>
-                        <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" required/>
+                        <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit"/>
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="col">
                     <label class="item item-input validated">
                         <span class="input-label">Email Address:</span> 
-                        <input name="email" type="email" ng-model="myapplication.email" placeholder="email address" required>
+                        <input name="email" type="email" ng-model="myapplication.email" placeholder="email address" ng-required="finalSubmit">
                     </label>
                 </div>
             </div>
@@ -173,7 +173,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Birthplace:</span> 
-                        <input type="text" ng-model="myapplication.birthplace" placeholder="birthplace" required>
+                        <input type="text" ng-model="myapplication.birthplace" placeholder="birthplace" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
@@ -184,14 +184,14 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Ethnic Background:</span> 
-                        <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?" required>
+                        <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Anticipated College Major:</span> 
-                        <input type="text" ng-model="myapplication.anticipated_major" placeholder="Major" required>
+                        <input type="text" ng-model="myapplication.anticipated_major" placeholder="Major" ng-required="finalSubmit">
                         <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
