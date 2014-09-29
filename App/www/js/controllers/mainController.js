@@ -1,5 +1,4 @@
 /*global angular, console*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -9,6 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers').controller('MainController', function ($scope, $location) {
+    'use strict';
 
     $scope.main = {};
     $scope.main.dragContent = false;

@@ -7,36 +7,26 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService, MyUniversityService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService, MyUniversityService, MyScholarshipService, MyChildService) {
     'use strict';
-
-    $scope.$watch('myapplication.citizen', function (value) {
-        console.log(value);
-    });
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
 
-    $scope.myVariables = {};
+    $scope.myVariables = {
+        current_mode: 'Add',
+    };
 
     $scope.myapplication = {};
-    $scope.myuniversities = {};
+    $scope.myscholarships = {};
+    $scope.myscholarship = {};
     $scope.myuniversity = {};
-    
-    // GET 
-    MyUniversityService.getAllUniversity().then(
-        function (result) {
-            $scope.myuniversities = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
-        }
-    );
+    $scope.mynewuniversity = {};
+    $scope.mychildren = {};
+    $scope.mychild = {};
 
+    // GET 
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function (result) {
             if ($stateParams.applicationId !== "") {
@@ -65,43 +55,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             }
         }
     );
-    
-    
-    
-    // Open the modal
-    $scope.showAddData = function () {
-        
-        // An elaborate, custom popup
-        var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="mynewuniversity.name">',
-            title: 'Name University',
-            subTitle: 'You can reorder the list later',
-            scope: $scope,
-            buttons: [
-                { text: 'Cancel' },
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        if (!$scope.mynewuniversity.name) {
-                            //don't allow the user to close unless he enters wifi password
-                            e.preventDefault();
-                        } else {
-                            return $scope.mynewuniversity.name;
-                        }
-                    }
-                },
-            ]
-        });
-            myPopup.then(function(res) {
-            console.log('Tapped!', res);
-  });
-  
-    };
 
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function () {
-        MyUniversityService.getAllUniversity().then(
+    // GET 
+    MyUniversityService.getAllUniversity().then(
         function (result) {
             $scope.myuniversities = result;
         },
@@ -112,8 +68,256 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             });
         }
     );
+
+    // GET 
+    MyScholarshipService.getAllScholarship().then(
+        function (result) {
+            $scope.myscholarships = result;
+        },
+        function (error) {
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
+
+    // GET 
+    MyChildService.getAllChild().then(
+        function (result) {
+            $scope.mychildren = result;
+        },
+        function (error) {
+            ngNotify.set("Something went wrong retrieving data.", {
+                type: "error",
+                sticky: true
+            });
+        }
+    );
+
+    // Open a popup to add data
+    $scope.showAddData = function () {
+        var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="mynewuniversity.name">',
+            title: 'Name University',
+            subTitle: 'You can reorder the list later',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Cancel'
+                },
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        if (!$scope.mynewuniversity.name) {
+                            //don't allow the user to close unless he enters wifi password
+                            e.preventDefault();
+                        } else {
+                            $scope.mynewuniversity.application_id = $stateParams.applicationId;
+                            MyUniversityService.addUniversity($scope.mynewuniversity);
+                            $scope.updateList('university');
+                        }
+                    }
+                }
+            ]
+        });
+    };
+
+    // Open a popup to edit data
+    $scope.editData = function (acType, item) {
+        switch (acType) {
+        case 'university':
+            var myPopup = $ionicPopup.show({
+                template: '<input type="text" ng-model="mynewuniversity.name">',
+                title: 'Name University',
+                subTitle: 'You can reorder the list later',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: 'Cancel'
+                },
+                    {
+                        text: '<b>Save</b>',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            if (!$scope.mynewuniversity.name) {
+                                //don't allow the user to close unless he enters wifi password
+                                e.preventDefault();
+                            } else {
+                                $scope.mynewuniversity.application_id = $stateParams.applicationId;
+                                MyUniversityService.updateUniversity($scope.mynewuniversity.id, $scope.mynewuniversity);
+                                $scope.updateList();
+                            }
+                        }
+                }
+            ]
+            });
+            break;
+        case 'scholarship':
+            $scope.myVariables.current_mode = "Edit";
+            $scope.myscholarship = item;
+            $scope.modal.show();
+            break;
+        }
+    };
+
+    $scope.updateList = function (acType) {
+        switch (acType) {
+        case 'university':
+            // GET 
+            MyUniversityService.getAllUniversity().then(
+                function (result) {
+                    $scope.myuniversities = result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data.", {
+                        type: "error",
+                        sticky: true
+                    });
+                }
+            );
+            break;
+        case 'scholarship':
+            // GET 
+            MyScholarshipService.getAllScholarship().then(
+                function (result) {
+                    $scope.myscholarships = result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data.", {
+                        type: "error",
+                        sticky: true
+                    });
+                }
+            );
+            break;
+        case 'children':
+            // GET 
+            MyChildService.getAllChild().then(
+                function (result) {
+                    $scope.mychildren = result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data.", {
+                        type: "error",
+                        sticky: true
+                    });
+                }
+            );
+        }
+    };
+
+    // callback for ng-click 'modal'- open Modal dialog
+    $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
     });
 
+    // callback for ng-click 'modal'- open Modal dialog
+    $ionicModal.fromTemplateUrl('templates/modal_child.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal1 = modal;
+    });
+
+    // Open a modal
+    $scope.showAddModal = function (type) {
+
+        $scope.myVariables.current_mode = "Add";
+
+        switch (type) {
+        case 1:
+            $scope.myscholarship = {};
+            $scope.myscholarship.applied_received = 'true';
+            $scope.modal.show();
+            break;
+        case 2:
+            $scope.myscholarship = {};
+            $scope.myscholarship.applied_received = 'false';
+            $scope.modal.show();
+            break;
+        case 3:
+            $scope.mychild = {};
+            $scope.modal1.show();
+            break;
+        }
+
+
+    };
+
+    // callback for ng-click 'saveModal':
+    $scope.saveModal = function () {
+
+        if ($scope.modal.isShown === 'true') {
+            $scope.myscholarship.application_id = $stateParams.applicationId;
+
+            if ($scope.myVariables.current_mode === 'Add') {
+                MyScholarshipService.addScholarship($scope.myscholarship).then(
+                    function (success) {
+                        $scope.updateList('scholarship');
+                        $scope.modal.hide();
+                    }
+                );
+            } else {
+                MyScholarshipService.updateScholarship($scope.myscholarship.id, $scope.myscholarship).then(
+                    function (success) {
+                        $scope.updateList('scholarship');
+                        $scope.modal.hide();
+                    }
+                );
+            }
+        } else {
+            $scope.mychild.application_id = $stateParams.applicationId;
+
+            if ($scope.myVariables.current_mode === 'Add') {
+                MyChildService.addChild($scope.mychild).then(
+                    function (success) {
+                        $scope.updateList('children');
+                        $scope.modal1.hide();
+                    }
+                );
+            } else {
+                MyChildService.updateChild($scope.mychild.id, $scope.mychild).then(
+                    function (success) {
+                        $scope.updateList('children');
+                        $scope.modal1.hide();
+                    }
+                );
+            }
+        }
+    };
+
+    // callback for ng-click 'deleteData':
+    $scope.deleteData = function (acType, itemId) {
+
+        switch (acType) {
+        case 'university':
+            MyUniversityService.deleteUniversity(itemId).then(
+                function (success) {
+                    $scope.updateList(acType);
+                }
+            );
+            break;
+        case 'scholarship':
+            MyScholarshipService.deleteScholarship(itemId).then(
+                function (success) {
+                    $scope.updateList(acType);
+                }
+            );
+            break;
+        case 'children':
+            MyChildService.deleteChild(itemId).then(
+                function (success) {
+                    $scope.updateList(acType);
+                }
+            );
+            break;
+        }
+    };
 
     $scope.pickedDates = {};
 
@@ -136,15 +340,15 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.$watch('pickedDates.actDate', function (unformattedDate) {
         $scope.myapplication.act_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.national_merit_date', function (unformattedDate) {
         $scope.myapplication.national_merit_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.national_achievement_date', function (unformattedDate) {
         $scope.myapplication.national_achievement_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.national_hispanic_date', function (unformattedDate) {
         $scope.myapplication.national_hispanic_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });

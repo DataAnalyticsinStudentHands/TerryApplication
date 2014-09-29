@@ -57,10 +57,10 @@ angular.module('TerryServices').factory('MyUniversityService', function (Restang
             function (university_id) {
                 return Restangular.all("university").all(university_id).remove().then(
                     function (result) {
-                        ngNotify.set("Succesfully deleted your service.", {position: 'bottom', type: 'success'});
+                        ngNotify.set("Succesfully deleted your university.", {position: 'bottom', type: 'success'});
                     },
                     function (error) {
-                        ngNotify.set("Could not contact server to delete service!", {position: 'bottom', type: 'error'});
+                        ngNotify.set("Could not contact server to delete university!", {position: 'bottom', type: 'error'});
                     }
                 );
             }

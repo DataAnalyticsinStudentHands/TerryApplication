@@ -1,5 +1,4 @@
 /*global angular*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -8,7 +7,8 @@
  * # MyScholarshipService
  * Service for the terry
  */
-angular.module('TerryServices').factory('MyScholarshipService', function (Restangular, $q) {
+angular.module('TerryServices').factory('MyScholarshipService', function (Restangular, $q, ngNotify) {
+    'use strict';
     
     return {
         getAllScholarship:
@@ -21,15 +21,48 @@ angular.module('TerryServices').factory('MyScholarshipService', function (Restan
             },
         addScholarship:
             function (scholarship) {
-                return Restangular.all("scholarship").post(scholarship);
+                return Restangular.all("scholarship").post(scholarship).then(
+                function (result) {
+                    ngNotify.set("Succesfully saved your scholarship to the server.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
+                },
+                function (error) {
+                    ngNotify.set("Could not contact server to add scholarship!", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
             },
         updateScholarship:
             function (scholarship_id, scholarship) {
-                return Restangular.all("scholarship").all(scholarship_id).post(scholarship);
+                return Restangular.all("scholarship").all(scholarship_id).post(scholarship).then(
+                function (result) {
+                    ngNotify.set("Succesfully updated your scholarship on the server.", {
+                        position: 'bottom',
+                        type: 'success'
+                    });
+                },
+                function (error) {
+                    ngNotify.set("Could not contact server to update scholarship!", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
             },
         deleteScholarship:
             function (scholarship_id) {
-                return Restangular.all("scholarship").all(scholarship_id).remove();
+                return Restangular.all("scholarship").all(scholarship_id).remove().then(
+                function (result) {
+                    ngNotify.set("Succesfully deleted your scholarship.", {position: 'bottom', type: 'success'});
+                },
+                function (error) {
+                    ngNotify.set("Could not contact server to delete scholarship!", {position: 'bottom', type: 'error'});
+                }
+            );
             }
     };
 });

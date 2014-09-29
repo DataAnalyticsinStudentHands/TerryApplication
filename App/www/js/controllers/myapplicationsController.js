@@ -1,5 +1,4 @@
 /*global angular, console*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -9,6 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers').controller('MyapplicationsController', function ($scope, $location, $ionicModal, ngNotify, MyApplicationsService, $ionicNavBarDelegate) {
+    'use strict';
     
     $scope.myapplications = {};
 

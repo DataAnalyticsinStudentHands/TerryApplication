@@ -5,9 +5,11 @@
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
 
-    <ion-content padding="true">
-        <h3>High School Information</h3>
-
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">High School Information</h1>
+    </ion-header-bar>
+    <ion-content>
+        
         <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.highschool_coursework')">
 
             <div class="row">

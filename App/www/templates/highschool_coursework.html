@@ -5,38 +5,48 @@
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
 
-    <ion-content padding="true">
-        <h3>High School Coursework</h3>
-        <p>&nbsp;</p>
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">High School Coursework</h1>
+    </ion-header-bar>
+    <ion-content>
+        
+        <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                Please fill out all sections provided. Use the "Add" button in each section to add individual courses to the lists. 
+            </p>
+        
+        <div class="item item-button-left dark">
+            Sophomore Level Coursework
+            <button title="Add course" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddCourse(1)"></button>
+        </div>
 
-        <h4 class="really">Sophomore Level Coursework</h4>
-        <button class="button button-icon icon ion-plus-circled" ng-click="showAddCourse(1)">Add Course</button>
-
-        <div class="list">
+        <div class="list list-inset">
             <div class="item" ng-repeat="course in mycourses | filter: {level:'sophomore'}" item="course">
-                <button title="Delete Course" class="button button-icon icon ion-minus-circled" ng-click="deleteCourse(course.id)"></button>
-                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 1)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}}</button>
+                <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteCourse(course.id)"></button>
+                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 1)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
         </div>
-
-        <h4 class="really">Junior Level Coursework</h4>
-        <button class="button button-icon icon ion-plus-circled" ng-click="showAddCourse(2)">Add Course</button>
+        
+        <div class="item item-button-left dark">
+            Junior Level Coursework
+            <button title="Add course" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddCourse(2)"></button>
         </div>
 
-        <div class="list">
+        <div class="list list-inset">
             <div class="item" ng-repeat="course in mycourses | filter: {level:'junior'}" item="course">
-                <button title="Delete Course" class="button button-icon icon ion-minus-circled" ng-click="deleteCourse(course.id)"></button>
-                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 2)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}}</button>
+                <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteCourse(course.id)"></button>
+                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 1)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
         </div>
 
-        <h4 class="really">Senior Level Coursework</h4>
-        <button class="button button-icon icon ion-plus-circled" ng-click="showAddCourse(3)">Add Course</button>
+        <div class="item item-button-left dark">
+            Senior Level Coursework
+            <button title="Add course" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddCourse(3)"></button>
+        </div>
 
-        <div class="list">
+        <div class="list list-inset">
             <div class="item" ng-repeat="course in mycourses | filter: {level:'senior'}" item="course">
-                <button title="Delete Course" class="button button-icon icon ion-minus-circled" ng-click="deleteCourse(course.id)"></button>
-                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 3)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}}</button>
+                <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteCourse(course.id)"></button>
+                <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course, 1)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
         </div>
 
@@ -47,57 +57,5 @@
             </div>
         </div>
     </ion-content>
-
-    <script id="modal_Coursework.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive">
-                <h1 class="title">{{myVariables.current_mode}} Coursework</h1>
-                <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-        </ion-header-bar>
-            <ion-content>
-                <div class="padding">
-                    <div class="row">
-                        <div class="col">
-			                 <label class="item item-input">
-                                <span class="input-label">Description/Name:</span>
-                                <input ng-model="mycourse.name" type="text" placeholder="description">
-        </label>
-        </div>
-        </div>
-                    <div class="row">
-                        <div class="col">
-                            <label class="item item-input item-select">
-                                <span class="input-label">Type:</span>
-                                <select ng-model="myVariables.myCourseType" 
-                                    ng-options="type.abbreviation for type in course_types"> 
-        </select>
-        </label>
-        </div>
-
-
-                    <div class="col">
-
-                        <label class="item item-input">
-                            <span class="input-label">Credit Hours:</span>
-                            <input ng-model="mycourse.credit_hours" type="text" placeholder="credit hours">
-        </label>
-        </div>
-                <div class="col">
-                        <label class="item item-input">
-                            <span class="input-label">Final Grade:</span>
-                            <input ng-model="mycourse.final_grade" type="text" placeholder="grade">
-        </label>
-        </div>
-        </div>
-            <div class="row">
-                <div class="col">
-                        <button class="button button-full button-positive" ng-click="saveModal()">Save</button>
-        </div>
-        </div>
-        </div>
-        </ion-content>
-        </ion-modal-view>
-    </script>
-
 </ion-view>
 

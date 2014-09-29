@@ -1,5 +1,4 @@
 /*global angular, console*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -9,6 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, MyCourseworkService) {
+    'use strict';
     
     $scope.myVariables = {
         current_mode: 'Add',
@@ -42,7 +42,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         $scope.myVariables.myCourseType = test[0];
                 
         $scope.modal.show();
-        var test = $filter('filter')($scope.levels, {id: level}, true);
+        test = $filter('filter')($scope.levels, {id: level}, true);
         currentLevel = test[0].name;
     };
 
@@ -56,7 +56,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             
             if ($scope.myVariables.current_mode === 'Add') {
                 MyCourseworkService.addCoursework($scope.mycourse).then(
-                    function c(result) {
+                    function (result) {
                         $scope.modal.hide();
                         ngNotify.set("Succesfully added your coursework.", {position: 'bottom', type: 'success'});
                     },
@@ -81,7 +81,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     };
 
     // callback for ng-click 'modal'- open Modal dialog to add a new course
-    $ionicModal.fromTemplateUrl('modal_Coursework.html', {
+    $ionicModal.fromTemplateUrl('templates/modal_coursework.html', {
         scope : $scope,
         animation : 'slide-in-up'
     }).then(function (modal) {

@@ -1,0 +1,47 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Coursework</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Description/Name:</span>
+                        <input ng-model="mycourse.name" type="text" placeholder="description">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-select">
+                        <span class="input-label">Type:</span>
+                        <select ng-model="myVariables.myCourseType" ng-options="type.abbreviation for type in course_types">
+                        </select>
+                    </label>
+                </div>
+
+
+                <div class="col">
+
+                    <label class="item item-input">
+                        <span class="input-label">Credit Hours:</span>
+                        <input ng-model="mycourse.credit_hours" type="text" placeholder="credit hours">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Final Grade:</span>
+                        <input ng-model="mycourse.final_grade" type="text" placeholder="grade">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-full button-positive" ng-click="saveModal()">Save</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

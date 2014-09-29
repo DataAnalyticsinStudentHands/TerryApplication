@@ -5,13 +5,18 @@
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
 
-    <ion-content padding="true">
-        <h3>Financial Information</h3>
-        <p>To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient. FAFSA forms can be submitted on-line after January 1st at www.fafsa.ed.gov. You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">Financial Information</h1>
+    </ion-header-bar>
+    <ion-content>
+        <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient. FAFSA forms can be submitted on-line after January 1st at <a href="http://www.fafsa.ed.gov/" target="_blank">www.fafsa.ed.gov
+      
+    </a>. You must file your FAFSA no later than February 28th. You must complete the FAFSA or your application cannot be processed.<br>
+                    Please complete all questions or your application cannot be considered. Financial information may be subject to verification from tax returns or other sources.
         </p>
-        <p>Please complete all questions or your application cannot be considered. Financial information may be subject to verification from tax returns or other sources.
-        </p>
-        <form class="submit" novalidate on-valid-submit="save()">
+
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.scholarship_information')">
 
             <div class="row">
                 <div class="col">
@@ -359,11 +364,37 @@
                 </div>
             </div>
             
+            
+            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            Please provide the specified information for all children under 25 years of age in your family.  <b>Do not include yourself or your parents.</b>
+                </p>
+            
+            <div class="item item-button-left dark">
+                List Children
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal(3)"></button>
+            </div>
 
-            <!-- Submit button -->
+            <div class="list list-inset">
+                <div class="item" ng-repeat="item in mychildren" item="item">
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('children', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('children', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.school}} {{item.year}} {{item.self_supporting}}</button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Do you have a sibling who is a current/past Terry Scholar or who is applying for a Terry Scholarship?  If so, please give name(s) and institution(s):  </span> 
+                        <input name="sibling_terry" type="text" ng-model="myapplication.sibling_terry" placeholder="description" required>
+                        <i class="icon ion-alert-circled error"></i>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Submit/Next button -->
             <div class="row">
                 <div class="col col-25 col-offset-75">
-                    <button type="submit" class="button button-block button-positive">Save</button>
+                    <button type="submit" class="button button-block button-positive">Next</button>
                 </div>
             </div>
         </form>

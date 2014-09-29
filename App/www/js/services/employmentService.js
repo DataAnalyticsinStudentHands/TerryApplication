@@ -10,8 +10,6 @@
  */
 angular.module('TerryServices').factory('MyEmploymentService', function (Restangular, $q, ngNotify) {
     'use strict';
-    
-    var promEmployment;
 
     return {
         getAllEmployment: function () {
@@ -45,7 +43,7 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
                     });
                 },
                 function (error) {
-                    ngNotify.set("Could not contact server to add employment!", {
+                    ngNotify.set("Could not contact server to update employment!", {
                         position: 'bottom',
                         type: 'error'
                     });

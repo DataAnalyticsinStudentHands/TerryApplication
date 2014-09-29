@@ -1,5 +1,4 @@
 /*global angular*/
-'use strict';
 
 /**
  * @ngdoc function
@@ -8,7 +7,8 @@
  * # MyChildService
  * Service for the terry
  */
-angular.module('TerryServices').factory('MyChildService', function (Restangular, $q) {
+angular.module('TerryServices').factory('MyChildService', function (Restangular, $q, ngNotify) {
+    'use strict';
     
     return {
         getAllChild:
@@ -21,15 +21,48 @@ angular.module('TerryServices').factory('MyChildService', function (Restangular,
             },
         addChild:
             function (child) {
-                return Restangular.all("child").post(child);
+                return Restangular.all("child").post(child).then(
+                    function (result) {
+                        ngNotify.set("Succesfully saved your child to the server.", {
+                            position: 'bottom',
+                            type: 'success'
+                        });
+                    },
+                    function (error) {
+                        ngNotify.set("Could not contact server to add child!", {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    }
+                );
             },
         updateChild:
             function (child_id, child) {
-                return Restangular.all("child").all(child_id).post(child);
+                return Restangular.all("child").all(child_id).post(child).then(
+                    function (result) {
+                        ngNotify.set("Succesfully updated your child on the server.", {
+                            position: 'bottom',
+                            type: 'success'
+                        });
+                    },
+                    function (error) {
+                        ngNotify.set("Could not contact server to child university!", {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    }
+                );
             },
         deleteChild:
             function (child_id) {
-                return Restangular.all("child").all(child_id).remove();
+                return Restangular.all("child").all(child_id).remove().then(
+                    function (result) {
+                        ngNotify.set("Succesfully deleted your child.", {position: 'bottom', type: 'success'});
+                    },
+                    function (error) {
+                        ngNotify.set("Could not contact server to delete child!", {position: 'bottom', type: 'error'});
+                    }
+                );
             }
     };
 });

@@ -94,7 +94,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     MyEmploymentService.deleteEmployment(itemId).then(
                         function (success) {
                             $scope.updateLists(acType);
-                            $scope.modal1.hide();
                         }
                     );
                     break;
@@ -102,7 +101,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     MyActivityService.deleteActivity(itemId).then(
                         function (success) {
                             $scope.updateLists(acType);
-                            $scope.modal2.hide();
                         }
                     );
                     break;
@@ -110,7 +108,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     MyVolunteerService.deleteVolunteer(itemId).then(
                         function (success) {
                             $scope.updateLists(acType);
-                            $scope.modal3.hide();
                         }
                     );
                     break;
@@ -118,7 +115,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     MyAwardService.deleteAward(itemId).then(
                         function (success) {
                             $scope.updateLists(acType);
-                            $scope.modal4.hide();
                         }
                     );
                     break;
@@ -415,7 +411,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             ]
         });
     };
-    
     
     $scope.yearInSchoolList = [
         {

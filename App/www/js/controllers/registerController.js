@@ -1,4 +1,4 @@
-'use strict';
+/*global angular*/
 
 /**
  * @ngdoc function
@@ -9,6 +9,7 @@
  */
 angular.module('TerryControllers')
 .controller('RegisterController', function($scope, $state, Auth, ngNotify) {
+    'use strict';
         $scope.register = {};
     
         $scope.registerUser = function() {
@@ -26,5 +27,5 @@ angular.module('TerryControllers')
         });
 
         Auth.clearCredentials();
-    }
+    };
 });

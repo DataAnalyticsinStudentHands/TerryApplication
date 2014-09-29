@@ -7,7 +7,7 @@
  * # MyAwardService
  * Service for the terry
  */
-angular.module('TerryServices').factory('MyAwardService', function (Restangular, $q) {
+angular.module('TerryServices').factory('MyAwardService', function (Restangular, $q, ngNotify) {
     'use strict';
     
     return {

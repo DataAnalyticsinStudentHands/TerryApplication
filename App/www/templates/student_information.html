@@ -5,10 +5,14 @@
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
 
-    <ion-content padding="true">
-        <p>Fill out each section of the application form completely, taking care to respond to each question in the space provided.</p>
-        <h3>Student Information</h3>
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">Student Information</h1>
+    </ion-header-bar>
+    <ion-content>
 
+        <p class="item item-icon-left"> <i class="icon ion-information"></i>
+            Fill out each section of the application form completely, taking care to respond to each question in the space provided.</b>
+        </p>
         <form name="student_information" novalidate on-valid-submit="save('tabs.myapplication.highschool_information')">
 
             <div class="row">
@@ -37,7 +41,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Preferred Name:</span> 
-                        <input name="preferred_name" type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname">                        
+                        <input name="preferred_name" type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname">
                     </label>
                 </div>
                 <div class="col">
@@ -51,7 +55,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input item-stacked-label validated"> 
+                    <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Permanent Address:</span> 
                         <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress" required>
                         <i class="icon ion-alert-circled error"></i>
@@ -61,7 +65,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input item-stacked-label validated"> 
+                    <label class="item item-input item-stacked-label validated">
                         <span class="input-label">City:</span> 
                         <input type="text" ng-model="myapplication.city" placeholder="City" required>
                         <i class="icon ion-alert-circled error"></i>
@@ -75,7 +79,7 @@
                     </label>
                 </div>
                 <div class="col">
-                    <label class="item item-input item-stacked-label validated"> 
+                    <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Zip Code:</span> 
                         <input type="text" ng-model="myapplication.zip_code" placeholder="01234" required>
                         <i class="icon ion-alert-circled error"></i>
@@ -109,7 +113,7 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input" ng-click="openDOBPicker()">
+                    <label class="item item-input item-stacked-label" ng-click="openDOBPicker()">
                         <span class="input-label">Date of Birth:</span> 
                         <input type="text" ng-model="myapplication.dob" placeholder="Select">
                     </label>
@@ -122,7 +126,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">
@@ -134,20 +138,20 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input"> 
+                    <label class="item item-input">
                         <span class="input-label">U.S. Citizen:</span>
                         <ion-radio name="citizen" ng-model="myapplication.citizen" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="citizen" ng-model="myapplication.citizen" ng-value="'false'">No</ion-radio>
                     </label>
                 </div>
-    
+
                 <div class="col" ng-hide="myapplication.citizen">
                     <label class="item item-input"> <span class="input-label">Permanent Resident:</span>
                         <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'false'">No</ion-radio>
                     </label>
                 </div>
-                </div>
+            </div>
             <div class="row">
                 <div class="col" ng-show="myapplication.permanent_resident">
                     <label class="item item-input"> <span class="input-label">Permanent Resident Type of Card:</span>
@@ -159,12 +163,12 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input"> 
+                    <label class="item item-input">
                         <span class="input-label">Texas Resident:</span>
                         <ion-radio name="texas_resident" ng-model="myapplication.texas_resident" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="texas_resident" ng-model="myapplication.texas_resident" ng-value="'false'">No</ion-radio>
                     </label>
-                    
+
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
@@ -181,7 +185,7 @@
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Ethnic Background:</span> 
                         <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?" required>
-                    <i class="icon ion-alert-circled error"></i>
+                        <i class="icon ion-alert-circled error"></i>
                     </label>
                 </div>
                 <div class="col">
