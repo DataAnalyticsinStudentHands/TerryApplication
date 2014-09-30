@@ -8,7 +8,7 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
     };
   }])
 
-.directive('onValidSubmit', ['$parse', '$timeout', function($parse, $timeout) {
+.directive('onValidSubmit', ['$parse', '$timeout', 'ngNotify', function($parse, $timeout, ngNotify) {
     return {
       require: '^form',
       restrict: 'A',
@@ -23,6 +23,11 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
               if (typeof fn === 'function') {
                 fn(scope, {$event: event});
               }
+            } else {
+                ngNotify.set("Please check your input for missing values or wrong entries!", {
+                position: 'bottom',
+                type: 'error'
+            });
             }
           });
         });

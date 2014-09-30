@@ -17,7 +17,8 @@ angular.module('TerryControllers').controller('UserDetailController', function (
             result = Restangular.stripRestangular(result)[0];
             $scope.user = result;
         },
-        function (error) {}
+        function (error) {
+        }
     );
 
     // callback for ng-submit 'save': save user updates to server
@@ -34,7 +35,6 @@ angular.module('TerryControllers').controller('UserDetailController', function (
                     position: 'bottom',
                     type: 'error'
                 });
-
             }
         );
     };

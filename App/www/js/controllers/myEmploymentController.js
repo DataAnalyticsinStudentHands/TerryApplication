@@ -46,7 +46,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     MyActivityService.getAllActivity().then(
         function (result) {
             $scope.myactivities = result;
-            
+
         },
         function (error) {
             ngNotify.set("Something went wrong retrieving data.", {
@@ -81,7 +81,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
         }
     );
-    
+
     // callback for ng-click 'deleteData':
     $scope.deleteData = function (itemId, acType) {
         $ionicPopup.confirm({
@@ -159,11 +159,11 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
     // callback for ng-click 'saveModal':
     $scope.saveModal = function (acType) {
-                
+
         switch (acType) {
         case 1:
             $scope.mynewdata.application_id = $stateParams.applicationId;
-                
+
             if ($scope.myVariables.current_mode === "Add") {
                 MyEmploymentService.addEmployment($scope.mynewdata).then(
                     function (success) {
@@ -183,9 +183,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             $scope.mynewactivity.application_id = $stateParams.applicationId;
             // convert year in school to string
             $scope.mynewactivity.year = angular.toJson($scope.yearInSchoolList);
-                
+
             if ($scope.myVariables.current_mode === "Add") {
-                
+
                 MyActivityService.addActivity($scope.mynewactivity).then(
                     function (success) {
                         $scope.updateLists(acType);
@@ -237,9 +237,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         default:
-           // need to define a default
+            // need to define a default
         }
-    
+
     };
 
     // callback for ng-click 'modal'- open Modal dialog
@@ -249,7 +249,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     }).then(function (modal) {
         $scope.modal1 = modal;
     });
-    
+
     // callback for ng-click 'modal'- open Modal dialog
     $ionicModal.fromTemplateUrl('templates/modal_Activity.html', {
         scope: $scope,
@@ -277,7 +277,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     // Open a modal
     $scope.showAddData = function (acType) {
         $scope.myVariables.current_mode = "Add";
-        
+
         switch (acType) {
         case 1:
             $scope.modal1.show();
@@ -295,9 +295,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             //need to define a default
         }
     };
-    
+
     $scope.updateLists = function (acType) {
-        
+
         switch (acType) {
         case 1:
             MyEmploymentService.getAllEmployment().then(
@@ -355,7 +355,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             //need to define a default
         }
     };
-    
+
     $scope.pickedDates = {};
 
     $scope.$watch('pickedDates.empl_date_from', function (unformattedDate) {
@@ -365,7 +365,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     $scope.$watch('pickedDates.empl_date_to', function (unformattedDate) {
         $scope.mynewdata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
-    
+
     $scope.$watch('pickedDates.vol_date_from', function (unformattedDate) {
         $scope.mynewvolunteer.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
@@ -411,7 +411,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             ]
         });
     };
-    
+
     $scope.yearInSchoolList = [
         {
             text: "Freshman",

@@ -21,8 +21,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.myapplication = {};
     $scope.myscholarships = {};
     $scope.myscholarship = {};
+    $scope.myuniversities = {};
     $scope.myuniversity = {};
-    $scope.mynewuniversity = {};
     $scope.mychildren = {};
     $scope.mychild = {};
 
@@ -98,7 +98,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     // Open a popup to add data
     $scope.showAddData = function () {
         var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="mynewuniversity.name">',
+            template: '<input type="text" ng-model="myuniversity.name">',
             title: 'Name University',
             subTitle: 'You can reorder the list later',
             scope: $scope,
@@ -110,13 +110,15 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        if (!$scope.mynewuniversity.name) {
+                        if (!$scope.myuniversity.name) {
                             //don't allow the user to close unless he enters wifi password
                             e.preventDefault();
                         } else {
-                            $scope.mynewuniversity.application_id = $stateParams.applicationId;
-                            MyUniversityService.addUniversity($scope.mynewuniversity);
+                            $scope.myuniversity.application_id = $stateParams.applicationId;
+                            MyUniversityService.addUniversity($scope.myuniversity).then (
+                                function (success) {
                             $scope.updateList('university');
+                                });
                         }
                     }
                 }
@@ -129,7 +131,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         switch (acType) {
         case 'university':
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="mynewuniversity.name">',
+                template: '<input type="text" ng-model="myuniversity.name">',
                 title: 'Name University',
                 subTitle: 'You can reorder the list later',
                 scope: $scope,
@@ -141,13 +143,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                         text: '<b>Save</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            if (!$scope.mynewuniversity.name) {
+                            if (!$scope.myuniversity.name) {
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
-                                $scope.mynewuniversity.application_id = $stateParams.applicationId;
-                                MyUniversityService.updateUniversity($scope.mynewuniversity.id, $scope.mynewuniversity);
-                                $scope.updateList();
+                                $scope.myuniversity.application_id = $stateParams.applicationId;
+                                MyUniversityService.updateUniversity($scope.myuniversity.id, $scope.myuniversity);
+                                $scope.updateList('university');
                             }
                         }
                 }
@@ -293,8 +295,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     // callback for ng-click 'deleteData':
     $scope.deleteData = function (acType, itemId) {
-
-        switch (acType) {
+        
+        $ionicPopup.confirm({
+            title: 'Confirm Delete',
+            template: 'Are you sure you want to delete your course from the list?'
+        }).then(function (res) {
+            if (res) {
+                switch (acType) {
         case 'university':
             MyUniversityService.deleteUniversity(itemId).then(
                 function (success) {
@@ -317,6 +324,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             );
             break;
         }
+            } else {
+                console.log('You are not sure to delete');
+            }
+        });
+
+        
     };
 
     $scope.pickedDates = {};

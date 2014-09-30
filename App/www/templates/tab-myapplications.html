@@ -1,9 +1,11 @@
-<ion-view title="My Applications">
+<ion-view title="My Application">
     <ion-content>
         <button class="button button-icon icon ion-minus-circled" 
-                ng-click="data.showDelete = !data.showDelete">Delete Application</button>
+                ng-click="deleteApplication()"
+                ng-show="myapplications">&nbsp;&nbsp;Delete Application</button>
         <button class="button button-icon icon ion-plus-circled" 
-                ng-click="modal.show()">Create Application</button>
+                ng-click="modal.show()"
+                ng-hide="myapplications">&nbsp;&nbsp;Create Application</button>
 
 
         <ion-list show-delete="data.showDelete">
@@ -14,7 +16,6 @@
 
                 <h2>Terry Application 2015</h2>
                 <p>{{myapplication.first_name}} {{myapplication.last_name}} <b>Status:</b> {{myapplication.status}}</p>
-                <ion-delete-button class="ion-minus-circled" ng-click="deleteApplication(myapplication.id)"></ion-delete-button>
             </ion-item>
         </ion-list>
     </ion-content>

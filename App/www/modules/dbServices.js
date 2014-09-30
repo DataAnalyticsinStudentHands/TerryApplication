@@ -1,31 +1,26 @@
 var databaseServices = angular.module('databaseServicesModule', []);
 
 databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
-    // initialize to whatever is in the cookie, if anything
+    // initialize to whatever is in the local storage, if anything
     $http.defaults.headers.common['Authorization'] = 'Basic ' + localStorage.getItem('authdata');
     console.log($http.defaults.headers.common.Authorization);
     return {
         setCredentials: function (username, password) {
             var encoded = Base64.encode(username + ':' + password);
             $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
-//            console.log(encoded);
             localStorage.setItem('authdata', encoded);
             localStorage.setItem("authdata-conf", false);
         },
         clearCredentials: function () {
             document.execCommand("ClearAuthenticationCache");
-//            $cookieStore.remove('authdata');
             localStorage.removeItem('authdata');
             $http.defaults.headers.common.Authorization = 'Basic ';
             localStorage.setItem("authdata-conf", false);
         },
         hasCredentials: function() {
             var ls = null;
-//          var cookie = $cookieStore.get('authdata');
             ls = localStorage.getItem('authdata');
             lsc = eval(localStorage.getItem('authdata-conf'));
-//            console.log(ls);
-//            console.log(lsc);
             //LITTLE HACKY TRYING TO NOT LOG THEM IN AS VISITOR
             return (ls && lsc && ls != "VmlzaXRvcjp0ZXN0");
         },

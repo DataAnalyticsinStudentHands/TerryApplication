@@ -10,20 +10,17 @@
                 <div class="list">
                     <label class="item item-input validated" >
                         <span class="input-label">UH ID:</span>
-                        <input name="uh_id" ng-model="myapplication.uh_id" type="number" required>
-                        <i class="icon ion-alert-circled error"></i>
+                        <input name="uh_id" ng-model="myapplication.uh_id" type="number" ng-minlength="6" required>
                     </label>
 
                     <label class="item item-input validated">
                         <span class="input-label">First Name:</span>
                         <input name="first_name" ng-model="myapplication.first_name" type="text">
-                        <i class="icon ion-alert-circled error"></i>
                     </label>
 
                     <label class="item item-input validated">
                         <span class="input-label">Last Name:</span>
                         <input name="last_name" ng-model="myapplication.last_name" type="text">
-                        <i class="icon ion-alert-circled error"></i>
                     </label>
                     <div class="col col-25 col-offset-75">
                         <button type="submit" class="button button-block button-positive">Create</button>
