@@ -12,17 +12,17 @@
             <form novalidate class="submit" on-valid-submit="saveModal(3)">
             <div class="row">
                 <div class="col">
-                    <label class="item item-input">
+                    <label class="item item-input validated">
                         <span class="input-label">Place of Service:</span>
-                        <input name="place" ng-model="mynewvolunteer.place" type="text" placeholder="place">
+                        <input name="place" ng-model="mynewvolunteer.place" type="text" placeholder="place" required>
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <label class="item item-input">
+                    <label class="item item-input validated">
                         <span class="input-label">Description of Service:</span>
-                        <input name="description" ng-model="mynewvolunteer.description" type="text" placeholder="description">
+                        <input name="description" ng-model="mynewvolunteer.description" type="text" placeholder="description" required>
                     </label>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                     </label>
                 </div>
                 <div class="col">
-                    <label class="item item-input">
-                        <span class="input-label">Total Hours::</span>
+                    <label class="item item-input validated">
+                        <span class="input-label">Total Hours:</span>
                         <input name="hours_total" ng-model="mynewvolunteer.hours_total" type="number" placeholder="hours">
                     </label>
                 </div>
