@@ -133,6 +133,50 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         });
     };
 
+    
+
+    // Open a modal
+    $scope.showAddModal = function (type) {
+        $scope.myVariables.current_mode = "Add";
+
+        switch (type) {
+        case 1:
+            $scope.myscholarship = {};
+            $scope.myscholarship.applied_received = 'true';
+            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+            break;
+        case 2:
+            $scope.myscholarship = {};
+            $scope.myscholarship.applied_received = 'false';
+            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+            break;
+        case 3:
+            $scope.mychild = {};
+            $ionicModal.fromTemplateUrl('templates/modal_child.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal1 = modal;
+                $scope.modal1.show();
+            });
+            break;
+        }
+
+
+    };
+    
     // Open a popup to edit data
     $scope.editData = function (acType, item) {
         switch (acType) {
@@ -166,7 +210,24 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         case 'scholarship':
             $scope.myVariables.current_mode = "Edit";
             $scope.myscholarship = item;
-            $scope.modal.show();
+            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+            break;
+        case 'children':
+            $scope.myVariables.current_mode = "Edit";
+            $scope.mychild = item;
+            $ionicModal.fromTemplateUrl('templates/modal_child.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal1 = modal;
+                $scope.modal1.show();
+            });
             break;
         }
     };
@@ -218,51 +279,11 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         }
     };
 
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal = modal;
-    });
-
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_child.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal1 = modal;
-    });
-
-    // Open a modal
-    $scope.showAddModal = function (type) {
-
-        $scope.myVariables.current_mode = "Add";
-
-        switch (type) {
-        case 1:
-            $scope.myscholarship = {};
-            $scope.myscholarship.applied_received = 'true';
-            $scope.modal.show();
-            break;
-        case 2:
-            $scope.myscholarship = {};
-            $scope.myscholarship.applied_received = 'false';
-            $scope.modal.show();
-            break;
-        case 3:
-            $scope.mychild = {};
-            $scope.modal1.show();
-            break;
-        }
-
-
-    };
-
     // callback for ng-click 'saveModal':
-    $scope.saveModal = function () {
-
-        if ($scope.modal.isShown === 'true') {
+    $scope.saveModal = function (acType) {
+        
+        switch (acType) {
+        case 'scholarship':
             $scope.myscholarship.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
@@ -280,7 +301,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     }
                 );
             }
-        } else {
+            break;
+        case 'children':
             $scope.mychild.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
@@ -298,6 +320,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     }
                 );
             }
+            break;
         }
     };
 
@@ -336,8 +359,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 console.log('You are not sure to delete');
             }
         });
-
-
     };
 
     $scope.pickedDates = {};

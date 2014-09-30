@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <ion-view title="Terry Scholarship Application 2015/2016">
 
     <!-- The nav bar that will be updated as we navigate between views.-->
@@ -11,7 +12,7 @@
     <ion-content>
 
         <p class="item item-icon-left"> <i class="icon ion-information"></i>
-            Fill out each section of the application form completely, taking care to respond to each question in the space provided.</b>
+            Fill out each section of the application form completely, taking care to respond to each question in the space provided.
         </p>
         <form name="student_information" novalidate class="submit" on-valid-submit="save('tabs.myapplication.highschool_information')">
 
@@ -46,6 +47,12 @@
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">UH ID:</span> 
                         <input name="uh_id" type="number" ng-model="myapplication.uh_id" placeholder="0123456" ng-required="finalSubmit">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">SSN:</span> 
+                        <input name="ssn" type="text" ng-model="myapplication.ssn" ui-mask="{{'999-99-999'}}" ng-required="finalSubmit">
                     </label>
                 </div>
             </div>
