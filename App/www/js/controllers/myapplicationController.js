@@ -104,7 +104,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     // Open a popup to add data
     $scope.showAddData = function () {
         var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="myuniversity.name">',
+            template: '<input type="text" ng-model="myVariables.university">',
             title: 'Name University',
             subTitle: 'You can reorder the list later',
             scope: $scope,
@@ -116,11 +116,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        if (!$scope.myuniversity.name) {
+                        if (!$scope.myVariables.university) {
                             //don't allow the user to close unless he enters wifi password
                             e.preventDefault();
                         } else {
                             $scope.myuniversity.application_id = $stateParams.applicationId;
+                            $scope.myuniversity.name = $scope.myVariables.university;
                             MyUniversityService.addUniversity($scope.myuniversity).then(
                                 function (success) {
                                     $scope.updateList('university');
@@ -179,10 +180,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     
     // Open a popup to edit data
     $scope.editData = function (acType, item) {
+        $scope.myVariables.current_mode = "Edit";
         switch (acType) {
         case 'university':
+            $scope.myuniversity = item;
+            $scope.myVariables.university = $scope.myuniversity.name;
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="myuniversity.name">',
+                template: '<input type="text" ng-model="myVariables.university">',
                 title: 'Name University',
                 subTitle: 'You can reorder the list later',
                 scope: $scope,
@@ -194,11 +198,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                         text: '<b>Save</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            if (!$scope.myuniversity.name) {
+                            if (!$scope.myVariables.university) {
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
                                 $scope.myuniversity.application_id = $stateParams.applicationId;
+                                $scope.myuniversity.name = $scope.myVariables.university;
                                 MyUniversityService.updateUniversity($scope.myuniversity.id, $scope.myuniversity);
                                 $scope.updateList('university');
                             }
@@ -208,7 +213,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             });
             break;
         case 'scholarship':
-            $scope.myVariables.current_mode = "Edit";
             $scope.myscholarship = item;
             $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
                 scope: $scope,
@@ -219,7 +223,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             });
             break;
         case 'children':
-            $scope.myVariables.current_mode = "Edit";
             $scope.mychild = item;
             $ionicModal.fromTemplateUrl('templates/modal_child.html', {
                 scope: $scope,
