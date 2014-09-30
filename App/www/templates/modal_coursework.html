@@ -10,7 +10,7 @@
                     <div class="col">
                         <label class="item item-input validated">
                             <span class="input-label">Description/Name:</span>
-                            <input name="mycourse.name" ng-model="mycourse.name" type="text" placeholder="description" ng-required="finalSubmit">
+                            <input name="mycourse.name" ng-model="mycourse.name" type="text" placeholder="description" required>
                         </label>
                     </div>
                 </div>
@@ -23,23 +23,22 @@
                         </label>
                     </div>
 
-
                     <div class="col">
-
                         <label class="item item-input validated">
                             <span class="input-label">Credit Hours:</span>
-                            <input name="credit_hours" ng-model="mycourse.credit_hours" type="number" placeholder="credit hours" ng-required="finalSubmit">
+                            <input name="credit_hours" ng-model="mycourse.credit_hours" type="number" placeholder="credit hours" required>
                         </label>
                     </div>
                     <div class="col">
-                        <label class="item item-input validated">
+                        <label class="item item-input item-select">
                             <span class="input-label">Final Grade:</span>
-                            <input name="final_grade" ng-model="mycourse.final_grade" type="text" placeholder="grade" ng-required="finalSubmit">
+                            <select ng-model="myVariables.myGrade" ng-options="item.grade for item in grades">
+                            </select>
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col col-25 col-offset-75">
                         <button class="button button-full button-positive" type="submit">Save</button>
                     </div>
                 </div>

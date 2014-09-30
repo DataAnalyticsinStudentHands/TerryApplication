@@ -120,7 +120,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     break;
                 default:
                     MyEmploymentService.deleteEmployment(itemId);
-
                 }
 
             } else {
@@ -136,21 +135,45 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         switch (acType) {
         case 1:
             $scope.mynewdata = item;
-            $scope.modal1.show();
+            $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal1 = modal;
+                $scope.modal1.show();
+            });
             break;
         case 2:
             $scope.mynewactivity = item;
             $scope.yearInSchoolList = angular.fromJson($scope.mynewactivity.year);
-            $scope.modal2.show();
+            $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal2 = modal;
+                $scope.modal2.show();
+            });
             break;
         case 3:
             $scope.mynewvolunteer = item;
-            $scope.modal3.show();
+            $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal3 = modal;
+                $scope.modal3.show();
+            });
             break;
         case 4:
             $scope.mynewaward = item;
             $scope.yearInSchoolList = angular.fromJson($scope.mynewaward.year);
-            $scope.modal4.show();
+            $ionicModal.fromTemplateUrl('templates/modal_award.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal4 = modal;
+                $scope.modal4.show();
+            });
             break;
         default:
             $scope.mynewdata = item;
@@ -242,54 +265,46 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
     };
 
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_Employment.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal1 = modal;
-    });
-
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_Activity.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal2 = modal;
-    });
-
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_Volunteer.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal3 = modal;
-    });
-
-    // callback for ng-click 'modal'- open Modal dialog
-    $ionicModal.fromTemplateUrl('templates/modal_Award.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal4 = modal;
-    });
-
     // Open a modal
     $scope.showAddData = function (acType) {
         $scope.myVariables.current_mode = "Add";
 
         switch (acType) {
         case 1:
-            $scope.modal1.show();
+            $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal1 = modal;
+                $scope.modal1.show();
+            });
             break;
         case 2:
-            $scope.modal2.show();
+            $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal2 = modal;
+                $scope.modal2.show();
+            });
             break;
         case 3:
-            $scope.modal3.show();
+            $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal3 = modal;
+                $scope.modal3.show();
+            });
             break;
         case 4:
-            $scope.modal4.show();
+            $ionicModal.fromTemplateUrl('templates/modal_award.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal4 = modal;
+                $scope.modal4.show();
+            });
             break;
         default:
             //need to define a default

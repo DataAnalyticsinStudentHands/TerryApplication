@@ -7,11 +7,19 @@
  * # MyCourseworkController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyCourseworkService) {
+angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyCourseworkService) {
     'use strict';
+    
+    //Load some variables
+    $http.get('json/course_types.json').success(function (data) {
+        $scope.course_types = data;
+    });
+    $http.get('json/grades.json').success(function (data) {
+        $scope.grades = data;
+    });
 
     $scope.myVariables = {
-        current_mode: 'Add',
+        current_mode: 'Add'
     };
 
     $scope.mycourses = {};
@@ -58,6 +66,10 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             abbreviation: $scope.mycourse.type
         }, true);
         $scope.myVariables.myCourseType = test[0];
+        test = $filter('filter')($scope.grades, {
+            grade: $scope.mycourse.final_grade
+        }, true);
+        $scope.myVariables.myGrade = test[0];
         $scope.modal.show();
     };
 
@@ -66,6 +78,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         $scope.mycourse.application_id = $stateParams.applicationId;
         $scope.mycourse.level = currentLevel;
         $scope.mycourse.type = $scope.myVariables.myCourseType.abbreviation;
+        $scope.mycourse.final_grade = $scope.myVariables.myGrade.grade;
 
         if ($scope.mycourse.name && $scope.mycourse.credit_hours && $scope.mycourse.final_grade) {
 
@@ -117,7 +130,6 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function (modal) {
-        $scope.myCourseType = $scope.course_types[0];
         $scope.modal = modal;
     });
 
@@ -126,6 +138,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         // Set some variables to default values
         $scope.myVariables.current_mode = "Add";
         $scope.myVariables.myCourseType = $scope.course_types[0];
+        $scope.myVariables.myGrade = $scope.grades[0];
         $scope.mycourse = {};
         $scope.modal.show();
         var test = $filter('filter')($scope.levels, {
@@ -133,7 +146,6 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         }, true);
         currentLevel = test[0].name;
     };
-
 
     // Update lists
     $scope.updateLists = function () {
@@ -156,21 +168,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         $ionicSideMenuDelegate.toggleRight();
     };
 
-    $scope.course_types = [
-        {
-            "name": "Advanced Placement",
-            "abbreviation": "AP"
-        },
-        {
-            "name": "International Baccalaureate Program",
-            "abbreviation": "IB"
-        },
-        {
-            "name": "Dual Credit",
-            "abbreviation": "DC"
-        }
-    ];
-
+    
     $scope.levels = [
         {
             "id": 1,
