@@ -1,14 +1,14 @@
-DASH AngularJS demo App
+Terry Web Application
 ==========
 
-The code here is used to test an AngularJS app against our DASH backend. We also play around with AngularJS. The current version is based on Ionic.
+The code is based on Ionic.
 
 
 Getting started:
 
 1. bower install 
 
-Reads bower.json and installs local dependencies into the folder www/bower_components
+Reads bower.json and installs local dependencies into the folder www/lib
 
 2. ionic serve
 
