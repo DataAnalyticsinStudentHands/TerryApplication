@@ -103,6 +103,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     // Open a popup to add data
     $scope.showAddData = function () {
+        $scope.myVariables.university = '';
         var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="myVariables.university">',
             title: 'Name University',
