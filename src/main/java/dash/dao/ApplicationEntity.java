@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import org.apache.commons.beanutils.BeanUtils;
 
 import dash.pojo.Application;
@@ -336,6 +337,42 @@ public class ApplicationEntity implements Serializable {
 	
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "app_UH_method")
+	private String app_UH_method;
+	
+	@Column(name = "app_UH_date_sub")
+	private Date app_UH_date_sub;
+	
+	@Column(name = "app_UH_date_int_sub")
+	private Date app_UH_date_int_sub;
+	
+	@Column(name = "transcript_method")
+	private String transcript_method;
+	
+	@Column(name = "transcript_date_sub")
+	private Date transcript_date_sub;
+	
+	@Column(name = "transcript_date_int_sub")
+	private Date transcript_date_int_sub;
+	
+	@Column(name = "fafsa_method")
+	private String fafsa_method;
+	
+	@Column(name = "fafsa_date_sub")
+	private Date fafsa_date_sub;
+	
+	@Column(name = "fafsa_date_int_sub")
+	private Date fafsa_date_int_sub;
+	
+	@Column(name = "housing_method")
+	private String housing_method;
+	
+	@Column(name = "housing_date_sub")
+	private Date housing_date_sub;
+	
+	@Column(name = "housing_date_int_sub")
+	private Date housing_date_int_sub;
 
 	public ApplicationEntity(){}
 
@@ -1181,5 +1218,101 @@ public class ApplicationEntity implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getApp_UH_method() {
+		return app_UH_method;
+	}
+
+	public void setApp_UH_method(String app_UH_method) {
+		this.app_UH_method = app_UH_method;
+	}
+
+	public Date getApp_UH_date_sub() {
+		return app_UH_date_sub;
+	}
+
+	public void setApp_UH_date_sub(Date app_UH_date_sub) {
+		this.app_UH_date_sub = app_UH_date_sub;
+	}
+
+	public Date getApp_UH_date_int_sub() {
+		return app_UH_date_int_sub;
+	}
+
+	public void setApp_UH_date_int_sub(Date app_UH_date_int_sub) {
+		this.app_UH_date_int_sub = app_UH_date_int_sub;
+	}
+
+	public String getTranscript_method() {
+		return transcript_method;
+	}
+
+	public void setTranscript_method(String transcript_method) {
+		this.transcript_method = transcript_method;
+	}
+
+	public Date getTranscript_date_sub() {
+		return transcript_date_sub;
+	}
+
+	public void setTranscript_date_sub(Date transcript_date_sub) {
+		this.transcript_date_sub = transcript_date_sub;
+	}
+
+	public Date getTranscript_date_int_sub() {
+		return transcript_date_int_sub;
+	}
+
+	public void setTranscript_date_int_sub(Date transcript_date_int_sub) {
+		this.transcript_date_int_sub = transcript_date_int_sub;
+	}
+
+	public String getFafsa_method() {
+		return fafsa_method;
+	}
+
+	public void setFafsa_method(String fafsa_method) {
+		this.fafsa_method = fafsa_method;
+	}
+
+	public Date getFafsa_date_sub() {
+		return fafsa_date_sub;
+	}
+
+	public void setFafsa_date_sub(Date fafsa_date_sub) {
+		this.fafsa_date_sub = fafsa_date_sub;
+	}
+
+	public Date getFafsa_date_int_sub() {
+		return fafsa_date_int_sub;
+	}
+
+	public void setFafsa_date_int_sub(Date fafsa_date_int_sub) {
+		this.fafsa_date_int_sub = fafsa_date_int_sub;
+	}
+
+	public String getHousing_method() {
+		return housing_method;
+	}
+
+	public void setHousing_method(String housing_method) {
+		this.housing_method = housing_method;
+	}
+
+	public Date getHousing_date_sub() {
+		return housing_date_sub;
+	}
+
+	public void setHousing_date_sub(Date housing_date_sub) {
+		this.housing_date_sub = housing_date_sub;
+	}
+
+	public Date getHousing_date_int_sub() {
+		return housing_date_int_sub;
+	}
+
+	public void setHousing_date_int_sub(Date housing_date_int_sub) {
+		this.housing_date_int_sub = housing_date_int_sub;
 	}
 }
