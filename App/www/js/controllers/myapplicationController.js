@@ -14,8 +14,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $http.get('json/states.json').success(function (data) {
         $scope.states = data;
     });
-
-
+    
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
@@ -134,8 +133,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
-
-    
 
     // Open a modal
     $scope.showAddModal = function (type) {
