@@ -19,7 +19,7 @@
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             You must complete this area prior to submitting your Terry application.
         </p>
-        <form name="submitform" on-valid-submit="submit()">
+        <form name="submitform" novalidate class="submit" on-valid-submit="save('tabs.myapplication.confirmation')">
 
             <div class="row">
 
@@ -47,14 +47,18 @@
                     <p> <b>No later than February 7th. </b> 
                     </p>
                 </div>
-                <div class="col item">
-                    <input name="app_uh_method" type="text" ng-model="myapplication.app_uh_method" placeholder="method" required>
+                <div class="col item item-select">
+                    <select ng-model="myVariables.myuhappMailOption" ng-options="option.name for option in mail_options">
+                    </select>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
+                    <label class="item-input" ng-click="openSubmissionDatePicker('app_uh_date_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.app_uh_date_sub" placeholder="Select" ng-change="updateDate('app_uh_date_sub')">
+                    </label>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
+                    <input type="date" >
                 </div>
             </div>
 
@@ -66,64 +70,59 @@
                     <p> <b>No later than February 7th;</b> all applications sent by mail must be <b>postmarked no later than February 6th.  </b>
                     </p>
                 </div>
-                <div class="col item item-text-wrap">
-                    <input name="transcript_method" type="text" ng-model="myapplication.transcript_method" placeholder="method" required>
+                <div class="col item item-select">
+                    <select ng-model="myVariables.mytranscriptMailOption" ng-options="option.name for option in mail_options">
+                    </select>
                 </div>
-                <div class="col item item-text-wrap">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
+                <div class="col item">
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
                 </div>
-                <div class="col item item-text-wrap">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
+                <div class="col item">
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
                 </div>
             </div>
             <div class="row">
-                <div class="col col-25">
-                    <p class="item item-text-wrap">File a FAFSA, either on-line or via US mail <a href="http://www.fafsa.ed.gov/ " target="_blank">http://www.fafsa.ed.gov/ </a>
+                <div class="col col-25 item item-text-wrap">
+                    <p>File a FAFSA, either on-line or via US mail <a href="http://www.fafsa.ed.gov/ " target="_blank">http://www.fafsa.ed.gov/ </a>
                     </p>
                 </div>
-                <div class="col">
-                    <p class="item item-text-wrap"> <b>Between January 1st and February 28th. </b> 
+                <div class="col item item-text-wrap">
+                    <p> <b>Between January 1st and February 28th. </b> 
                     </p>
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="fafsa_method" type="text" ng-model="myapplication.fafsa_method" placeholder="method" required>
-                    </div>
+                <div class="col item item-select">
+                    <select ng-model="myVariables.myfafsaMailOption" ng-options="option.name for option in mail_options">
+                    </select>
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
-                    </div>
+                <div class="col item">
+
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
-                    </div>
+                <div class="col item">
+
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+
                 </div>
             </div>
 
             <div class="row">
-                <div class="col">
-                    <p class="item item-text-wrap">Apply for on-campus housing at <a href="http://www.housing.uh.edu/" target="_blank">http://www.housing.uh.edu/</a>. On-campus housing for Terry Scholars is defined as Honors housing in Cougar Village</p>
+                <div class="col col-25 item item-text-wrap">
+                    <p>Apply for on-campus housing at <a href="http://www.housing.uh.edu/" target="_blank">http://www.housing.uh.edu/</a>. On-campus housing for Terry Scholars is defined as Honors housing in Cougar Village</p>
                 </div>
-                <div class="col">
-                    <p class="item item-text-wrap"> <b>Between March 1st and 15th.   </b>
+                <div class="col item item-text-wrap">
+                    <p> <b>Between March 1st and 15th.   </b>
                     </p>
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="housing_method" type="text" ng-model="myapplication.housing_uh_method" placeholder="method" required>
-                    </div>
+                <div class="col item item-select">
+                    <select ng-model="myVariables.myhousingMailOption" ng-options="option.name for option in mail_options">
+                    </select>
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
-                    </div>
+                <div class="col item">
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
                 </div>
-                <div class="col">
-                    <div class="item item-text-wrap">
-                        <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select" required>
-                    </div>
+                <div class="col item">
+                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
                 </div>
             </div>
             <div class="row">
@@ -132,5 +131,7 @@
                 </div>
             </div>
         </form>
+        
+        
     </ion-content>
 </ion-view>

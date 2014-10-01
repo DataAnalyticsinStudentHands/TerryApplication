@@ -33,9 +33,12 @@ angular.module('HonorsApplications', [
             //USERNAME & ID TO BE USED IN CONTROLLERS
             $rootScope.uid = result.id.toString();
             $rootScope.uin = result.username.toString();
-        },  function (error) {
+        }, function (error) {
             if (error.status === 0) {
-                ngNotify.set("Internet or server unavailable.", {type : "error", sticky : true});
+                ngNotify.set("Internet or server unavailable.", {
+                    type: "error",
+                    sticky: true
+                });
             } else { // LOG THEM OUT
                 Auth.clearCredentials();
                 console.log("not-authed");
@@ -65,7 +68,7 @@ angular.module('HonorsApplications', [
         Auth.clearCredentials();
         console.log("log out");
         $state.go('signin', {}, {
-            reload : true
+            reload: true
         });
     };
 
@@ -94,12 +97,12 @@ angular.module('HonorsApplications', [
 
     //signin, this is also the fallback
     $stateProvider
-    .state('signin', {
-        url: '/signin',
-        templateUrl: 'templates/signin.html',
-        controller: 'SignInController',
-        authenticate : false
-    })
+        .state('signin', {
+            url: '/signin',
+            templateUrl: 'templates/signin.html',
+            controller: 'SignInController',
+            authenticate: false
+        })
 
     //register
     .state('register', {
@@ -118,11 +121,11 @@ angular.module('HonorsApplications', [
     })
 
     .state('tabs.myapplications', {
-        url : '/myapplications',
-        views : {
-            'tab-myapplications' : {
-                templateUrl : 'templates/tab-myapplications.html',
-                controller : 'MyapplicationsController'
+        url: '/myapplications',
+        views: {
+            'tab-myapplications': {
+                templateUrl: 'templates/tab-myapplications.html',
+                controller: 'MyapplicationsController'
             }
         },
         authenticate: true
@@ -222,7 +225,7 @@ angular.module('HonorsApplications', [
         },
         authenticate: true
     })
-    
+
     .state('tabs.myapplication.submit', {
         url: '/submit',
         views: {
@@ -234,22 +237,33 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
-    .state('tabs.information', {
-        url : '/information',
-        views : {
-            'tab-information' : {
-                templateUrl : 'templates/tab-information.html'
+    .state('tabs.myapplication.confirmation', {
+        url: '/confirmation',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/confirmation.html',
+                controller: 'MyApplicationController'
             }
         },
         authenticate: true
     })
-    
+
+    .state('tabs.information', {
+        url: '/information',
+        views: {
+            'tab-information': {
+                templateUrl: 'templates/tab-information.html'
+            }
+        },
+        authenticate: true
+    })
+
     .state('tabs.user', {
-        url : '/user',
-        views : {
-            'tab-user' : {
-                templateUrl : 'templates/tab-user_detail.html',
-                controller : 'UserDetailController'
+        url: '/user',
+        views: {
+            'tab-user': {
+                templateUrl: 'templates/tab-user_detail.html',
+                controller: 'UserDetailController'
             }
         },
         authenticate: true

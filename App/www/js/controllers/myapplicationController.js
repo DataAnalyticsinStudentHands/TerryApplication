@@ -9,7 +9,16 @@
  */
 angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyCourseworkService, MyUniversityService, MyScholarshipService, MyChildService) {
     'use strict';
-
+    
+    $scope.mail_options = [
+        {
+            "name": "online"
+        },
+        {
+            "name": "US mail"
+        }
+    ];
+    
     //Load some variables
     $http.get('json/states.json').success(function (data) {
         $scope.states = data;
@@ -36,6 +45,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         function (result) {
             if ($stateParams.applicationId !== "") {
                 $scope.myapplication = result;
+                //set selected state
                 if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
                     $scope.test = $filter('filter')($scope.states, {
                         name: $scope.myapplication.state
@@ -44,6 +54,40 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 } else {
                     $scope.myVariables.myState = $scope.states[50];
                 }
+                //set selected mail options
+                if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
+                    $scope.test = $filter('filter')($scope.mail_options, {
+                        name: $scope.myapplication.app_uh_method
+                    }, true);
+                    $scope.myVariables.myuhappMailOption = $scope.test[0];
+                } else {
+                    $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
+                }
+                if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
+                    $scope.test = $filter('filter')($scope.mail_options, {
+                        name: $scope.myapplication.transcript_method
+                    }, true);
+                    $scope.myVariables.mytranscriptMailOption = $scope.test[0];
+                } else {
+                    $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
+                }
+                if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
+                    $scope.test = $filter('filter')($scope.mail_options, {
+                        name: $scope.myapplication.fafsa_method
+                    }, true);
+                    $scope.myVariables.myfafsaMailOption = $scope.test[0];
+                } else {
+                    $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
+                }
+                if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
+                    $scope.test = $filter('filter')($scope.mail_options, {
+                        name: $scope.myapplication.housing_method
+                    }, true);
+                    $scope.myVariables.myhousingMailOption = $scope.test[0];
+                } else {
+                    $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
+                }
+                
             }
         },
         function (error) {
@@ -395,6 +439,30 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.$watch('pickedDates.national_hispanic_date', function (unformattedDate) {
         $scope.myapplication.national_hispanic_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
     });
+    
+    $scope.openSubmissionDatePicker = function (acType) {
+        $scope.tmp = {};
+        $scope.tmp.newDate = $scope.pickedDates.submission;
+
+        var birthDatePopup = $ionicPopup.show({
+            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
+            title: "Submission Date",
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Cancel'
+                },
+                {
+                    text: '<b>Save</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                       var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy');
+                        $scope.myapplication[acType] = test;
+                    }
+                }
+            ]
+        });
+    };
 
     $scope.openDOBPicker = function () {
         $scope.tmp = {};
@@ -465,10 +533,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
+    
+    
 
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function (nextstate) {
         $scope.myapplication.state = $scope.myVariables.myState.name;
+        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
+        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
 
         MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
@@ -488,4 +562,14 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             }
         );
     };
+    
+    $scope.mail_options = [
+        {
+            "name": "online"
+        },
+        {
+            "name": "US mail"
+        }
+    ];
+    
 });

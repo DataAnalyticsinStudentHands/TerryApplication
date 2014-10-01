@@ -338,14 +338,14 @@ public class ApplicationEntity implements Serializable {
 	@Column(name = "status")
 	private String status;
 	
-	@Column(name = "app_UH_method")
-	private String app_UH_method;
+	@Column(name = "app_uh_method")
+	private String app_uh_method;
 	
-	@Column(name = "app_UH_date_sub")
-	private Date app_UH_date_sub;
+	@Column(name = "app_uh_date_sub")
+	private Date app_uh_date_sub;
 	
-	@Column(name = "app_UH_date_int_sub")
-	private Date app_UH_date_int_sub;
+	@Column(name = "app_uh_date_int_sub")
+	private Date app_uh_date_int_sub;
 	
 	@Column(name = "transcript_method")
 	private String transcript_method;
@@ -1220,28 +1220,28 @@ public class ApplicationEntity implements Serializable {
 		this.status = status;
 	}
 
-	public String getApp_UH_method() {
-		return app_UH_method;
+	public String getApp_uh_method() {
+		return app_uh_method;
 	}
 
-	public void setApp_UH_method(String app_UH_method) {
-		this.app_UH_method = app_UH_method;
+	public void setApp_uh_method(String app_uh_method) {
+		this.app_uh_method = app_uh_method;
 	}
 
-	public Date getApp_UH_date_sub() {
-		return app_UH_date_sub;
+	public Date getApp_uh_date_sub() {
+		return app_uh_date_sub;
 	}
 
-	public void setApp_UH_date_sub(Date app_UH_date_sub) {
-		this.app_UH_date_sub = app_UH_date_sub;
+	public void setApp_uh_date_sub(Date app_uh_date_sub) {
+		this.app_uh_date_sub = app_uh_date_sub;
 	}
 
-	public Date getApp_UH_date_int_sub() {
-		return app_UH_date_int_sub;
+	public Date getApp_uh_date_int_sub() {
+		return app_uh_date_int_sub;
 	}
 
-	public void setApp_UH_date_int_sub(Date app_UH_date_int_sub) {
-		this.app_UH_date_int_sub = app_UH_date_int_sub;
+	public void setApp_uh_date_int_sub(Date app_uh_date_int_sub) {
+		this.app_uh_date_int_sub = app_uh_date_int_sub;
 	}
 
 	public String getTranscript_method() {
