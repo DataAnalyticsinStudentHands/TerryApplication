@@ -185,7 +185,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
         switch (acType) {
         case 1:
+                
             $scope.mynewdata.application_id = $stateParams.applicationId;
+                
 
             if ($scope.myVariables.current_mode === "Add") {
                 MyEmploymentService.addEmployment($scope.mynewdata).then(
@@ -271,6 +273,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
         switch (acType) {
         case 1:
+            $scope.mynewdata = {};
             $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -280,6 +283,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 2:
+            $scope.mynewactivity = {};
             $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -289,6 +293,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 3:
+            $scope.mynewvolunteer = {};
             $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -298,6 +303,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 4:
+            $scope.mynewaward = {};
             $ionicModal.fromTemplateUrl('templates/modal_award.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
