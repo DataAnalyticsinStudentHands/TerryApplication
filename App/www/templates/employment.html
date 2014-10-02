@@ -23,7 +23,7 @@
         </div>
 
         <div class="list list-inset">
-            <div class="item" ng-repeat="item in mydata" item="item">
+            <div class="item" ng-repeat="item in myemployments" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData(item.id, 1)"></button>
                 <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editData(item, 1)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} {{item.date_from}} - {{item.date_to}}</button>
             </div>
