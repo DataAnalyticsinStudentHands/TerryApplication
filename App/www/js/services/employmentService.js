@@ -14,6 +14,7 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
     return {
         getAllEmployment: function () {
             return Restangular.all("employment").getList();
+               
         },
         getMyEmployment: function (employment_id) {
             return Restangular.all("employment").get(employment_id);
@@ -50,8 +51,7 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
                 }
             );
         },
-        deleteEmployment: 
-        function (employment_id) {
+        deleteEmployment: function (employment_id) {
             return Restangular.all("employment").all(employment_id).remove().then(
                 function (result) {
                     ngNotify.set("Succesfully deleted your employment.", {position: 'bottom', type: 'success'});

@@ -187,7 +187,6 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         case 1:
                 
             $scope.myemployment.application_id = $stateParams.applicationId;
-                
 
             if ($scope.myVariables.current_mode === "Add") {
                 MyEmploymentService.addEmployment($scope.myemployment).then(
