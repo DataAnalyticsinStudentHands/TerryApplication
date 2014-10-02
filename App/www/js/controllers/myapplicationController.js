@@ -458,9 +458,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         );
         //check the lists for not empty
         var myemployments;
-
-
-        // GET 
+        
         // GET 
         MyEmploymentService.getAllEmployment().then(
             function (result) {
@@ -476,8 +474,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 });
             }
         );
-
-
 
         //check 
         var toTest = $scope.myapplication,

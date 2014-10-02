@@ -11,9 +11,41 @@
 angular.module('TerryServices').factory('MyEmploymentService', function (Restangular, $q, ngNotify) {
     'use strict';
 
+    
+    var employments,
+        promEmployments,
+        employment,
+        updating;
     return {
+        //ACCESSES SERVER AND UPDATES THE LIST OF EMPLOYMENTS
+        updateEmployments: function (update) {
+            if (update || (!employments && !updating)) {
+                promEmployments = Restangular.all("employment").getList();
+                updating = true;
+                promEmployments.then(function (success) {
+                    updating = false;
+                    success = Restangular.stripRestangular(success);
+                    employments = success;
+                }, function (fail) {
+
+                });
+                return promEmployments;
+            } else if (updating) {
+                return promEmployments;
+            } else {
+                var defer = $q.defer();
+                defer.resolve("DONE");
+                return defer.promise;
+            }
+        },
+        
+        
+        
         getAllEmployment: function () {
-            return Restangular.all("employment").getList();
+           // return Restangular.all("employment").getList();
+            return this.updateEmployments().then(function (success) {
+                return employments;
+            });
                
         },
         getMyEmployment: function (employment_id) {
