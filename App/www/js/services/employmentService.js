@@ -39,8 +39,6 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
             }
         },
         
-        
-        
         getAllEmployment: function () {
            // return Restangular.all("employment").getList();
             return this.updateEmployments().then(function (success) {
