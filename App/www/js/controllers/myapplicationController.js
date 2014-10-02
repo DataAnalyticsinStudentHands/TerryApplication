@@ -406,47 +406,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         });
     };
 
-    $scope.pickedDates = {};
-
-    $scope.$watch('pickedDates.birthDate', function (unformattedDate) {
-        $scope.myapplication.dob = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.gradDate', function (unformattedDate) {
-        $scope.myapplication.highschool_graduation_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.psatDate', function (unformattedDate) {
-        $scope.myapplication.psat_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.satDate', function (unformattedDate) {
-        $scope.myapplication.sat_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.actDate', function (unformattedDate) {
-        $scope.myapplication.act_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.national_merit_date', function (unformattedDate) {
-        $scope.myapplication.national_merit_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.national_achievement_date', function (unformattedDate) {
-        $scope.myapplication.national_achievement_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.national_hispanic_date', function (unformattedDate) {
-        $scope.myapplication.national_hispanic_date = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-    
-    $scope.openSubmissionDatePicker = function (acType) {
+    $scope.openDatePicker = function (title, acType) {
         $scope.tmp = {};
-        $scope.tmp.newDate = $scope.pickedDates.submission;
 
-        var birthDatePopup = $ionicPopup.show({
+        var datePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Submission Date",
+            title: title,
             scope: $scope,
             buttons: [
                 {
@@ -463,78 +428,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
-
-    $scope.openDOBPicker = function () {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.pickedDates.birthDate;
-
-        var birthDatePopup = $ionicPopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Birth date",
-            scope: $scope,
-            buttons: [
-                {
-                    text: 'Cancel'
-                },
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        $scope.pickedDates.birthDate = $scope.tmp.newDate;
-                    }
-                }
-            ]
-        });
-    };
-
-    $scope.openTestDatePicker = function (testvar) {
-        $scope.tmp = {};
-        $scope.tmp.newDate = $scope.pickedDates.birthDate;
-
-        var birthDatePopup = $ionicPopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Date of Test",
-            scope: $scope,
-            buttons: [
-                {
-                    text: 'Cancel'
-                },
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        switch (testvar) {
-                        case 1:
-                            $scope.pickedDates.gradDate = $scope.tmp.newDate;
-                            break;
-                        case 2:
-                            $scope.pickedDates.psatDate = $scope.tmp.newDate;
-                            break;
-                        case 3:
-                            $scope.pickedDates.satDate = $scope.tmp.newDate;
-                            break;
-                        case 4:
-                            $scope.pickedDates.actDate = $scope.tmp.newDate;
-                            break;
-                        case 5:
-                            $scope.pickedDates.national_merit_date = $scope.tmp.newDate;
-                            break;
-                        case 6:
-                            $scope.pickedDates.national_achievement_date = $scope.tmp.newDate;
-                            break;
-                        case 7:
-                            $scope.pickedDates.national_hispanic_date = $scope.tmp.newDate;
-                            break;
-                        default:
-                            //need to define a default
-                        }
-                    }
-                }
-            ]
-        });
-    };
-    
-    
 
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function (nextstate) {

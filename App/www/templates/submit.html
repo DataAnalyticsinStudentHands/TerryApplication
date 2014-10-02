@@ -52,13 +52,16 @@
                     </select>
                 </div>
                 <div class="col item">
-                    <label class="item-input" ng-click="openSubmissionDatePicker('app_uh_date_sub')">
+                    <label class="item-input" ng-click="openDatePicker('Submission Date','app_uh_date_sub')">
                         <span class="input-label">Date:</span>
-                        <input type="text" ng-model="myapplication.app_uh_date_sub" placeholder="Select" ng-change="updateDate('app_uh_date_sub')">
+                        <input type="text" ng-model="myapplication.app_uh_date_sub" placeholder="Select">
                     </label>
                 </div>
                 <div class="col item">
-                    <input type="date" >
+                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','app_uh_date_int_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.app_uh_date_int_sub" placeholder="Select">
+                    </label>
                 </div>
             </div>
 
@@ -75,10 +78,16 @@
                     </select>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+                    <label class="item-input" ng-click="openDatePicker('Submission Date','transcript_date_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.transcript_date_sub" placeholder="Select">
+                    </label>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','transcript_date_int_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.transcript_date_int_sub" placeholder="Select">
+                    </label>
                 </div>
             </div>
             <div class="row">
@@ -95,14 +104,16 @@
                     </select>
                 </div>
                 <div class="col item">
-
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
-
+                    <label class="item-input" ng-click="openDatePicker('Submission Date','fafsa_date_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.fafsa_date_sub" placeholder="Select">
+                    </label>
                 </div>
                 <div class="col item">
-
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
-
+                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','fafsa_date_int_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.fafsa_date_int_sub" placeholder="Select">
+                    </label>
                 </div>
             </div>
 
@@ -119,10 +130,16 @@
                     </select>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+                    <label class="item-input" ng-click="openDatePicker('Submission Date','housing_date_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.housing_date_sub" placeholder="Select">
+                    </label>
                 </div>
                 <div class="col item">
-                    <input name="app_uh_date_sub" type="text" ng-model="myapplication.app_uh_date_sub" placeholder="select">
+                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','housing_date_int_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.housing_date_int_sub" placeholder="Select">
+                    </label>
                 </div>
             </div>
             <div class="row">
@@ -131,7 +148,5 @@
                 </div>
             </div>
         </form>
-        
-        
     </ion-content>
 </ion-view>
