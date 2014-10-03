@@ -1,5 +1,10 @@
 package dash.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +76,32 @@ ApplicationService {
 					AppConstants.DASH_POST_URL);
 		}		
 		//etc...
+	}
+	
+	// save uploaded file to new location
+	public boolean uploadFile(InputStream uploadedInputStream,
+		String uploadedFileLocation, Application application) {
+ 
+		try {
+			File file= new File(uploadedFileLocation);
+			file.getParentFile().mkdirs();
+			OutputStream out = new FileOutputStream(file);
+			int read = 0;
+			byte[] bytes = new byte[1024];
+			
+			out = new FileOutputStream(new File(uploadedFileLocation));
+			while ((read = uploadedInputStream.read(bytes)) != -1) {
+				out.write(bytes, 0, read);
+			}
+			out.flush();
+			out.close();
+			return true;
+		} catch (IOException e) {
+ 
+			e.printStackTrace();
+			return false;
+		}
+ 
 	}
 
 		// ******************** Read related methods implementation **********************

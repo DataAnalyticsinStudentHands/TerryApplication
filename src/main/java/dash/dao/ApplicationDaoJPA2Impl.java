@@ -74,11 +74,13 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 	public Long createApplication(ApplicationEntity application) {
 
 		application.setCreation_timestamp(new Date());
-		application.setStatus("Editing");
-
+		application.setStatus("in progress");
+		
+		entityManager.persist(application);
+		entityManager.flush();// force insert to receive the id of the
+								// application
 		// create hashed folder name for documents
-		String fileName = application.getFirst_name()
-				+ application.getLast_name();
+		String fileName = application.getId().toString();
 		int hashcode = fileName.hashCode();
 		int mask = 255;
 		int firstDir = hashcode & mask;
@@ -89,15 +91,14 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 		path.append(String.format("%03d", secondDir));
 		path.append(File.separator);
 		path.append(fileName);
-		application.setDocument_folder(fileName);
-		application.setName(fileName+application.getCreation_timestamp());
-		entityManager.persist(application);
-		entityManager.flush();// force insert to receive the id of the
-								// application
-
+		application.setDocument_folder(path.toString());
+		application.setName(fileName);
+		entityManager.merge(application);
+	
 		// Give admin over new application to the new user
 		return application.getId();
 	}
+		
 
 	@Override
 	public void updateApplication(ApplicationEntity application) {

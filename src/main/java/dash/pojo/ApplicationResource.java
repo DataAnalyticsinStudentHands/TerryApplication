@@ -1,12 +1,14 @@
 package dash.pojo;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -17,6 +19,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +40,8 @@ public class ApplicationResource {
 	@Autowired
 	private ApplicationService applicationService;
 
+	private static final String APPLICATION_UPLOAD_LOCATION_FOLDER = "/srv/uploads/terry_application";
+	
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.TEXT_HTML })
@@ -128,6 +134,27 @@ public class ApplicationResource {
 				// 200
 				.entity("The application you specified has been successfully updated")
 				.build();
+	}
+	
+	@POST
+	@Path("/upload")
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	public Response uploadFile(
+			@QueryParam("id") Long id,
+		@FormDataParam("file") InputStream uploadedInputStream,
+		@FormDataParam("file") FormDataContentDisposition fileDetail,
+		@HeaderParam("Content-Length") final long fileSize) throws AppException {
+		
+		Application application= applicationService.getApplicationById(id);
+		
+		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+"/"+application.getDocument_folder()+"/" + fileDetail.getFileName();
+		// save it
+		applicationService.uploadFile(uploadedInputStream, uploadedFileLocation, application);
+ 
+		String output = "File uploaded to : " + uploadedFileLocation;
+ 
+		return Response.status(200).entity(output).build();
+ 
 	}
 
 	/*

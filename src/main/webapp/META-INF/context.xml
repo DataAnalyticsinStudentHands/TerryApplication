@@ -20,6 +20,6 @@
 	   username="sqluser"
 	   password="*****"
 	   driverClassName="com.mysql.jdbc.Driver"
-	   url="jdbc:mysql://localhost:3306/testApp?allowMultiQueries=true"
+	   url="jdbc:mysql://localhost:3306/terry2015?allowMultiQueries=true"
    /> 
 </Context>

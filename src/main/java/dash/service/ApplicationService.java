@@ -1,5 +1,6 @@
 package dash.service;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -17,6 +18,10 @@ public interface ApplicationService {
 	 */
 	public Long createApplication(Application application) throws AppException;	
 
+	@PreAuthorize("hasPermission(#application, 'write') or hasRole('ROLE_ADMIN')")
+	public boolean uploadFile(InputStream uploadedInputStream,
+			String uploadedFileLocation, Application application);
+	
 	/*
 	 * ******************* Read related methods ********************
 	 */
