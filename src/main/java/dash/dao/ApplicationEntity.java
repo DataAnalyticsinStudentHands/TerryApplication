@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.annotations.Generated;
 
 import dash.pojo.Application;
 
