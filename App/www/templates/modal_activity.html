@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">{{myVariables.current_mode}} Activities</h1>
-        <button class="button button-clear button-primary" ng-click="modal2.hide()">Cancel</button>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
         <p class="item item-icon-left item-text-wrap">
                 <i class="icon ion-information"></i>
                 <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.
             </p>
-        <form novalidate class="submit" on-valid-submit="saveModal(2)">
-            <div class="padding">
+        <form novalidate class="submit" on-valid-submit="saveModal('activity')">
+            
                 <div class="row">
                     <div class="col">
                         <label class="item item-input validated">

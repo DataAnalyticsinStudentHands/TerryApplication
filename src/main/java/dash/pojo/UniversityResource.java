@@ -45,7 +45,7 @@ public class UniversityResource {
 				.createUniversity(university);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new University has been created")
+				.entity(createUniversityId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createUniversityId)).build();

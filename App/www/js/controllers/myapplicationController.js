@@ -7,7 +7,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, MyEmploymentService, MyCourseworkService, MyUniversityService, MyScholarshipService, MyChildService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, DataService) {
     'use strict';
 
     $scope.mail_options = [
@@ -37,12 +37,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     $scope.myapplication = {};
     $scope.myscholarships = {};
-    $scope.myscholarship = {};
     $scope.myuniversities = {};
-    $scope.myuniversity = {};
     $scope.mychildren = {};
-    $scope.mychild = {};
-
+    
     // GET 
     MyApplicationService.getMyApplication($stateParams.applicationId).then(
         function (result) {
@@ -110,46 +107,28 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     );
 
     // GET 
-    MyUniversityService.getAllUniversity().then(
+    DataService.getAllItems('university').then(
         function (result) {
             $scope.myuniversities = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // GET 
-    MyScholarshipService.getAllScholarship().then(
+    DataService.getAllItems('scholarship').then(
         function (result) {
             $scope.myscholarships = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // GET 
-    MyChildService.getAllChild().then(
+    DataService.getAllItems('child').then(
         function (result) {
             $scope.mychildren = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // Open a popup to add data
-    $scope.showAddData = function () {
+    $scope.showAddData = function (acType) {
         $scope.myVariables.university = '';
         var myPopup = $ionicPopup.show({
             template: '<input type="text" ng-model="myVariables.university">',
@@ -170,9 +149,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                         } else {
                             $scope.myuniversity.application_id = $stateParams.applicationId;
                             $scope.myuniversity.name = $scope.myVariables.university;
-                            MyUniversityService.addUniversity($scope.myuniversity).then(
+                            DataService.addItem(acType, $scope.myuniversity).then(
                                 function (success) {
-                                    $scope.updateList('university');
+                                    $scope.updateList(acType);
                                 }
                             );
                         }
@@ -181,48 +160,28 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
-
-    // Open a modal
-    $scope.showAddModal = function (type) {
+        
+    // callback for ng-click 'showAddModal':
+    $scope.showAddModal = function (acType, applied_received) {
+        
         $scope.myVariables.current_mode = "Add";
-
-        switch (type) {
-        case 1:
-            $scope.myscholarship = {};
-            $scope.myscholarship.applied_received = 'true';
-            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                $scope.modal.show();
-            });
-            break;
-        case 2:
-            $scope.myscholarship = {};
-            $scope.myscholarship.applied_received = 'false';
-            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                $scope.modal.show();
-            });
-            break;
-        case 3:
-            $scope.mychild = {};
-            $ionicModal.fromTemplateUrl('templates/modal_child.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal1 = modal;
-                $scope.modal1.show();
-            });
-            break;
+        $scope.myemployment = {};
+        $scope.myscholarship = {};
+        
+        if (applied_received !== undefined) {
+            $scope.myscholarship.applied_received = applied_received;
         }
+        
+        $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
     };
 
-    // Open a popup to edit data
+    // callback for ng-click 'editData'
     $scope.editData = function (acType, item) {
         $scope.myVariables.current_mode = "Edit";
         switch (acType) {
@@ -248,8 +207,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                             } else {
                                 $scope.myuniversity.application_id = $stateParams.applicationId;
                                 $scope.myuniversity.name = $scope.myVariables.university;
-                                MyUniversityService.updateUniversity($scope.myuniversity.id, $scope.myuniversity);
-                                $scope.updateList('university');
+                                DataService.updateItem(acType, $scope.myuniversity.id, $scope.myuniversity);
+                                $scope.updateList(acType);
                             }
                         }
                     }
@@ -266,14 +225,14 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 $scope.modal.show();
             });
             break;
-        case 'children':
+        case 'child':
             $scope.mychild = item;
             $ionicModal.fromTemplateUrl('templates/modal_child.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
             }).then(function (modal) {
-                $scope.modal1 = modal;
-                $scope.modal1.show();
+                $scope.modal = modal;
+                $scope.modal.show();
             });
             break;
         }
@@ -283,43 +242,25 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         switch (acType) {
         case 'university':
             // GET 
-            MyUniversityService.getAllUniversity().then(
+            DataService.getAllUniversity(acType).then(
                 function (result) {
                     $scope.myuniversities = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
                 }
             );
             break;
         case 'scholarship':
             // GET 
-            MyScholarshipService.getAllScholarship().then(
+            DataService.getAllUniversity(acType).then(
                 function (result) {
-                    $scope.myscholarships = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
+                    $scope.myuniversities = result;
                 }
             );
             break;
-        case 'children':
+        case 'child':
             // GET 
-            MyChildService.getAllChild().then(
+            DataService.getAllUniversity(acType).then(
                 function (result) {
-                    $scope.mychildren = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
+                    $scope.myuniversities = result;
                 }
             );
             break;
@@ -334,36 +275,34 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.myscholarship.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
-                MyScholarshipService.addScholarship($scope.myscholarship).then(
+                DataService.addScholarship(acType, $scope.myscholarship).then(
                     function (success) {
-                        $scope.updateList('scholarship');
+                        $scope.updateList(acType);
                         $scope.modal.hide();
                     }
                 );
             } else {
-                MyScholarshipService.updateScholarship($scope.myscholarship.id, $scope.myscholarship).then(
+                DataService.updateScholarship(acType, $scope.myscholarship.id, $scope.myscholarship).then(
                     function (success) {
-                        $scope.updateList('scholarship');
                         $scope.modal.hide();
                     }
                 );
             }
             break;
-        case 'children':
+        case 'child':
             $scope.mychild.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
-                MyChildService.addChild($scope.mychild).then(
+                DataService.addChild(acType, $scope.mychild).then(
                     function (success) {
-                        $scope.updateList('children');
-                        $scope.modal1.hide();
+                        $scope.updateList(acType);
+                        $scope.modal.hide();
                     }
                 );
             } else {
-                MyChildService.updateChild($scope.mychild.id, $scope.mychild).then(
+                DataService.updateChild(acType, $scope.mychild.id, $scope.mychild).then(
                     function (success) {
-                        $scope.updateList('children');
-                        $scope.modal1.hide();
+                        $scope.modal.hide();
                     }
                 );
             }
@@ -372,39 +311,17 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     };
 
     // callback for ng-click 'deleteData':
-    $scope.deleteData = function (acType, itemId) {
+    $scope.deleteData = function (acType, item) {
 
         $ionicPopup.confirm({
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete your course from the list?'
         }).then(function (res) {
-            if (res) {
-                switch (acType) {
-                case 'university':
-                    MyUniversityService.deleteUniversity(itemId).then(
-                        function (success) {
-                            $scope.updateList(acType);
-                        }
-                    );
-                    break;
-                case 'scholarship':
-                    MyScholarshipService.deleteScholarship(itemId).then(
-                        function (success) {
-                            $scope.updateList(acType);
-                        }
-                    );
-                    break;
-                case 'children':
-                    MyChildService.deleteChild(itemId).then(
-                        function (success) {
-                            $scope.updateList(acType);
-                        }
-                    );
-                    break;
+            DataService.deleteItem(acType, item).then(
+                function (success) {
+                    $scope.updateList(acType);
                 }
-            } else {
-                console.log('You are not sure to delete');
-            }
+            );
         });
     };
 
@@ -458,9 +375,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         );
         //check the lists for not empty
         var myemployments;
-        
+
         // GET 
-        MyEmploymentService.getAllEmployment().then(
+        DataService.getAllItems('employment').then(
             function (result) {
                 myemployments = result;
                 if (Object.keys(myemployments).length === 0) {

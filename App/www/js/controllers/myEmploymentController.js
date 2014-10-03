@@ -8,12 +8,12 @@
  * # MyEmploymentController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, Restangular, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService, MyEmploymentService, MyActivityService, MyVolunteerService, MyAwardService) {
+angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService) {
     'use strict';
 
     $scope.myVariables = {
         current_mode: 'Add',
-        acType: 1
+        acType: 'employment'
     };
 
     $scope.toggleRight = function () {
@@ -30,351 +30,184 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     $scope.myaward = {};
 
     // GET 
-    DataService.getAll('employment').then(
+    DataService.getAllItems('employment').then(
         function (result) {
-            result = Restangular.stripRestangular(result);
             $scope.myemployments = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // GET 
-    MyActivityService.getAllActivity().then(
+    DataService.getAllItems('activity').then(
         function (result) {
             $scope.myactivities = result;
-
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // GET 
-    MyVolunteerService.getAllVolunteer().then(
+    DataService.getAllItems('volunteer').then(
         function (result) {
             $scope.myvolunteers = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // GET 
-    MyAwardService.getAllAward().then(
+    DataService.getAllItems('award').then(
         function (result) {
             $scope.myawards = result;
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
     // callback for ng-click 'deleteData':
-    $scope.deleteData = function (itemId, acType) {
+    $scope.deleteData = function (acType, item) {
         $ionicPopup.confirm({
             title: 'Confirm Delete',
-            template: 'Are you sure you want to delete one item from the list?'
+            template: 'Are you sure you want to delete one ' + acType + ' from the list?'
         }).then(function (res) {
-            if (res) {
-                switch (acType) {
-                case 1:
-                    MyEmploymentService.deleteEmployment(itemId).then(
-                        function (success) {
-                            $scope.updateLists(acType);
-                        }
-                    );
-                    break;
-                case 2:
-                    MyActivityService.deleteActivity(itemId).then(
-                        function (success) {
-                            $scope.updateLists(acType);
-                        }
-                    );
-                    break;
-                case 3:
-                    MyVolunteerService.deleteVolunteer(itemId).then(
-                        function (success) {
-                            $scope.updateLists(acType);
-                        }
-                    );
-                    break;
-                case 4:
-                    MyAwardService.deleteAward(itemId).then(
-                        function (success) {
-                            $scope.updateLists(acType);
-                        }
-                    );
-                    break;
-                default:
-                    MyEmploymentService.deleteEmployment(itemId);
+            DataService.deleteItem(acType, item).then(
+                function (success) {
+                    $scope.updateLists(acType);
                 }
-
-            } else {
-                console.log('You are not sure to delete');
-            }
+            );
         });
     };
 
     // callback for ng-click 'editData':
-    $scope.editData = function (item, acType) {
+    $scope.editData = function (acType, item) {
+        
         $scope.myVariables.current_mode = "Edit";
-
-        switch (acType) {
-        case 1:
-            $scope.myemployment = item;
-            $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal1 = modal;
-                $scope.modal1.show();
-            });
-            break;
-        case 2:
-            $scope.myactivity = item;
-            $scope.yearInSchoolList = angular.fromJson($scope.myactivity.year);
-            $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal2 = modal;
-                $scope.modal2.show();
-            });
-            break;
-        case 3:
-            $scope.myvolunteer = item;
-            $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal3 = modal;
-                $scope.modal3.show();
-            });
-            break;
-        case 4:
-            $scope.myaward = item;
-            $scope.yearInSchoolList = angular.fromJson($scope.myaward.year);
-            $ionicModal.fromTemplateUrl('templates/modal_award.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal4 = modal;
-                $scope.modal4.show();
-            });
-            break;
-        default:
-            $scope.myemployment = item;
-        }
+        $scope.myemployment = item;
+        
+        $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
     };
 
     // callback for ng-click 'saveModal':
     $scope.saveModal = function (acType) {
 
         switch (acType) {
-        case 1:
-                
+        case 'employment':
+
             $scope.myemployment.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === "Add") {
-                MyEmploymentService.addEmployment($scope.myemployment).then(
+                DataService.addItem('employment', $scope.myemployment).then(
                     function (success) {
+                        $scope.modal.hide();
                         $scope.updateLists(acType);
-                        $scope.modal1.hide();
                     }
                 );
             } else {
-                MyEmploymentService.updateEmployment($scope.myemployment.id, $scope.myemployment).then(
+                DataService.updateItem('employment', $scope.myemployment.id, $scope.myemployment).then(
                     function (success) {
-                        $scope.modal1.hide();
+                        $scope.modal.hide();
                     }
                 );
             }
             break;
-        case 2:
+        case 'activity':
             $scope.myactivity.application_id = $stateParams.applicationId;
             // convert year in school to string
             $scope.myactivity.year = angular.toJson($scope.yearInSchoolList);
 
             if ($scope.myVariables.current_mode === "Add") {
 
-                MyActivityService.addActivity($scope.myactivity).then(
+                DataService.addItem('activity', $scope.myactivity).then(
                     function (success) {
+                        $scope.modal.hide();
                         $scope.updateLists(acType);
-                        $scope.modal2.hide();
                     }
                 );
             } else {
-                MyActivityService.updateActivity($scope.myactivity.id, $scope.myactivity).then(
+                DataService.updateItem('activity', $scope.myactivity.id, $scope.myactivity).then(
                     function (success) {
-                        $scope.modal2.hide();
+                        $scope.modal.hide();
                     }
                 );
             }
             break;
-        case 3:
+        case 'volunteer':
             $scope.myvolunteer.application_id = $stateParams.applicationId;
             if ($scope.myVariables.current_mode === "Add") {
-                MyVolunteerService.addVolunteer($scope.myvolunteer).then(
+                DataService.addItem('volunteer', $scope.myvolunteer).then(
                     function (success) {
+                        $scope.modal.hide();
                         $scope.updateLists(acType);
-                        $scope.modal3.hide();
                     }
                 );
             } else {
-                MyVolunteerService.updateVolunteer($scope.myvolunteer.id, $scope.myvolunteer).then(
+                DataService.updateItem('volunteer', $scope.myvolunteer.id, $scope.myvolunteer).then(
                     function (success) {
-                        $scope.modal3.hide();
+                        $scope.modal.hide();
                     }
                 );
             }
             break;
-        case 4:
+        case 'award':
             $scope.myaward.application_id = $stateParams.applicationId;
             // convert year in school to string
             $scope.myaward.year = angular.toJson($scope.yearInSchoolList);
             if ($scope.myVariables.current_mode === "Add") {
-                MyAwardService.addAward($scope.myaward).then(
+                DataService.addItem('award', $scope.myaward).then(
                     function (success) {
+                        $scope.modal.hide();
                         $scope.updateLists(acType);
-                        $scope.modal4.hide();
                     }
                 );
             } else {
-                MyAwardService.updateAward($scope.myaward.id, $scope.myaward).then(
+                DataService.updateItem('award', $scope.myaward.id, $scope.myaward).then(
                     function (success) {
-                        $scope.modal4.hide();
+                        $scope.modal.hide();
                     }
                 );
             }
             break;
-        default:
-            // need to define a default
         }
 
     };
 
-    // Open a modal
+    // callback for ng-click 'showAddData':
     $scope.showAddData = function (acType) {
+        
         $scope.myVariables.current_mode = "Add";
-
-        switch (acType) {
-        case 1:
-            $scope.myemployment = {};
-            $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal1 = modal;
-                $scope.modal1.show();
-            });
-            break;
-        case 2:
-            $scope.myactivity = {};
-            $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal2 = modal;
-                $scope.modal2.show();
-            });
-            break;
-        case 3:
-            $scope.myvolunteer = {};
-            $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal3 = modal;
-                $scope.modal3.show();
-            });
-            break;
-        case 4:
-            $scope.myaward = {};
-            $ionicModal.fromTemplateUrl('templates/modal_award.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal4 = modal;
-                $scope.modal4.show();
-            });
-            break;
-        default:
-            //need to define a default
-        }
+        $scope.myemployment = {};
+        $scope.myactivity = {};
+        $scope.myvolunteer = {};
+        $scope.myaward = {};
+        
+        $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
     };
 
     $scope.updateLists = function (acType) {
 
-        switch (acType) {
-        case 1:
-            MyEmploymentService.getAllEmployment().then(
-                function (result) {
+        DataService.getAllItems(acType).then(
+            function (result) {
+                switch (acType) {
+                case 'employment':
                     $scope.myemployments = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
-                }
-            );
-            break;
-        case 2:
-            MyActivityService.getAllActivity().then(
-                function (result) {
+                    break;
+                case 'activity':
                     $scope.myactivities = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
-                }
-            );
-            break;
-        case 3:
-            MyVolunteerService.getAllVolunteer().then(
-                function (result) {
+                    break;
+                case 'volunteer':
                     $scope.myvolunteers = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
-                }
-            );
-            break;
-        case 4:
-            MyAwardService.getAllAward().then(
-                function (result) {
+                    break;
+                case 'award':
                     $scope.myawards = result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data.", {
-                        type: "error",
-                        sticky: true
-                    });
+                    break;
                 }
-            );
-            break;
-        default:
-            //need to define a default
-        }
+            }
+        );
     };
 
     $scope.openDatePicker = function (title, type) {
@@ -392,21 +225,21 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy');
-                        var res = title.substring(0, 1);
-                        
+                        var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy'),
+                            res = title.substring(0, 1);
+
                         if (res === 'E') {
                             $scope.myemployment[type] = test;
                         } else {
                             $scope.myvolunteer[type] = test;
                         }
-                                                 
+
                     }
                 }
             ]
         });
     };
-    
+
     $scope.yearInSchoolList = [
         {
             text: "Freshman",

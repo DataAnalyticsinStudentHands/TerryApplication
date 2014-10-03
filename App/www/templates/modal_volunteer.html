@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">{{myVariables.current_mode}} Service</h1>
-        <button class="button button-clear button-primary" ng-click="modal3.hide()">Cancel</button>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
         
@@ -9,7 +10,7 @@
                 <i class="icon ion-information"></i>Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity. <b>List your most recent service first.</b>
         </p>
             
-            <form novalidate class="submit" on-valid-submit="saveModal(3)">
+            <form novalidate class="submit" on-valid-submit="saveModal('volunteer')">
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">

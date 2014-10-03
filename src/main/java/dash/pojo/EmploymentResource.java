@@ -45,7 +45,7 @@ public class EmploymentResource {
 				.createEmployment(employment);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Employment has been created")
+				.entity(createEmploymentId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createEmploymentId)).build();

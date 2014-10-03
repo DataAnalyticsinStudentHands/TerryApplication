@@ -64,7 +64,7 @@ public class UsersResource {
 		Long createUserId = userService.createUser(user);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new user has been created")
+				.entity(createUserId.toString())
 				.header("Location",
 						"http://localhost:8080/services/users/"
 								+ String.valueOf(createUserId)).build();
