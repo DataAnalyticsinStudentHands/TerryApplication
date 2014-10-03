@@ -8,7 +8,7 @@
  * # MyEmploymentService
  * Service for the terry
  */
-angular.module('TerryServices').factory('MyEmploymentService', function (Restangular, $q, ngNotify) {
+angular.module('TerryServices').factory('DataService', function (Restangular, $q, ngNotify) {
 'use strict';
 
 
@@ -21,8 +21,8 @@ angular.module('TerryServices').factory('MyEmploymentService', function (Restang
 return {
     
 
-    getAllEmployment: function () {
-        return Restangular.all("employment").getList();
+    getAll: function (type) {
+        return Restangular.all(type).getList();
         
 
     },

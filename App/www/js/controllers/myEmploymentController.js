@@ -8,7 +8,7 @@
  * # MyEmploymentController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, MyEmploymentService, MyActivityService, MyVolunteerService, MyAwardService) {
+angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, Restangular, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService, MyEmploymentService, MyActivityService, MyVolunteerService, MyAwardService) {
     'use strict';
 
     $scope.myVariables = {
@@ -30,8 +30,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     $scope.myaward = {};
 
     // GET 
-    MyEmploymentService.getAllEmployment().then(
+    DataService.getAll('employment').then(
         function (result) {
+            result = Restangular.stripRestangular(result);
             $scope.myemployments = result;
         },
         function (error) {
