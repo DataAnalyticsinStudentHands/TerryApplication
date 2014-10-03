@@ -8,7 +8,7 @@
  * # MyEmploymentController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, MyEmploymentService, MyActivityService, MyVolunteerService, MyAwardService) {
+angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, ngNotify, $stateParams, $state, $filter, Restangular, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService, MyEmploymentService, MyActivityService, MyVolunteerService, MyAwardService) {
     'use strict';
 
     $scope.myVariables = {
@@ -20,19 +20,20 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         $ionicSideMenuDelegate.toggleRight();
     };
 
-    $scope.mydata = {};
-    $scope.mynewdata = {};
+    $scope.myemployments = {};
+    $scope.myemployment = {};
     $scope.myactivities = {};
-    $scope.mynewactivity = {};
+    $scope.myactivity = {};
     $scope.myvolunteers = {};
-    $scope.mynewvolunteer = {};
+    $scope.myvolunteer = {};
     $scope.myawards = {};
-    $scope.mynewaward = {};
+    $scope.myaward = {};
 
     // GET 
-    MyEmploymentService.getAllEmployment().then(
+    DataService.getAll('employment').then(
         function (result) {
-            $scope.mydata = result;
+            result = Restangular.stripRestangular(result);
+            $scope.myemployments = result;
         },
         function (error) {
             ngNotify.set("Something went wrong retrieving data.", {
@@ -134,7 +135,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
         switch (acType) {
         case 1:
-            $scope.mynewdata = item;
+            $scope.myemployment = item;
             $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -144,8 +145,8 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 2:
-            $scope.mynewactivity = item;
-            $scope.yearInSchoolList = angular.fromJson($scope.mynewactivity.year);
+            $scope.myactivity = item;
+            $scope.yearInSchoolList = angular.fromJson($scope.myactivity.year);
             $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -155,7 +156,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 3:
-            $scope.mynewvolunteer = item;
+            $scope.myvolunteer = item;
             $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -165,8 +166,8 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 4:
-            $scope.mynewaward = item;
-            $scope.yearInSchoolList = angular.fromJson($scope.mynewaward.year);
+            $scope.myaward = item;
+            $scope.yearInSchoolList = angular.fromJson($scope.myaward.year);
             $ionicModal.fromTemplateUrl('templates/modal_award.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -176,7 +177,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         default:
-            $scope.mynewdata = item;
+            $scope.myemployment = item;
         }
     };
 
@@ -186,18 +187,17 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         switch (acType) {
         case 1:
                 
-            $scope.mynewdata.application_id = $stateParams.applicationId;
-                
+            $scope.myemployment.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === "Add") {
-                MyEmploymentService.addEmployment($scope.mynewdata).then(
+                MyEmploymentService.addEmployment($scope.myemployment).then(
                     function (success) {
                         $scope.updateLists(acType);
                         $scope.modal1.hide();
                     }
                 );
             } else {
-                MyEmploymentService.updateEmployment($scope.mynewdata.id, $scope.mynewdata).then(
+                MyEmploymentService.updateEmployment($scope.myemployment.id, $scope.myemployment).then(
                     function (success) {
                         $scope.modal1.hide();
                     }
@@ -205,20 +205,20 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 2:
-            $scope.mynewactivity.application_id = $stateParams.applicationId;
+            $scope.myactivity.application_id = $stateParams.applicationId;
             // convert year in school to string
-            $scope.mynewactivity.year = angular.toJson($scope.yearInSchoolList);
+            $scope.myactivity.year = angular.toJson($scope.yearInSchoolList);
 
             if ($scope.myVariables.current_mode === "Add") {
 
-                MyActivityService.addActivity($scope.mynewactivity).then(
+                MyActivityService.addActivity($scope.myactivity).then(
                     function (success) {
                         $scope.updateLists(acType);
                         $scope.modal2.hide();
                     }
                 );
             } else {
-                MyActivityService.updateActivity($scope.mynewactivity.id, $scope.mynewactivity).then(
+                MyActivityService.updateActivity($scope.myactivity.id, $scope.myactivity).then(
                     function (success) {
                         $scope.modal2.hide();
                     }
@@ -226,16 +226,16 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 3:
-            $scope.mynewvolunteer.application_id = $stateParams.applicationId;
+            $scope.myvolunteer.application_id = $stateParams.applicationId;
             if ($scope.myVariables.current_mode === "Add") {
-                MyVolunteerService.addVolunteer($scope.mynewvolunteer).then(
+                MyVolunteerService.addVolunteer($scope.myvolunteer).then(
                     function (success) {
                         $scope.updateLists(acType);
                         $scope.modal3.hide();
                     }
                 );
             } else {
-                MyVolunteerService.updateVolunteer($scope.mynewvolunteer.id, $scope.mynewvolunteer).then(
+                MyVolunteerService.updateVolunteer($scope.myvolunteer.id, $scope.myvolunteer).then(
                     function (success) {
                         $scope.modal3.hide();
                     }
@@ -243,18 +243,18 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             }
             break;
         case 4:
-            $scope.mynewaward.application_id = $stateParams.applicationId;
+            $scope.myaward.application_id = $stateParams.applicationId;
             // convert year in school to string
-            $scope.mynewaward.year = angular.toJson($scope.yearInSchoolList);
+            $scope.myaward.year = angular.toJson($scope.yearInSchoolList);
             if ($scope.myVariables.current_mode === "Add") {
-                MyAwardService.addAward($scope.mynewaward).then(
+                MyAwardService.addAward($scope.myaward).then(
                     function (success) {
                         $scope.updateLists(acType);
                         $scope.modal4.hide();
                     }
                 );
             } else {
-                MyAwardService.updateAward($scope.mynewaward.id, $scope.mynewaward).then(
+                MyAwardService.updateAward($scope.myaward.id, $scope.myaward).then(
                     function (success) {
                         $scope.modal4.hide();
                     }
@@ -273,7 +273,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
         switch (acType) {
         case 1:
-            $scope.mynewdata = {};
+            $scope.myemployment = {};
             $ionicModal.fromTemplateUrl('templates/modal_employment.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -283,7 +283,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 2:
-            $scope.mynewactivity = {};
+            $scope.myactivity = {};
             $ionicModal.fromTemplateUrl('templates/modal_activity.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -293,7 +293,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 3:
-            $scope.mynewvolunteer = {};
+            $scope.myvolunteer = {};
             $ionicModal.fromTemplateUrl('templates/modal_volunteer.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -303,7 +303,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             });
             break;
         case 4:
-            $scope.mynewaward = {};
+            $scope.myaward = {};
             $ionicModal.fromTemplateUrl('templates/modal_award.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -323,7 +323,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         case 1:
             MyEmploymentService.getAllEmployment().then(
                 function (result) {
-                    $scope.mydata = result;
+                    $scope.myemployments = result;
                 },
                 function (error) {
                     ngNotify.set("Something went wrong retrieving data.", {
@@ -377,31 +377,12 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         }
     };
 
-    $scope.pickedDates = {};
-
-    $scope.$watch('pickedDates.empl_date_from', function (unformattedDate) {
-        $scope.mynewdata.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.empl_date_to', function (unformattedDate) {
-        $scope.mynewdata.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.vol_date_from', function (unformattedDate) {
-        $scope.mynewvolunteer.date_from = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.$watch('pickedDates.vol_date_to', function (unformattedDate) {
-        $scope.mynewvolunteer.date_to = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-    });
-
-    $scope.openDatePicker = function (testvar) {
+    $scope.openDatePicker = function (title, type) {
         $scope.tmp = {};
-        $scope.tmp.newDate = $scope.pickedDates.birthDate;
 
-        var birthDatePopup = $ionicPopup.show({
+        var datePopup = $ionicPopup.show({
             template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
-            title: "Date",
+            title: title,
             scope: $scope,
             buttons: [
                 {
@@ -411,28 +392,21 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        switch (testvar) {
-                        case 1:
-                            $scope.pickedDates.empl_date_from = $scope.tmp.newDate;
-                            break;
-                        case 2:
-                            $scope.pickedDates.empl_date_to = $scope.tmp.newDate;
-                            break;
-                        case 3:
-                            $scope.pickedDates.vol_date_from = $scope.tmp.newDate;
-                            break;
-                        case 4:
-                            $scope.pickedDates.vol_date_to = $scope.tmp.newDate;
-                            break;
-                        default:
-                            //need to define a default
+                        var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy');
+                        var res = title.substring(0, 1);
+                        
+                        if (res === 'E') {
+                            $scope.myemployment[type] = test;
+                        } else {
+                            $scope.myvolunteer[type] = test;
                         }
+                                                 
                     }
                 }
             ]
         });
     };
-
+    
     $scope.yearInSchoolList = [
         {
             text: "Freshman",

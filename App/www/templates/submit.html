@@ -19,7 +19,7 @@
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             You must complete this area prior to submitting your Terry application.
         </p>
-        <form name="submitform" novalidate class="submit" on-valid-submit="save('tabs.myapplication.confirmation')">
+        <form name="submitform" novalidate class="submit" on-valid-submit="check()">
 
             <div class="row">
 
@@ -144,7 +144,7 @@
             </div>
             <div class="row">
                 <div class="col col-25 col-offset-75">
-                    <button class="button button-full button-positive" type="submit">Submit</button>
+                    <button class="button button-full button-positive" type="submit">Check Application</button>
                 </div>
             </div>
         </form>

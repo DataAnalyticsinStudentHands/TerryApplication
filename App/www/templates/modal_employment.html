@@ -16,7 +16,7 @@
                     <div class="col">
                         <label class="item item-input validated">
                             <span class="input-label">Position/Job Title:</span>
-                            <input name="position" ng-model="mynewdata.position" type="text" placeholder="title" required>
+                            <input name="position" ng-model="myemployment.position" type="text" placeholder="title" required>
                         </label>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="col">
                         <label class="item item-input validated">
                             <span class="input-label">Employer:</span>
-                            <input name="employer" ng-model="mynewdata.employer" type="text" placeholder="employer" required>
+                            <input name="employer" ng-model="myemployment.employer" type="text" placeholder="employer" required>
                         </label>
                     </div>
                 </div>
@@ -32,19 +32,19 @@
                     <div class="col">
                         <label class="item item-input validated">
                             <span class="input-label">Hours:</span>
-                            <input name="hours" ng-model="mynewdata.hours" type="text" placeholder="hours" required>
+                            <input name="hours" ng-model="myemployment.hours" type="text" placeholder="hours" required>
                         </label>
                     </div>
                     <div class="col">
-                        <label class="item item-input" ng-click="openDatePicker(1)">
+                        <label class="item item-input" ng-click="openDatePicker('Employment Start Date', 'date_from')">
                             <span class="input-label">From Date:</span>
-                            <input type="text" ng-model="mynewdata.date_from" placeholder="Select" required>
+                            <input type="text" ng-model="myemployment.date_from" placeholder="Select" required>
                         </label>
                     </div>
                     <div class="col">
-                        <label class="item item-input" ng-click="openDatePicker(2)">
+                        <label class="item item-input" ng-click="openDatePicker('Employment End Date', 'date_to')">
                             <span class="input-label">To Date:</span>
-                            <input type="text" ng-model="mynewdata.date_to" placeholder="Select" required>
+                            <input type="text" ng-model="myemployment.date_to" placeholder="Select" required>
                         </label>
                     </div>
                 </div>
