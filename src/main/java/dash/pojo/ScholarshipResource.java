@@ -45,7 +45,7 @@ public class ScholarshipResource {
 				.createScholarship(scholarship);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Scholarship has been created")
+				.entity(createScholarshipId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createScholarshipId)).build();

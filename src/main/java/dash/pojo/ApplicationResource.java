@@ -51,7 +51,7 @@ public class ApplicationResource {
 				.createApplication(application);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new application has been created")
+				.entity(createApplicationId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createApplicationId)).build();

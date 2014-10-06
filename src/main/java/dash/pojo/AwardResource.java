@@ -45,7 +45,7 @@ public class AwardResource {
 				.createAward(award);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Award has been created")
+				.entity(createAwardId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createAwardId)).build();
