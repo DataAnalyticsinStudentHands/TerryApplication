@@ -145,9 +145,12 @@ public class ApplicationResource {
 		@FormDataParam("file") FormDataContentDisposition fileDetail,
 		@HeaderParam("Content-Length") final long fileSize) throws AppException {
 		
+		
+		
 		Application application= applicationService.getApplicationById(id);
 		
-		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+"/"+application.getDocument_folder()+"/" + fileDetail.getFileName();
+		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+"/"
+				+application.getDocument_folder()+"/" + fileDetail.getFileName().replaceAll("%20", "_").toLowerCase();;
 		// save it
 		applicationService.uploadFile(uploadedInputStream, uploadedFileLocation, application);
  
@@ -156,6 +159,26 @@ public class ApplicationResource {
 		return Response.status(200).entity(output).build();
  
 	}
+	
+	@DELETE
+	@Path("/upload")
+	public Response deleteUpload(
+			@QueryParam("applicationId") Long id,
+			@QueryParam("fileName") String fileName) throws AppException{
+		
+		fileName=fileName.replaceAll(" ", "_").toLowerCase();
+		
+		Application application= applicationService.getApplicationById(id);
+		
+		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()+"/" + fileName;
+		// save it
+		applicationService.deleteUploadFile(uploadedFileLocation, application);
+ 
+		String output = "File removed from: " + uploadedFileLocation;
+		
+		return Response.status(200).entity(output).build();
+	}
+		
 
 	/*
 	 * *********************************** DELETE

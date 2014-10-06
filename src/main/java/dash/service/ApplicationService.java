@@ -19,8 +19,8 @@ public interface ApplicationService {
 	public Long createApplication(Application application) throws AppException;	
 
 	@PreAuthorize("hasPermission(#application, 'write') or hasRole('ROLE_ADMIN')")
-	public boolean uploadFile(InputStream uploadedInputStream,
-			String uploadedFileLocation, Application application);
+	public void uploadFile(InputStream uploadedInputStream,
+			String uploadedFileLocation, Application application) throws AppException;
 	
 	/*
 	 * ******************* Read related methods ********************
@@ -68,6 +68,9 @@ public interface ApplicationService {
 	@PreAuthorize("hasRole('ROLE_ROOT')")
 	public void deleteApplications();	
 
+	
+	@PreAuthorize("hasPermission(#application, 'delete') or hasRole('ROLE_ADMIN')")
+	public void deleteUploadFile(String uploadedFileLocation, Application application) throws AppException;
 	/*
 	 * ******************** Helper methods **********************
 	 */
