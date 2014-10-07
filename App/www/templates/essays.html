@@ -28,13 +28,24 @@
                 Describe a significant setback, challenge or opportunity in your life and the impact that it has had on you.
             </p>
 
+            You can have any element as an upload button: <div ng-file-select="onFileSelect($files)" data-multiple="true" title="select file"  class="button button-positive">Click here to select file</div>
             <div class="item">
-                <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
-                <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
-                <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function" ng-show="dropSupported">drop files here</div>
-                <div ng-file-drop-available="dropSupported=true" ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-                <button class="button button-positive" ng-click="upload.abort()">Cancel Upload</button>
+                
+                
+                
+                    <input type="file" ng-file-select="onFileSelect($files)" accept="application/pdf">
+                
+                
+                
             </div>
+            
+            
+            
+            
+            
+		</div>
+            
+            <button class="button button-positive" ng-click="upload.abort()">Cancel Upload</button>
             
             <div class="item item-divider">
                 Essay II: Leadership Experience
