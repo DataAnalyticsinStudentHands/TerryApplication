@@ -1,7 +1,10 @@
 package dash.service;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+
+import javax.ws.rs.core.Response;
 
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
@@ -46,6 +49,9 @@ public interface ApplicationService {
 	@PostAuthorize("hasPermission(returnObject, 'READ') or hasRole('ROLE_ADMIN')")
 	public Application getApplicationById(Long id) throws AppException;
 	
+	@PreAuthorize("hasPermission(#application, 'read') or hasRole('ROLE_ADMIN')")
+	public File getUploadFile(String uploadedFileLocation, Application application) throws AppException;
+	
 	/*
 	 * ******************** Update related methods **********************
 	 */
@@ -77,6 +83,9 @@ public interface ApplicationService {
 	// TODO: This also should not exist, or it should be changed to
 	// private/protected. Redundant
 	// Could be made a boolean so it was not a security vulnerability
-	public Application verifyApplicationExistenceById(Long id);	
+	public Application verifyApplicationExistenceById(Long id);
+	
+	@PreAuthorize("hasPermission(#application, 'read') or hasRole('ROLE_ADMIN')")
+	public List<String> getFileNames(Application application);	
 
 }

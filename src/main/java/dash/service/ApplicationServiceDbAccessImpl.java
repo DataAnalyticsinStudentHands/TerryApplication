@@ -108,6 +108,11 @@ ApplicationService {
 		}
  
 	}
+	
+	public File getUploadFile(String uploadedFileLocation,
+			Application application) throws AppException {
+		return new File(uploadedFileLocation); 
+	}
 
 		// ******************** Read related methods implementation **********************
 	@Override
@@ -288,5 +293,22 @@ ApplicationService {
 					AppConstants.DASH_POST_URL);
 		}
 		
+	}
+
+	@Override
+	public List<String> getFileNames(Application application) {
+		List<String> results = new ArrayList<String>();
+
+		
+		
+		File[] files = new File(AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()).listFiles();
+		//If this pathname does not denote a directory, then listFiles() returns null. 
+
+		for (File file : files) {
+		    if (file.isFile()) {
+		        results.add(file.getName());
+		    }
+		}
+		return results;
 	}
 }

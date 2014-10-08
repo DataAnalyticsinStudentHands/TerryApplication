@@ -18,6 +18,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dash.errorhandling.AppException;
+import dash.filters.AppConstants;
 import dash.service.ApplicationService;
 
 /**
@@ -40,7 +43,6 @@ public class ApplicationResource {
 	@Autowired
 	private ApplicationService applicationService;
 
-	private static final String APPLICATION_UPLOAD_LOCATION_FOLDER = "/srv/uploads/terry_application";
 	
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -149,7 +151,9 @@ public class ApplicationResource {
 		
 		Application application= applicationService.getApplicationById(id);
 		
-		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+"/"
+		//TODO: Generate directory if not set
+		//if(application.getDocument_folder()==null)	
+		String uploadedFileLocation = AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+"/"
 				+application.getDocument_folder()+"/" + fileDetail.getFileName().replaceAll("%20", "_").toLowerCase();;
 		// save it
 		applicationService.uploadFile(uploadedInputStream, uploadedFileLocation, application);
@@ -158,6 +162,38 @@ public class ApplicationResource {
  
 		return Response.status(200).entity(output).build();
  
+	}
+	
+	@GET
+	@Path("/upload")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response getFileNames(@QueryParam("applicationId") Long id) throws AppException{
+		
+		Application application= applicationService.getApplicationById(id);
+		JaxbList<String> fileNames=new JaxbList<String>(applicationService.getFileNames(application));
+		return Response.status(200).entity(fileNames).build();
+	}
+	
+	//Gets a specific file and allows the user to download the pdf
+	@GET
+	@Path("/upload")
+	public Response getFile(@QueryParam("applicationId") Long id,
+			@QueryParam("fileName") String fileName) throws AppException {
+	    
+		fileName=fileName.replaceAll(" ", "_").toLowerCase();
+		
+		Application application= applicationService.getApplicationById(id);
+		
+		if(application==null){
+			return Response.status(Response.Status.BAD_REQUEST)
+					.entity("Invalid applicationId, unable to locate application with id: "+id).build();
+		}
+		
+		String uploadedFileLocation = AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()+"/" + fileName;
+		
+		
+		return Response.ok(applicationService.getUploadFile(uploadedFileLocation, application))
+				.type("application/pdf").build(); 
 	}
 	
 	@DELETE
@@ -170,7 +206,7 @@ public class ApplicationResource {
 		
 		Application application= applicationService.getApplicationById(id);
 		
-		String uploadedFileLocation = APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()+"/" + fileName;
+		String uploadedFileLocation = AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()+"/" + fileName;
 		// save it
 		applicationService.deleteUploadFile(uploadedFileLocation, application);
  
@@ -207,6 +243,22 @@ public class ApplicationResource {
 				// 204
 				.entity("All applications have been successfully removed")
 				.build();
+	}
+	
+	@XmlRootElement(name="fileNames")
+	public static class JaxbList<T>{
+	    protected List<T> list;
+
+	    public JaxbList(){}
+
+	    public JaxbList(List<T> list){
+	    	this.list=list;
+	    }
+
+	    @XmlElement(name="fileName")
+	    public List<T> getList(){
+	    	return list;
+	    }
 	}
 
 }
