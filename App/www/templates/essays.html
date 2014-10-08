@@ -22,13 +22,47 @@
 
             <div class="item item-divider">
                 Essay I: Significant Event and its Impact
+                <div data-tap-disable="true">
+            You can have any element as an upload button: <button ng-file-select="onFileSelect($files)" title="select file" data-tap-disabled="true">Click here to select file</button>
+    </div>
             </div>
 
             <p class="item">
                 Describe a significant setback, challenge or opportunity in your life and the impact that it has had on you.
             </p>
+            
+            <div class="row"  data-tap-disable="true">
+            <div class="col col-100 text-center">
+                <div class="text-center">
+                    <button class="button icon ion-filing" ng-file-select="onFileSelect($files)" title="select file" data-tap-disabled="true">Click here to select file</button>
+                </div>   
+            </div>
+        </div>
+            
+            <label for="file" class="item item-icon-right fileContainer">
+              <i class="icon ion-ios7-camera"></i>
+              Upload a file
+              <input id="file" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null">
+            </label>
 
-            You can have any element as an upload button: <div ng-file-select="onFileSelect($files)" data-multiple="true" title="select file"  class="button button-positive">Click here to select file</div>
+            
+            
+            <br/>
+		Progress:
+		<br/>
+		<br/>
+		<div ng-show="selectedFiles != null">
+			<div class="sel-file" ng-repeat="f in selectedFiles">
+				{{($index + 1) + '.'}}
+				<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
+				<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
+				<span class="progress" ng-show="progress[$index] >= 0">						
+					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+				</span>				
+				<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
+				{{f.name}} - size: {{f.size}}B - type: {{f.type}}
+			</div>
+		</div>
             <div class="item">
                 
                 
