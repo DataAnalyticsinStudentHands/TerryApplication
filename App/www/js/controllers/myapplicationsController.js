@@ -7,22 +7,15 @@
  * # MyapplicationsController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyapplicationsController', function ($scope, $location, ngNotify, $ionicModal, $ionicNavBarDelegate, $ionicPopup, MyApplicationsService) {
+angular.module('TerryControllers').controller('MyapplicationsController', function ($scope, $location, ngNotify, $ionicModal, $ionicNavBarDelegate, $ionicPopup, ApplicationService) {
     'use strict';
 
     $scope.myapplications = {};
-
-    // GET /applications
-    MyApplicationsService.getAllApplications().then(
+    
+    // GET 
+    ApplicationService.getAllApplications().then(
         function (myapplications) {
             $scope.myapplications = myapplications;
-        },
-        function (error) {
-            console.error(error);
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
@@ -33,15 +26,11 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     }).then(function (modal) {
         $scope.modal = modal;
     });
-
-
+    
     $scope.updateList = function () {
-        MyApplicationsService.getAllApplications().then(
+        ApplicationService.getAllApplications().then(
             function (result) {
                 $scope.myapplications = result;
-            },
-            function (error) {
-                console.error(error);
             }
         );
     };
@@ -51,7 +40,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     // callback for ng-click 'createApplication':
     $scope.createApplication = function () {
         if ($scope.myapplication.uh_id && $scope.myapplication.first_name && $scope.myapplication.last_name) {
-            MyApplicationsService.createApplication($scope.myapplication).then(
+            ApplicationService.createApplication($scope.myapplication).then(
                 function (result) {
                     $scope.myapplication.state = "Texas";
                     $scope.modal.hide();
@@ -85,7 +74,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
             template: 'Are you sure you want to delete your application?'
         }).then(function (res) {
             if (res) {
-                MyApplicationsService.deleteApplication($scope.myapplications[0].id).then(
+                ApplicationService.deleteApplication($scope.myapplications[0].id).then(
                     function (result) {
                         $scope.updateList();
                         ngNotify.set("Succesfully deleted your application.", {

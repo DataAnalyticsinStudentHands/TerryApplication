@@ -14,19 +14,28 @@
         <h1 class="title">Confirmation of Sumission</h1>
     </ion-header-bar>
     <ion-content>
-
         
+        <div class="list card">
+
+  <div class="item item-avatar">
+    <img src="mcfly.jpg">
+    <h2>Marty McFly</h2>
+    <p>November 05, 1955</p>
+  </div>
+
+  <div class="item item-body">
+    <ion-checkbox ng-model="isChecked">By checking this box</ion-checkbox>
+    <p>
+      I CERTIFY THAT I HAVE READ AND UNDERSTAND THE PRECEEDING PAGE and that the information I am providing is complete and correct to the best of my knowledge.  If my application is accepted, I agree to abide by the policies, rules, and regulations of the Terry Foundation.  I authorize the University of Houston and/or the Terry Foundation to verify the information I have provided.  I further understand that this information will be relied upon by the Terry Foundation in determining my financial eligibility and that the submission of false information is grounds for rejection of my application, and/or withdrawal of an offer of scholarship. 
+    </p>
+    
+  </div>
+
+  
+</div>
+            
         
-        <form name="submitform" on-valid-submit="save()">
-
-            <div class="row">
-
-                <div class="col col-25 item item-text-wrap">
-                    <h2>You made it!</h2> 
-                </div>
-                
-            </div>
            
-        </form>
+        
     </ion-content>
 </ion-view>

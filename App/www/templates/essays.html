@@ -15,71 +15,40 @@
     <ion-content>
 
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            For <u>BOTH</u> of the topics listed below, attach a typed essay of 250 words (minimum). Your full name and UH ID should appear legibly at the top of each page of your essays.
+            For <u>BOTH</u> of the topics listed below, attach a typed essay of 250 words (minimum) in PDF or MS Word format. Your full name and UH ID should appear legibly at the top of each page of your essays.
         </p>
 
         <div class="list">
 
             <div class="item item-divider">
                 Essay I: Significant Event and its Impact
-                <div data-tap-disable="true">
-            You can have any element as an upload button: <button ng-file-select="onFileSelect($files)" title="select file" data-tap-disabled="true">Click here to select file</button>
-    </div>
             </div>
 
-            <p class="item">
+            <p class="item item-text-wrap">
                 Describe a significant setback, challenge or opportunity in your life and the impact that it has had on you.
             </p>
-            
-            <div class="row"  data-tap-disable="true">
-            <div class="col col-100 text-center">
-                <div class="text-center">
-                    <button class="button icon ion-filing" ng-file-select="onFileSelect($files)" title="select file" data-tap-disabled="true">Click here to select file</button>
-                </div>   
-            </div>
-        </div>
-            
-            <label for="file" class="item item-icon-right fileContainer">
-              <i class="icon ion-ios7-camera"></i>
-              Upload a file
-              <input id="file" type="file" ng-file-select="onFileSelect($files)" onclick="this.value=null">
-            </label>
 
-            
-            
-            <br/>
-		Progress:
-		<br/>
-		<br/>
-		<div ng-show="selectedFiles != null">
-			<div class="sel-file" ng-repeat="f in selectedFiles">
-				{{($index + 1) + '.'}}
-				<img ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}">
-				<button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
-				<span class="progress" ng-show="progress[$index] >= 0">						
+
+
+            <div class="list card">
+                
+                    <label for="file" class="item item-icon-right fileContainer">
+                        <i class="icon ion-filing"></i>
+                        Upload Essay I
+                        <input id="file" type="file" ng-file-select="onFileSelect($files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </label>
+                
+                <div class="item" ng-show="selectedFiles != null">
+                            <div class="sel-file" ng-repeat="f in selectedFiles">
+                                <label>Progress:</label>
+                                <span class="progress" ng-show="progress[$index] >= 0">						
 					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
-				</span>				
-				<button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
-				{{f.name}} - size: {{f.size}}B - type: {{f.type}}
-			</div>
-		</div>
-            <div class="item">
-                
-                
-                
-                    <input type="file" ng-file-select="onFileSelect($files)" accept="application/pdf">
-                
-                
-                
+				</span>	
+                                <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
+                                {{f.name}} - size: {{f.size}}B
+                            </div>
+                </div>
             </div>
-            
-            
-            
-            
-            
-		</div>
-            
-            <button class="button button-positive" ng-click="upload.abort()">Cancel Upload</button>
             
             <div class="item item-divider">
                 Essay II: Leadership Experience
@@ -89,27 +58,32 @@
                 Describe an example of your leadership. Be sure to describe your actions and the actions of those around you and to explain what you accomplished.
             </p>
 
-            <div class="item">
-                <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
-                <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
-                <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function" ng-show="dropSupported">drop files here</div>
-                <div ng-file-drop-available="dropSupported=true" ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-                <button class="button button-positive" ng-click="upload.abort()">Cancel Upload</button>
+<div class="list card">
+                
+                    <label for="file" class="item item-icon-right fileContainer">
+                        <i class="icon ion-filing"></i>
+                        Upload Essay II
+                        <input id="file" type="file" ng-file-select="onFileSelect($files, 'essay2')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </label>
+                
+                <div class="item" ng-show="selectedFiles != null">
+                            <div class="sel-file" ng-repeat="f in selectedFiles">
+                                <label>Progress:</label>
+                                <span class="progress" ng-show="progress[$index] >= 0">						
+					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+				</span>	
+                                <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
+                                {{f.name}} - size: {{f.size}}B
+                            </div>
+                </div>
             </div>
-
         </div>
 
-
-<!-- Next button -->
+        <!-- Next button -->
         <div class="row">
             <div class="col col-25 col-offset-75">
                 <a type="button" class="button button-block button-positive" ui-sref="tabs.myapplication.submit">Next</a>
             </div>
         </div>
-
-
-         
-
-
     </ion-content>
 </ion-view>

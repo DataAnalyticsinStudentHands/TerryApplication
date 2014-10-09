@@ -19,7 +19,7 @@ angular.module('TerryServices').factory('DataService', function (Restangular, $q
                     return result;
                 },
                 function (error) {
-                    ngNotify.set("Something went wrong retireving data for " + type, {
+                    ngNotify.set("Something went wrong retrieving data for " + type, {
                         position: 'bottom',
                         type: 'error'
                     });

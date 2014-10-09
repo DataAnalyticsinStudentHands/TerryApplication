@@ -7,7 +7,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyApplicationService, DataService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService) {
     'use strict';
 
     $scope.mail_options = [
@@ -30,9 +30,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
     $scope.myVariables = {
         current_mode: 'Add',
+        checking: 'false',
         number_errors: 0,
         error: 'false',
-        error_employment: 'false'
+        error_employment: 'false',
+        error_activity: 'false',
+        error_volunteer: 'false',
+        error_award: 'false',
+        error_childrn: 'false',
+        error_universities: 'false',
+        error_scholarships: 'false'
     };
 
     $scope.myapplication = {};
@@ -41,10 +48,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.mychildren = {};
     
     // GET 
-    MyApplicationService.getMyApplication($stateParams.applicationId).then(
+    ApplicationService.getApplication($stateParams.applicationId).then(
         function (result) {
-            result = Restangular.stripRestangular(result);
-            if ($stateParams.applicationId !== "") {
+                if ($stateParams.applicationId !== "") {
                 $scope.myapplication = result;
                 //set selected state
                 if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
@@ -89,19 +95,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
                 }
 
-            }
-        },
-        function (error) {
-            if (error.status === 0) {
-                ngNotify.set("Internet or Server unavailable.", {
-                    type: "error",
-                    sticky: true
-                });
-            } else {
-                ngNotify.set("Something went wrong retrieving data.", {
-                    type: "error",
-                    sticky: true
-                });
             }
         }
     );
@@ -242,7 +235,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         switch (acType) {
         case 'university':
             // GET 
-            DataService.getAllUniversity(acType).then(
+            DataService.getAllItems(acType).then(
                 function (result) {
                     $scope.myuniversities = result;
                 }
@@ -250,17 +243,17 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             break;
         case 'scholarship':
             // GET 
-            DataService.getAllUniversity(acType).then(
+            DataService.getAllItems(acType).then(
                 function (result) {
-                    $scope.myuniversities = result;
+                    $scope.myscholarships = result;
                 }
             );
             break;
         case 'child':
             // GET 
-            DataService.getAllUniversity(acType).then(
+            DataService.getAllItems(acType).then(
                 function (result) {
-                    $scope.myuniversities = result;
+                    $scope.mychildren = result;
                 }
             );
             break;
@@ -356,7 +349,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
         $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
 
-        MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
+        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
                 ngNotify.set("Saved to server.", {
                     position: 'bottom',
@@ -375,6 +368,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         );
         //check the lists for not empty
         var myemployments;
+        var mycoursework;
 
         // GET 
         DataService.getAllItems('employment').then(
@@ -383,12 +377,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 if (Object.keys(myemployments).length === 0) {
                     $scope.myVariables.error_employment = 'true';
                 }
-            },
-            function (error) {
-                ngNotify.set("Something went wrong retrieving data.", {
-                    type: "error",
-                    sticky: true
-                });
+            }
+        );
+        
+        // GET 
+        DataService.getAllItems('employment').then(
+            function (result) {
+                myemployments = result;
+                if (Object.keys(myemployments).length === 0) {
+                    $scope.myVariables.error_employment = 'true';
+                }
             }
         );
 
@@ -412,7 +410,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.myVariables.number_errors = 116 - len;
 
         if ($scope.myVariables.number_errors !== 0) {
-            $scope.myVariables.error = 'true';
+            $scope.myVariables.error = 'false';
         }
 
         //display result of check
@@ -437,7 +435,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.save = function (nextstate) {
         $scope.myapplication.state = $scope.myVariables.myState.name;
 
-        MyApplicationService.updateMyApplication($scope.myapplication.id, $scope.myapplication).then(
+        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
                 ngNotify.set("Saved to server.", {
                     position: 'bottom',
