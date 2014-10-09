@@ -46,11 +46,11 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.myscholarships = {};
     $scope.myuniversities = {};
     $scope.mychildren = {};
-    
+
     // GET 
     ApplicationService.getApplication($stateParams.applicationId).then(
         function (result) {
-                if ($stateParams.applicationId !== "") {
+            if ($stateParams.applicationId !== "") {
                 $scope.myapplication = result;
                 //set selected state
                 if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
@@ -94,7 +94,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 } else {
                     $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
                 }
-
             }
         }
     );
@@ -153,18 +152,18 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             ]
         });
     };
-        
+
     // callback for ng-click 'showAddModal':
     $scope.showAddModal = function (acType, applied_received) {
-        
+
         $scope.myVariables.current_mode = "Add";
         $scope.myemployment = {};
         $scope.myscholarship = {};
-        
+
         if (applied_received !== undefined) {
             $scope.myscholarship.applied_received = applied_received;
         }
-        
+
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -341,8 +340,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         });
     };
 
-    // callback for ng-submit 'check': check application 
-    $scope.check = function () {
+
+    $scope.saveToserver = function () {
         //save data to server
         $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
         $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
@@ -351,12 +350,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
         ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
-                ngNotify.set("Saved to server.", {
-                    position: 'bottom',
-                    type: 'success'
-                });
-                //if succesful => send to next page
-
+                result = Restangular.stripRestangular(result);
+                $scope.myapplication = result;
             },
             function (error) {
                 ngNotify.set("Could not contact server to save application!", {
@@ -366,6 +361,45 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
             }
         );
+    };
+
+    // callback for ng-submit 'check': check application 
+    $scope.check = function () {
+        $scope.saveToserver();
+
+
+        var thingsToCheck = ['student_information'];
+        var thing;
+        for (thing in thingsToCheck) {
+            //check using form.json
+            $scope.myVariables.errors[thing] = [];
+
+            $http.get('json/form_application.json').success(function (data) {
+                var validation_messages = data.filter(function (obj) {
+                    return obj.form === thing;
+                });
+
+                var key;
+                for (key in validation_messages) {
+                    if (validation_messages.hasOwnProperty(key)) {
+                        var obj = validation_messages[key];
+
+                        if (obj.required === 'true') {
+                            if (!$scope.myapplication.hasOwnProperty(obj.name)) {
+                                console.log(obj.name);
+                                $scope.myVariables.errors[thing].push(obj.name);
+                            }
+                        }
+                    }
+                }
+            });
+
+            if ($scope.myVariables.errors[thing].lenght !== 0) {
+                $scope.myVariables.error[thing] = 'true';
+            }
+        }
+
+
         //check the lists for not empty
         var myemployments;
         var mycoursework;
@@ -379,7 +413,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 }
             }
         );
-        
+
         // GET 
         DataService.getAllItems('employment').then(
             function (result) {
@@ -407,7 +441,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             };
         }
 
-        $scope.myVariables.number_errors = 116 - len;
+        $scope.myVariables.number_errors = 112 - len;
 
         if ($scope.myVariables.number_errors !== 0) {
             $scope.myVariables.error = 'false';
@@ -434,6 +468,10 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function (nextstate) {
         $scope.myapplication.state = $scope.myVariables.myState.name;
+        if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
+            $scope.myapplication.permanent_resident = 'false';
+            $scope.myapplication.permanent_resident_card = 'false';
+        }
 
         ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
