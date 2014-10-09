@@ -45,7 +45,7 @@ public class ActivityResource {
 				.createActivity(activity);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Activity has been created")
+				.entity(createActivityId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createActivityId)).build();

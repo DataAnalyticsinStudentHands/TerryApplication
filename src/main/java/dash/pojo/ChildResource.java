@@ -45,7 +45,7 @@ public class ChildResource {
 				.createChild(child);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Child has been created")
+				.entity(createChildId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createChildId)).build();

@@ -7,7 +7,7 @@
  * # MyCourseworkController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, MyCourseworkService) {
+angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService) {
     'use strict';
     
     //Load some variables
@@ -27,16 +27,9 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     var currentLevel = "sophomore";
 
     // GET
-    MyCourseworkService.getAllCoursework().then(
+    DataService.getAllItems('coursework').then(
         function (result) {
             $scope.mycourses = result;
-        },
-        function (error) {
-            console.error(error);
-            ngNotify.set("Something went wrong retrieving data.", {
-                type: "error",
-                sticky: true
-            });
         }
     );
 
@@ -47,7 +40,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
             template: 'Are you sure you want to delete your course from the list?'
         }).then(function (res) {
             if (res) {
-                MyCourseworkService.deleteCoursework(courseId).then(
+                DataService.deleteItem('coursework', courseId).then(
                     function (success) {
                         $scope.updateLists();
                     }
@@ -83,7 +76,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         if ($scope.mycourse.name && $scope.mycourse.credit_hours && $scope.mycourse.final_grade) {
 
             if ($scope.myVariables.current_mode === 'Add') {
-                MyCourseworkService.addCoursework($scope.mycourse).then(
+                DataService.addItem('coursework', $scope.mycourse).then(
                     function (result) {
                         $scope.updateLists();
                         ngNotify.set("Succesfully added your coursework.", {
@@ -100,7 +93,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
                     }
                 );
             } else {
-                MyCourseworkService.updateCoursework($scope.mycourse.id, $scope.mycourse).then(
+                DataService.updateItem('coursework', $scope.mycourse.id, $scope.mycourse).then(
                     function (result) {
                         $scope.updateLists();
                         ngNotify.set("Succesfully updated your coursework.", {
@@ -149,16 +142,9 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
 
     // Update lists
     $scope.updateLists = function () {
-        MyCourseworkService.getAllCoursework().then(
+        DataService.getAllItems('coursework').then(
             function (result) {
                 $scope.mycourses = result;
-            },
-            function (error) {
-                console.error(error);
-                ngNotify.set("Something went wrong retrieving data.", {
-                    type: "error",
-                    sticky: true
-                });
             }
         );
     };

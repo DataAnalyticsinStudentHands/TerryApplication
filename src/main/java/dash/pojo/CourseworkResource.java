@@ -45,7 +45,7 @@ public class CourseworkResource {
 				.createCoursework(coursework);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Coursework has been created")
+				.entity(createCourseworkId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createCourseworkId)).build();

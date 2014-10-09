@@ -11,6 +11,7 @@
 angular.module('TerryServices').factory('MyApplicationService', function (Restangular, $q) {
     
     return {
+        
         getMyApplication:
             function (application_id) {
                 return Restangular.all("applications").get(application_id);

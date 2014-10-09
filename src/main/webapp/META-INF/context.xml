@@ -18,8 +18,8 @@
 	   removeAbandoned="true"
 	   removeAbandonedTimeout="233"
 	   username="sqluser"
-	   password="*****"
+	   password="hs@SQL2011"
 	   driverClassName="com.mysql.jdbc.Driver"
-	   url="jdbc:mysql://localhost:3306/testApp?allowMultiQueries=true"
+	   url="jdbc:mysql://localhost:3306/terry2015?allowMultiQueries=true"
    /> 
 </Context>

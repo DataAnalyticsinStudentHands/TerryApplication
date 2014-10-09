@@ -338,13 +338,13 @@
             
             <div class="item item-button-left dark">
                 List Children
-                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal(3)"></button>
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('child')"></button>
             </div>
 
             <div class="list list-inset">
                 <div class="item" ng-repeat="item in mychildren" item="item">
-                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('children', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('children', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.school}} {{item.year}} {{item.self_supporting}}</button>
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('child', item)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.school}} {{item.year}} {{item.self_supporting}}</button>
                 </div>
             </div>
             

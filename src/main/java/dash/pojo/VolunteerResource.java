@@ -45,7 +45,7 @@ public class VolunteerResource {
 				.createVolunteer(volunteer);
 		return Response.status(Response.Status.CREATED)
 				// 201
-				.entity("A new Volunteer has been created")
+				.entity(createVolunteerId.toString())
 				.header("Location",
 						"http://..../applications/"
 								+ String.valueOf(createVolunteerId)).build();
