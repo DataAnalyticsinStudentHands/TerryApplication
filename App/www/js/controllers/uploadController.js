@@ -19,8 +19,9 @@ angular.module('TerryControllers').controller('UploadController', function ($sco
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
-
-
+    
+    $scope.documents = {};
+    
     $scope.fileName = 'essay1';
     
     $scope.usingFlash = FileAPI && FileAPI.upload !== null;

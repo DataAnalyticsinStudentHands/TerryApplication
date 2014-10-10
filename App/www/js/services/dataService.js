@@ -11,6 +11,17 @@ angular.module('TerryServices').factory('DataService', function (Restangular, $q
     'use strict';
 
     return {
+        getAllItemsRes: function (type) {
+            var deferred = $q.defer();
+            Restangular.all(type).getList().then(
+                function (result) {
+                    deferred.resolve(result);
+                }
+
+            );
+
+            return deferred.promise;
+        },
         getAllItems: function (type) {
 
             return Restangular.all(type).getList().then(
@@ -62,9 +73,9 @@ angular.module('TerryServices').factory('DataService', function (Restangular, $q
                 }
             );
         },
-        deleteItem: function (type, item) {
+        deleteItem: function (type, item_id) {
 
-            return Restangular.all(type).all(item.id).remove().then(
+            return Restangular.all(type).all(item_id).remove().then(
                 function (result) {
                     ngNotify.set("Succesfully deleted your " + type + " .", {
                         position: 'bottom',

@@ -7,7 +7,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService) {
     'use strict';
 
     $scope.mail_options = [
@@ -24,22 +24,18 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.states = data;
     });
 
+    //Load some variables
+    $http.get('json/form_application.json').success(function (data) {
+        $scope.formObjects = data;
+    });
+
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
 
     $scope.myVariables = {
         current_mode: 'Add',
-        checking: 'false',
-        number_errors: 0,
-        error: 'false',
-        error_employment: 'false',
-        error_activity: 'false',
-        error_volunteer: 'false',
-        error_award: 'false',
-        error_childrn: 'false',
-        error_universities: 'false',
-        error_scholarships: 'false'
+        problems: 'false'
     };
 
     $scope.myapplication = {};
@@ -303,13 +299,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     };
 
     // callback for ng-click 'deleteData':
-    $scope.deleteData = function (acType, item) {
+    $scope.deleteData = function (acType, item_id) {
 
         $ionicPopup.confirm({
             title: 'Confirm Delete',
-            template: 'Are you sure you want to delete your course from the list?'
+            template: 'Are you sure you want to delete your ' + acType + ' item from the list?'
         }).then(function (res) {
-            DataService.deleteItem(acType, item).then(
+            DataService.deleteItem(acType, item_id).then(
                 function (success) {
                     $scope.updateList(acType);
                 }
@@ -367,84 +363,74 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.check = function () {
         $scope.saveToserver();
 
+        $scope.errors = {};
+        $scope.error = {};
 
-        var thingsToCheck = ['student_information'];
-        var thing;
-        for (thing in thingsToCheck) {
-            //check using form.json
-            $scope.myVariables.errors[thing] = [];
+        var thingsToCheck = ['student_information', 'highschool_information'];
 
-            $http.get('json/form_application.json').success(function (data) {
-                var validation_messages = data.filter(function (obj) {
+        function doChecking(i) {
+            if (i in thingsToCheck) {
+                var thing = thingsToCheck[i];
+                //check using form.json
+                $scope.errors[thing] = [];
+                var key;
+
+                var objectsToCheck = $scope.formObjects.filter(function (obj) {
                     return obj.form === thing;
                 });
-
-                var key;
-                for (key in validation_messages) {
-                    if (validation_messages.hasOwnProperty(key)) {
-                        var obj = validation_messages[key];
+                for (key in objectsToCheck) {
+                    if (objectsToCheck.hasOwnProperty(key)) {
+                        var obj = objectsToCheck[key];
 
                         if (obj.required === 'true') {
                             if (!$scope.myapplication.hasOwnProperty(obj.name)) {
                                 console.log(obj.name);
-                                $scope.myVariables.errors[thing].push(obj.name);
+                                $scope.errors[thing].push(obj.name);
                             }
                         }
                     }
                 }
-            });
 
-            if ($scope.myVariables.errors[thing].lenght !== 0) {
-                $scope.myVariables.error[thing] = 'true';
+                if ($scope.errors[thing].lenght !== 0) {
+                    $scope.error[thing] = 'true';
+                }
             }
         }
 
+        var len = thingsToCheck.length;
+        for (var i = 0; i < len; ++i) {
+            doChecking(i);
+        }
 
         //check the lists for not empty
-        var myemployments;
-        var mycoursework;
+        var listsToCheck = ['coursework', 'employment'];
 
-        // GET 
-        DataService.getAllItems('employment').then(
-            function (result) {
-                myemployments = result;
-                if (Object.keys(myemployments).length === 0) {
-                    $scope.myVariables.error_employment = 'true';
-                }
-            }
-        );
+        function listChecking(i) {
+            if (i in listsToCheck) {
+                var thing = listsToCheck[i];
 
-        // GET 
-        DataService.getAllItems('employment').then(
-            function (result) {
-                myemployments = result;
-                if (Object.keys(myemployments).length === 0) {
-                    $scope.myVariables.error_employment = 'true';
-                }
-            }
-        );
-
-        //check 
-        var toTest = $scope.myapplication,
-            len = Object.keys(toTest).length;
-
-        if (!Object.keys) {
-            Object.keys = function (toTest) {
-                var keys = [],
-                    k;
-                for (k in $scope.myapplication) {
-                    if (Object.prototype.hasOwnProperty.call(toTest, k)) {
-                        keys.push(k);
+                $scope.error[thing] = 'false';
+                // GET 
+                DataService.getAllItemsRes(thing).then(
+                    function (result) {
+                        if (Object.keys(result).length === 0) {
+                            $scope.error[thing] = 'true';
+                        }
                     }
-                }
-                return keys;
-            };
+                );
+            }
         }
 
-        $scope.myVariables.number_errors = 112 - len;
+        var len2 = listsToCheck.length;
+        for (var y = 0; y < len2; ++y) {
+            listChecking(y);
+        }
 
-        if ($scope.myVariables.number_errors !== 0) {
-            $scope.myVariables.error = 'false';
+        //update general problems value
+        for (var value in $scope.error) {
+            if ($scope.error[value] === 'true') {
+                $scope.myVariables.problems = 'true';
+            }
         }
 
         //display result of check
@@ -460,7 +446,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.checked = function (nextstate) {
 
         $scope.modal.hide();
-        if ($scope.myVariables.error === 'false') {
+        if ($scope.myVariables.problems === 'false') {
             $state.go(nextstate);
         }
     };

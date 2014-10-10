@@ -45,8 +45,8 @@ angular.module('TerryServices').factory('ApplicationService', function (Restangu
         createApplication: function (application) {
             return Restangular.all("applications").post(application);
         },
-        updateApplication: function (id, application) {
-            return Restangular.all("applications").all(id).post(application);
+        updateApplication: function (application_id, application) {
+            return Restangular.all("applications").all(application_id).post(application);
         },
         getListofDocuments: function (application_id) {
             return Restangular.all("applications/upload").get(application_id);

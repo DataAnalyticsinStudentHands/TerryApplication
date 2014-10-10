@@ -34,13 +34,13 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     );
 
     // callback for ng-click 'deleteCourse':
-    $scope.deleteCourse = function (courseId) {
+    $scope.deleteCourse = function (course_Id) {
         $ionicPopup.confirm({
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete your course from the list?'
         }).then(function (res) {
             if (res) {
-                DataService.deleteItem('coursework', courseId).then(
+                DataService.deleteItem('coursework', course_Id).then(
                     function (success) {
                         $scope.updateLists();
                     }

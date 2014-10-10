@@ -58,12 +58,12 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     );
 
     // callback for ng-click 'deleteData':
-    $scope.deleteData = function (acType, item) {
+    $scope.deleteData = function (acType, item_id) {
         $ionicPopup.confirm({
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete one ' + acType + ' from the list?'
         }).then(function (res) {
-            DataService.deleteItem(acType, item).then(
+            DataService.deleteItem(acType, item_id).then(
                 function (success) {
                     $scope.updateLists(acType);
                 }
