@@ -404,29 +404,29 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
         //check the lists for not empty
         var listsToCheck = ['coursework', 'employment'];
+        var promises = [];
 
-        function listChecking(i) {
-            if (i in listsToCheck) {
-                var thing = listsToCheck[i];
+        var len2 = listsToCheck.length;
+        for (var y = 0; y < len2; ++y) {
+                var thing = listsToCheck[y];
 
                 $scope.error[thing] = 'false';
                 // GET 
-                DataService.getAllItemsRes(thing).then(
+                promises.push(DataService.getAllItems(thing).then(
                     function (result) {
                         if (Object.keys(result).length === 0) {
                             $scope.error[thing] = 'true';
                         }
                     }
-                );
-            }
+                ));
+            
         }
 
-        var len2 = listsToCheck.length;
-        for (var y = 0; y < len2; ++y) {
-            listChecking(y);
-        }
-
-        //update general problems value
+        $scope.fromThen = $q.all(promises)
+            .then(function (values) {
+                console.log(values);
+            
+            //update general problems value
         for (var value in $scope.error) {
             if ($scope.error[value] === 'true') {
                 $scope.myVariables.problems = 'true';
@@ -441,6 +441,10 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.modal = modal;
             $scope.modal.show();
         });
+                return values;
+            });
+
+        
     };
 
     $scope.checked = function (nextstate) {
