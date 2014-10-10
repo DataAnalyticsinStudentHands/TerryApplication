@@ -8,7 +8,7 @@
  * Controller for the terry
  */
 angular.module('TerryControllers')
-.controller('SignInController', function($scope, Auth, $state, ngNotify, $timeout) {
+.controller('SignInController', function($scope, $state, ngNotify, $timeout, Auth) {
     
      $scope.signin = {};
      if($scope.isAuthenticated() === true) {
