@@ -1,4 +1,5 @@
 /*global angular, console*/
+/*jslint plusplus: true */
 
 /**
  * @ngdoc function
@@ -7,9 +8,20 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService) {
+angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
     'use strict';
 
+    $scope.user = {};
+
+    UserService.getUser().then(
+        function (result) {
+            result = Restangular.stripRestangular(result)[0];
+            $scope.user = result;
+        },
+        function (error) {
+        }
+    );
+    
     $scope.mail_options = [
         {
             "name": "online"
@@ -24,7 +36,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.states = data;
     });
 
-    //Load some variables
     $http.get('json/form_application.json').success(function (data) {
         $scope.formObjects = data;
     });
@@ -135,6 +146,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                             //don't allow the user to close unless he enters wifi password
                             e.preventDefault();
                         } else {
+                            $scope.myuniversity = {};
                             $scope.myuniversity.application_id = $stateParams.applicationId;
                             $scope.myuniversity.name = $scope.myVariables.university;
                             DataService.addItem(acType, $scope.myuniversity).then(
@@ -263,14 +275,14 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.myscholarship.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addScholarship(acType, $scope.myscholarship).then(
+                DataService.addItem(acType, $scope.myscholarship).then(
                     function (success) {
                         $scope.updateList(acType);
                         $scope.modal.hide();
                     }
                 );
             } else {
-                DataService.updateScholarship(acType, $scope.myscholarship.id, $scope.myscholarship).then(
+                DataService.updateItem(acType, $scope.myscholarship.id, $scope.myscholarship).then(
                     function (success) {
                         $scope.modal.hide();
                     }
@@ -281,14 +293,14 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.mychild.application_id = $stateParams.applicationId;
 
             if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addChild(acType, $scope.mychild).then(
+                DataService.addItem(acType, $scope.mychild).then(
                     function (success) {
                         $scope.updateList(acType);
                         $scope.modal.hide();
                     }
                 );
             } else {
-                DataService.updateChild(acType, $scope.mychild.id, $scope.mychild).then(
+                DataService.updateItem(acType, $scope.mychild.id, $scope.mychild).then(
                     function (success) {
                         $scope.modal.hide();
                     }
@@ -317,7 +329,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.tmp = {};
 
         var datePopup = $ionicPopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate" data-datetimepicker-config="{ startView:'day', minView:'day' }"></datetimepicker>',
+            template: '<datetimepicker data-ng-model="tmp.newDate" data-datetimepicker-config="{ startView:\'year\', minView:\'day\' }"></datetimepicker>',
             title: title,
             scope: $scope,
             buttons: [
@@ -346,8 +358,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
         ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
-                result = Restangular.stripRestangular(result);
-                $scope.myapplication = result;
+                //do nothing
             },
             function (error) {
                 ngNotify.set("Could not contact server to save application!", {
@@ -359,6 +370,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         );
     };
 
+    $scope.filterBy = function (type) {
+        return $scope.formObjects.filter(function (obj) {
+            return obj.form === type;
+        });
+    };
+
+    $scope.testFunction = function (something) {
+
+    };
+
     // callback for ng-submit 'check': check application 
     $scope.check = function () {
         $scope.saveToserver();
@@ -366,85 +387,95 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         $scope.errors = {};
         $scope.error = {};
 
-        var thingsToCheck = ['student_information', 'highschool_information'];
+        //check using form.json
+        var i, j, l, k, key, objectsToCheck, obj, thingsToCheck = ['student_information', 'highschool_information', 'college_plans', 'financial_information', 'scholarship_information'];
 
-        function doChecking(i) {
-            if (i in thingsToCheck) {
-                var thing = thingsToCheck[i];
-                //check using form.json
-                $scope.errors[thing] = [];
-                var key;
+        for (i = 0, l = thingsToCheck.length; i < l; i++) {
+            objectsToCheck = $scope.filterBy(thingsToCheck[i]);
 
-                var objectsToCheck = $scope.formObjects.filter(function (obj) {
-                    return obj.form === thing;
-                });
-                for (key in objectsToCheck) {
-                    if (objectsToCheck.hasOwnProperty(key)) {
-                        var obj = objectsToCheck[key];
+            $scope.errors[thingsToCheck[i]] = [];
+            for (key in objectsToCheck) {
+                if (objectsToCheck.hasOwnProperty(key)) {
+                    obj = objectsToCheck[key];
 
-                        if (obj.required === 'true') {
-                            if (!$scope.myapplication.hasOwnProperty(obj.name)) {
-                                console.log(obj.name);
-                                $scope.errors[thing].push(obj.name);
-                            }
+                    if (obj.required === 'true') {
+                        if (!$scope.myapplication.hasOwnProperty(obj.name)) {
+                            $scope.errors[thingsToCheck[i]].push(obj.name);
                         }
                     }
                 }
-
-                if ($scope.errors[thing].lenght !== 0) {
-                    $scope.error[thing] = 'true';
-                }
             }
-        }
 
-        var len = thingsToCheck.length;
-        for (var i = 0; i < len; ++i) {
-            doChecking(i);
+            if ($scope.errors[thingsToCheck[i]].length > 0) {
+                $scope.error[thingsToCheck[i]] = 'true';
+            }
         }
 
         //check the lists for not empty
-        var listsToCheck = ['coursework', 'employment'];
-        var promises = [];
+        var listsToCheck = ['activity', 'award', 'child', 'coursework', 'employment', 'scholarship', 'university', 'volunteer'];
+        var listPromises = [];
+        $scope.listerror = {};
 
-        var len2 = listsToCheck.length;
-        for (var y = 0; y < len2; ++y) {
-                var thing = listsToCheck[y];
-
-                $scope.error[thing] = 'false';
-                // GET 
-                promises.push(DataService.getAllItems(thing).then(
-                    function (result) {
-                        if (Object.keys(result).length === 0) {
-                            $scope.error[thing] = 'true';
-                        }
+        for (j = 0, k = listsToCheck.length; j < k; j++) {
+            listPromises.push(DataService.getAllItems(listsToCheck[j]).then(
+                function (result) {
+                    $scope.listerror[result.type] = 'false';
+                    if (result.length === 0) {
+                        $scope.listerror[result.type] = 'true';
                     }
-                ));
-            
+                    
+                    //we should check courses at each level
+                    if (result.type === 'coursework') {
+                        
+                        console.log("course " + result);
+                    }
+                }
+            ));
         }
 
-        $scope.fromThen = $q.all(promises)
+        //after checking individual lists, sift through the results
+        $scope.fromThen = $q.all(listPromises)
             .then(function (values) {
-                console.log(values);
-            
-            //update general problems value
-        for (var value in $scope.error) {
-            if ($scope.error[value] === 'true') {
-                $scope.myVariables.problems = 'true';
-            }
-        }
 
-        //display result of check
-        $ionicModal.fromTemplateUrl('templates/modal_check.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modal = modal;
-            $scope.modal.show();
-        });
+                //check coursework page TODO
+                
+
+                //check employment page
+                var i, l, goThroughLists = ['activity', 'award', 'employment', 'volunteer'];
+                $scope.errors.employment = [];
+                for (i = 0, l = goThroughLists.length; i < l; i++) {
+                    if ($scope.listerror[goThroughLists[i]] === 'true') {
+                        $scope.error.employment = 'true';
+                        $scope.errors.employment.push(goThroughLists[i]);
+                    }
+                }
+
+                //additional check for college plans page: list universities
+                if ($scope.listerror.university === 'true') {
+                    $scope.error.college_plans = 'true';
+                    if ($scope.errors.college_plans === undefined) {
+                        $scope.errors.college_plans = [];
+                    }
+                    $scope.errors.college_plans.push('university list');
+                }
+
+                //update general problems value
+                for (var value in $scope.error) {
+                    if ($scope.error[value] === 'true') {
+                        $scope.myVariables.problems = 'true';
+                    }
+                }
+
+                //display result of check
+                $ionicModal.fromTemplateUrl('templates/modal_check.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) {
+                    $scope.modal = modal;
+                    $scope.modal.show();
+                });
                 return values;
             });
-
-        
     };
 
     $scope.checked = function (nextstate) {

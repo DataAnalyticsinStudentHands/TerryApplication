@@ -306,6 +306,9 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "financial_assistance")
 	private String financial_assistance;
 	
+	@XmlElement(name = "assistance_type")
+	private String assistance_type;
+	
 	@XmlElement(name = "assistance_amount")
 	private Integer assistance_amount;
 	
@@ -1137,6 +1140,14 @@ public class Application implements  Serializable, IAclObject{
 
 	public void setFinancial_assistance(String financial_assistance) {
 		this.financial_assistance = financial_assistance;
+	}
+
+	public String getAssistance_type() {
+		return assistance_type;
+	}
+
+	public void setAssistance_type(String assistance_type) {
+		this.assistance_type = assistance_type;
 	}
 
 	public Integer getAssistance_amount() {

@@ -38,43 +38,43 @@
                 <i class="icon ion-close-round assertive"></i>
                 III. High School Coursework 
             </a>
-            <a ng-hide="error_employment" class="item item-icon-right" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
+            <a ng-hide="error.employment" class="item item-icon-right" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
                 IV. Employment
             </a>
-            <a ng-show="error_employment" class="item item-icon-right" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
+            <a ng-show="error.employment" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                IV. Employment
+                IV. Employment missing values in lists: {{errors.employment}}
             </a>
-            <a ng-hide="error" class="item item-icon-right" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
+            <a ng-hide="error.college_plans" class="item item-icon-right" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
                 V. College Plans
             </a>
-            <a ng-show="error" class="item item-icon-right" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
+            <a ng-show="error.college_plans" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                V. College Plans
+                V. College Plans {{errors.college_plans}}
             </a>
-            <a ng-hide="error" class="item item-icon-right" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
+            <a ng-hide="error.financial_information" class="item item-icon-right" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
                 VI. Financial Information
             </a>
-            <a ng-show="error" class="item item-icon-right" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
+            <a ng-show="error.financial_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                VI. Financial Information
+                VI. Financial Information {{errors.financial_information}}
             </a>
-            <a ng-hide="error" class="item item-icon-right" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
+            <a ng-hide="error.scholarship" class="item item-icon-right" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
                 VII. University Scholarship Information
             </a>
-            <a ng-show="error" class="item item-icon-right" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
+            <a ng-show="error.scholarship" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                VII. University Scholarship Information
+                VII. University Scholarship Information {{errors.scholarship}}
             </a>
-            <a ng-hide="error" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
+            <a ng-hide="error.essays" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
                 VIII. Essays
             </a>
-            <a ng-show="error" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
+            <a ng-show="error.essays" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
                 VIII. Essays
             </a>

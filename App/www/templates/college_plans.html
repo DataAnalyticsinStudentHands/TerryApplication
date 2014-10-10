@@ -46,7 +46,7 @@
             <div class="list list-inset">
                 <div class="item" ng-repeat="item in myuniversities" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('university', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('university', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}</button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('university', item)">&nbsp;&nbsp;&nbsp;&nbsp;University Name: {{item.name}}</button>
                 </div>
             </div>
 

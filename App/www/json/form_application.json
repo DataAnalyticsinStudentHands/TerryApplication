@@ -302,7 +302,7 @@
         "form": "highschool_information",
         "id": 39,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "sat_reading",
@@ -342,7 +342,7 @@
         "form": "highschool_information",
         "id": 44,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "act_composite",
@@ -358,7 +358,7 @@
         "form": "highschool_information",
         "id": 46,
         "type": "date",
-        "required": "true"
+        "required": "false"
         },
     {
         "name": "national_merit",
@@ -374,7 +374,7 @@
         "form": "highschool_information",
         "id": 48,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "national_achievement",
@@ -390,7 +390,7 @@
         "form": "highschool_information",
         "id": 50,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "national_hispanic",
@@ -406,12 +406,12 @@
         "form": "highschool_information",
         "id": 52,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "first_graduate",
         "label": "Will you be the first in your family to graduate college?",
-        "form": "highschool_information",
+        "form": "college_plans",
         "id": 53,
         "type": "text",
         "required": "true"
@@ -419,7 +419,7 @@
     {
         "name": "why_apply",
         "label": "Why have you chosen to apply to the University of Houston?",
-        "form": "highschool_information",
+        "form": "college_plans",
         "id": 54,
         "type": "text",
         "required": "true"
@@ -427,7 +427,7 @@
     {
         "name": "why_major",
         "label": "Why have you chosen your academic major(s)?",
-        "form": "highschool_information",
+        "form": "college_plans",
         "id": 55,
         "type": "text",
         "required": "true"
@@ -435,7 +435,7 @@
     {
         "name": "educational_plans",
         "label": "Briefly describe any educational plans you have beyond earning your Bachelor’s degree:",
-        "form": "highschool_information",
+        "form": "college_plans",
         "id": 56,
         "type": "text",
         "required": "true"
@@ -443,7 +443,7 @@
     {
         "name": "life_goals",
         "label": "What are some of your life’s goals and objectives?",
-        "form": "highschool_information",
+        "form": "college_plans",
         "id": 57,
         "type": "text",
         "required": "true"
@@ -653,7 +653,7 @@
         "form": "financial_information",
         "id": 83,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "decreased",
@@ -661,7 +661,7 @@
         "form": "financial_information",
         "id": 84,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "family_attending_college",
@@ -780,7 +780,8 @@
         "label": "Please indicate any college or departmental scholarships specific to your intended major for which you are applying:",
         "form": "scholarship_information",
         "id": 99,
-        "type": "text"
+        "type": "text",
+        "required": "false"
     },
     {
         "name": "app_uh_method",

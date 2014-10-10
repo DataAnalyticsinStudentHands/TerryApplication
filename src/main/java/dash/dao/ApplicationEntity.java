@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.hibernate.annotations.Generated;
 
 import dash.pojo.Application;
 
@@ -299,6 +298,9 @@ public class ApplicationEntity implements Serializable {
 	  
 	@Column(name = "financial_assistance")
 	private String financial_assistance;
+	
+	@Column(name = "assistance_type")
+	private String assistance_type;
 	
 	@Column(name = "assistance_amount")
 	private Integer assistance_amount;
@@ -1114,6 +1116,14 @@ public class ApplicationEntity implements Serializable {
 
 	public void setFinancial_assistance(String financial_assistance) {
 		this.financial_assistance = financial_assistance;
+	}
+
+	public String getAssistance_type() {
+		return assistance_type;
+	}
+
+	public void setAssistance_type(String assistance_type) {
+		this.assistance_type = assistance_type;
 	}
 
 	public Integer getAssistance_amount() {

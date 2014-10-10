@@ -217,7 +217,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         $scope.tmp = {};
 
         var datePopup = $ionicPopup.show({
-            template: '<datetimepicker data-ng-model="tmp.newDate"></datetimepicker>',
+            template: '<datetimepicker data-ng-model="tmp.newDate" data-datetimepicker-config="{ startView:\'year\', minView:\'day\' }"></datetimepicker>',
             title: title,
             scope: $scope,
             buttons: [

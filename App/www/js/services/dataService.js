@@ -11,26 +11,17 @@ angular.module('TerryServices').factory('DataService', function (Restangular, $q
     'use strict';
 
     return {
-        getAllItemsRes: function (type) {
-            var deferred = $q.defer();
-            Restangular.all(type).getList().then(
-                function (result) {
-                    deferred.resolve(result);
-                }
+        
+        getAllItems: function (acType) {
 
-            );
-
-            return deferred.promise;
-        },
-        getAllItems: function (type) {
-
-            return Restangular.all(type).getList().then(
+            return Restangular.all(acType).getList().then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
+                    result.type = acType;
                     return result;
                 },
                 function (error) {
-                    ngNotify.set("Something went wrong retrieving data for " + type, {
+                    ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'
                     });
