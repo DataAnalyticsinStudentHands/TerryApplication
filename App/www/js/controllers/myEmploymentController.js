@@ -76,9 +76,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         
         $scope.myVariables.current_mode = "Edit";
         $scope.myemployment = item;
-        $scope.myactivity = {};
-        $scope.myvolunteer = {};
-        $scope.myaward = {};
+        $scope.myactivity = item;
+        $scope.myvolunteer = item;
+        $scope.myaward = item;
         
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
