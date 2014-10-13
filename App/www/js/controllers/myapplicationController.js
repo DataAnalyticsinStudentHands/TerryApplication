@@ -10,6 +10,8 @@
  */
 angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
     'use strict';
+    
+    var date = new Date();
 
     $scope.user = {};
 

@@ -12,6 +12,7 @@ angular.module('HonorsApplications', [
     'TerryDirectives',
     'ui.bootstrap.datetimepicker',
     'ui.utils',
+    'ng-currency',
     'angular-data.DSCacheFactory',
     'angularFileUpload'
 ]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {

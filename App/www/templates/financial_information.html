@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Your total annual income:</span> 
-                        <input name="total_annual_income" type="number" ng-model="myapplication.total_annual_income" placeholder="income in dollar">
+                        <span class="input-label">Your total annual income:</span>
+                        <input name="total_annual_income" type="text" ng-model="myapplication.total_annual_income" placeholder="total annual income" ng-currency/>
                     </label>
                 </div>
                 <div class="col">
@@ -83,13 +83,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Father’s total annual income:</span> 
-                        <input name="father_total_income" type="number" ng-model="myapplication.father_total_income" placeholder="income in dollar" >
+                        <input name="father_total_income" type="text" ng-model="myapplication.father_total_income" placeholder="income in dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Step Parent’s total annual income:</span> 
-                        <input name="stepparent_total_income" type="number" ng-model="myapplication.stepparent_total_income" placeholder="income in dollar" >
+                        <input name="stepparent_total_income" type="text" ng-model="myapplication.stepparent_total_income" placeholder="income in dollar"  ng-currency>
                     </label>
                 </div>
             </div>
@@ -158,13 +158,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Mother’s total annual income:</span> 
-                        <input name="mother_total_income" type="number" ng-model="myapplication.mother_total_income" placeholder="income in dollar" >
+                        <input name="mother_total_income" type="text" ng-model="myapplication.mother_total_income" placeholder="income in dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Guardian’s total annual income:</span> 
-                        <input name="guardian_total_income" type="number" ng-model="myapplication.guardian_total_income" placeholder="income in dollar" >
+                        <input name="guardian_total_income" type="text" ng-model="myapplication.guardian_total_income" placeholder="income in dollar" ng-currency>
                     </label>
                 </div>
             </div>
@@ -221,9 +221,9 @@
                     <label class="item item-input item-stacked-label" ng-show="!myapplication.income_same">
                         <span style="white-space:normal;" >If “NO”, by what amount (approximate) has it changed?<br>  </span>
                         <span>Increased:</span>
-                        <input name="increased" type="number" ng-model="myapplication.increased" placeholder="amount in dollars">
+                        <input name="increased" type="text" ng-model="myapplication.increased" placeholder="amount in dollars" ng-currency>
                         <span>Decreased:</span>
-                        <input name="decreased" type="number" ng-model="myapplication.decreased" placeholder="amount in dollars">
+                        <input name="decreased" type="text" ng-model="myapplication.decreased" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
                 <div class="col">
@@ -231,8 +231,8 @@
                         <span style="white-space:normal;">If “YES”, please indicate the type of assistance and amount received per month: </span> 
                         <span>Type:</span>
                         <input name="assistance_type" type="text" ng-model="myapplication.assistance_type" placeholder="type">
-                        <span>Decreased:</span>
-                        <input name="assistance_amount" type="number" ng-model="myapplication.assistance_amount" placeholder="amount in dollars">
+                        <span>Amount:</span>
+                        <input name="assistance_amount" type="text" ng-model="myapplication.assistance_amount" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -257,13 +257,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Funds for college saved by you:</span> 
-                        <input name="funds_saved_you" type="number" ng-model="myapplication.funds_saved_you" placeholder="amount in dollars" >
+                        <input name="funds_saved_you" type="text" ng-model="myapplication.funds_saved_you" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Funds for college saved by others:</span> 
-                        <input name="funds_saved_others" type="text" ng-model="myapplication.funds_saved_others" placeholder="amount in dollars" >
+                        <input name="funds_saved_others" type="text" ng-model="myapplication.funds_saved_others" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -272,7 +272,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your parents’ or guardians’ total cash savings (not limited to college):</span> 
-                        <input name="total_savings" type="number" ng-model="myapplication.total_savings" placeholder="amount in dollars" >
+                        <input name="total_savings" type="text" ng-model="myapplication.total_savings" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -281,7 +281,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Value of your parents’ or guardians’ other investments (<b>NOT</b> including home):</span> 
-                        <input name="total_investments" type="number" ng-model="myapplication.total_investments" placeholder="amount in dollars" >
+                        <input name="total_investments" type="text" ng-model="myapplication.total_investments" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -290,7 +290,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Net value of your parents’ or guardians’ businesses, farms and/or ranches:</span> 
-                        <input name="net_value" type="number" ng-model="myapplication.net_value" placeholder="amount in dollars" >
+                        <input name="net_value" type="text" ng-model="myapplication.net_value" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -299,7 +299,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Parents’/Guardians’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A):</span> 
-                        <input name="adjusted_cross_income" type="number" ng-model="myapplication.adjusted_cross_income" placeholder="amount in dollars" >
+                        <input name="adjusted_cross_income" type="text" ng-model="myapplication.adjusted_cross_income" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
@@ -308,7 +308,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Projected parental support (annual):</span> 
-                        <input name="projected_support" type="number" ng-model="myapplication.projected_support" placeholder="amount in dollars" >
+                        <input name="projected_support" type="text" ng-model="myapplication.projected_support" placeholder="amount in dollars" ng-currency>
                     </label>
                 </div>
             </div>
