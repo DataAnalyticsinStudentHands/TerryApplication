@@ -228,7 +228,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy'),
+                        var test = $filter('date')($scope.tmp.newDate, 'MM/dd/yyyy'),
                             res = title.substring(0, 1);
 
                         if (res === 'E') {

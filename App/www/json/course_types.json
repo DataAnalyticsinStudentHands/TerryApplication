@@ -10,5 +10,9 @@
     {
         "name": "Dual Credit",
         "abbreviation": "DC"
+    },
+    {
+        "name": "Pre-AP",
+        "abbreviation": "Pre-AP"
     }
 ]

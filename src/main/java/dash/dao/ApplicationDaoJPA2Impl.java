@@ -92,7 +92,6 @@ public class ApplicationDaoJPA2Impl implements ApplicationDao {
 		path.append(File.separator);
 		path.append(fileName);
 		application.setDocument_folder(path.toString());
-		application.setName(fileName);
 		entityManager.merge(application);
 	
 		// Give admin over new application to the new user

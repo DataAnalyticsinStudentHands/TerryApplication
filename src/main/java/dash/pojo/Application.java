@@ -26,9 +26,6 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "document_folder")
 	private String document_folder;
 	
-	@XmlElement(name = "name")
-	private String name;
-	
 	@XmlElement(name = "creation_timestamp")
 	private Date creation_timestamp;
 	
@@ -402,11 +399,10 @@ public class Application implements  Serializable, IAclObject{
 	  
 	public Application(){}
 	
-	public Application(Long id, String document_folder, String name, Date creation_timestamp) {
+	public Application(Long id, String document_folder, Date creation_timestamp) {
 		super();
 		this.id = id;
 		this.document_folder = document_folder;
-		this.name = name;
 		this.creation_timestamp = creation_timestamp;
 	}
 	
@@ -436,14 +432,6 @@ public class Application implements  Serializable, IAclObject{
 
 	public void setDocument_folder(String document_folder) {
 		this.document_folder = document_folder;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Date getCreation_timestamp() {

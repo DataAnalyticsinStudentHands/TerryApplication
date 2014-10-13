@@ -51,9 +51,9 @@ ApplicationService {
 
 		validateInputForCreation(application);
 
-		//verify existence of resource in the db (feed must be unique)
-		ApplicationEntity applicationByName = applicationDao.getApplicationByName(application.getName());
-		if (applicationByName != null) {
+		//ToDo: verify existence of resource in the db (feed must be unique)
+		//ApplicationEntity applicationByName = applicationDao.getApplicationByName(application.getName());
+		/*if (applicationByName != null) {
 			throw new AppException(
 					Response.Status.CONFLICT.getStatusCode(),
 					409,
@@ -61,7 +61,7 @@ ApplicationService {
 							+ applicationByName.getId(),
 							"Please verify that the name are properly generated",
 							AppConstants.DASH_POST_URL);
-		}
+		}*/
 
 		long applicationId = applicationDao.createApplication(new ApplicationEntity(application));
 		application.setId(applicationId);
@@ -194,8 +194,7 @@ ApplicationService {
 	 * @return
 	 */
 	private boolean isFullUpdate(Application application) {
-		return application.getId() == null
-				|| application.getName() == null;
+		return application.getId() == null;
 	}
 
 	/********************* DELETE-related methods implementation ***********************/

@@ -33,10 +33,6 @@ public class ApplicationEntity implements Serializable {
 	@Column(name = "document_folder")
 	private String document_folder;
 
-	/** description of the object */
-	@Column(name = "name")
-	private String name;
-
 	/** insertion date in the database */
 	@Column(name = "creation_timestamp")
 	private Date creation_timestamp;
@@ -379,10 +375,9 @@ public class ApplicationEntity implements Serializable {
 
 	public ApplicationEntity(){}
 
-	public ApplicationEntity(String document_folder, String name, Date creation_timestamp) {
+	public ApplicationEntity(String document_folder, Date creation_timestamp) {
 	
 		this.document_folder = document_folder;
-		this.name = name;
 		this.creation_timestamp = creation_timestamp;
 	}
 
@@ -412,14 +407,6 @@ public class ApplicationEntity implements Serializable {
 
 	public void setDocument_folder(String document_folder) {
 		this.document_folder = document_folder;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Date getCreation_timestamp() {

@@ -342,7 +342,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     text: '<b>Save</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        var test = $filter('date')($scope.tmp.newDate, 'dd/MM/yyyy');
+                        var test = $filter('date')($scope.tmp.newDate, 'MM/dd/yyyy');
                         $scope.myapplication[acType] = test;
                     }
                 }
