@@ -11,7 +11,7 @@
 angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
     'use strict';
     
-    var date = new Date();
+    $scope.date = new Date();
 
     $scope.user = {};
 
@@ -486,6 +486,28 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         if ($scope.myVariables.problems === 'false') {
             $state.go(nextstate);
         }
+    };
+    
+    // callback for ng-submit 'save': save application updates to server
+    $scope.confirmation = function () {
+        $scope.myapplication.status = "submitted";
+        
+        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
+            function (result) {
+                ngNotify.set("Saved to server.", {
+                    position: 'bottom',
+                    type: 'success'
+                });
+                //if succesful => send to next page
+                $state.go('tabs.myapplications');
+            },
+            function (error) {
+                ngNotify.set("Could not contact server to save application!", {
+                    position: 'bottom',
+                    type: 'error'
+                });
+            }
+        );
     };
 
     // callback for ng-submit 'save': save application updates to server

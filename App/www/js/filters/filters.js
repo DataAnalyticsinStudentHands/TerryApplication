@@ -2,18 +2,11 @@
 
 
 /* Filters */
-angular.module('TerryFilters', []).filter('date', function ($filter) {
+angular.module('TerryFilters', []).filter('currentdate', function ($filter) {
     
     'use strict';
     
-return function (input) {
-    if (input === null) {
-        return "";
-    }
-
-    var _date = $filter('date')(new Date(input), 'MMM dd yyyy');
-
-    return _date.toUpperCase();
-
-};
+    return function() {
+        return $filter('date')(new Date(), 'MM/dd/yyyy');
+    };
 });

@@ -10,12 +10,18 @@
 angular.module('TerryControllers').controller('MyapplicationsController', function ($scope, $location, ngNotify, $ionicModal, $ionicNavBarDelegate, $ionicPopup, ApplicationService) {
     'use strict';
 
+
     $scope.myapplications = {};
-    
+
     // GET 
     ApplicationService.getAllApplications().then(
         function (myapplications) {
             $scope.myapplications = myapplications;
+            var i, l;
+            for (i = 0, l = $scope.myapplications.length; i < l; i++) {
+             var application = $scope.myapplications[i];
+                application.allowEdit = 'true';
+            }
         }
     );
 
@@ -26,7 +32,7 @@ angular.module('TerryControllers').controller('MyapplicationsController', functi
     }).then(function (modal) {
         $scope.modal = modal;
     });
-    
+
     $scope.updateList = function () {
         ApplicationService.getAllApplications().then(
             function (result) {
