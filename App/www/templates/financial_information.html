@@ -201,7 +201,7 @@
             
             <div class="row">
                 <div class="col">
-                    <label class="item item-input item-stacked-label">
+                    <label class="item">
                         <span style="white-space:normal;" >Has your family’s income for 2014 remained the same as 2013? </span> 
                         <ion-radio name="income_same" ng-model="myapplication.income_same" ng-value="'Yes'">Yes</ion-radio>
                         <ion-radio name="income_same" ng-model="myapplication.income_same" ng-value="'No'">No</ion-radio>
@@ -218,16 +218,20 @@
             
             <div class="row">
                 <div class="col">
-                    <label class="item item-input item-stacked-label" ng-show="!myapplication.income_same">
+                    <label class="item item-input item-stacked-label" ng-hide="myapplication.income_same">
                         <span style="white-space:normal;" >If “NO”, by what amount (approximate) has it changed?<br>  </span>
+                        <label class="plain-item item-input item-stacked-label">
                         <span>Increased:</span>
                         <input name="increased" type="text" ng-model="myapplication.increased" placeholder="amount in dollars" ng-currency>
+                            </label>
+                        <label class="item item-input item-stacked-label">
                         <span>Decreased:</span>
                         <input name="decreased" type="text" ng-model="myapplication.decreased" placeholder="amount in dollars" ng-currency>
+                        </label>
                     </label>
                 </div>
                 <div class="col">
-                    <label class="item item-input item-stacked-label" ng-show="!financial_assistance">
+                    <label class="item item-input item-stacked-label" ng-show="myapplication.financial_assistance">
                         <span style="white-space:normal;">If “YES”, please indicate the type of assistance and amount received per month: </span> 
                         <span>Type:</span>
                         <input name="assistance_type" type="text" ng-model="myapplication.assistance_type" placeholder="type">

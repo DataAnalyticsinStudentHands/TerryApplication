@@ -1,6 +1,14 @@
 /* Our own CSS */
 
+.item-plain .item-input .item-stacked-label {
+    border: none;
+    padding: 10px 5px 15px 0px;
+    
+}
 
+.item .item-radio{
+    display: inline-block;
+} 
 
 .small-input-label {
     max-width: 100px;
