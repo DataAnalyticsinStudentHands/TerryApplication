@@ -16,19 +16,20 @@ import dash.pojo.Application;
 
 /**
  * Application entity
+ * 
  * @author plindner
  *
  */
 @Entity
-@Table(name="applications")
+@Table(name = "applications")
 public class ApplicationEntity implements Serializable {
 
 	/** id of the object */
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name = "id")
 	private Long id;
-	
+
 	/** path to stored documents for this object */
 	@Column(name = "document_folder")
 	private String document_folder;
@@ -36,358 +37,362 @@ public class ApplicationEntity implements Serializable {
 	/** insertion date in the database */
 	@Column(name = "creation_timestamp")
 	private Date creation_timestamp;
-	
+
 	@Column(name = "uh_id")
 	private Long uh_id;
-	
+
 	@Column(name = "first_name")
 	private String first_name;
-	
+
 	@Column(name = "last_name")
 	private String last_name;
-	
+
 	@Column(name = "middle_name")
 	private String middle_name;
-	
+
 	@Column(name = "preferred_name")
 	private String preferred_name;
-	
+
 	@Column(name = "ssn")
 	private String ssn;
-	
+
 	@Column(name = "permanent_address")
 	private String permanent_address;
-	
+
 	@Column(name = "city")
 	private String city;
-	
+
 	@Column(name = "state")
 	private String state;
-	
+
 	@Column(name = "dob")
 	private Date dob;
-	
+
 	@Column(name = "zip_code")
 	private Long zip_code;
-	
+
 	@Column(name = "county")
 	private String county;
-	
+
 	@Column(name = "home_phone")
 	private String home_phone;
-	
+
 	@Column(name = "alt_cell_phone")
 	private String alt_cell_phone;
-	
+
 	@Column(name = "gender")
 	private String gender;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "citizen")
 	private String citizen;
-	
+
 	@Column(name = "permanent_resident")
 	private String permanent_resident;
-	
+
 	@Column(name = "texas_resident")
 	private String texas_resident;
-	
+
 	@Column(name = "permanent_resident_card")
 	private String permanent_resident_card;
-	
+
 	@Column(name = "birthplace")
 	private String birthplace;
-	
+
 	@Column(name = "ethnic_background")
 	private String ethnic_background;
-	
+
 	@Column(name = "anticipated_major")
 	private String anticipated_major;
-	
+
 	@Column(name = "highschool_name")
 	private String highschool_name;
-	
+
 	@Column(name = "highschool_city")
 	private String highschool_city;
-	
+
 	@Column(name = "highschool_councelor")
 	private String highschool_councelor;
-	
+
 	@Column(name = "highschool_phone")
 	private String highschool_phone;
-	
+
 	@Column(name = "highschool_councelor_email")
 	private String highschool_councelor_email;
-	
+
 	@Column(name = "highschool_gpa")
 	private Float highschool_gpa;
-	
+
 	@Column(name = "highschool_scale")
 	private Float highschool_scale;
-	
+
 	@Column(name = "highschool_graduation_date")
 	private Date highschool_graduation_date;
-	  
+
 	@Column(name = "highschool_rank")
 	private Integer highschool_rank;
-	
+
 	@Column(name = "highschool_rank_out")
 	private Integer highschool_rank_out;
-	  
+
 	@Column(name = "highschool_rank_tied")
 	private Integer highschool_rank_tied;
-	
+
 	@Column(name = "psat_verbal")
 	private Float psat_verbal;
-	
+
 	@Column(name = "psat_math")
 	private Float psat_math;
-	
+
 	@Column(name = "psat_writing")
 	private Float psat_writing;
-	
+
 	@Column(name = "psat_selection")
 	private Float psat_selection;
-	
+
 	@Column(name = "psat_date")
 	private Date psat_date;
-	
+
 	@Column(name = "sat_reading")
 	private Float sat_reading;
-	
+
 	@Column(name = "sat_math")
 	private Float sat_math;
-	
+
 	@Column(name = "sat_writing")
 	private Float sat_writing;
-	
+
 	@Column(name = "sat_composite")
 	private Float sat_composite;
-	
+
 	@Column(name = "sat_date")
 	private Date sat_date;
-	
+
 	@Column(name = "act_composite")
 	private Float act_composite;
-	
+
 	@Column(name = "act_date")
 	private Date act_date;
-	
+
 	@Column(name = "national_merit")
 	private String national_merit;
-	
+
 	@Column(name = "national_merit_date")
 	private Date national_merit_date;
-	
+
 	@Column(name = "national_achievement")
 	private String national_achievement;
-	
+
 	@Column(name = "national_achievement_date")
 	private Date national_achievement_date;
-	
+
 	@Column(name = "national_hispanic")
 	private String national_hispanic;
-	
+
 	@Column(name = "national_hispanic_date")
 	private Date national_hispanic_date;
-	
+
 	@Column(name = "first_graduate")
 	private Boolean first_graduate;
-	
+
 	@Column(name = "why_apply")
 	private String why_apply;
-	
+
 	@Column(name = "why_major")
 	private String why_major;
-	
+
 	@Column(name = "educational_plans")
 	private String educational_plans;
-	
+
 	@Column(name = "life_goals")
 	private String life_goals;
-	
+
 	@Column(name = "marital_status")
 	private String marital_status;
-	
+
 	@Column(name = "marital_status_parents")
 	private String marital_status_parents;
-	
+
 	@Column(name = "total_annual_income")
 	private Integer total_annual_income;
-	
+
 	@Column(name = "present_partner")
 	private String present_partner;
-	
+
 	@Column(name = "father_occupation")
 	private String father_occupation;
-	
+
 	@Column(name = "stepparent_occupation")
 	private String stepparent_occupation;
-	
+
 	@Column(name = "father_employer")
 	private String father_employer;
-	
+
 	@Column(name = "stepparent_employer")
 	private String stepparent_employer;
-	
+
 	@Column(name = "father_total_income")
 	private Integer father_total_income;
-	
+
 	@Column(name = "stepparent_total_income")
 	private Integer stepparent_total_income;
-	
+
 	@Column(name = "father_age")
 	private Integer father_age;
-	
+
 	@Column(name = "stepparent_age")
 	private Integer stepparent_age;
-	 
+
 	@Column(name = "father_level_education")
 	private String father_level_education;
-	
+
 	@Column(name = "stepparent_level_education")
 	private String stepparent_level_education;
-	
+
 	@Column(name = "mother_occupation")
 	private String mother_occupation;
-	
+
 	@Column(name = "guardian_occupation")
 	private String guardian_occupation;
-	
+
 	@Column(name = "mother_employer")
 	private String mother_employer;
-	
+
 	@Column(name = "guardian_employer")
 	private String guardian_employer;
-	  
+
 	@Column(name = "mother_total_income")
 	private Integer mother_total_income;
-	
+
 	@Column(name = "guardian_total_income")
 	private Integer guardian_total_income;
-	
+
 	@Column(name = "mother_age")
 	private Integer mother_age;
-	
+
 	@Column(name = "guardian_age")
 	private Integer guardian_age;
-	
+
 	@Column(name = "mother_level_education")
 	private String mother_level_education;
-	
+
 	@Column(name = "guardian_level_education")
 	private String guardian_level_education;
-	
+
 	@Column(name = "income_same")
 	private String income_same;
-	  
+
 	@Column(name = "increased")
 	private Integer increased;
-	
+
 	@Column(name = "decreased")
 	private Integer decreased;
-	
+
 	@Column(name = "family_attending_college")
 	private Integer family_attending_college;
-	  
+
 	@Column(name = "financial_assistance")
 	private String financial_assistance;
-	
+
 	@Column(name = "assistance_type")
 	private String assistance_type;
-	
+
 	@Column(name = "assistance_amount")
 	private Integer assistance_amount;
-	
+
 	@Column(name = "funds_saved_you")
-	private Integer funds_saved_you;	
-	
+	private Integer funds_saved_you;
+
 	@Column(name = "funds_saved_others")
 	private Integer funds_saved_others;
-	
+
 	@Column(name = "total_savings")
 	private Integer total_savings;
-	
+
 	@Column(name = "total_investments")
 	private Integer total_investments;
-	
+
 	@Column(name = "net_value")
 	private Integer net_value;
-	
+
 	@Column(name = "adjusted_cross_income")
 	private Integer adjusted_cross_income;
-	
+
 	@Column(name = "projected_support")
 	private Integer projected_support;
-	
+
 	@Column(name = "description_special_circumstances")
 	private String description_special_circumstances;
-	
+
 	@Column(name = "texas_tomorrow_fund")
 	private String texas_tomorrow_fund;
-	
+
+	@Column(name = "texas_tomorrow_fund_value")
+	private String texas_tomorrow_fund_value;
+
 	@Column(name = "sibling_terry")
 	private String sibling_terry;
-	
+
 	@Column(name = "department_scholarship")
 	private String department_scholarship;
-	
+
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "app_uh_method")
 	private String app_uh_method;
-	
+
 	@Column(name = "app_uh_date_sub")
 	private Date app_uh_date_sub;
-	
+
 	@Column(name = "app_uh_date_int_sub")
 	private Date app_uh_date_int_sub;
-	
+
 	@Column(name = "transcript_method")
 	private String transcript_method;
-	
+
 	@Column(name = "transcript_date_sub")
 	private Date transcript_date_sub;
-	
+
 	@Column(name = "transcript_date_int_sub")
 	private Date transcript_date_int_sub;
-	
+
 	@Column(name = "fafsa_method")
 	private String fafsa_method;
-	
+
 	@Column(name = "fafsa_date_sub")
 	private Date fafsa_date_sub;
-	
+
 	@Column(name = "fafsa_date_int_sub")
 	private Date fafsa_date_int_sub;
-	
+
 	@Column(name = "housing_method")
 	private String housing_method;
-	
+
 	@Column(name = "housing_date_sub")
 	private Date housing_date_sub;
-	
+
 	@Column(name = "housing_date_int_sub")
 	private Date housing_date_int_sub;
 
-	public ApplicationEntity(){}
+	public ApplicationEntity() {
+	}
 
 	public ApplicationEntity(String document_folder, Date creation_timestamp) {
-	
+
 		this.document_folder = document_folder;
 		this.creation_timestamp = creation_timestamp;
 	}
 
-	public ApplicationEntity(Application application) {		
+	public ApplicationEntity(Application application) {
 		try {
 			BeanUtils.copyProperties(this, application);
-		} catch ( IllegalAccessException e) {
+		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch ( InvocationTargetException e) {
+		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -397,7 +402,7 @@ public class ApplicationEntity implements Serializable {
 		return id;
 	}
 
-	public void setId( Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -1192,6 +1197,14 @@ public class ApplicationEntity implements Serializable {
 
 	public void setTexas_tomorrow_fund(String texas_tomorrow_fund) {
 		this.texas_tomorrow_fund = texas_tomorrow_fund;
+	}
+
+	public String getTexas_tomorrow_fund_value() {
+		return texas_tomorrow_fund_value;
+	}
+
+	public void setTexas_tomorrow_fund_value(String texas_tomorrow_fund_value) {
+		this.texas_tomorrow_fund_value = texas_tomorrow_fund_value;
 	}
 
 	public String getSibling_terry() {

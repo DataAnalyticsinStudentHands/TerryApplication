@@ -33,7 +33,7 @@ public class Scholarship implements  Serializable, IAclObject{
 	private String duration;
 	
 	@XmlElement(name = "amount")
-	private Long amount;
+	private String amount;
 	
 	public Scholarship(){}
 	
@@ -95,11 +95,11 @@ public class Scholarship implements  Serializable, IAclObject{
 		this.duration = duration;
 	}
 
-	public Long getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 

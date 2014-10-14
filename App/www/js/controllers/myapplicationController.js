@@ -167,8 +167,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.showAddModal = function (acType, applied_received) {
 
         $scope.myVariables.current_mode = "Add";
-        $scope.myemployment = {};
         $scope.myscholarship = {};
+        $scope.mychild = {};
 
         if (applied_received !== undefined) {
             $scope.myscholarship.applied_received = applied_received;

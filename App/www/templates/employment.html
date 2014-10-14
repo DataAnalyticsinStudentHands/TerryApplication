@@ -22,7 +22,7 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myemployments" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('employment', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} {{item.date_from}} - {{item.date_to}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} hours  Date: {{item.date_from}} - {{item.date_to}}</button>
             </div>
         </div>
             
@@ -34,7 +34,7 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myactivities" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('activity', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} {{item.position}} {{item.description}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.description}}</button>
             </div>
         </div>    
             
@@ -46,7 +46,7 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myvolunteers" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('volunteer', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} {{item.hours_total}} {{item.date_from}}-{{item.date_to}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} Hours per week/{{item.hours_total}} Hours total Date: {{item.date_from}}-{{item.date_to}}</button>
             </div>
         </div> 
             
@@ -58,7 +58,8 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myawards" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('award', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.award}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp;
+                    Award: {{item.award}} {{item.description}} Level: {{item.level}} </button>
             </div>
         </div> 
 

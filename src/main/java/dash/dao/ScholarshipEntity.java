@@ -40,7 +40,7 @@ public class ScholarshipEntity implements Serializable {
 	private String duration;
 	
 	@Column(name = "amount")
-	private Long amount;
+	private String amount;
 	
 	public ScholarshipEntity(){}
 
@@ -100,11 +100,11 @@ public class ScholarshipEntity implements Serializable {
 		this.duration = duration;
 	}
 
-	public Long getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 }

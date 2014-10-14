@@ -336,6 +336,9 @@ public class Application implements  Serializable, IAclObject{
 	@XmlElement(name = "texas_tomorrow_fund")
 	private String texas_tomorrow_fund;
 	
+	@XmlElement(name = "texas_tomorrow_fund_value")
+	private String texas_tomorrow_fund_value;
+	
 	@XmlElement(name = "sibling_terry")
 	private String sibling_terry;
 	
@@ -1217,6 +1220,14 @@ public class Application implements  Serializable, IAclObject{
 
 	public void setTexas_tomorrow_fund(String texas_tomorrow_fund) {
 		this.texas_tomorrow_fund = texas_tomorrow_fund;
+	}
+
+	public String getTexas_tomorrow_fund_value() {
+		return texas_tomorrow_fund_value;
+	}
+
+	public void setTexas_tomorrow_fund_value(String texas_tomorrow_fund_value) {
+		this.texas_tomorrow_fund_value = texas_tomorrow_fund_value;
 	}
 
 	public String getSibling_terry() {
