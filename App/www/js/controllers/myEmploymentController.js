@@ -63,23 +63,28 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete one ' + acType + ' from the list?'
         }).then(function (res) {
-            DataService.deleteItem(acType, item_id).then(
-                function (success) {
-                    $scope.updateLists(acType);
-                }
-            );
+            if (res) {
+                DataService.deleteItem(acType, item_id).then(
+                    function (success) {
+                        $scope.updateLists(acType);
+                    }
+                );
+            } else {
+                console.log('Delete canceled.');
+            }
+
         });
     };
 
     // callback for ng-click 'editData':
     $scope.editData = function (acType, item) {
-        
+
         $scope.myVariables.current_mode = "Edit";
         $scope.myemployment = item;
         $scope.myactivity = item;
         $scope.myvolunteer = item;
         $scope.myaward = item;
-        
+
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -175,13 +180,13 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
 
     // callback for ng-click 'showAddData':
     $scope.showAddData = function (acType) {
-        
+
         $scope.myVariables.current_mode = "Add";
         $scope.myemployment = {};
         $scope.myactivity = {};
         $scope.myvolunteer = {};
         $scope.myaward = {};
-        
+
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
             animation: 'slide-in-up'

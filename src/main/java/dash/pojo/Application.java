@@ -202,7 +202,7 @@ public class Application implements  Serializable, IAclObject{
 	private Date national_hispanic_date;
 	
 	@XmlElement(name = "first_graduate")
-	private Boolean first_graduate;
+	private String first_graduate;
 	
 	@XmlElement(name = "why_apply")
 	private String why_apply;
@@ -861,11 +861,11 @@ public class Application implements  Serializable, IAclObject{
 		this.national_hispanic_date = national_hispanic_date;
 	}
 
-	public Boolean getFirst_graduate() {
+	public String getFirst_graduate() {
 		return first_graduate;
 	}
 
-	public void setFirst_graduate(Boolean first_graduate) {
+	public void setFirst_graduate(String first_graduate) {
 		this.first_graduate = first_graduate;
 	}
 

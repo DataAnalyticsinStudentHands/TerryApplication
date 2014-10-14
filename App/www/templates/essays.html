@@ -31,25 +31,25 @@
 
 
             <div class="list card">
-                
-                    <label for="file" class="item item-icon-right fileContainer">
-                        <i class="icon ion-filing"></i>
-                        Upload Essay I
-                        <input id="file" type="file" ng-file-select="onFileSelect($files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    </label>
-                
+
+                <label for="file1" class="item item-icon-right fileContainer">
+                    <i class="icon ion-filing"></i>
+                    Upload Essay I
+                    <input id="file1" type="file" ng-file-select="onFileSelect($files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                </label>
+
                 <div class="item" ng-show="selectedFiles != null">
-                            <div class="sel-file" ng-repeat="f in selectedFiles">
-                                <label>Progress:</label>
-                                <span class="progress" ng-show="progress[$index] >= 0">						
+                    <div class="sel-file" ng-repeat="f in selectedFiles">
+                        <label>Progress:</label>
+                        <span class="progress" ng-show="progress[$index] >= 0">						
 					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
 				</span>	
-                                <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
-                                {{f.name}} - size: {{f.size}}B
-                            </div>
+                        <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
+                        {{f.name}} - size: {{f.size}}B
+                    </div>
                 </div>
             </div>
-            
+
             <div class="item item-divider">
                 Essay II: Leadership Experience
             </div>
@@ -58,23 +58,23 @@
                 Describe an example of your leadership. Be sure to describe your actions and the actions of those around you and to explain what you accomplished.
             </p>
 
-<div class="list card">
-                
-                    <label for="file" class="item item-icon-right fileContainer">
-                        <i class="icon ion-filing"></i>
-                        Upload Essay II
-                        <input id="file" type="file" ng-file-select="onFileSelect($files, 'essay2')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    </label>
-                
+            <div class="list card">
+
+                <label for="file2" class="item item-icon-right fileContainer">
+                    <i class="icon ion-filing"></i>
+                    Upload Essay II
+                    <input id="file2" type="file" ng-file-select="onFileSelect($files, 'essay2')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                </label>
+
                 <div class="item" ng-show="selectedFiles != null">
-                            <div class="sel-file" ng-repeat="f in selectedFiles">
-                                <label>Progress:</label>
-                                <span class="progress" ng-show="progress[$index] >= 0">						
+                    <div class="sel-file" ng-repeat="f in selectedFiles">
+                        <label>Progress:</label>
+                        <span class="progress" ng-show="progress[$index] >= 0">						
 					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
 				</span>	
-                                <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
-                                {{f.name}} - size: {{f.size}}B
-                            </div>
+                        <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
+                        {{f.name}} - size: {{f.size}}B
+                    </div>
                 </div>
             </div>
         </div>

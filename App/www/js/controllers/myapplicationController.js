@@ -10,7 +10,7 @@
  */
 angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
     'use strict';
-    
+
     $scope.date = new Date();
 
     $scope.user = {};
@@ -20,10 +20,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             result = Restangular.stripRestangular(result)[0];
             $scope.user = result;
         },
-        function (error) {
-        }
+        function (error) {}
     );
-    
+
     $scope.mail_options = [
         {
             "name": "online"
@@ -172,6 +171,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
 
         if (applied_received !== undefined) {
             $scope.myscholarship.applied_received = applied_received;
+            if (applied_received) {
+                $scope.myVariables.label_name = "";
+            }
+            else {
+                $scope.myVariables.label_name = " or Grant";
+                
+            }
         }
 
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
@@ -219,6 +225,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             break;
         case 'scholarship':
             $scope.myscholarship = item;
+            if ($scope.myscholarship.applied_received) {
+                $scope.myVariables.label_name = "";
+            }
+            else {
+                $scope.myVariables.label_name = " or Grant";                
+            }
             $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
@@ -319,11 +331,15 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             title: 'Confirm Delete',
             template: 'Are you sure you want to delete your ' + acType + ' item from the list?'
         }).then(function (res) {
-            DataService.deleteItem(acType, item_id).then(
-                function (success) {
-                    $scope.updateList(acType);
-                }
-            );
+            if (res) {
+                DataService.deleteItem(acType, item_id).then(
+                    function (success) {
+                        $scope.updateList(acType);
+                    }
+                );
+            } else {
+                console.log('Delete canceled.');
+            }
         });
     };
 
@@ -425,10 +441,10 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     if (result.length === 0) {
                         $scope.listerror[result.type] = 'true';
                     }
-                    
+
                     //we should check courses at each level
                     if (result.type === 'coursework') {
-                        
+
                         console.log("course " + result);
                     }
                 }
@@ -440,7 +456,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             .then(function (values) {
 
                 //check coursework page TODO
-                
+
 
                 //check employment page
                 var i, l, goThroughLists = ['activity', 'award', 'employment', 'volunteer'];
@@ -487,11 +503,11 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $state.go(nextstate);
         }
     };
-    
+
     // callback for ng-submit 'save': save application updates to server
     $scope.confirmation = function () {
         $scope.myapplication.status = "submitted";
-        
+
         ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
             function (result) {
                 ngNotify.set("Saved to server.", {

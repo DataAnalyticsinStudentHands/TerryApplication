@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">{{myVariables.current_mode}} Scholarship</h1>
@@ -8,7 +9,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">
-                        <span class="input-label">Scholarship or Grant Name:</span>
+                        <span class="input-label">Scholarship{{myVariables.label_name}} Name:</span>
                         <input name="name" ng-model="myscholarship.name" type="text" placeholder="name" required>
                     </label>
                 </div>
