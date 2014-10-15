@@ -28,7 +28,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">First Name:</span> 
+                        <span id="lesspace" class="input-label">First Name:</span> 
                         <span style="color: red;">*</span>
 
                         <input type="text" ng-model="myapplication.first_name" placeholder="Firstname" ng-required="finalSubmit">
@@ -44,13 +44,13 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Preferred Name:</span> 
+                        <span id="lesspace" class="input-label">Preferred Name:</span> 
                         <input name="preferred_name" type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">UH ID:</span> 
+                        <span id="lesspace" class="input-label">UH ID:</span> 
                         <span style="color: red;">*</span>
                         
                         <input name="uh_id" type="number" ng-model="myapplication.uh_id" placeholder="0123456" ng-required="finalSubmit">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">SSN:</span> 
+                        <span id="lesspace" class="input-label">SSN:</span> 
                         <span style="color: red;">*</span>
                         
                         <input name="ssn" type="text" ng-model="myapplication.ssn" ui-mask="{{'999-99-9999'}}" ng-required="finalSubmit">
@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Permanent Address:</span> 
+                        <span id="lesspace" class="input-label">Permanent Address:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.permanent_address" placeholder="Streetaddress" ng-ng-required="finalSubmit">
@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">City:</span> 
+                        <span id="lesspace" class="input-label">City:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.city" placeholder="City" ng-required="finalSubmit">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-select">
-                        <span class="input-label">State:</span>
+                        <span id="lesspace" class="input-label">State:</span>
                         <span style="color: red;">*</span>
                         
                         <select ng-model="myVariables.myState" ng-options="state.name for state in states">
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Zip Code:</span> 
+                        <span id="lesspace" class="input-label">Zip Code:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.zip_code" ui-mask="{{'99999'}}">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">County:</span> 
+                        <span id="lesspace" class="input-label">County:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.county" placeholder="County" ng-required="finalSubmit">
@@ -116,7 +116,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Home Phone:</span>
+                        <span id="lesspace" class="input-label">Home Phone:</span>
                         <span style="color: red;">*</span>
                         
                         <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit" />
@@ -133,7 +133,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Birth', 'dob')">
-                        <span class="input-label">Date of Birth:</span> 
+                        <span id="lesspace" class="input-label">Date of Birth:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.dob" placeholder="Select">
@@ -141,7 +141,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input">
-                        <span class="input-label">Gender:</span>
+                        <span id="lesspace" class="input-label">Gender:</span>
                         <span style="color: red;">*</span>
                         
                         <ion-radio name="gender" ng-model="myapplication.gender" ng-value="'Female'">Female</ion-radio>
@@ -153,7 +153,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">
-                        <span class="input-label">Email Address:</span> 
+                        <span id="lesspace" class="input-label">Email Address:</span> 
                         <span style="color: red;">*</span>
                         
                         <input name="email" type="email" ng-model="myapplication.email" placeholder="email address" ng-required="finalSubmit">
@@ -164,7 +164,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input">
-                        <span class="input-label">U.S. Citizen:</span>
+                        <span id="lesspace" class="input-label">U.S. Citizen:</span>
                         <span style="color: red;">*</span>
                         
                         <ion-radio name="citizen" ng-model="myapplication.citizen" ng-value="'true'">Yes</ion-radio>
@@ -174,7 +174,7 @@
 
                 <div class="col" ng-hide="myapplication.citizen">
                     <label class="item item-input"> <span class="input-label">Permanent Resident:</span>
-                        <span style="color: red;">*</span>
+                        
                         
                         <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="permanent_resident" ng-model="myapplication.permanent_resident" ng-value="'false'">No</ion-radio>
@@ -193,7 +193,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input">
-                        <span class="input-label">Texas Resident:</span>
+                        <span id="lesspace" class="input-label">Texas Resident:</span>
                         <span style="color: red;">*</span>
                         
                         <ion-radio name="texas_resident" ng-model="myapplication.texas_resident" ng-value="'true'">Yes</ion-radio>
@@ -203,7 +203,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Birthplace:</span> 
+                        <span id="lesspace" class="input-label">Birthplace:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.birthplace" placeholder="birthplace" ng-required="finalSubmit">
@@ -215,7 +215,7 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Ethnic Background:</span> 
+                        <span id="lesspace" class="input-label">Ethnic Background:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.ethnic_background" placeholder="How do you describe yourself?" ng-required="finalSubmit">
@@ -223,7 +223,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Anticipated College Major:</span> 
+                        <span id="lesspace" class="input-label">Anticipated College Major:</span> 
                         <span style="color: red;">*</span>
                         
                         <input type="text" ng-model="myapplication.anticipated_major" placeholder="Major" ng-required="finalSubmit">
