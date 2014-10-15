@@ -109,6 +109,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     // GET 
     DataService.getAllItems('university').then(
         function (result) {
+            var test = $filter('orderBy')(result,result.rank,'false');
             $scope.myuniversities = result;
         }
     );

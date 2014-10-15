@@ -50,7 +50,7 @@
             </div>
             
             <ion-list type="list-inset" show-reorder="data.showReorder">
-                <ion-item ng-repeat="item in myuniversities" item="item">
+                <ion-item ng-repeat="item in myuniversities | orderBy:rank:false" item="item">
                     <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('university', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('university', item)">&nbsp;&nbsp;&nbsp;&nbsp;University Name: {{item.name}}</button>
