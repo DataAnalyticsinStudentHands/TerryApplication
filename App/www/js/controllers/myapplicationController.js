@@ -173,10 +173,9 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.myscholarship.applied_received = applied_received;
             if (applied_received) {
                 $scope.myVariables.label_name = "";
-            }
-            else {
+            } else {
                 $scope.myVariables.label_name = " or Grant";
-                
+
             }
         }
 
@@ -227,9 +226,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             $scope.myscholarship = item;
             if ($scope.myscholarship.applied_received) {
                 $scope.myVariables.label_name = "";
-            }
-            else {
-                $scope.myVariables.label_name = " or Grant";                
+            } else {
+                $scope.myVariables.label_name = " or Grant";
             }
             $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
                 scope: $scope,
@@ -279,6 +277,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             );
             break;
         }
+    };
+
+    $scope.data = {
+        showReorder: false
+    };
+
+    //reorder items in a list
+    $scope.moveItem = function (item, fromIndex, toIndex) {
+        $scope.myuniversities.splice(fromIndex, 1);
+        $scope.myuniversities.splice(toIndex, 0, item);
     };
 
     // callback for ng-click 'saveModal':
