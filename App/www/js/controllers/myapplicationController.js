@@ -109,7 +109,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     // GET 
     DataService.getAllItems('university').then(
         function (result) {
-            var test = $filter('orderBy')(result,result.rank,'false');
             $scope.myuniversities = result;
         }
     );
@@ -151,6 +150,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                             $scope.myuniversity = {};
                             $scope.myuniversity.application_id = $stateParams.applicationId;
                             $scope.myuniversity.name = $scope.myVariables.university;
+                            $scope.myuniversity.rank = $scope.myuniversities.length;
                             DataService.addItem(acType, $scope.myuniversity).then(
                                 function (success) {
                                     $scope.updateList(acType);
@@ -288,6 +288,14 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     $scope.moveItem = function (item, fromIndex, toIndex) {
         $scope.myuniversities.splice(fromIndex, 1);
         $scope.myuniversities.splice(toIndex, 0, item);
+        var i, l;
+        for (i = 0, l = $scope.myuniversities.length; i < l; i++) {
+            $scope.myuniversities[i].rank = i;
+            var test = $scope.myuniversities[i];
+            DataService.updateItem('university', $scope.myuniversities[i].id, $scope.myuniversities[i]);
+        }
+        $scope.updateList('university');
+        
     };
 
     // callback for ng-click 'saveModal':
@@ -534,6 +542,12 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
             }
         );
     };
+    
+    //detect state change from sidemenu
+    $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        $scope.save(toState);
+        
+    });
 
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function (nextstate) {
