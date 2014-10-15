@@ -24,7 +24,6 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
 
     $scope.mycourses = {};
     $scope.mycourse = {};
-    var currentLevel = "sophomore";
 
     // GET
     DataService.getAllItems('coursework').then(
@@ -69,13 +68,13 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     // callback for ng-click 'saveModal':
     $scope.saveModal = function () {
         $scope.mycourse.application_id = $stateParams.applicationId;
-        $scope.mycourse.level = currentLevel;
         $scope.mycourse.type = $scope.myVariables.myCourseType.abbreviation;
         $scope.mycourse.final_grade = $scope.myVariables.myGrade.grade;
 
         if ($scope.mycourse.name && $scope.mycourse.credit_hours && $scope.mycourse.final_grade) {
 
             if ($scope.myVariables.current_mode === 'Add') {
+                $scope.mycourse.level = $scope.currentLevel;
                 DataService.addItem('coursework', $scope.mycourse).then(
                     function (result) {
                         $scope.updateLists();
@@ -134,10 +133,7 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
         $scope.myVariables.myGrade = $scope.grades[0];
         $scope.mycourse = {};
         $scope.modal.show();
-        var test = $filter('filter')($scope.levels, {
-            id: level
-        }, true);
-        currentLevel = test[0].name;
+        $scope.currentLevel = level;
     };
 
     // Update lists
@@ -153,20 +149,4 @@ angular.module('TerryControllers').controller('MyCourseworkController', function
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
-
-    
-    $scope.levels = [
-        {
-            "id": 1,
-            "name": "sophomore"
-        },
-        {
-            "id": 2,
-            "name": "junior"
-        },
-        {
-            "id": 3,
-            "name": "senior"
-        }
-    ];
 });
