@@ -6,6 +6,10 @@
 
 
 
+#lesspace  {
+    width: initial;
+}
+
 .item .item-radio{
     display: inline-block;
 } 
