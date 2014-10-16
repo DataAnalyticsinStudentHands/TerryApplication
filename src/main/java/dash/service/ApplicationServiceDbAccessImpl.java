@@ -300,7 +300,7 @@ ApplicationService {
 
 		
 		
-		File[] files = new File(AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+application.getDocument_folder()).listFiles();
+		File[] files = new File(AppConstants.APPLICATION_UPLOAD_LOCATION_FOLDER+"/"+application.getDocument_folder()).listFiles();
 		//If this pathname does not denote a directory, then listFiles() returns null. 
 
 		for (File file : files) {

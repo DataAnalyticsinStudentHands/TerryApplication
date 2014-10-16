@@ -9,18 +9,33 @@
  * Controller for the terry
  */
 
-var uploadUrl = (window.location.protocol || 'http:') + '//www.housuggest.org:8888/terry/applications/upload?id=18';
-window.uploadUrl = window.uploadUrl || 'upload';
 
-angular.module('TerryControllers').controller('UploadController', function ($scope, $ionicSideMenuDelegate, $http, $timeout, $upload) {
+
+angular.module('TerryControllers').controller('UploadController', function ($scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
 
     'use strict';
+    
+    Restangular.all("applications").customGET("upload", {applicationId: $stateParams.applicationId}).then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    $scope.fileList=  result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data for application", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+                
+           
+
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
     
-    $scope.documents = {};
+    
     
     $scope.fileName = 'essay1';
     
@@ -82,7 +97,7 @@ angular.module('TerryControllers').controller('UploadController', function ($sco
 
         //$upload.upload()
         $scope.upload[index] = $upload.upload({
-            url: 'http://www.housuggest.org:8888/terry/applications/upload?id=18',
+            url: 'http://www.housuggest.org:8888/terry/applications/upload?id=' + $stateParams.applicationId,
             //method: $scope.httpMethod,
             //headers: {'my-header': 'my-header-value'},
             data: {
@@ -121,8 +136,8 @@ angular.module('TerryControllers').controller('UploadController', function ($sco
         });
 
     };
-
-
+    
+     
 
 
     
