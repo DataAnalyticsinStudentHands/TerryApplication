@@ -226,8 +226,7 @@ angular.module('HonorsApplications', [
                 controller: 'UploadController'
             }
         },
-        authenticate: true,
-        resolve: { title: 'My Contacts' }
+        authenticate: true
     })
 
     .state('tabs.myapplication.submit', {
