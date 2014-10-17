@@ -13,26 +13,16 @@
         <h1 class="title">Essays</h1>
     </ion-header-bar>
     <ion-content>
-
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             For <u>BOTH</u> of the topics listed below, attach a typed essay of 250 words (minimum) in PDF or MS Word format. Your full name and UH ID should appear legibly at the top of each page of your essays.
         </p>
-
         <ion-list>
-
             <ion-item class="item item-divider">
                 Essay I: Significant Event and its Impact
             </ion-item>
-
-
-
-
             <div class="row">
-
                 <div class="col col-75 item-text-wrap">
-
                     Describe a significant setback, challenge or opportunity in your life and the impact that it has had on you.
-
                 </div>
                 <div class="col col-25">
                     <label for="file1" class="item item-icon-right fileContainer">
@@ -41,33 +31,63 @@
                         <input id="file1" type="file" ng-file-select="onFileSelect($files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                     </label>
                 </div>
-
+            </div>
+            <div class="row" ng-show="fileEssay1">
+                <div class="col col-25 col-offset-75">
+                    Uploaded File:
+                    <button title="Delete File" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteFile('essay1')"></button>
+                </div>
+            </div>
+            <div class="row" ng-show="fileEssay1">
+                <div class="col col-25 col-offset-75 item-text-wrap">
+                    "{{fileEssay1}}"
+                </div>
+            </div>
+            <div class="row" ng-hide="fileEssay1">
+                <div class="col col-25 col-offset-75 item-text-wrap">
+                    No file uploaded.
+                </div>
             </div>
 
             <ion-item class="item item-divider">
                 Essay II: Leadership Experience
             </ion-item>
-            
-            
+
+
             <div class="row">
 
                 <div class="col col-75 item-text-wrap">
 
-                   Describe an example of your leadership. Be sure to describe your actions and the actions of those around you and to explain what you accomplished.
+                    Describe an example of your leadership. Be sure to describe your actions and the actions of those around you and to explain what you accomplished.
                 </div>
                 <div class="col col-25">
-                    <label for="file1" class="item item-icon-right fileContainer">
+                    <label for="file2" class="item item-icon-right fileContainer">
                         <i class="icon ion-filing"></i>
                         Upload Essay II
-                        <input id="file1" type="file" ng-file-select="onFileSelect($files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                        <input id="file2" type="file" ng-file-select="onFileSelect($files, 'essay2')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                     </label>
                 </div>
 
             </div>
-            <div class="row">
-                File: 
+
+            <div class="row" ng-show="fileEssay2">
+                <div class="col col-25 col-offset-75">
+                    Uploaded File:
+                    <button title="Delete File" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteFile('essay2')"></button>
+                </div>
             </div>
-            
+            <div class="row" ng-show="fileEssay2">
+                <div class="col col-25 col-offset-75 item-text-wrap">
+                    "{{fileEssay2}}"
+                </div>
+            </div>
+            <div class="row" ng-hide="fileEssay2">
+                <div class="col col-25 col-offset-75 item-text-wrap">
+                    No file uploaded.
+                </div>
+            </div>
+
+
         </ion-list>
 
         <div class="item" ng-show="selectedFiles != null">

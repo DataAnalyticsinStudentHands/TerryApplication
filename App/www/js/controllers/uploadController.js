@@ -11,33 +11,17 @@
 
 
 
-angular.module('TerryControllers').controller('UploadController', function ($scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
+angular.module('TerryControllers').controller('UploadController', function ($filter, $scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
 
     'use strict';
     
-    Restangular.all("applications").customGET("upload", {applicationId: $stateParams.applicationId}).then(
-                function (result) {
-                    result = Restangular.stripRestangular(result);
-                    $scope.fileList=  result;
-                },
-                function (error) {
-                    ngNotify.set("Something went wrong retrieving data for application", {
-                        position: 'bottom',
-                        type: 'error'
-                    });
-                }
-            );
-                
+      
            
 
 
     $scope.toggleRight = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
-    
-    
-    
-    $scope.fileName = 'essay1';
     
     $scope.usingFlash = FileAPI && FileAPI.upload !== null;
     $scope.fileReaderSupported = window.FileReader !== null && (window.FileAPI === null || FileAPI.html5 !== false);
@@ -68,11 +52,9 @@ angular.module('TerryControllers').controller('UploadController', function ($sco
         $scope.dataUrls = [];
         for (var i = 0; i < $files.length; i++) {
             var $file = $files[i];
+            //add essay1 or eesay2 to the file Name    
+            $scope.fileName = param + $file.name;
             
-            if ($file.type === 'application/pdf')
-                $scope.fileName = param + '.pdf';
-            else
-                $scope.fileName = param + '.doc';
             if ($scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL($files[i]);
@@ -137,7 +119,29 @@ angular.module('TerryControllers').controller('UploadController', function ($sco
 
     };
     
-     
+     $scope.updateView = function() {
+         Restangular.all("applications").customGET("upload", {applicationId: $stateParams.applicationId}).then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    var str = $filter('filter')(result.fileName, 'essay1');
+                    if (str.length !== 0) {
+                        $scope.fileEssay1 = str[0].substr(6);
+                    }
+                    var str2 = $filter('filter')(result.fileName, 'essay2', 'true');
+                    if (str2.length !== 0) {
+                        $scope.fileEssay2 = str2[0].substr(6);
+                    }
+                    
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data for application", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+              
+     };
 
 
     
