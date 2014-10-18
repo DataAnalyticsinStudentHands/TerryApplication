@@ -1,0 +1,21 @@
+{
+  "name": "terry-web-app",
+  "appPath": "www",
+  "version": "0.0.1",
+  "dependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+    "crypto-js": "http://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
+    "ng-notify": "~0.5.0",
+    "lodash": "latest",
+    "restangular": "latest",
+    "angular-bootstrap-datetimepicker": "latest",
+    "angular-ui-utils": "latest",
+    "ng-file-upload-shim": "latest",
+    "ng-file-upload": "latest",
+    "ng-currency": "latest",
+    "angular-cache": "~3.1.1"
+  }
+}
+
+
+

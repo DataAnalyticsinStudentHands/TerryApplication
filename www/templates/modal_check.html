@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Checking Application</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <p ng-hide="myVariables.problems" class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            We have checked your application and found no errors.
+        </p>
+        <p ng-show="myVariables.problems" class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            We have checked your application and found missing values. Please use the table below as an indicator to go back and fix the problems.
+        </p>
+        
+        
+        <div class="list">
+            <a ng-hide="error.student_information" class="item item-icon-right" ui-sref="tabs.myapplication.student_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                I. Student Information 
+            </a>
+            <a ng-show="error.student_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.student_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                I. Student Information {{errors.student_information}}
+            </a>
+            <a ng-hide="error.highschool_information" class="item item-icon-right" ui-sref="tabs.myapplication.highschool_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                II. High School Information
+            </a>
+            <a ng-show="error.highschool_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.highschool_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                II. High School Information {{errors.highschool_information}}
+            </a>
+            <a ng-hide="error.coursework" class="item item-icon-right" ui-sref="tabs.myapplication.highschool_coursework" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                III. High School Coursework 
+            </a>
+            <a ng-show="error.coursework" class="item item-icon-right" ui-sref="tabs.myapplication.highschool_coursework" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                III. High School Coursework 
+            </a>
+            <a ng-hide="error.employment" class="item item-icon-right" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                IV. Employment
+            </a>
+            <a ng-show="error.employment" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.employment" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                IV. Employment missing values in lists: {{errors.employment}}
+            </a>
+            <a ng-hide="error.college_plans" class="item item-icon-right" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                V. College Plans
+            </a>
+            <a ng-show="error.college_plans" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.college_plans" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                V. College Plans {{errors.college_plans}}
+            </a>
+            <a ng-hide="error.financial_information" class="item item-icon-right" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                VI. Financial Information
+            </a>
+            <a ng-show="error.financial_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.financial_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                VI. Financial Information {{errors.financial_information}}
+            </a>
+            <a ng-hide="error.scholarship" class="item item-icon-right" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                VII. University Scholarship Information
+            </a>
+            <a ng-show="error.scholarship" class="item item-icon-right item-text-wrap" ui-sref="tabs.myapplication.scholarship_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                VII. University Scholarship Information {{errors.scholarship}}
+            </a>
+            <a ng-hide="error.essays" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                VIII. Essays
+            </a>
+            <a ng-show="error.essays" class="item item-icon-right" ui-sref="tabs.myapplication.essays" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                VIII. Essays
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col col-25 col-offset-75">
+                <button class="button button-full button-positive" ng-click="checked('tabs.myapplication.confirmation')">Done</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

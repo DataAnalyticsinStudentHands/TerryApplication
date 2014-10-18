@@ -1,8 +1,5 @@
-/target
-/target/
-/Versions/
-/App/www/lib
-/App/platforms/
-/App/plugins/
-/App/.brackets.json
+www/lib
+platforms/
+plugins/
+.brackets.json
 www.zip

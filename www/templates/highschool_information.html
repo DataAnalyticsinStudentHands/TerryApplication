@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<ion-view title="Terry Scholarship Application 2015/2016">
+
+    <!-- The nav bar that will be updated as we navigate between views.-->
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">High School Information</h1>
+    </ion-header-bar>
+    <ion-content>
+
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.highschool_coursework')">
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">High School Name:</span> 
+                        <input type="text" ng-model="myapplication.highschool_name" placeholder="Highschool name">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">High School City/State:</span> 
+                        <input type="text" ng-model="myapplication.highschool_city" placeholder="City">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Your High School Counselor:</span> 
+                        <input type="text" ng-model="myapplication.highschool_councelor" placeholder="Name">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">School Phone/Ext.:</span>
+                        <input ng-model="myapplication.highschool_phone" ui-mask="{{'(999) 999-9999'}}" type="text" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Your High School Counselor's Email Address:</span> 
+                        <input type="email" ng-model="myapplication.highschool_councelor_email" placeholder="email">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">High School GPA:</span> 
+                        <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Scale:</span> 
+                        <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
+                        <span class="input-label">Graduation Date:</span>
+                        <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <label class="plain-item validated">
+                            <span class="input-label">Class Rank:</span> 
+                            <input type="number" ng-model="myapplication.highschool_rank" placeholder="#">
+                        </label>
+                        <label class="plain-item validated">
+                            <span class="input-label">out of:</span>
+                            <input style="max-width: 100px;" type="number" ng-model="myapplication.highschool_rank_out" placeholder="#">
+                            <span class="input-label">students</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Number of students tied for this rank:</span> 
+                        <input type="number" ng-model="myapplication.highschool_rank_tied" placeholder="#">
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    <div class="item item-divider">Test Scores</div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <h2>PSAT</h2>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Verbal:</span>
+                            <input name="psat_verbal" type="number" ng-model="myapplication.psat_verbal" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Math:</span> 
+                            <input name="psat_math" type="number" ng-model="myapplication.psat_math" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Writing Skills:</span>
+                            <input name="psat_writing" type="number" ng-model="myapplication.psat_writing" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Selection Index:</span>
+                            <input name="psat_selection" type="number" ng-model="myapplication.psat_selection" placeholder="index">
+                        </label>
+                        <label ng-click="openDatePicker('Date of Test', 'psat_date')">Date of Test:
+                            <input type="text" ng-model="myapplication.psat_date" placeholder="Select">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <h2>SAT</h2>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Critical Reading:</span>
+                            <input type="number" ng-model="myapplication.sat_reading" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Mathematics:</span> 
+                            <input type="number" ng-model="myapplication.sat_math" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Writing:</span>
+                            <input type="number" ng-model="myapplication.sat_writing" placeholder="score">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Composite:</span>
+                            <input type="number" ng-model="myapplication.sat_composite" placeholder="index">
+                        </label>
+                        <label ng-click="openDatePicker('Date of Test', 'sat_date')">Date of Test:
+                            <input type="text" ng-model="myapplication.sat_date" placeholder="Select">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <h2>ACT</h2>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Composite:</span>
+                            <input type="number" ng-model="myapplication.act_composite" placeholder="index">
+                        </label>
+                        <label ng-click="openDatePicker('Date of Test', 'act_date')">Date of Test:
+                            <input type="text" ng-model="myapplication.act_date" placeholder="Select">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="item item-divider">Indicate the level of recognition you have achieved in the following scholarship competition(s)</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <label class="plain-item item-stacked-label">
+                            <span>National Merit:</span>
+                            <input type="text" ng-model="myapplication.national_merit" placeholder="level of recognition">
+                        </label>
+                        <label class="plain-item item-stacked-label">
+                            <span>National Achievement:</span> 
+                            <input type="text" ng-model="myapplication.national_achievement" placeholder="level of recognition">
+                        </label>
+                        <label class="plain-item item-stacked-label">
+                            <span>National Hispanic:</span>
+                            <input type="text" ng-model="myapplication.national_hispanic" placeholder="level of recognition">
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="item item-input item-stacked-label">
+                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_merit_date')">
+                            <span>Date of Test:</span>
+                            <input type="text" ng-model="myapplication.national_merit_date" placeholder="Select">
+                        </label>
+                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_achievement_date')">
+                            <span>Date of Test:</span>
+                            <input type="text" ng-model="myapplication.national_achievement_date" placeholder="Select">
+                        </label>
+                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_hispanic_date')">
+                            <span>Date of Test:</span>
+                            <input type="text" ng-model="myapplication.national_hispanic_date" placeholder="Select">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save/next button -->
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button type="submit" class="button button-block button-positive">Next</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

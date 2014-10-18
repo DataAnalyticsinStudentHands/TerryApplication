@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<ion-view title="Terry Scholarship Application 2015/2016">
+
+    <!-- The nav bar that will be updated as we navigate between views.-->
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">College Plans</h1>
+    </ion-header-bar>
+    <ion-content>
+
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.financial_information')">
+
+            <div class="row">
+                <div class="col">
+                    <label class="item">
+                        <span class="input-label">Will you be the first in your family to graduate college?</span>
+                        <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'false'">No</ion-radio>
+                    </label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Why have you chosen to apply to the University of Houston?</span>
+                        <textarea name="why_apply" rows="5" ng-model="myapplication.why_apply" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                List, in order of preference, the top six colleges or universities you are considering attending (be sure to rank the University of Houston among your choices). Use the <span class="ion-plus-circled"></span> button to add a university.</p>
+            
+            
+
+            <div class="item dark item-button-left">
+                
+                <button type="button" name="addbutton" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('university')"></button>
+                <span class="item-button-right">
+               List Universities
+            <button type="button" name="reorderbutton" class="button"
+          ng-click="data.showReorder = !data.showReorder">
+            Reorder
+          </button>
+          </span>
+            </div>
+            
+            <ion-list type="list-inset" show-reorder="data.showReorder">
+                <ion-item ng-repeat="item in myuniversities | orderBy:'rank'" item="item">
+                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('university', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('university', item)">&nbsp;&nbsp;&nbsp;&nbsp;University Name: {{item.name}}</button>
+                </ion-item>
+            </ion-list>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Why have you chosen your academic major(s)?</span>
+                        <textarea name="why_major" rows="3" ng-model="myapplication.why_major" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Briefly describe any educational plans you have beyond earning your Bachelor’s degree:</span>
+                        <textarea name="educational_plans" rows="5" ng-model="myapplication.educational_plans" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">What are some of your life’s goals and objectives?</span>
+                        <textarea name="life_goals" rows="5" ng-model="myapplication.life_goals" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button type="submit" class="button button-block button-positive">Next</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

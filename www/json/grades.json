@@ -1,0 +1,20 @@
+[
+    {
+        "grade": "A"
+    },
+    {
+        "grade": "B"
+    },
+    {
+        "grade": "C"
+    },
+    {
+        "grade": "D"
+    },
+    {
+        "grade": "F"
+    },
+    {
+        "grade": "In Progress"
+    }
+]
