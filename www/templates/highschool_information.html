@@ -15,13 +15,15 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School Name:</span> 
+                        <span class="input-label">High School Name:<span style="color: red;">*</span></span> 
+                        
                         <input type="text" ng-model="myapplication.highschool_name" placeholder="Highschool name">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School City/State:</span> 
+                        <span class="input-label">High School City/State:<span style="color: red;">*</span></span> 
+                        
                         <input type="text" ng-model="myapplication.highschool_city" placeholder="City">
                     </label>
                 </div>
@@ -30,13 +32,15 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Your High School Counselor:</span> 
+                        <span class="input-label">Your High School Counselor:<span style="color: red;">*</span></span> 
+                        
                         <input type="text" ng-model="myapplication.highschool_councelor" placeholder="Name">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">School Phone/Ext.:</span>
+                        <span class="input-label">School Phone/Ext.:<span style="color: red;">*</span></span>
+                        
                         <input ng-model="myapplication.highschool_phone" ui-mask="{{'(999) 999-9999'}}" type="text" />
                     </label>
                 </div>
@@ -44,7 +48,8 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Your High School Counselor's Email Address:</span> 
+                        <span class="input-label">Your High School Counselor's Email Address:<span style="color: red;">*</span></span> 
+                        
                         <input type="email" ng-model="myapplication.highschool_councelor_email" placeholder="email">
                     </label>
                 </div>
@@ -53,19 +58,22 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School GPA:</span> 
+                        <span class="input-label">High School GPA:<span style="color: red;">*</span></span> 
+                        
                         <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Scale:</span> 
+                        <span class="input-label">Scale:<span style="color: red;">*</span></span> 
+                        
                         <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
-                        <span class="input-label">Graduation Date:</span>
+                        <span class="input-label">Graduation Date:<span style="color: red;">*</span></span>
+                        
                         <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
                     </label>
                 </div>
@@ -75,7 +83,8 @@
                 <div class="col">
                     <div class="item item-input item-stacked-label">
                         <label class="plain-item validated">
-                            <span class="input-label">Class Rank:</span> 
+                            <span class="input-label">Class Rank:<span style="color: red;">*</span></span> 
+                            
                             <input type="number" ng-model="myapplication.highschool_rank" placeholder="#">
                         </label>
                         <label class="plain-item validated">
@@ -87,7 +96,8 @@
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Number of students tied for this rank:</span> 
+                        <span class="input-label">Number of students tied for this rank:<span style="color: red;">*</span></span> 
+                        
                         <input type="number" ng-model="myapplication.highschool_rank_tied" placeholder="#">
                     </label>
                 </div>
@@ -107,22 +117,27 @@
                     <div class="item item-input item-stacked-label">
                         <h2>PSAT</h2>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Verbal:</span>
+                            <span>Verbal:<span style="color: red;">*</span></span>
+                            
                             <input name="psat_verbal" type="number" ng-model="myapplication.psat_verbal" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Math:</span> 
+                            <span>Math:<span style="color: red;">*</span></span> 
+                            
                             <input name="psat_math" type="number" ng-model="myapplication.psat_math" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Writing Skills:</span>
+                            <span>Writing Skills:<span style="color: red;">*</span></span>
+                            
                             <input name="psat_writing" type="number" ng-model="myapplication.psat_writing" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Selection Index:</span>
+                            <span>Selection Index:<span style="color: red;">*</span></span>
+                            
                             <input name="psat_selection" type="number" ng-model="myapplication.psat_selection" placeholder="index">
                         </label>
-                        <label ng-click="openDatePicker('Date of Test', 'psat_date')">Date of Test:
+                        <label ng-click="openDatePicker('Date of Test', 'psat_date')">Date of Test:<span style="color: red;">*</span>
+                            
                             <input type="text" ng-model="myapplication.psat_date" placeholder="Select">
                         </label>
                     </div>
@@ -132,22 +147,27 @@
                     <div class="item item-input item-stacked-label">
                         <h2>SAT</h2>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Critical Reading:</span>
+                            <span>Critical Reading:<span style="color: red;">*</span></span>
+                            
                             <input type="number" ng-model="myapplication.sat_reading" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Mathematics:</span> 
+                            <span>Mathematics:<span style="color: red;">*</span></span> 
+                            
                             <input type="number" ng-model="myapplication.sat_math" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Writing:</span>
+                            <span>Writing:<span style="color: red;">*</span></span>
+                            
                             <input type="number" ng-model="myapplication.sat_writing" placeholder="score">
                         </label>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Composite:</span>
+                            <span>Composite:<span style="color: red;">*</span></span>
+                            
                             <input type="number" ng-model="myapplication.sat_composite" placeholder="index">
                         </label>
                         <label ng-click="openDatePicker('Date of Test', 'sat_date')">Date of Test:
+                            <span style="color: red;">*</span>
                             <input type="text" ng-model="myapplication.sat_date" placeholder="Select">
                         </label>
                     </div>
@@ -157,10 +177,12 @@
                     <div class="item item-input item-stacked-label">
                         <h2>ACT</h2>
                         <label class="plain-item item-stacked-label validated">
-                            <span>Composite:</span>
+                            <span>Composite:<span style="color: red;">*</span></span>
+                            
                             <input type="number" ng-model="myapplication.act_composite" placeholder="index">
                         </label>
                         <label ng-click="openDatePicker('Date of Test', 'act_date')">Date of Test:
+                            <span style="color: red;">*</span>
                             <input type="text" ng-model="myapplication.act_date" placeholder="Select">
                         </label>
                     </div>
@@ -176,15 +198,18 @@
                 <div class="col">
                     <div class="item item-input item-stacked-label">
                         <label class="plain-item item-stacked-label">
-                            <span>National Merit:</span>
+                            <span>National Merit:<span style="color: red;">*</span></span>
+                            
                             <input type="text" ng-model="myapplication.national_merit" placeholder="level of recognition">
                         </label>
                         <label class="plain-item item-stacked-label">
-                            <span>National Achievement:</span> 
+                            <span>National Achievement:<span style="color: red;">*</span></span> 
+                            
                             <input type="text" ng-model="myapplication.national_achievement" placeholder="level of recognition">
                         </label>
                         <label class="plain-item item-stacked-label">
-                            <span>National Hispanic:</span>
+                            <span>National Hispanic:<span style="color: red;">*</span></span>
+                            
                             <input type="text" ng-model="myapplication.national_hispanic" placeholder="level of recognition">
                         </label>
                     </div>
@@ -192,15 +217,18 @@
                 <div class="col">
                     <div class="item item-input item-stacked-label">
                         <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_merit_date')">
-                            <span>Date of Test:</span>
+                            <span>Date of Test:<span style="color: red;">*</span></span>
+                            
                             <input type="text" ng-model="myapplication.national_merit_date" placeholder="Select">
                         </label>
                         <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_achievement_date')">
-                            <span>Date of Test:</span>
+                            <span>Date of Test:<span style="color: red;">*</span></span>
+                            
                             <input type="text" ng-model="myapplication.national_achievement_date" placeholder="Select">
                         </label>
                         <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_hispanic_date')">
-                            <span>Date of Test:</span>
+                            <span>Date of Test:<span style="color: red;">*</span></span>
+                            
                             <input type="text" ng-model="myapplication.national_hispanic_date" placeholder="Select">
                         </label>
                     </div>
