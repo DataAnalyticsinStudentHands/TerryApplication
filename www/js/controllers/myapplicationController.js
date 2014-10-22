@@ -493,6 +493,16 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     }
                     $scope.errors.college_plans.push('university list');
                 }
+            
+                //check the submission page
+                var j, k, goThrough = ['app_uh_method', 'transcript_method', 'fafsa_method', 'housing_method'];
+                $scope.errors.submission = [];
+                for (j = 0, k = goThrough.length; j < k; j++) {
+                    if ($scope.myapplication[goThrough[j]] === 'true') {
+                        $scope.error.submission = 'true';
+                        $scope.errors.submission.push(goThrough[j]);
+                    }
+                }
 
                 //update general problems value
                 for (var value in $scope.error) {
