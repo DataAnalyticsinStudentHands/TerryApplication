@@ -685,7 +685,7 @@
         "form": "financial_information",
         "id": 87,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "assistance_amount",
@@ -693,7 +693,7 @@
         "form": "financial_information",
         "id": 88,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "funds_saved_you",
