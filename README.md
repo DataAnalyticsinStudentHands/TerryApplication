@@ -10,7 +10,7 @@ Getting started:
 
 Reads bower.json and installs local dependencies into the folder www/lib
 
-Quck hack for ngNotify -> add z-index: 99 into ngNotify css
+Quick hack for ngNotify -> add z-index: 99 into ngNotify css
 
 2. ionic serve
 

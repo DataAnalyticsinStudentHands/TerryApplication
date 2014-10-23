@@ -102,6 +102,7 @@ angular.module('TerryControllers').controller('UploadController', function ($fil
         //$upload.upload()
         $scope.upload[index] = $upload.upload({
             url: 'http://www.housuggest.org:8888/terry/applications/upload?id=' + $stateParams.applicationId,
+            //url: 'http://127.0.0.1:8080/terry/applications/upload?id=' + $stateParams.applicationId,
             //method: $scope.httpMethod,
             //headers: {'my-header': 'my-header-value'},
             data: {

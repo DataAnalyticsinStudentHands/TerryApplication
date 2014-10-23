@@ -354,8 +354,8 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Please describe any special circumstances that affect your family’s ability to fund your college expenses:<span style="color: red;">*</span></span>
-                        <textarea name="description_special_circumstances" rows="3" ng-model="myapplication.description_special_circumstances" placeholder="description"></textarea>
+                        <span class="input-label">Please describe any special circumstances that affect your family’s ability to fund your college expenses: (max. 200 characters)<span style="color: red;">*</span></span>
+                        <textarea name="description_special_circumstances" rows="3" maxlength="200" ng-model="myapplication.description_special_circumstances" placeholder="description"></textarea>
                     </label>
                 </div>
             </div>
@@ -393,7 +393,7 @@
             <div class="list list-inset">
                 <div class="item" ng-repeat="item in mychildren" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('child', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.school}} {{item.year}} {{item.self_supporting}}</button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.school}} {{item.year}}</button>
                 </div>
             </div>
 

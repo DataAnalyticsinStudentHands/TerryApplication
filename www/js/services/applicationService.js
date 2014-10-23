@@ -49,7 +49,20 @@ angular.module('TerryServices').factory('ApplicationService', function (Restangu
             return Restangular.all("applications").all(application_id).post(application);
         },
         getListofDocuments: function (application_id) {
-            return Restangular.all("applications/upload").get(application_id);
-        },
+            return Restangular.all("applications").customGET("upload", {
+                applicationId: application_id
+            }).then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    return result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving uploaded file information.", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
+        }
     };
 });

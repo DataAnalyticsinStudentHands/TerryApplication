@@ -467,6 +467,17 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 }
             ));
         }
+        
+        //check whether essays have been put in
+        listPromises.push(ApplicationService.getListofDocuments($stateParams.applicationId).then (
+            function (result) {
+                if (result.fileName.length < 2) {
+                    $scope.error.essay = 'true';
+                    $scope.errors.essay = [];
+                    $scope.errors.essay.push('One of the essays is missing.');
+                }                
+            }
+        ));
 
         //after checking individual lists, sift through the results
         $scope.fromThen = $q.all(listPromises)
@@ -493,6 +504,19 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                     }
                     $scope.errors.college_plans.push('university list');
                 }
+            
+                //check the submission page
+                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub',' fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
+                $scope.errors.submission = [];
+                for (j = 0, k = goThrough.length; j < k; j++) {
+                    if ($scope.myapplication[goThrough[j]] === undefined) {
+                        $scope.error.submission = 'true';
+                        $scope.errors.submission.push(goThrough[j]);
+                    }
+                }
+            
+                
+                
 
                 //update general problems value
                 for (var value in $scope.error) {

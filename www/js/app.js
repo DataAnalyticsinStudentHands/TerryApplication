@@ -19,7 +19,7 @@ angular.module('HonorsApplications', [
     'use strict';
 
     // Set Base URL to connect to DASH RESTFUL webservices
-    //Restangular.setBaseUrl("http://127.0.0.1:8080/RESTFUL-WS-terry/"); // localhost
+    //Restangular.setBaseUrl("http://127.0.0.1:8080/terry/"); // localhost
     Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
     //Restangular.setDefaultHttpFields({cache: true});
 
