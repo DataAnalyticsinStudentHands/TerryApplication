@@ -361,9 +361,10 @@
             </div>
 
             <div class="row">
-                <div class="col col-75">
+                <div class="col col-50">
 
-                    <label class="item item-input">
+                    <label class="item">
+                        
                         <span class="input-label">Do you have a Texas Tomorrow Fund or 529 college savings plan?<span style="color: red;">*</span></span>
                         <ion-radio name="texas_tomorrow_fund" ng-model="myapplication.texas_tomorrow_fund" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="texas_tomorrow_fund" ng-model="myapplication.texas_tomorrow_fund" ng-value="'false'">No</ion-radio>
@@ -373,7 +374,8 @@
                 <div class="col" ng-show="myapplication.texas_tomorrow_fund">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">  If so, what is the plan’s value?<span style="color: red;">*</span></span> 
-                        <input name="texas_tomorrow_fund" type="text" ng-model="myapplication.texas_tomorrow_fund_value" placeholder="description">
+                        <textarea name="texas_tomorrow_fund_value" rows="5" ng-model="myapplication.texas_tomorrow_fund_value" placeholder="description"></textarea>
+                       
                     </label>
                 </div>
             </div>
