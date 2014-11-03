@@ -13,7 +13,7 @@
     "ng-file-upload-shim": "latest",
     "ng-file-upload": "latest",
     "ng-currency": "latest",
-    "angular-cache": "~3.1.1"
+    "angular-cache": "latest"
   }
 }
 
