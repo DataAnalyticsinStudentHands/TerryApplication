@@ -7,7 +7,7 @@
     </ion-nav-buttons>
 
     <ion-header-bar class="bar-subheader">
-        <h1 class="title">High School Information</h1>
+        <h1 class="title">Education</h1>
     </ion-header-bar>
     <ion-content>
 
@@ -15,225 +15,88 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School Name:<span style="color: red;">*</span></span> 
-                        
-                        <input type="text" ng-model="myapplication.highschool_name" placeholder="Highschool name">
+                        <span class="input-label">High School Last Attended:<span style="color: red;">*</span></span>
+
+                        <input type="text" ng-model="myapplication.highschool_lastattended" placeholder="High School Last Attended">
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School City/State:<span style="color: red;">*</span></span> 
-                        
+                        <span class="input-label">High School City/State:<span style="color: red;">*</span></span>
+
                         <input type="text" ng-model="myapplication.highschool_city" placeholder="City">
                     </label>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Your High School Counselor:<span style="color: red;">*</span></span> 
-                        
-                        <input type="text" ng-model="myapplication.highschool_councelor" placeholder="Name">
-                    </label>
-                </div>
-                <div class="col">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">School Phone/Ext.:<span style="color: red;">*</span></span>
-                        
-                        <input ng-model="myapplication.highschool_phone" ui-mask="{{'(999) 999-9999'}}" type="text" />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Your High School Counselor's Email Address:<span style="color: red;">*</span></span> 
-                        
-                        <input type="email" ng-model="myapplication.highschool_councelor_email" placeholder="email">
-                    </label>
-                </div>
-            </div>
+                <div class="col col-50">
 
-            <div class="row">
-                <div class="col">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">High School GPA:<span style="color: red;">*</span></span> 
-                        
-                        <input type="text" ng-model="myapplication.highschool_gpa" placeholder="gpa">
+                    <label class="item">
+
+                        <span class="input-label">High School Diploma<span style="color: red;">*</span></span>
+                        <ion-radio name="highschool_diploma" ng-model="myapplication.highschool_diploma" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="highschool_diploma" ng-model="myapplication.highschool_diploma" ng-value="'false'">No</ion-radio>
                     </label>
                 </div>
-                <div class="col">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Scale:<span style="color: red;">*</span></span> 
-                        
-                        <input type="text" ng-model="myapplication.highschool_scale" placeholder="scale">
-                    </label>
-                </div>
-                <div class="col">
-                    <label class="item item-input item-stacked-label" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
-                        <span class="input-label">Graduation Date:<span style="color: red;">*</span></span>
-                        
+
+                <div class="col" ng-show="myapplication.highschool_diploma">
+                    <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
+                        <span class="input-label">  If "YES", date of graduation<span style="color: red;">*</span></span>
                         <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
                     </label>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <label class="plain-item validated">
-                            <span class="input-label">Class Rank:<span style="color: red;">*</span></span> 
-                            
-                            <input type="number" ng-model="myapplication.highschool_rank" placeholder="#">
-                        </label>
-                        <label class="plain-item validated">
-                            <span class="input-label">out of:</span>
-                            <input style="max-width: 100px;" type="number" ng-model="myapplication.highschool_rank_out" placeholder="#">
-                            <span class="input-label">students</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col">
-                    <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Number of students tied for this rank:<span style="color: red;">*</span></span> 
-                        
-                        <input type="number" ng-model="myapplication.highschool_rank_tied" placeholder="#">
+           <div class="row">
+                <div class="col col-50">
+
+                    <label class="item">
+
+                        <span class="input-label">High School GED<span style="color: red;">*</span></span>
+                        <ion-radio name="highschool_GED" ng-model="myapplication.highschool_GED" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="highschool_GED" ng-model="myapplication.highschool_GED" ng-value="'false'">No</ion-radio>
                     </label>
                 </div>
 
-            </div>
-
-            <div class="row">
-                <div class="col">
-
-                    <div class="item item-divider">Test Scores</div>
-
+                <div class="col" ng-show="myapplication.highschool_GED">
+                    <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_GEDawarded_date')">
+                        <span class="input-label">  If "YES", date GED awarded<span style="color: red;">*</span></span>
+                        <input type="text" ng-model="myapplication.highschool_GEDawarded_date" placeholder="Select">
+                    </label>
                 </div>
             </div>
+           
+<p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            List all of your preiously attended institutions, both actual and online. Include the city and state in which the institution is located, your dates of attendance, your hours attempted and completed, and your cum gpa at the institution. List your recent attendace first.
+        </p>
+ <div class="item item-button-left dark">
+            Institutions attended
+            <span style="color: red;">*</span>
+            <button title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddInstitution"></button>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <h2>PSAT</h2>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Verbal:<span style="color: red;">*</span></span>
-                            
-                            <input name="psat_verbal" type="number" ng-model="myapplication.psat_verbal" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Math:<span style="color: red;">*</span></span> 
-                            
-                            <input name="psat_math" type="number" ng-model="myapplication.psat_math" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Writing Skills:<span style="color: red;">*</span></span>
-                            
-                            <input name="psat_writing" type="number" ng-model="myapplication.psat_writing" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Selection Index:<span style="color: red;">*</span></span>
-                            
-                            <input name="psat_selection" type="number" ng-model="myapplication.psat_selection" placeholder="index">
-                        </label>
-                        <label ng-click="openDatePicker('Date of Test', 'psat_date')">Date of Test:<span style="color: red;">*</span>
-                            
-                            <input type="text" ng-model="myapplication.psat_date" placeholder="Select">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <h2>SAT</h2>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Critical Reading:<span style="color: red;">*</span></span>
-                            
-                            <input type="number" ng-model="myapplication.sat_reading" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Mathematics:<span style="color: red;">*</span></span> 
-                            
-                            <input type="number" ng-model="myapplication.sat_math" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Writing:<span style="color: red;">*</span></span>
-                            
-                            <input type="number" ng-model="myapplication.sat_writing" placeholder="score">
-                        </label>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Composite:<span style="color: red;">*</span></span>
-                            
-                            <input type="number" ng-model="myapplication.sat_composite" placeholder="index">
-                        </label>
-                        <label ng-click="openDatePicker('Date of Test', 'sat_date')">Date of Test:
-                            <span style="color: red;">*</span>
-                            <input type="text" ng-model="myapplication.sat_date" placeholder="Select">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <h2>ACT</h2>
-                        <label class="plain-item item-stacked-label validated">
-                            <span>Composite:<span style="color: red;">*</span></span>
-                            
-                            <input type="number" ng-model="myapplication.act_composite" placeholder="index">
-                        </label>
-                        <label ng-click="openDatePicker('Date of Test', 'act_date')">Date of Test:
-                            <span style="color: red;">*</span>
-                            <input type="text" ng-model="myapplication.act_date" placeholder="Select">
-                        </label>
-                    </div>
-                </div>
+        <div class="list list-inset">
+            <div class="item" ng-repeat="institution in myinstitutions" item="institution">
+                <button title="Delete institution" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteInstitution(institution.id)"></button>
+                <button title="Edit institution" class="button button-icon icon ion-compose" ng-click="editInstitution(institution)">&nbsp;&nbsp;&nbsp;&nbsp;{{institution}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="item item-divider">Indicate the level of recognition you have achieved in the following scholarship competition(s)</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <label class="plain-item item-stacked-label">
-                            <span>National Merit:<span style="color: red;">*</span></span>
-                            
-                            <input type="text" ng-model="myapplication.national_merit" placeholder="level of recognition">
-                        </label>
-                        <label class="plain-item item-stacked-label">
-                            <span>National Achievement:<span style="color: red;">*</span></span> 
-                            
-                            <input type="text" ng-model="myapplication.national_achievement" placeholder="level of recognition">
-                        </label>
-                        <label class="plain-item item-stacked-label">
-                            <span>National Hispanic:<span style="color: red;">*</span></span>
-                            
-                            <input type="text" ng-model="myapplication.national_hispanic" placeholder="level of recognition">
-                        </label>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="item item-input item-stacked-label">
-                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_merit_date')">
-                            <span>Date of Test:<span style="color: red;">*</span></span>
-                            
-                            <input type="text" ng-model="myapplication.national_merit_date" placeholder="Select">
-                        </label>
-                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_achievement_date')">
-                            <span>Date of Test:<span style="color: red;">*</span></span>
-                            
-                            <input type="text" ng-model="myapplication.national_achievement_date" placeholder="Select">
-                        </label>
-                        <label class="plain-item item-stacked-label" ng-click="openDatePicker('Date of Test', 'national_hispanic_date')">
-                            <span>Date of Test:<span style="color: red;">*</span></span>
-                            
-                            <input type="text" ng-model="myapplication.national_hispanic_date" placeholder="Select">
-                        </label>
-                    </div>
-                </div>
-            </div>
+        </div>
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+              
+           
+                
 
             <!-- Save/next button -->
             <div class="row">
