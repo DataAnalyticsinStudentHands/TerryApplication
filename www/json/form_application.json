@@ -454,7 +454,7 @@
         "form": "financial_information",
         "id": 58,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "marital_status_parents",
@@ -462,7 +462,7 @@
         "form": "financial_information",
         "id": 59,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "total_annual_income",
@@ -470,7 +470,7 @@
         "form": "financial_information",
         "id": 60,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "present_partner",
@@ -478,7 +478,7 @@
         "form": "financial_information",
         "id": 61,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "father_occupation",
@@ -486,7 +486,7 @@
         "form": "financial_information",
         "id": 62,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "stepparent_occupation",
@@ -494,7 +494,7 @@
         "form": "financial_information",
         "id": 63,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "father_employer",
@@ -502,7 +502,7 @@
         "form": "financial_information",
         "id": 64,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "stepparent_employer",
@@ -510,7 +510,7 @@
         "form": "financial_information",
         "id": 65,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "father_total_income",
@@ -518,7 +518,7 @@
         "form": "financial_information",
         "id": 66,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "stepparent_total_income",
@@ -526,7 +526,7 @@
         "form": "financial_information",
         "id": 67,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "father_age",
@@ -534,7 +534,7 @@
         "form": "financial_information",
         "id": 68,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "stepparent_age",
@@ -542,7 +542,7 @@
         "form": "financial_information",
         "id": 69,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "father_level_education",
@@ -550,7 +550,7 @@
         "form": "financial_information",
         "id": 70,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "stepparent_level_education",
@@ -558,7 +558,7 @@
         "form": "financial_information",
         "id": 71,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "mother_occupation",
@@ -566,7 +566,7 @@
         "form": "financial_information",
         "id": 72,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "guardian_occupation",
@@ -574,7 +574,7 @@
         "form": "financial_information",
         "id": 73,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "mother_employer",
@@ -582,7 +582,7 @@
         "form": "financial_information",
         "id": 74,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "guardian_employer",
@@ -590,7 +590,7 @@
         "form": "financial_information",
         "id": 75,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "mother_total_income",
@@ -598,14 +598,15 @@
         "form": "financial_information",
         "id": 76,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "guardian_total_income",
         "label": "Guardian’s total annual income:",
         "form": "financial_information",
         "id": 77,
-        "type": "number"
+        "type": "number",
+        "required": "false"
     },
     {
         "name": "mother_age",
@@ -613,7 +614,7 @@
         "form": "financial_information",
         "id": 78,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "guardian_age",
@@ -621,7 +622,7 @@
         "form": "financial_information",
         "id": 79,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "mother_level_education",
@@ -629,7 +630,7 @@
         "form": "financial_information",
         "id": 80,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "guardian_level_education",
@@ -637,7 +638,7 @@
         "form": "financial_information",
         "id": 81,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "income_same",
@@ -645,7 +646,7 @@
         "form": "financial_information",
         "id": 82,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "increased",
@@ -669,7 +670,7 @@
         "form": "financial_information",
         "id": 85,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "financial_assistance",
@@ -677,7 +678,7 @@
         "form": "financial_information",
         "id": 86,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "assistance_type",
@@ -701,7 +702,7 @@
         "form": "financial_information",
         "id": 89,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "funds_saved_others",
@@ -709,7 +710,7 @@
         "form": "financial_information",
         "id": 90,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "total_savings",
@@ -717,7 +718,7 @@
         "form": "financial_information",
         "id": 91,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "total_investments",
@@ -725,7 +726,7 @@
         "form": "financial_information",
         "id": 92,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "net_value",
@@ -733,7 +734,7 @@
         "form": "financial_information",
         "id": 93,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "adjusted_cross_income",
@@ -741,7 +742,7 @@
         "form": "financial_information",
         "id": 94,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "projected_support",
@@ -749,7 +750,7 @@
         "form": "financial_information",
         "id": 95,
         "type": "number",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "description_special_circumstances",
@@ -757,7 +758,7 @@
         "form": "financial_information",
         "id": 96,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "texas_tomorrow_fund",
@@ -765,7 +766,7 @@
         "form": "financial_information",
         "id": 97,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "sibling_terry",
@@ -773,7 +774,7 @@
         "form": "financial_information",
         "id": 98,
         "type": "text",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "department_scholarship",

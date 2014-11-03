@@ -291,7 +291,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         var i, l;
         for (i = 0, l = $scope.myuniversities.length; i < l; i++) {
             $scope.myuniversities[i].rank = i;
-            var test = $scope.myuniversities[i];
             DataService.updateItem('university', $scope.myuniversities[i].id, $scope.myuniversities[i]);
         }
         $scope.updateList('university');
@@ -447,8 +446,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         }
 
         //check the lists for not empty
-        var listsToCheck = ['activity', 'award', 'child', 'coursework', 'employment', 'scholarship', 'university', 'volunteer'];
-        var listPromises = [];
+        var listsToCheck = ['activity', 'award', 'child', 'coursework', 'employment', 'scholarship', 'university', 'volunteer'],
+            listPromises = [];
         $scope.listerror = {};
 
         for (j = 0, k = listsToCheck.length; j < k; j++) {
@@ -469,13 +468,13 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
         }
         
         //check whether essays have been put in
-        listPromises.push(ApplicationService.getListofDocuments($stateParams.applicationId).then (
+        listPromises.push(ApplicationService.getListofDocuments($stateParams.applicationId).then(
             function (result) {
                 if (result.fileName.length < 2) {
                     $scope.error.essay = 'true';
                     $scope.errors.essay = [];
                     $scope.errors.essay.push('One of the essays is missing.');
-                }                
+                }
             }
         ));
 
@@ -506,7 +505,7 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 }
             
                 //check the submission page
-                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub',' fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
+                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
                 $scope.errors.submission = [];
                 for (j = 0, k = goThrough.length; j < k; j++) {
                     if ($scope.myapplication[goThrough[j]] === undefined) {
@@ -519,7 +518,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
                 
 
                 //update general problems value
-                for (var value in $scope.error) {
+                var value;
+                for (value in $scope.error) {
                     if ($scope.error[value] === 'true') {
                         $scope.myVariables.problems = 'true';
                     }
