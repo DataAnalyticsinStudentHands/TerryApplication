@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Activities</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <p class="item item-icon-left item-text-wrap">
+                <i class="icon ion-information"></i>
+                <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.
+            </p>
+        <form novalidate class="submit" on-valid-submit="saveModal('activity')">
+            
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Organization/Activity:</span>
+                            <input name="activity" ng-model="myactivity.activity" type="text" placeholder="activity" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Position(s) held<br>[e.g. member]:</span>
+                            <input name="position" ng-model="myactivity.position" type="text" placeholder="position" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Description of Activity:</span>
+                            <input name="description" ng-model="myactivity.description" type="text" placeholder="description" required>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <ion-checkbox ng-repeat="item in yearInSchoolList"
+                                ng-model="item.checked" 
+                                ng-checked="item.checked">
+                                {{ item.text }}
+                        </ion-checkbox>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-25 col-offset-75">
+                        <button class="button button-full button-positive" type="submit">Save</button>
+                    </div>
+                </div>
+        </form>
+    </ion-content>
+</ion-modal-view>
