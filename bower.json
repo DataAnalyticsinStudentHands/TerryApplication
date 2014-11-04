@@ -1,21 +1,43 @@
 {
-  "name": "terry-web-app",
-  "appPath": "www",
-  "version": "0.0.1",
-  "devDependencies": {
+  "name": "TerryApplicationApp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DataAnalyticsinStudentHands/TerryApplicationApp",
+  "authors": [
+    "Peggy Lindner <plindner@uh.edu>"
+  ],
+  "description": "Honors Terry Scholarship Application",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
-    "crypto-js": "http://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
-    "ng-notify": "~0.5.0",
     "lodash": "latest",
+    "ng-notify": "latest",
     "restangular": "latest",
-    "angular-bootstrap-datetimepicker": "latest",
     "angular-ui-utils": "latest",
+    "angular-bootstrap-datetimepicker": "~0.2.4",
+    "moment": "^2.6.0",
     "ng-file-upload-shim": "latest",
     "ng-file-upload": "latest",
     "ng-currency": "latest",
-    "angular-cache": "latest"
-  }
+    "angular-cache": "latest",
+    "cryptojslib": "~3.1.2"
+  },
+    "overrides": {
+        "cryptojslib": {
+            "main": "rollups/sha512.js"
+        },
+        "ng-currency": {
+            "main": "dist/ng-currency.js"
+        },
+        "angular-bootstrap-datetimepicker": {
+            "dependencies": "null"
+        }
+    }
 }
-
-
-

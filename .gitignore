@@ -1,5 +1,8 @@
-www/lib
+dist/
+node_modules/
 platforms/
 plugins/
-dist/
+www/lib
+www/js/third-party.js
+www/css/third-party.css
 .brackets.json
