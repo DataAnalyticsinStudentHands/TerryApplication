@@ -11,7 +11,8 @@ prod: build git-prod deploy
 
 build: 
 	@ find www/ -name ".DS_Store" -depth -exec rm {} \;
-	@ cp -R www/ $(BUILD_DIR)
+	@ cp -R www/ $(BUILD_DIR) && \
+    rm -rf $(BUILD_DIR)/lib
 
 # Sub-tasks
 

@@ -36,6 +36,12 @@
         "ng-currency": {
             "main": "dist/ng-currency.js"
         },
+        "ng-file-upload": {
+            "main": [
+                "FileAPI.min.js",
+                "angular-file-upload.js"
+            ]
+        },
         "angular-bootstrap-datetimepicker": {
             "dependencies": "null"
         }
