@@ -8,10 +8,7 @@ bower `npm install -g bower`
 gulp `npm install -g gulp`  
 
 Inside project:   
-`npm install gulp `   
-`npm install gulp-concat --save-dev`    
-`npm install gulp-filter --save-dev`    
-`npm install main-bower-files --save-dev`    
+`npm install`   
 
 Getting started:
 
