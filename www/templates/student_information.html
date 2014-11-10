@@ -45,6 +45,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Preferred Name:</span> 
+                        
                         <input name="preferred_name" type="text" ng-model="myapplication.preferred_name" placeholder="Preferredname">
                     </label>
                 </div>
@@ -125,6 +126,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Alternate/Cell Phone:</span>
+                       
                         <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit" />
                     </label>
                 </div>
@@ -134,16 +136,15 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Birth', 'dob')">
                         <span class="input-label">Date of Birth:<span style="color: red;">*</span></span> 
-                        
-                        
+                       
                         <input type="text" ng-model="myapplication.dob" placeholder="Select">
                     </label>
                 </div>
+                
                 <div class="col">
                     <label class="item item-input">
                         <span class="input-label">Gender:<span style="color: red;">*</span></span>
-                        
-                        
+                                                
                         <ion-radio name="gender" ng-model="myapplication.gender" ng-value="'Female'">Female</ion-radio>
                         <ion-radio name="gender" ng-model="myapplication.gender" ng-value="'Male'">Male</ion-radio>
                     </label>
@@ -154,8 +155,7 @@
                 <div class="col">
                     <label class="item item-input validated">
                         <span class="input-label">Email Address:<span style="color: red;">*</span></span> 
-                        
-                        
+                                                
                         <input name="email" type="email" ng-model="myapplication.email" placeholder="email address" ng-required="finalSubmit">
                     </label>
                 </div>

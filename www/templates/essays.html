@@ -14,16 +14,18 @@
     </ion-header-bar>
     <ion-content>
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            For <u>BOTH</u> of the topics listed below, attach a typed essay of 250 words (minimum) in PDF or MS Word format. Your full name and UH ID should appear legibly at the top of each page of your essays.
+            For <u>Essay</u> topic listed below, attach a typed essay of 250 words (minimum) in PDF or MS Word format. Your full name and UH ID should appear legibly at the top of each page of your essay.
         </p>
         <ion-list>
             <ion-item class="item item-divider">
-                Essay I: Significant Event and its Impact
+                Essay: Your Story
             </ion-item>
             <div class="row">
                 <div class="col col-75 item-text-wrap">
-                    Describe a significant setback, challenge or opportunity in your life and the impact that it has had on you.<span style="color: red;">*</span>
+                    As a transfer/non-traditional student, you have a story to tell about your educational journey. Some students describe a direct path from high school to community college, while others tell of a pathway that was less direct, but no less impactful, upon the person they have become. You might also describe a particular event or moment when you discovered what you wanted to acheive and realized what you neede to do to accomplish your goals. Please tell us your story of how you decided to study at the University of Houston.<strong> Upload your essay to this application.</strong><span style="color: red;">*</span>
+                
                 </div>
+                
                 <div class="col col-25" ng-show="!myVariables.fileEssay1">
                     <label for="file1" class="item item-icon-right fileContainer">
                         <i class="icon ion-filing"></i>
@@ -52,45 +54,7 @@
                 </div>
             </div>
 
-            <ion-item class="item item-divider">
-                Essay II: Leadership Experience
-            </ion-item>
-
-
-            <div class="row">
-
-                <div class="col col-75 item-text-wrap">
-
-                    Describe an example of your leadership. Be sure to describe your actions and the actions of those around you and to explain what you accomplished.<span style="color: red;">*</span>
-                </div>
-                <div class="col col-25" ng-show="!myVariables.fileEssay2">
-                    <label for="file2" class="item item-icon-right fileContainer">
-                        <i class="icon ion-filing"></i>
-                        Upload Essay II
-                        <input id="file2" type="file" ng-file-select="onFileSelect($files, 'essay2')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    </label>
-                </div>
-                <div class="col col-25" ng-hide="!myVariables.fileEssay2">
-                    <button class="button icon-right ion-minus-circled button-outline button-dark" ng-click="deleteFile('essay2')">Delete File</button>
-                </div>
-            </div>
-
-            <div class="row" ng-show="myVariables.fileEssay2">
-                <div class="col col-25 col-offset-75">
-                    Uploaded File:
-                </div>
-            </div>
-            <div class="row" ng-show="myVariables.fileEssay2">
-                <div class="col col-25 col-offset-75 item-text-wrap">
-                    "{{myVariables.fileEssay2}}"
-                </div>
-            </div>
-            <div class="row" ng-hide="myVariables.fileEssay2">
-                <div class="col col-25 col-offset-75 item-text-wrap">
-                    No file uploaded.
-                </div>
-            </div>
-
+           
 
         </ion-list>
 
