@@ -11,7 +11,7 @@
     </ion-header-bar>
     <ion-content>
 
-        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.highschool_coursework')">
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.education_institution')">
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
@@ -41,9 +41,10 @@
                 </div>
 
                 <div class="col" ng-show="myapplication.highschool_diploma">
-                    <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
+                    <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_diplomadate')">
                         <span class="input-label">  If "YES", date of graduation<span style="color: red;">*</span></span>
-                        <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
+                        <input type="text" ng-model="myapplication.highschool_diplomadate" placeholder="Select">
+                    
                     </label>
                 </div>
             </div>
@@ -66,6 +67,8 @@
                     </label>
                 </div>
             </div>
+            
+            
            
 <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
             List all of your preiously attended institutions, both actual and online. Include the city and state in which the institution is located, your dates of attendance, your hours attempted and completed, and your cum gpa at the institution. List your recent attendace first.
@@ -73,30 +76,35 @@
  <div class="item item-button-left dark">
             Institutions attended
             <span style="color: red;">*</span>
-            <button title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddInstitution"></button>
+            <button title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('institution')"></button>
         </div>
 
         <div class="list list-inset">
-            <div class="item" ng-repeat="institution in myinstitutions" item="institution">
-                <button title="Delete institution" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteInstitution(institution.id)"></button>
-                <button title="Edit institution" class="button button-icon icon ion-compose" ng-click="editInstitution(institution)">&nbsp;&nbsp;&nbsp;&nbsp;{{institution}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
+            <div class="item" ng-repeat="item in myinstitutions" item="item">
+                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteModal('institution', item.id)"></button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editModal('institution', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.institution}} {{institution.type}} {{institution.city}} {{institution.state}}{{institution.semesters_attended}}{{institution.hours_attempted}}{{institution.completed}}{{institution.cum_gpa}}</button>
             </div>
         </div>
-           
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-              
-           
-                
+        <div class="row">
+                <div class="col col-50">
+
+                    <label class="item">
+
+                        <span class="input-label">Are you a member of Phi Theta Kappa?<span style="color: red;">*</span></span>
+                        <ion-radio name="phithetakappa_member" ng-model="myapplication.phithetakappa_member" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="phithetakappa_member" ng-model="myapplication.phithetakappa_member" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+
+                <div class="col" ng-show="myapplication.phithetakappa_member">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">  If "YES", semester of induction:<span style="color: red;">*</span></span>
+                        <input type="text" ng-model="myapplication.induction_semester" placeholder="Semester of Induction">
+                    </label>
+                        </div>
+            </div>    
+        
 
             <!-- Save/next button -->
             <div class="row">

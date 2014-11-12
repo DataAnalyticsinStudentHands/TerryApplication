@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Institution</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <form novalidate class="submit" on-valid-submit="saveModal()">
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Institution:</span>
+                            <input name="myinstitution.name" ng-model="myinstitution.name" type="text" placeholder="description" required>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Online Institution?</span>
+                            <ion-radio name="online_institution" ng-model="myinstitution.online_institution" ng-value="'true'">Yes</ion-radio>
+                            <ion-radio name="online_institution" ng-model="myinstitution.online_institution" ng-value="'false'">No</ion-radio>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-50">
+                        <label class="item item-input item-stacked-label validated">
+                            <span class="input-label">City:<span style="color: red;">*</span></span>
+
+
+                            <input type="text" ng-model="myinstitution.city" placeholder="City" ng-required="finalSubmit">
+                        </label>
+                    </div>
+
+                    <div class="col col-50">
+                        <label class="item item-input item-stacked-label validated">
+                            <span class="input-label">State:<span style="color: red;">*</span></span>
+                            <input type="text" ng-model="myinstitution.myState" placeholder="State" ng-required="finalSubmit">
+                        </label>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Semester Attended(ex: F11-S12):</span>
+                            <input name="semesters_attented" ng-model="myinstitution.semesters_attempted" type="text" placeholder="semesters attempted" required>
+                        </label>
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col col-50">
+                            <label class="item item-input validated">
+                                <span class="input-label">Hours Attempted:</span>
+                                <input name="hours_attempted" ng-model="myinstitution.hours_attempted" type="number" placeholder="credit hours attempted" required>
+                            </label>
+                        </div>
+
+                        <div class="col col-50">
+                            <label class="item item-input validated">
+                                <span class="input-label">Hours Completed:</span>
+                                <input name="hours_completed" ng-model="myinstitution.hours_completed" type="number" placeholder="credit hours completed" required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="input-label">Cum GPA:</span>
+                                <input name="cum_gpa" ng-model="myinstitution.cum_gpa" type="number" placeholder="cumulative gpa" required>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col col-25 col-offset-75">
+                            <button class="button button-full button-positive" type="submit">Save</button>
+                        </div>
+                    </div>
+            </form>
+            </div>
+    </ion-content>
+</ion-modal-view>
