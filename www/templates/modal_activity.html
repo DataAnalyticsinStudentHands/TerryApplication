@@ -7,7 +7,7 @@
     <ion-content>
         <p class="item item-icon-left item-text-wrap">
                 <i class="icon ion-information"></i>
-                <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.
+                <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.<b>List your most recent employment first.</b>
             </p>
         <form novalidate class="submit" on-valid-submit="saveModal('activity')">
             
@@ -28,23 +28,33 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <label class="item item-input validated">
-                            <span class="input-label">Description of Activity:</span>
-                            <input name="description" ng-model="myactivity.description" type="text" placeholder="description" required>
-                        </label>
-                    </div>
+                <div class="col">
+                    <label class="item item-input">
+                        <span class="input-label">Hours per Week:</span>
+                        <input name="hours_week" ng-model="myvolunteer.hours_week" type="number" placeholder="hours">
+                    </label>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <ion-checkbox ng-repeat="item in yearInSchoolList"
-                                ng-model="item.checked" 
-                                ng-checked="item.checked">
-                                {{ item.text }}
-                        </ion-checkbox>
-                    </div>
+                <div class="col">
+                    <label class="item item-input validated">
+                        <span class="input-label">Total Hours:</span>
+                        <input name="hours_total" ng-model="myvolunteer.hours_total" type="number" placeholder="hours">
+                    </label>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input" ng-click="openDatePicker('Volunteer Start Date', 'date_from')">
+                        <span class="input-label">From Date:</span>
+                        <input type="text" ng-model="myvolunteer.date_from" placeholder="Select">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input" ng-click="openDatePicker('Volunteer End Date', 'date_to')">
+                        <span class="input-label">To Date:</span>
+                        <input type="text" ng-model="myvolunteer.date_to" placeholder="Select">
+                    </label>
+                </div>
+            </div>
 
                 <div class="row">
                     <div class="col col-25 col-offset-75">

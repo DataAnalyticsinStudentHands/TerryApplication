@@ -152,23 +152,23 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
-    .state('tabs.myapplication.highschool_information', {
-        url: '/highschool_information',
+    .state('tabs.myapplication.education', {
+        url: '/education',
         views: {
             "tab-myapplications@tabs": {
-                templateUrl: 'templates/highschool_information.html',
+                templateUrl: 'templates/education.html',
                 controller: 'MyApplicationController'
             }
         },
         authenticate: true
     })
 
-    .state('tabs.myapplication.highschool_coursework', {
-        url: '/highschool_coursework',
+    .state('tabs.myapplication.personal_history', {
+        url: '/education',
         views: {
             "tab-myapplications@tabs": {
-                templateUrl: 'templates/highschool_coursework.html',
-                controller: 'MyCourseworkController'
+                templateUrl: 'templates/personal_history.html',
+                controller: 'MyApplicationController'
             }
         },
         authenticate: true
@@ -207,38 +207,36 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
-    .state('tabs.myapplication.scholarship_information', {
-        url: '/scholarship_information',
-        views: {
-            "tab-myapplications@tabs": {
-                templateUrl: 'templates/scholarship_information.html',
-                controller: 'MyApplicationController'
-            }
-        },
-        authenticate: true
-    })
-
-    .state('tabs.myapplication.essays', {
+    .state('tabs.myapplication.essay', {
         url: '/essays',
         views: {
             "tab-myapplications@tabs": {
-                templateUrl: 'templates/essays.html',
+                templateUrl: 'templates/essay.html',
                 controller: 'UploadController'
             }
         },
         authenticate: true
     })
-
-    .state('tabs.myapplication.submit', {
-        url: '/submit',
-        views: {
-            "tab-myapplications@tabs": {
-                templateUrl: 'templates/submit.html',
-                controller: 'MyApplicationController'
-            }
-        },
-        authenticate: true
-    })
+        .state('tabs.myapplication.signature', {
+            url: '/signature',
+            views: {
+                "tab-myapplications@tabs": {
+                    templateUrl: 'templates/signature.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+        .state('tabs.myapplication.submit', {
+            url: '/submit',
+            views: {
+                "tab-myapplications@tabs": {
+                    templateUrl: 'templates/submit.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
 
     .state('tabs.myapplication.confirmation', {
         url: '/confirmation',

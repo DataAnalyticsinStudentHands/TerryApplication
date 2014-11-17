@@ -11,7 +11,7 @@
     </ion-header-bar>
     <ion-content>
 
-        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.education_institution')">
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.employment')">
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
@@ -44,12 +44,12 @@
                     <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_diplomadate')">
                         <span class="input-label">  If "YES", date of graduation<span style="color: red;">*</span></span>
                         <input type="text" ng-model="myapplication.highschool_diplomadate" placeholder="Select">
-                    
+
                     </label>
                 </div>
             </div>
 
-           <div class="row">
+            <div class="row">
                 <div class="col col-50">
 
                     <label class="item">
@@ -67,26 +67,26 @@
                     </label>
                 </div>
             </div>
-            
-            
-           
-<p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            List all of your preiously attended institutions, both actual and online. Include the city and state in which the institution is located, your dates of attendance, your hours attempted and completed, and your cum gpa at the institution. List your recent attendace first.
-        </p>
- <div class="item item-button-left dark">
-            Institutions attended
-            <span style="color: red;">*</span>
-            <button title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('institution')"></button>
-        </div>
 
-        <div class="list list-inset">
-            <div class="item" ng-repeat="item in myinstitutions" item="item">
-                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteModal('institution', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editModal('institution', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.institution}} {{institution.type}} {{institution.city}} {{institution.state}}{{institution.semesters_attended}}{{institution.hours_attempted}}{{institution.completed}}{{institution.cum_gpa}}</button>
+
+
+            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                List all of your preiously attended institutions, both actual and online. Include the city and state in which the institution is located, your dates of attendance, your hours attempted and completed, and your cum gpa at the institution. List your recent attendace first.
+            </p>
+            <div class="item item-button-left dark">
+                Institutions attended
+                <span style="color: red;">*</span>
+                <button title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('institution')"></button>
             </div>
-        </div>
-            
-        <div class="row">
+
+            <div class="list list-inset">
+                <div class="item" ng-repeat="item in myinstitutions" item="item">
+                    <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteModal('institution', item.id)"></button>
+                    <button title="Edit" class="button button-icon icon ion-compose" ng-click="editModal('institution', item)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.institution}} {{institution.type}} {{institution.city}} {{institution.state}}{{institution.semesters_attended}}{{institution.hours_attempted}}{{institution.completed}}{{institution.cum_gpa}}</button>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col col-50">
 
                     <label class="item">
@@ -102,9 +102,9 @@
                         <span class="input-label">  If "YES", semester of induction:<span style="color: red;">*</span></span>
                         <input type="text" ng-model="myapplication.induction_semester" placeholder="Semester of Induction">
                     </label>
-                        </div>
-            </div>    
-        
+                </div>
+            </div>
+
 
             <!-- Save/next button -->
             <div class="row">

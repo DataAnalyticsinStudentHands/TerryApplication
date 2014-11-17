@@ -11,24 +11,24 @@
     </ion-header-bar>
     <ion-content>
 
-        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.financial_information')">
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.essay')">
 
             <div class="row">
                 <div class="col">
                     <label class="item">
                         <span class="input-label">Will you be the first in your family to graduate college?<span style="color: red;">*</span></span>
-                        
+
                         <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'false'">No</ion-radio>
                     </label>
                 </div>
             </div>
-           
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Why have you chosen to apply to the University of Houston? (max. 200 characters)<span style="color: red;">*</span></span>
-                        
+
                         <textarea name="why_apply" rows="3" maxlength="200" ng-model="myapplication.why_apply" placeholder="Write here."></textarea>
                     </label>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Why have you chosen your academic major(s)? (max. 200 characters)<span style="color: red;">*</span></span>
-                        
+
                         <textarea name="why_major" rows="3" maxlength="200" ng-model="myapplication.why_major" placeholder="Write here."></textarea>
                     </label>
                 </div>
@@ -48,17 +48,17 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Briefly describe any educational plans you have beyond earning your Bachelor’s degree:  (max. 200 characters)<span style="color: red;">*</span></span>
-                        
+
                         <textarea name="educational_plans" rows="3" maxlength="200" ng-model="myapplication.educational_plans" placeholder="Write here."></textarea>
                     </label>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">What are some of your life’s goals and objectives?  (max. 200 characters)<span style="color: red;">*</span></span>
-                        
+
                         <textarea name="life_goals" rows="3" maxlength="200" ng-model="myapplication.life_goals" placeholder="Write here."></textarea>
                     </label>
                 </div>
@@ -67,34 +67,36 @@
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Has there been a particularly influential faculty member or personal contact that has been instrumental in your decision to attend the University of Houston? <br>If so, please relate: (max. 300 characters)<span style="color: red;">*</span></span> </br>
-                        
+                        <span class="input-label">Has there been a particularly influential faculty member or personal contact that has been instrumental in your decision to attend the University of Houston? <br>If so, please relate: (max. 300 characters)<span style="color: red;">*</span></span>
+                        </br>
+
                         <textarea name="influential_member" rows="5" maxlength="300" ng-model="myapplication.influential_member" placeholder="Write here."></textarea>
                     </label>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Transfer/non-traditional students often tell us that their prior experience has taught them lessons that helped them to be successful. What lessons have you learned that you would like to pass <br>on to other students?  (max. 500 characters) <span style="color: red;">*</span></span> </br>
-                        
+                        <span class="input-label">Transfer/non-traditional students often tell us that their prior experience has taught them lessons that helped them to be successful. What lessons have you learned that you would like to pass <br>on to other students?  (max. 500 characters) <span style="color: red;">*</span></span>
+                        </br>
+
                         <textarea name="successful_lessons" rows="7" maxlength="500" ng-model="myapplication.successful_lessons" placeholder="Write here."></textarea>
                     </label>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Is there any additional information that you consider important for the committee to know in evaluating your application for scholarship consideration?(max. 500 characters)<span style="color: red;">*</span></span>
-                        
-                        <textarea name="scholarship_consideration" rows="7ss" maxlength="500" ng-model="myapplication.scholarship_consideration" placeholder="Write here."></textarea>
+
+                        <textarea name="scholarship_consideration" rows="7" maxlength="500" ng-model="myapplication.scholarship_consideration" placeholder="Write here."></textarea>
                     </label>
                 </div>
             </div>
 
-            
+
             <!-- Submit button -->
             <div class="row">
                 <div class="col col-25 col-offset-75">

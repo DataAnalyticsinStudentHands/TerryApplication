@@ -9,13 +9,14 @@
     <ion-header-bar class="bar-subheader">
         <h1 class="title">Employment, Activities, Service and Awards</h1>
     </ion-header-bar>
+
     <ion-content>
-            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-                Fill all sections provided. Use the "Add" button in each section to add individual items. Do not submit a resume in lieu of completing sections listed here. <b>Important:</b> If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.
-            </p>
-            
+        <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            Fill all sections provided. Use the "Add" button in each section to add individual items. Do not submit a resume in lieu of completing sections listed here. <b>Important:</b> If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.
+        </p>
+
         <div class="item item-button-left dark">
-            Employment, Internships, and Summer Activities
+            Employment
             <span style="color: red;">*</span>
             <button title="Add employment" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('employment')"></button>
         </div>
@@ -23,12 +24,12 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myemployments" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('employment', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} hours  Date: {{item.date_from}} - {{item.date_to}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
             </div>
         </div>
-            
+
         <div class="item item-button-left dark">
-            Extracurricular Activities and Leadership Positions
+            Leadership Activities
             <span style="color: red;">*</span>
             <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('activity')"></button>
         </div>
@@ -36,12 +37,12 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myactivities" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('activity', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.description}}</button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
             </div>
-        </div>    
-            
+        </div>
+
         <div class="item item-button-left dark">
-            Community or Volunteer Service
+            Church,Community and Volunteer Service
             <span style="color: red;">*</span>
             <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('volunteer')"></button>
         </div>
@@ -51,8 +52,8 @@
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('volunteer', item.id)"></button>
                 <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} Hours per week/{{item.hours_total}} Hours total Date: {{item.date_from}}-{{item.date_to}}</button>
             </div>
-        </div> 
-            
+        </div>
+
         <div class="item item-button-left dark">
             Awards, Special Honors, and Distinctions
             <span style="color: red;">*</span>
@@ -62,15 +63,160 @@
         <div class="list list-inset">
             <div class="item" ng-repeat="item in myawards" item="item">
                 <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('award', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp;
-                    Award: {{item.award}} {{item.description}} Level: {{item.level}} </button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp; Service: {{item.service_branch}} Dates: {{item.date_from}} - {{item.date_to}} {{item.description}} Mode: {{item.mode}} Status: {{item.status}} Location: {{item.station_location}}</button>
             </div>
-        </div> 
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <p><b>MILITARY SERVICE </b>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-50">
+
+                <label class="item">
+
+                    <span class="input-label">Are you currently serving in the Reserves or the National Gaurd?<span style="color: red;">*</span></span>
+                    <ion-radio name="currently_serving" ng-model="myapplication.currently_serving" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="currently_serving" ng-model="myapplication.currently_serving" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+
+            <div class="col" ng-show="myapplication.currently_serving">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">  If "YES", please provide unit and location:<span style="color: red;">*</span></span>
+                    <input type="text" ng-model="myapplication.unit_location" placeholder="Unit and Location">
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label class="item">
+
+                    <span class="input-label">Have you previously served on active duty in a uniformed service of the United States?<span style="color: red;">*</span></span>
+                    <ion-radio name="previously_served" ng-model="myapplication.previously_served" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="previously_served" ng-model="myapplication.previously_served" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+        </div>
+
+        <div class="row" ng-show="myapplication.previously_served">
+            <div class="col">
+                <label class="item item-button-left dark">
+                    If "YES", please add your services.
+                    <span style="color: red;">*</span>
+                    <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('military')"></button>
+            </div>
+        </div>
+
+        <div class="list list-inset">
+            <div class="item" ng-repeat="item in mymilitaries" item="item">
+                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('military', item.id)"></button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('military', item)">&nbsp;&nbsp;&nbsp;&nbsp; Award: {{item.award}} {{item.description}} Level: {{item.level}} Date: {{item.date_received}}</button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">List all Military Occupation Specialities (MOS) attained (max. 300 characters):<span style="color: red;">*</span></span>
+                    <textarea name="military_occupation_specialities" rows="4" maxlength="300" ng-model="myapplication.military_occupation_specialities" placeholder="description"></textarea>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">Additional specialized training received (max. 200 characters):<span style="color: red;">*</span></span>
+                    <textarea name="additional_specialized_training" rows="3" maxlength="200" ng-model="myapplication.additional_specialized_training" placeholder="description"></textarea>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">List all medals,honors and awards received (max. 300 characters):<span style="color: red;">*</span></span>
+                    <textarea name="medals_honors_awards" rows="4" maxlength="300" ng-model="myapplication.medals_honors_awards" placeholder="description"></textarea>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col ">
+                <label class="item">
+                    <span class="input-label">If you are a Wounded Warrior, please indicate:<span style="color: red;">*</span></span>
+                    <ion-radio name="wounded_warrior" ng-model="myapplication.wounded_warrior" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="wounded_warrior" ng-model="myapplication.wounded_warrior" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-50">
+                <label class="item">
+                    <span class="input-label">Have you previously utilized GI Bill education benefits?<span style="color: red;">*</span></span>
+                    <ion-radio name="education_benefits" ng-model="myapplication.education_benefits" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="education_benefits" ng-model="myapplication.education_benefits" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+
+            <div class="col" ng-show="myapplication.education_benefits">
+                <label class="item item-input">
+                    <span class="input-label">  If "YES", do you have any GI bill education benefits remaining?<span style="color: red;">*</span></span>
+                    <ion-radio name="education_benefits_remaining" ng-model="myapplication.education_benefits_remaining" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="education_benefits_remaining" ng-model="myapplication.education_benefits_remaining" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" ng-show="myapplication.education_benefits_remaining">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">  If "YES", provide details:<span style="color: red;">*</span></span>
+                    <input type="text" ng-model="myapplication.details_gibill" placeholder="details">
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-50">
+                <label class="item">
+                    <span class="input-label">Are you entitled to Hazlewood Act benefits?<span style="color: red;">*</span></span>
+                    <ion-radio name="hazlewood_act_benefits" ng-model="myapplication.hazlewood_act_benefits" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="hazlewood_act_benefits" ng-model="myapplication.hazlewood_act_benefits" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+
+            <div class="col" ng-show="myapplication.hazlewood_act_benefits">
+                <label class="item item-input">
+                    <span class="input-label">  If "YES", do you have any Hazlewood act benefits remaining?<span style="color: red;">*</span></span>
+                    <ion-radio name="hazlewood_act_benefits_remaining" ng-model="myapplication.hazlewood_act_benefits_remaining" ng-value="'true'">Yes</ion-radio>
+                    <ion-radio name="hazlewood_act_benefits_remaining" ng-model="myapplication.hazlewood_act_benefits_remaining" ng-value="'false'">No</ion-radio>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" ng-show="myapplication.hazlewood_act_benefits_remaining">
+                <label class="item item-input item-stacked-label validated">
+                    <span class="input-label">  If "YES", provide details:<span style="color: red;">*</span></span>
+                    <input type="text" ng-model="myapplication.details_hazlewoodact" placeholder="details">
+                </label>
+            </div>
+        </div>
 
         <!-- Next button -->
         <div class="row">
             <div class="col col-25 col-offset-75">
-                <a type="button" class="button button-block button-positive" ui-sref="tabs.myapplication.college_plans">Next</a>
+                <a type="button" class="button button-block button-positive" ui-sref="tabs.myapplication.financial_information">Next</a>
             </div>
         </div>
     </ion-content>

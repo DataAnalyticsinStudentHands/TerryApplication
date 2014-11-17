@@ -28,6 +28,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     $scope.myvolunteer = {};
     $scope.myawards = {};
     $scope.myaward = {};
+    $scope.mymilitaries = {};
+    $scope.mymilitary = {};
+
 
     // GET 
     DataService.getAllItems('employment').then(
@@ -54,6 +57,13 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
     DataService.getAllItems('award').then(
         function (result) {
             $scope.myawards = result;
+        }
+    );
+
+    // GET 
+    DataService.getAllItems('military').then(
+        function (result) {
+            $scope.mymilitaries = result;
         }
     );
 
@@ -84,6 +94,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         $scope.myactivity = item;
         $scope.myvolunteer = item;
         $scope.myaward = item;
+        $scope.mymilitary = item;
 
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
@@ -174,6 +185,23 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                 );
             }
             break;
+        case 'military':
+            $scope.mymilitary.application_id = $stateParams.applicationId;
+            if ($scope.myVariables.current_mode === "Add") {
+                DataService.addItem('military', $scope.myaward).then(
+                    function (success) {
+                        $scope.modal.hide();
+                        $scope.updateLists(acType);
+                    }
+                );
+            } else {
+                DataService.updateItem('military', $scope.mymilitary.id, $scope.military).then(
+                    function (success) {
+                        $scope.modal.hide();
+                    }
+                );
+            }
+            break;
         }
 
     };
@@ -186,6 +214,7 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
         $scope.myactivity = {};
         $scope.myvolunteer = {};
         $scope.myaward = {};
+        $scope.mymilitary = {};
 
         $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
             scope: $scope,
@@ -212,6 +241,9 @@ angular.module('TerryControllers').controller('MyEmploymentController', function
                     break;
                 case 'award':
                     $scope.myawards = result;
+                    break;
+                case 'military':
+                    $scope.mymilitaries = result;
                     break;
                 }
             }
