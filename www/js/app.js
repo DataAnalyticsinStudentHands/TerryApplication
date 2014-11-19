@@ -20,7 +20,7 @@ angular.module('HonorsApplications', [
 
     // Set Base URL to connect to DASH RESTFUL webservices
     //Restangular.setBaseUrl("http://127.0.0.1:8080/terry/"); // localhost
-    Restangular.setBaseUrl("http://www.housuggest.org:8888/terry/");
+    Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
     //Restangular.setDefaultHttpFields({cache: true});
 
     // have Restangular available whereever we need it
@@ -152,6 +152,39 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
+    .state('tabs.myapplication.student_information_old', {
+        url: '/student_information_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/student_information_old.html',
+                controller: 'MyApplicationController'
+            }
+        },
+        authenticate: true
+    })
+    
+    .state('tabs.myapplication.highschool_information_old', {
+        url: '/highschool_information_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/highschool_information_old.html',
+                controller: 'MyApplicationController'
+            }
+        },
+        authenticate: true
+    })
+
+    .state('tabs.myapplication.highschool_coursework_old', {
+        url: '/highschool_coursework_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/highschool_coursework_old.html',
+                controller: 'MyCourseworkController'
+            }
+        },
+        authenticate: true
+    })
+    
     .state('tabs.myapplication.education', {
         url: '/education',
         views: {
@@ -185,17 +218,29 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
-    .state('tabs.myapplication.college_plans', {
-        url: '/college_plans',
+    .state('tabs.myapplication.employment_old', {
+        url: '/employment_old',
         views: {
             "tab-myapplications@tabs": {
-                templateUrl: 'templates/college_plans.html',
+                templateUrl: 'templates/employment_old.html',
+                controller: 'MyEmploymentController'
+            }
+        },
+        authenticate: true
+    })
+    
+    
+    .state('tabs.myapplication.college_plans_old', {
+        url: '/college_plans_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/college_plans_old.html',
                 controller: 'MyApplicationController'
             }
         },
         authenticate: true
     })
-
+    
     .state('tabs.myapplication.financial_information', {
         url: '/financial_information',
         views: {
@@ -207,6 +252,27 @@ angular.module('HonorsApplications', [
         authenticate: true
     })
 
+    .state('tabs.myapplication.financial_information_old', {
+        url: '/financial_information_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/financial_information_old.html',
+                controller: 'MyApplicationController'
+            }
+        },
+        authenticate: true
+    })
+    
+    .state('tabs.myapplication.scholarship_information_old', {
+        url: '/scholarship_information_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/scholarship_information_old.html',
+                controller: 'MyApplicationController'
+            }
+        },
+        authenticate: true
+    })
     .state('tabs.myapplication.essay', {
         url: '/essays',
         views: {
@@ -217,7 +283,19 @@ angular.module('HonorsApplications', [
         },
         authenticate: true
     })
-        .state('tabs.myapplication.signature', {
+    
+    .state('tabs.myapplication.essays_old', {
+        url: '/essays_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/essays_old.html',
+                controller: 'UploadController'
+            }
+        },
+        authenticate: true
+    })
+    
+    .state('tabs.myapplication.signature', {
             url: '/signature',
             views: {
                 "tab-myapplications@tabs": {
@@ -237,6 +315,17 @@ angular.module('HonorsApplications', [
             },
             authenticate: true
         })
+
+     .state('tabs.myapplication.submit_old', {
+        url: '/submit_old',
+        views: {
+            "tab-myapplications@tabs": {
+                templateUrl: 'templates/submit_old.html',
+                controller: 'MyApplicationController'
+            }
+        },
+        authenticate: true
+    })
 
     .state('tabs.myapplication.confirmation', {
         url: '/confirmation',

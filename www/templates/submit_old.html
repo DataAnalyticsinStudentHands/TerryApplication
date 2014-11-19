@@ -5,7 +5,7 @@
 -->
 <!-- The nav bar that will be updated as we navigate between views.-->
 
-<ion-view title="Terry Scholarship Application for Transfer Students 2015/2016">
+<ion-view title="Terry Scholarship Application 2015/2016">
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-nav-buttons>
@@ -41,10 +41,10 @@
             </div>
             <div class="row">
                 <div class="col col-25 item item-text-wrap">
-                    <p>Apply and be accepted to the University of Houston AND The Honors College<span style="color: red;">*</span></p>
+                    <p>Apply and be accepted to the University of Houston<span style="color: red;">*</span></p>
                 </div>
                 <div class="col item item-text-wrap">
-                    <p> <b>No later than March 31st. </b> 
+                    <p> <b>No later than February 7th. </b> 
                     </p>
                 </div>
                 <div class="col item item-select">
@@ -67,11 +67,36 @@
 
             <div class="row">
                 <div class="col col-25 item item-text-wrap">
-                    <p>File a FAFSA, either on-line or via US mail <a href="http://www.fafsa.ed.gov/ " target="_blank">http://www.fafsa.ed.gov/<span style="color: red;">*</span></a>
+                    <p>Submit your completed Terry application, essays and letters of recommendation. Include a sealed official copy of your high school transcript in addition to any transcript sent to UH or The Honors College<span style="color: red;">*</span></p>
+                </div>
+                <div class="col item item-text-wrap">
+                    <p> <b>No later than February 7th;</b> all applications sent by mail must be <b>postmarked no later than February 6th.  </b>
+                    </p>
+                </div>
+                <div class="col item item-select">
+                    <select ng-model="myVariables.mytranscriptMailOption" ng-options="option.name for option in mail_options">
+                    </select>
+                </div>
+                <div class="col item">
+                    <label class="item-input" ng-click="openDatePicker('Submission Date','transcript_date_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.transcript_date_sub" placeholder="Select">
+                    </label>
+                </div>
+                <div class="col item">
+                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','transcript_date_int_sub')">
+                        <span class="input-label">Date:</span>
+                        <input type="text" ng-model="myapplication.transcript_date_int_sub" placeholder="Select">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-25 item item-text-wrap">
+                    <p>File a FAFSA, either on-line or via US mail <a href="http://www.fafsa.ed.gov/ " target="_blank">http://www.fafsa.ed.gov/ <span style="color: red;">*</span></a>
                     </p>
                 </div>
                 <div class="col item item-text-wrap">
-                    <p> <b>Between January 1st and March 30th,2015. </b> 
+                    <p> <b>Between January 1st and February 28th. </b> 
                     </p>
                 </div>
                 <div class="col item item-select">
@@ -92,39 +117,12 @@
                 </div>
             </div>
 
-            
             <div class="row">
                 <div class="col col-25 item item-text-wrap">
-                    <p>Submit your completed Terry application, essays, copies of 2011 tax returns, resume and letters of recommendation. Include sealed official copies of all college transcripts in addition to any transcript sent to UH or The Honors College<span style="color: red;">*</span></p>
+                    <p>Apply for on-campus housing at <a href="http://www.housing.uh.edu/" target="_blank">http://www.housing.uh.edu/</a>. On-campus housing for Terry Scholars is defined as Honors housing in Cougar Village<span style="color: red;">*</span></p>
                 </div>
                 <div class="col item item-text-wrap">
-                    <p> <b>No later than March 31st;</b> all applications sent by mail must be <b>postmarked no later than March 30th.  </b>
-                    </p>
-                </div>
-                <div class="col item item-select">
-                    <select ng-model="myVariables.mytranscriptMailOption" ng-options="option.name for option in mail_options">
-                    </select>
-                </div>
-                <div class="col item">
-                    <label class="item-input" ng-click="openDatePicker('Submission Date','transcript_date_sub')">
-                        <span class="input-label">Date:</span>
-                        <input type="text" ng-model="myapplication.transcript_date_sub" placeholder="Select">
-                    </label>
-                </div>
-                <div class="col item">
-                    <label class="item-input" ng-click="openDatePicker('Anticipated Submission Date','transcript_date_int_sub')">
-                        <span class="input-label">Date:</span>
-                        <input type="text" ng-model="myapplication.transcript_date_int_sub" placeholder="Select">
-                    </label>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col col-25 item item-text-wrap">
-                    <p>Register for a New Student Orientation(NSO) with the University of Houston Office of Admissions <a href="http://www.uh.edu/admissions/admitted/conferences/index.php" target="_blank">http://www.uh.edu/admissions/admitted/conferences/index.php</a>. <span style="color: red;">*</span></p>
-                </div>
-                <div class="col item item-text-wrap">
-                    <p> <b>Between February 15th and May 1st 2015.   </b>
+                    <p> <b>Between March 1st and 15th.   </b>
                     </p>
                 </div>
                 <div class="col item item-select">

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_mode}} Coursework</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <form novalidate class="submit" on-valid-submit="saveModal()">
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Description/Name:</span>
+                            <input name="mycourse.name" ng-model="mycourse.name" type="text" placeholder="description" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input item-select">
+                            <span class="input-label">Type:</span>
+                            <select ng-model="myVariables.myCourseType" ng-options="type.abbreviation for type in course_types">
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Credit Hours:</span>
+                            <input name="credit_hours" ng-model="mycourse.credit_hours" type="number" placeholder="credit hours" required>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input item-select">
+                            <span class="input-label">Final Grade:</span>
+                            <select ng-model="myVariables.myGrade" ng-options="item.grade for item in grades">
+                            </select>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col col-25 col-offset-75">
+                        <button class="button button-full button-positive" type="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-modal-view>
