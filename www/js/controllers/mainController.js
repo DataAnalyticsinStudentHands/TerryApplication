@@ -7,7 +7,7 @@
  * # MainController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MainController', function ($scope, $location) {
+angular.module('Controllers').controller('MainController', function ($scope, $location) {
     'use strict';
 
     $scope.main = {};

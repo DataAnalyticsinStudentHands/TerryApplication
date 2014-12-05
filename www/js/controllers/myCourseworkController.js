@@ -7,7 +7,7 @@
  * # MyCourseworkController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService) {
+angular.module('Controllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService) {
     'use strict';
     
     //Load some variables

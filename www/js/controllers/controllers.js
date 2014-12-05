@@ -2,4 +2,4 @@
 'use strict';
 
 /* Controllers */
-angular.module('TerryControllers', []);
+angular.module('Controllers', []);

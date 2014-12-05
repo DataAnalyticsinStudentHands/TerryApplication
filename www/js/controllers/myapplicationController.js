@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
     'use strict';
 
     $scope.date = new Date();
@@ -35,10 +35,6 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     //Load some variables
     $http.get('json/states.json').success(function (data) {
         $scope.states = data;
-    });
-
-    $http.get('json/form_application.json').success(function (data) {
-        $scope.formObjects = data;
     });
 
     $scope.toggleRight = function () {
@@ -405,7 +401,8 @@ angular.module('TerryControllers').controller('MyApplicationController', functio
     };
 
     $scope.filterBy = function (type) {
-        return $scope.formObjects.filter(function (obj) {
+        var formObjects = DataService.getForm('application');
+        return formObjects.filter(function (obj) {
             return obj.form === type;
         });
     };

@@ -2,7 +2,7 @@
 'use strict';
 
 /* Directives */
-angular.module('TerryDirectives', []).directive('appVersion', ['version', function(version) {
+angular.module('Directives', []).directive('appVersion', ['version', function(version) {
     return function(scope, elm, attrs) {
       elm.text(version);
     };

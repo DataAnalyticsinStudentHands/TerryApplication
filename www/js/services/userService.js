@@ -7,7 +7,7 @@
  * # UserService
  * Service for the terry
  */
-angular.module('TerryServices').factory('UserService', function (Restangular, $q, $filter) {
+angular.module('Services').factory('UserService', function (Restangular, $q, $filter) {
     'use strict';
 
     var allUsers,

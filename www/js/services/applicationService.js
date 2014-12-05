@@ -7,7 +7,7 @@
  * # ApplicationService
  * Sevice of the terry
  */
-angular.module('TerryServices').factory('ApplicationService', function (Restangular, ngNotify) {
+angular.module('Services').factory('ApplicationService', function (Restangular, ngNotify) {
     'use strict';
 
     return {

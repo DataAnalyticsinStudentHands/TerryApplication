@@ -5,11 +5,12 @@ angular.module('HonorsApplications', [
     'ionic',
     'restangular',
     'ngNotify',
+    'databaseControllerModule',
     'databaseServicesModule',
-    'TerryControllers',
-    'TerryFilters',
-    'TerryServices',
-    'TerryDirectives',
+    'Controllers',
+    'Filters',
+    'Services',
+    'Directives',
     'ui.bootstrap.datetimepicker',
     'ui.utils',
     'ng-currency',
@@ -27,42 +28,20 @@ angular.module('HonorsApplications', [
         return Restangular;
     };
 
-    //CHECKING IF AUTHENTICATED ON STATE CHANGE - Called in $stateChangeStart
-    $rootScope.isAuthenticated = function (authenticate) {
-        UserService.getUser().then(function (result) {
-            console.log("authed");
-            result = Restangular.stripRestangular(result)[0];
-            //USERNAME & ID TO BE USED IN CONTROLLERS
-            $rootScope.uid = result.id.toString();
-            $rootScope.uin = result.username.toString();
-        }, function (error) {
-            if (error.status === 0) {
-                ngNotify.set("Internet or server unavailable.", {
-                    type: "error",
-                    sticky: true
-                });
-            } else { // LOG THEM OUT
-                Auth.clearCredentials();
-                console.log("not-authed");
-                if (authenticate) {
-                    $state.go("signin");
-                }
-            }
-        });
-
+    $rootScope.isAuthenticated = function() {
         return Auth.hasCredentials();
-    };
+    }
 
-    //AUTHENTICATE ON CHANGE STATE
-    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
-        if (toState.authenticate && !$rootScope.isAuthenticated(toState.authenticate)) {
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        console.log("$stateChangeStart");
+        console.log($rootScope.isAuthenticated());
+        if (toState.authenticate && !$rootScope.isAuthenticated()){
             console.log("non-authed");
             // User isn’t authenticated
             $state.go("signin");
-            //Prevents the switching of the state
+            //What?
             event.preventDefault();
-        }
+        } else console.log("authed");
     });
 
     //Logout user by clearing credentials
@@ -102,7 +81,7 @@ angular.module('HonorsApplications', [
         .state('signin', {
             url: '/signin',
             templateUrl: 'templates/signin.html',
-            controller: 'SignInController',
+            controller: 'loginCtrl',
             authenticate: false
         })
 
@@ -110,7 +89,7 @@ angular.module('HonorsApplications', [
     .state('register', {
         url: "/register",
         templateUrl: "templates/register.html",
-        controller: 'RegisterController',
+        controller: 'registerCtrl',
         authenticate: false
     })
 

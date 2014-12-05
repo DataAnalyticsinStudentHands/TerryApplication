@@ -8,7 +8,7 @@
  * # MyEmploymentController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyEmploymentController', function ($scope, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService) {
+angular.module('Controllers').controller('MyEmploymentController', function ($scope, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicPopup, $ionicModal, DataService) {
     'use strict';
 
     $scope.myVariables = {

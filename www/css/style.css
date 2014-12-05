@@ -1,5 +1,17 @@
 /* Our own CSS */
 
+
+
+.Aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
 .item-plain .item-stacked-label {
     border: none;    
 }

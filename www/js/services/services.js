@@ -1,2 +1,2 @@
-angular.module('TerryServices', []);
+angular.module('Services', []);
 

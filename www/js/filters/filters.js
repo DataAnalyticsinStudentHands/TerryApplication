@@ -2,7 +2,7 @@
 
 
 /* Filters */
-angular.module('TerryFilters', []).filter('currentdate', function ($filter) {
+angular.module('Filters', []).filter('currentdate', function ($filter) {
     
     'use strict';
     

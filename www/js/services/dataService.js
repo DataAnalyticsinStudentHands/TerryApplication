@@ -7,10 +7,61 @@
  * # DataService
  * Service for the terry
  */
-angular.module('TerryServices').factory('DataService', function (Restangular, $q, ngNotify) {
+angular.module('Services').factory('DataService', function (Restangular, $http, $q, ngNotify) {
     'use strict';
 
+    //Load data for form data for terry application
+    var application_form,
+        modal_award_form,
+        modal_child_form,
+        modal_coursework_form,
+        modal_employment_form,
+        modal_scholarship_form,
+        modal_volunteer_form;
+
+    $http.get('json/form_application.json').success(function (data) {
+        application_form = data;
+    });
+    $http.get('json/form_modal_award.json').success(function (data) {
+        modal_award_form = data;
+    });
+    $http.get('json/form_modal_child.json').success(function (data) {
+        modal_child_form = data;
+    });
+    $http.get('json/form_modal_coursework.json').success(function (data) {
+        modal_coursework_form = data;
+    });
+    $http.get('json/form_modal_employment.json').success(function (data) {
+        modal_employment_form = data;
+    });
+    $http.get('json/form_modal_scholarship.json').success(function (data) {
+        modal_scholarship_form = data;
+    });
+    $http.get('json/form_modal_volunteer.json').success(function (data) {
+        modal_volunteer_form = data;
+    });
+
     return {
+
+        getForm: function (acType) {
+            switch (acType) {
+                case 'application':
+                    return application_form;
+                case 'award':
+                    return modal_award_form;
+                case 'child':
+                    return modal_child_form;
+                case 'coursework':
+                    return modal_coursework_form;
+                case 'employment':
+                    return modal_employment_form;
+                case 'scholarship':
+                    return modal_scholarship_form;
+                case 'volunteer':
+                    return modal_volunteer_form;
+            }
+        },
+
         
         getAllItems: function (acType) {
 

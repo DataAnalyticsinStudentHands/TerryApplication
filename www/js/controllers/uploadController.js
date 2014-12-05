@@ -8,10 +8,7 @@
  * # UploadController
  * Controller for the terry
  */
-
-
-
-angular.module('TerryControllers').controller('UploadController', function ($filter, $scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
+angular.module('Controllers').controller('UploadController', function ($filter, $scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
 
     'use strict';
     

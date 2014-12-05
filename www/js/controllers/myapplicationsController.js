@@ -7,7 +7,7 @@
  * # MyapplicationsController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('MyapplicationsController', function ($scope, $location, ngNotify, $ionicModal, $ionicNavBarDelegate, $ionicPopup, ApplicationService) {
+angular.module('Controllers').controller('MyapplicationsController', function ($scope, $location, ngNotify, $ionicModal, $ionicNavBarDelegate, $ionicPopup, ApplicationService) {
     'use strict';
     
     $scope.myapplications = {};

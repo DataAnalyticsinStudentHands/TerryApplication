@@ -7,7 +7,7 @@
  * # UserDetailController
  * Controller for the terry
  */
-angular.module('TerryControllers').controller('UserDetailController', function ($scope, Restangular, ngNotify, UserService) {
+angular.module('Controllers').controller('UserDetailController', function ($scope, Restangular, ngNotify, UserService) {
     'use strict';
 
     $scope.user = {};

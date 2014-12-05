@@ -1,0 +1,9 @@
+/*** --- Desktops and Laptops --- ***/
+@media only screen and (min-width : 768px) {
+    /* sign in screen */
+    #desktop_form {
+        padding-top: 2%;
+        padding-right: 25%;
+        padding-left: 25%;
+    }
+}
