@@ -47,10 +47,15 @@ angular.module('TerryDirectives', []).directive('appVersion', ['version', functi
             if (attributes.getNamedItem('ng-model') != void 0 && attributes.getNamedItem('name') != void 0) {
               var field = form[attributes.name.value];
               if (field != void 0) {
+                angular.element(input).bind('blur',function(){
+                  scope.$apply(function(){
+                    field.$blurred = true;
+                  });
+                });
                 scope.$watch(function() {
-                  return form.$submitted + "_" + field.$valid;
+                  return form.$submitted + "_" + field.$valid + "_" + field.$blurred;
                 }, function() {
-                  if (form.$submitted !== true) return;
+                  if (!field.$blurred && form.$submitted !== true) return;
                   var inp = angular.element(input);
                   if (inp.hasClass('ng-invalid')) {
                     element.removeClass('has-success');

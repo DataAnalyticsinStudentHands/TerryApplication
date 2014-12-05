@@ -13,14 +13,13 @@ angular.module('HonorsApplications', [
     'ui.bootstrap.datetimepicker',
     'ui.utils',
     'ng-currency',
-    'angular-data.DSCacheFactory',
     'angularFileUpload'
 ]).run(function ($ionicPlatform, Restangular, $rootScope, Auth, $q, $state, UserService, ngNotify) {
     'use strict';
 
     // Set Base URL to connect to DASH RESTFUL webservices
-    Restangular.setBaseUrl("http://127.0.0.1:8080/terry/"); // localhost
-    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terry/");
+    Restangular.setBaseUrl("http://127.0.0.1:8080/terrytest/"); // localhost
+    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
     //Restangular.setDefaultHttpFields({cache: true});
 
     // have Restangular available whereever we need it

@@ -21,6 +21,7 @@ angular.module('TerryControllers')
              document.activeElement.blur();
              $timeout(function() {
                  $scope.signin.passWordHashed = new String(CryptoJS.SHA512($scope.signin.passWord + $scope.signin.userName + $scope.salt));
+                 //console.log ($scope.signin.passWordHashed.toString());
                  Auth.setCredentials($scope.signin.userName, $scope.signin.passWordHashed);
                  $scope.signin.userName = '';
                  $scope.signin.passWord = '';
