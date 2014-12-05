@@ -6,7 +6,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
  function($scope, Auth, $state, ngNotify) {
      if($scope.isAuthenticated() === true) {
          //Point 'em to logged in page of app
-         $state.go('tabs.myapplications');
+         $state.go('tabs.applications');
      }
 
      $scope.signin = {};
@@ -24,9 +24,10 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
                  $scope.loginMsg = "You have logged in successfully!";
                  Auth.confirmCredentials();
                  ngNotify.set($scope.loginMsg, 'success');
-                 $state.go('tabs.myapplications');
+                 $state.go('tabs.applications');
              }, function(error) {
-                $scope.loginMsg = "Arghhh, matey! Check your username or password.";
+                $scope.loginMsg = "Wrong username or password!";
+                 ngNotify.set($scope.loginMsg, {position: 'bottom', type: 'error'});
                 Auth.clearCredentials();
              });
              $scope.signin.userName = '';

@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/desktop_app.css">
     <link rel="stylesheet" href="css/third-party.css">
-    
-    <script type="text/javascript" src="js/third-party.js"></script>    
-    
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-        <link href="css/ionic.app.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="css/ionic.app.css">
 
-    <!--Modules-->
+    <!-- Third party js -->
+    <script type="text/javascript" src="js/third-party.js"></script>
+
+    <!-- Modules -->
     <script type="text/javascript" src="modules/DatabaseCommunicationModule/js/controllers.js"></script>
     <script type="text/javascript" src="modules/DatabaseCommunicationModule/js/services.js"></script>
     <!-- CORE APP -->
@@ -23,9 +22,9 @@
     <!-- Controllers -->
     <script type="text/javascript" src="js/controllers/controllers.js"></script>
     <script type="text/javascript" src="js/controllers/mainController.js"></script>
+    <script type="text/javascript" src="js/controllers/menuController.js"></script>
     <script type="text/javascript" src="js/controllers/myCourseworkController.js"></script>
     <script type="text/javascript" src="js/controllers/myEmploymentController.js"></script>
-    <script type="text/javascript" src="js/controllers/myapplicationsController.js"></script>
     <script type="text/javascript" src="js/controllers/myapplicationController.js"></script>
     <script type="text/javascript" src="js/controllers/uploadController.js"></script>
     <script type="text/javascript" src="js/controllers/userDetailController.js"></script>
@@ -40,61 +39,8 @@
     <script type="text/javascript" src="js/directives/directives.js"></script>
 </head>
 
-<body ng-app="HonorsApplications" ng-controller="MainController">
-
-    <ion-side-menus>
-
-        <ion-pane ion-side-menu-content drag-content="main.dragContent">
-            <ion-nav-bar class="nav-title-slide-ios7">
-                <ion-nav-back-button class="button-icon ion-arrow-left-c">
-                </ion-nav-back-button>
-            </ion-nav-bar>
-
-            <ion-nav-view animation="slide-left-right"></ion-nav-view>
-        </ion-pane>
-
-
-        <ion-side-menu side="right" ng-show="allowSideMenu">
-            <ion-header-bar class="bar bar-header bar-dark">
-                <h1 class="title">Application Package</h1>
-            </ion-header-bar>
-            <ion-content>
-
-                <ul class="list">
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.student_information"> I. Student Information</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.highschool_information">II. High School Information</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.highschool_coursework">III. High School Coursework</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.employment">IV. Employment</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.college_plans">V. College Plans</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.financial_information">VI. Financial Information</a>
-                    </li>
-                    <li>
-                        <a class="item item-text-wrap" menu-close nav-clear ui-sref="tabs.myapplication.scholarship_information">VII. University Scholarship Information</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.essays">VIII. Essays</a>
-                    </li>
-                    <li>
-                        <a class="item" menu-close nav-clear ui-sref="tabs.myapplication.submit">Submission</a>
-                    </li>
-                </ul>
-            </ion-content>
-        </ion-side-menu>
-
-    </ion-side-menus>
-
-
+<body ng-app="HonorsApplications" ng-controller="menuCtrl">
+    <ion-nav-view animation="slide-left-right" name="login"></ion-nav-view>
 </body>
 
 </html>

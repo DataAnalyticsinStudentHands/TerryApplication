@@ -9,10 +9,10 @@ navigation history that also transitions its views in and out.
     <!-- My Applications Tab -->
     <ion-tab title="My Application" 
              icon="icon ion-home" 
-             href="#/tab/myapplications"
+             href="#/tab/applications"
              on-select="allowSideMenu(true)" 
              on-deselect="allowSideMenu(false)">
-        <ion-nav-view name="tab-myapplications"></ion-nav-view>
+        <ion-nav-view name="tab-applications"></ion-nav-view>
     </ion-tab>
     <!-- Information Tab -->
     <ion-tab title="Instructions" icon="ion-ios7-information" href="#/tab/information">
@@ -27,5 +27,4 @@ navigation history that also transitions its views in and out.
     <!-- Sign Out Tab -->
     <ion-tab title="Sign-Out" icon="ion-log-out" ng-click="logout()">
     </ion-tab>
-
 </ion-tabs>

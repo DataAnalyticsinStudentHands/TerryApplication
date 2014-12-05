@@ -41,6 +41,9 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $ionicSideMenuDelegate.toggleRight();
     };
 
+
+
+
     $scope.myVariables = {
         current_mode: 'Add',
         problems: 'false'

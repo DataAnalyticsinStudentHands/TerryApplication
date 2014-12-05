@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<ion-view title="My Application">
+    <ion-content>
+
+        <div id="desktop_form" class="list card" ng-hide="applications || transfer_applications">
+            <div class="item item-body">
+                <p>
+                    Please select whether you want to submit a freshman application or a transfer application.
+                </p>
+                <button class="button button-positive" ng-click="modal.show()">Create Freshman Application</button>
+                <button class="button button-positive" ng-click="modal.show()">Create Transfer Application</button>
+            </div>
+        </div>
+
+        <button class="button button-icon icon ion-minus-circled" ng-click="deleteApplication()" ng-show="applications">&nbsp;&nbsp;Delete Application</button>
+
+        <ion-list show-delete="data.showDelete">
+            <ion-item class="item item-thumbnail-left" ng-repeat="myapplication in applications" >
+               <img src="img/edit_green.png">
+                <a ng-show="myapplication.allowEdit" style="color: grey">
+                    <h2>Terry Application 2015</h2>
+                    <p>{{myapplication.first_name}} {{myapplication.last_name}} <b>Status:</b> {{myapplication.status}}</p>
+                </a>
+                <a ng-hide="myapplication.allowEdit" ui-sref="tabs.application.student_information({ applicationId: myapplication.id })">
+
+                        <h2>Terry Application 2015</h2>
+                        <p>{{myapplication.first_name}} {{myapplication.last_name}} <b>Status:</b> {{myapplication.status}}</p>
+                </a>
+
+                </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

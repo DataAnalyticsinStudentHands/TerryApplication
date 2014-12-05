@@ -2,49 +2,49 @@
 <ion-view title="Honors College Terry Application 2015/2016 Login">
     <ion-content padding="true">
         <div id="desktop_form" class="list card">
-            <div class="item item-body">
-                <div class="Aligner">
-                    <img  src="img/honors_logo.png">
-                </div>
-                <p>
-                    Welcome to the Online Application System for the Terry Scholarship Application at the University of Houston.
-                    If you have not created an account for our system, please <a ui-sref="register">register</a> and then login to enter your data.
-                </p>
-
-                <form name="login "class="submit" novalidate ng-submit="submit()">
-                    <label class="item item-input validated">
-                        <input name="userName" type="email" ng-model="signin.userName" placeholder="EMAIL">
-                    </label>
-                    <div class="item item-icon-left" ng-show="login.userName.$error.email">
-                        <i class="icon ion-alert-circled error"></i>
-                        <span>Please enter a valid email address </span>
-                    </div>
-
-                    <label class="item item-input">
-                        <input type="password" ng-model="signin.passWord" name="passWord" placeholder="PASSWORD">
-                    </label>
-
-                    <div>
-                        <button type="submit" class="button button-block button-positive">Login</button>
-                    </div>
-                </form>
+        <div class="item item-body">
+            <div class="Aligner">
+                <img  src="img/honors_logo.png">
             </div>
+            <p>
+                Welcome to the Online Application System for the Terry Scholarship Application at the University of Houston.
+                If you have not created an account for our system, please <a ui-sref="register">register</a> and then login to enter your data.
+            </p>
 
-            <a class="item item-icon-left assertive" ui-sref="register">
-                <i class="icon ion-asterisk"></i>
-                Register here if you have not created a login.
-            </a>
+            <form name="login "class="submit" novalidate ng-submit="submit()">
+                <label class="item item-input validated">
+                    <input name="userName" type="email" ng-model="signin.userName" placeholder="EMAIL">
+                </label>
+                <div class="item item-icon-left" ng-show="login.userName.$error.email">
+                    <i class="icon ion-alert-circled error"></i>
+                    <span>Please enter a valid email address </span>
+                </div>
 
-            <div class="item item-text-wrap">
+                <label class="item item-input">
+                    <input type="password" ng-model="signin.passWord" name="passWord" placeholder="PASSWORD">
+                </label>
+
+                <div>
+                    <button type="submit" class="button button-block button-positive">Login</button>
+                </div>
+            </form>
+        </div>
+
+        <a class="item item-icon-left dark" ui-sref="register">
+            <i class="icon ion-asterisk"></i>
+            Register here if you have not created a login.
+        </a>
+
+        <div class="item item-text-wrap">
             <p>If you encounter Problems with this page, please make sure you have reloaded the page in your browser.</p>
             <p>For technical problems with the site please contact Peggy Lindner <a href="mailto:plindner@uh.edu?Subject=Terry%20Application" target="_top">
                 plindner@uh.edu</a>.
             </p>
             <p>For additional information about the Terry Foundation Scholarship at the University of Houston please contact Franco Martinez <a href="mailto:fsmartinez@uh.edu?Subject=Terry%20Application" target="_top">
                 fsmartinez@uh.edu</a>.</p>
-                </div>
-
         </div>
+
+    </div>
 
 
 
