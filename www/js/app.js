@@ -28,20 +28,21 @@ angular.module('HonorsApplications', [
         return Restangular;
     };
 
-    $rootScope.isAuthenticated = function() {
+    $rootScope.isAuthenticated = function () {
         return Auth.hasCredentials();
-    }
+    };
 
-    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        //console.log("$stateChangeStart");
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        console.log("$stateChangeStart to state: " + toState.name);
         //console.log($rootScope.isAuthenticated());
-        if (toState.authenticate && !$rootScope.isAuthenticated()){
+        if (toState.authenticate && !$rootScope.isAuthenticated()) {
             console.log("non-authed");
             // User isn’t authenticated
             $state.go("signin");
             //What?
             event.preventDefault();
-        };
+        }
+        
     });
 
     //Logout user by clearing credentials
@@ -74,13 +75,246 @@ angular.module('HonorsApplications', [
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
-    // Set up the various states which the app can be in.
     $stateProvider
-        //signin, this is also the fallback
+        .state('signin', {
+            url: '/sign-in',
+            templateUrl: 'templates/signin.html',
+            controller: 'loginCtrl',
+            authenticate: false
+        })
+
+        .state('tabs', {
+            url: '/tab',
+            abstract: true,
+            templateUrl: 'templates/tabs.html',
+            authenticate: true
+        })
+    
+        .state('tabs.applications', {
+            url: '/applications',
+            resolve: {
+                freshman_applications: function (DataService) {
+                    return DataService.getAllItems('application');
+                },
+                transfer_applications: function (DataService) {
+                    return DataService.getAllItems('transferApplication');
+                }
+            },
+            views: {
+                'applications-tab': {
+                    templateUrl: 'templates/tab-applications.html',
+                    controller: 'MainController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.application', {
+            url: '/application/:applicationId',
+            abstract: true,
+            views: {
+                'applications-tab@tabs': {                    
+                        templateUrl: 'templates/abstract_application.html',
+                        controller: 'MyApplicationController' 
+                }
+            },
+            resolve: {
+                application: function (DataService, $stateParams) {
+                    return DataService.getItem('application', $stateParams.applicationID);
+                }
+            },
+            authenticate: true           
+        })
+    
+        .state('tabs.applications.application.student_information', {
+            url: '/student_information',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/student_information.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.application.highschool_information', {
+            url: '/highschool_information',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/highschool_information.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.employment', {
+            url: '/employment',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/employment.html',
+                    controller: 'MyEmploymentController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.college_plans', {
+            url: '/college_plans',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/college_plans.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.financial_information', {
+            url: '/financial_information',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/financial_information.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.scholarship_information', {
+            url: '/scholarship_information',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/freshman_app/scholarship_information.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.essays', {
+            url: '/essays',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/essays.html',
+                    controller: 'UploadController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.submit', {
+            url: '/submit',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/submit.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+
+        .state('tabs.applications.application.confirmation', {
+            url: '/confirmation',
+            views: {
+                'main_content': {
+                    templateUrl: 'templates/confirmation.html',
+                    controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.transfer_application', {
+            url: '/transfer_application/:applicationId',
+            abstract: true,
+            views: {
+                'applications-tab@tabs': {
+                        templateUrl: 'templates/abstract_transfer_application.html',
+                        controller: 'MyApplicationController'
+                }
+            },
+            resolve: {
+                application: function (DataService, $stateParams) {
+                    return DataService.getItem('transferApplication', $stateParams.applicationID);
+                }
+            },
+            authenticate: true           
+        })
+    
+        .state('tabs.applications.transfer_application.student_information', {
+            url: '/student_information',
+            views: {
+                'main_content': {
+                        templateUrl: 'templates/transfer_app/student_information.html',
+                        controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.transfer_application.education', {
+            url: '/education',
+            views: {
+                'main_content': {
+                        templateUrl: 'templates/transfer_app/education.html',
+                        controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.transfer_application.employment', {
+            url: '/education',
+            views: {
+                'main_content': {
+                        templateUrl: 'templates/transfer_app/employment.html',
+                        controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.applications.transfer_application.financial_information', {
+            url: '/education',
+            views: {
+                'main_content': {
+                        templateUrl: 'templates/transfer_app/financial_information.html',
+                        controller: 'MyApplicationController'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.information', {
+            url: '/information',
+            views: {
+                'information-tab': {
+                    templateUrl: 'templates/tab-information.html'
+                }
+            },
+            authenticate: true
+        })
+    
+        .state('tabs.user', {
+            url: '/user',
+            views: {
+                'user-tab': {
+                    templateUrl: 'templates/tab-user_detail.html'
+                }
+            }
+        });
+        
+        
+
+
+    $urlRouterProvider.otherwise('/sign-in');
+    /*
+        
         .state('signin', {
             url: '/signin',
             views: {
-                'login': {
+                'main-view': {
                     templateUrl: 'templates/signin.html',
                     controller: 'loginCtrl'
                 }
@@ -96,18 +330,7 @@ angular.module('HonorsApplications', [
             authenticate: false
         })
 
-        // setup an abstract state for the tabs directive
-        .state('tabs', {
-            url: '/tab',
-            abstract: true,
-            views: {
-                'login': {
-                    templateUrl: 'templates/tabs.html'
-                }
-            },
-            authenticate: true
-        })
-
+        
         //home page
         .state('tabs.applications', {
             url: '/applications',
@@ -134,9 +357,11 @@ angular.module('HonorsApplications', [
             abstract: true,
             authenticate: true,
             views: {
-                "menuBar@home": { templateUrl: "templates/menus/menuBar/menu_app.html", controller:"menuCtrl"},
-                "app": { templateUrl: "templates/home.html"},
-                "bottomMenu":  { templateUrl: "partials/bottomMenu.html", controller:"menuCtrl"}
+                "menuBar@tabs": { 
+                    templateUrl: "templates/menubar/menu_app.html", 
+                    controller:"menuCtrl"},
+                "app": { 
+                    templateUrl: "templates/home.html"}
             }
         })
 
@@ -278,5 +503,5 @@ angular.module('HonorsApplications', [
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/signin');
+    $urlRouterProvider.otherwise('/signin');*/
 });

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<ion-view title="Terry Scholarship Application for Transfer Students 2015/2016">
+
+    <!-- The nav bar that will be updated as we navigate between views.-->
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+    </ion-nav-buttons>
+
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">FINANCIAL INFORMATION</h1>
+    </ion-header-bar>
+    <ion-content>
+        <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            To be considered for a Terry Foundation Scholarship, applicants must file a completed Free Application for Federal Student Aid (FAFSA) with the U.S. Department of Education and indicate the University of Houston (school code: 003652) as a report recipient. FAFSA forms can be submitted on-line after January 1st at <a href="http://www.fafsa.ed.gov/" target="_blank">www.fafsa.ed.gov
+      
+    </a>. You must file your FAFSA no later than March 30th,2015.
+            <br>Please complete all questions or your application cannot be considered. Financial information may be subject to verification from tax returns or other sources.
+        </p>
+
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.personal_history')">
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your marital status:<span style="color: red;">*</span></span>
+
+                        <select>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                Please provide the specified information for all dependents(spouse,children or stepchildren, parents, others) who reside with you or to whom you are obligated to provide support.
+            </p>
+
+            <div class="item item-button-left dark">
+                List Dependents
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('child')"></button>
+            </div>
+
+            <div class="list list-inset">
+                <div class="item" ng-repeat="item in mychildren" item="item">
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('child', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.year}}</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your Occupation:<span style="color: red;">*</span></span>
+
+                        <input name="your_occupation" type="text" ng-model="myapplication.your_occupation" placeholder="Your Occupation" />
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's Occupation:<span style="color: red;">*</span></span>
+                        <input name="partner_occupation" type="text" ng-model="myapplication.partner_occupation" placeholder="Partner's Occupation">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your Employer:<span style="color: red;">*</span></span>
+
+                        <input name="your_employer" type="text" ng-model="myapplication.your_employer" placeholder="Your Employer">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's Employer:<span style="color: red;">*</span></span>
+                        <input name="partner_employer" type="text" ng-model="myapplication.partner_employer" placeholder="Partner Employer">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your AGI for 2014:<span style="color: red;">*</span></span>
+                        <input name="your_AGI_2014" type="text" ng-model="myapplication.your_AGI_2014" placeholder="AGI in Dollar" ng-currency>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's AGI for 2014:<span style="color: red;">*</span></span>
+                        <input name="partner_AGI_2014" type="text" ng-model="myapplication.partner_AGI_2014" placeholder="AGI in Dollar" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your educational debt to date:<span style="color: red;">*</span></span>
+                        <input name="your_educational_debt" type="text" ng-model="myapplication.your_educational_debt" placeholder="Educational Debt in Dollar" ng-currency>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's educational debt to date:<span style="color: red;">*</span></span>
+                        <input name="partner_educational_debt" type="text" ng-model="myapplication.partner_educational_debt" placeholder="Educational Debt in Dollar" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your monthly child support received:<span style="color: red;">*</span></span>
+                        <input name="your_childsupport_received" type="text" ng-model="myapplication.your_childsupport_received" placeholder="Monthly Child Support Received in Dollar" ng-currency>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's monthly child support received:<span style="color: red;">*</span></span>
+                        <input name="partner_childsupport_received" type="text" ng-model="myapplication.partner_childsupport_received" placeholder="Monthly Child Support Received in Dollar" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your monthly child support payment:<span style="color: red;">*</span></span>
+                        <input name="your_childsupport_payment" type="text" ng-model="myapplication.your_childsupport_payment" placeholder="Monthly Child Support Payment in Dollar" ng-currency>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's monthly child support payment:<span style="color: red;">*</span></span>
+                        <input name="partner_childsupport_payment" type="text" ng-model="myapplication.partner_childsupport_payment" placeholder="Monthly Child Support Payment in Dollar" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your monthly child support expenses:<span style="color: red;">*</span></span>
+                        <input name="your_childsupport_expenses" type="text" ng-model="myapplication.your_childsupport_expenses" placeholder="Monthly Child Support Expenses in Dollar" ng-currency>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Partner's monthly child support expenses:<span style="color: red;">*</span></span>
+                        <input name="partner_childsupport_expenses" type="text" ng-model="myapplication.partner_childsupport_expenses" placeholder="Monthly Child Support Expenses in Dollar" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Are there other financial resources that you regularly receive or rely upon to support yourself and your family? If so, please describe and provide amounts: (max. 400 characters)<span style="color: red;">*</span></span>
+                        <textarea name="description_other_financial_resources" rows="5" maxlength="400" ng-model="myapplication.description_other_financial_resources" placeholder="description"></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">If you provide financial support for another family (whether child, parent, sibling or other), please tell us about this family (max. 400 characters)<span style="color: red;">*</span></span>
+                        <textarea name="description_financialsupport_otherfamily" rows="5" maxlength="400" ng-model="myapplication.description_financialsupport_otherfamily" placeholder="description"></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Please describe any special circumstances that affect your family’s ability to fund your college expenses: (max. 300 characters)<span style="color: red;">*</span></span>
+                        <textarea name="description_special_circumstances" rows="4" maxlength="300" ng-model="myapplication.description_special_circumstances" placeholder="description"></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p><b>DEPENDENTS </b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-50">
+                    <label class="item">
+
+                        <span class="input-label">Were you listed as a dependent on someone else's tax return for 2014?<span style="color: red;">*</span></span>
+                        <ion-radio name="dependent_taxreturn_2014" ng-model="myapplication.dependent_taxreturn_2014" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="dependent_taxreturn_2014" ng-model="myapplication.dependent_taxreturn_2014" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+
+                <div class="col col-50">
+                    <label class="item">
+
+                        <span class="input-label">Were you listed as a dependent on someone else's tax return for 2015?<span style="color: red;">*</span></span>
+                        <ion-radio name="dependent_taxreturn_2015" ng-model="myapplication.dependent_taxreturn_2015" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="dependent_taxreturn_2015" ng-model="myapplication.dependent_taxreturn_2015" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">If "YES" to either of the above questions, complete the following:</span> 
+                        <ol>
+                            <li>Name and Relationship of Claimant</li>
+                            <textarea rows="1" cols="100"></textarea>
+                            <li>Father/Stepfather Occupation.</li>
+                            <textarea rows="1" cols="100"></textarea>
+                            <li>Mother/Stepmother Occupation.</li>
+                            <textarea rows="1" cols="100"></textarea>
+                        </ol>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Your Parent(s)’/Guardian(s)/Stepparent(s)’ Adjusted Gross Income for 2014 (line 37 on Form 1040; line 21 on form 1040A)<span style="color: red;">*</span>:</span>
+                        <input name="adjusted_cross_income" type="text" ng-model="myapplication.adjusted_cross_income" placeholder="amount in dollars" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Amount of financial support received by you from family (not your partner) in 2014:<span style="color: red;">*</span></span>
+                        <input name="family_support" type="text" ng-model="myapplication.family_support" placeholder="amount in dollars" ng-currency>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Please describe any special circumstances that affect your family’s ability to fund your college expenses: (max. 300 characters)<span style="color: red;">*</span></span>
+                        <textarea name="description_additional_factors" rows="4" maxlength="300" ng-model="myapplication.description_additional_factors" placeholder="description"></textarea>
+                    </label>
+                </div>
+            </div>
+
+
+
+            <!-- Submit/Next button -->
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button type="submit" class="button button-block button-positive">Next</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

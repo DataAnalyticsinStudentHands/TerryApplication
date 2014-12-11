@@ -8,20 +8,18 @@ navigation history that also transitions its views in and out.
 
     <!-- My Applications Tab -->
     <ion-tab title="My Application" 
-             icon="icon ion-home" 
-             href="#/tab/applications"
-             on-select="allowSideMenu(true)" 
-             on-deselect="allowSideMenu(false)">
-        <ion-nav-view name="tab-applications"></ion-nav-view>
+             icon="icon ion-home"
+             ui-sref="tabs.applications">
+        <ion-nav-view name="applications-tab"></ion-nav-view>
     </ion-tab>
     <!-- Information Tab -->
-    <ion-tab title="Instructions" icon="ion-ios7-information" href="#/tab/information">
-        <ion-nav-view name="tab-information"></ion-nav-view>
+    <ion-tab title="Instructions" icon="ion-ios7-information" ui-sref="tabs.information">
+        <ion-nav-view name="information-tab"></ion-nav-view>
     </ion-tab>
     
     <!-- User Tab -->
-    <ion-tab title="Account" icon="ion-gear-b" href="#/tab/user">
-        <ion-nav-view name="tab-user"></ion-nav-view>
+    <ion-tab title="Account" icon="ion-gear-b" ui-sref="tabs.user">
+        <ion-nav-view name="user-tab"></ion-nav-view>
     </ion-tab>
 
     <!-- Sign Out Tab -->

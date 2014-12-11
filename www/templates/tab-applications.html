@@ -1,33 +1,58 @@
 <!DOCTYPE html>
 <ion-view title="My Application">
+    
+    
+    
     <ion-content>
 
-        <div id="desktop_form" class="list card" ng-hide="applications || transfer_applications">
+        <div id="desktop_form" class="list card" ng-hide="applications">
             <div class="item item-body">
                 <p>
                     Please select whether you want to submit a freshman application or a transfer application.
                 </p>
-                <button class="button button-positive" ng-click="modal.show()">Create Freshman Application</button>
-                <button class="button button-positive" ng-click="modal.show()">Create Transfer Application</button>
+                <button class="button button-positive" ng-click="createApplication('Freshman')">Create Freshman Application</button>
+                <button class="button button-positive" ng-click="createApplication('Transfer')">Create Transfer Application</button>
             </div>
         </div>
-
-        <button class="button button-icon icon ion-minus-circled" ng-click="deleteApplication()" ng-show="applications">&nbsp;&nbsp;Delete Application</button>
-
-        <ion-list show-delete="data.showDelete">
-            <ion-item class="item item-thumbnail-left" ng-repeat="myapplication in applications" >
-               <img src="img/edit_green.png">
-                <a ng-show="myapplication.allowEdit" style="color: grey">
-                    <h2>Terry Application 2015</h2>
-                    <p>{{myapplication.first_name}} {{myapplication.last_name}} <b>Status:</b> {{myapplication.status}}</p>
+        
+        <!-- Card to show for Freshman Application -->
+        <div class="list card" ng-repeat="item in applications" ng-hide="transfer_applications.length == 1">            
+            <div class="item item-icon-left energized" ng-show="item.status == 'in progress' ">
+                <i class="icon ion-edit"></i>
+                <h2 ng-show="applications.type == 'application'">Terry Freshman Application 2015</h2>
+                <h2 ng-show="applications.type == 'transferApplication'">Terry Transfer Application 2015</h2>
+                <p>Application ID {{item.id}}: </p>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+            </div>
+            <div class="item item-icon-left balanced" ng-show="item.status == 'submitted' ">
+                <i class="icon ion-email"></i>
+                <p>Application ID {{item.id}}: {{item.status}}</p>
+                <h2>{{item.first_name}} {{item.last_name}}</h2>
+            </div>
+            <div class="item item-body">
+                <p>Status: {{item.status}}</p>
+                <p>Please edit your application. Fill out each section of the application form completely, taking care to respond to each question in the space provided. </p>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left"
+                 ng-show="applications.type == 'application'">
+                <a class="tab-item"
+                   ng-hide="item.allowEdit" 
+                   ui-sref="tabs.applications.application.student_information({ applicationId: item.id })">
+                    <i class="icon ion-document-text"></i>
+                    Edit Application
                 </a>
-                <a ng-hide="myapplication.allowEdit" ui-sref="tabs.application.student_information({ applicationId: myapplication.id })">
-
-                        <h2>Terry Application 2015</h2>
-                        <p>{{myapplication.first_name}} {{myapplication.last_name}} <b>Status:</b> {{myapplication.status}}</p>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left"
+                 ng-show="applications.type == 'transferApplication'">
+                <a class="tab-item"
+                   ng-hide="item.allowEdit" 
+                   ui-sref="tabs.applications.transfer_application.student_information({ applicationId: item.id })">
+                    <i class="icon ion-document-text"></i>
+                    Edit Application
                 </a>
-
-                </ion-item>
-        </ion-list>
+            </div>
+        </div>
+        
+        
     </ion-content>
 </ion-view>

@@ -2,11 +2,11 @@
 <!-- Modal dialog for creating a new application -->
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Create New Terry Foundation Scholarship Application</h1>
+        <h1 class="title title-text-wrap">Create New {{main.application_type}} Terry Foundation Scholarship Application</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     
-    <ion-content> <form novalidate class="submit" on-valid-submit="createApplication()">
+    <ion-content> <form novalidate class="submit" on-valid-submit="saveApplication()">
             <div class="padding">
                 <div class="list">
                     <label class="item item-input validated" >

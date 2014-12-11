@@ -19,7 +19,7 @@
     <script type="text/javascript" src="modules/DatabaseCommunicationModule/js/services.js"></script>
     <!-- CORE APP -->
     <script type="text/javascript" src="js/app.js"></script>
-    <!-- Controllers -->
+    <!-- Controllers --> 
     <script type="text/javascript" src="js/controllers/controllers.js"></script>
     <script type="text/javascript" src="js/controllers/mainController.js"></script>
     <script type="text/javascript" src="js/controllers/menuController.js"></script>
@@ -39,8 +39,13 @@
     <script type="text/javascript" src="js/directives/directives.js"></script>
 </head>
 
-<body ng-app="HonorsApplications" ng-controller="menuCtrl">
-    <ion-nav-view animation="slide-left-right" name="login"></ion-nav-view>
+<body ng-app="HonorsApplications">
+    <!-- The nav bar -->
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-arrow-left-c"></i> Back
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
 </body>
-
 </html>

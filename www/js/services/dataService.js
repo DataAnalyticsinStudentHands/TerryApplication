@@ -17,7 +17,8 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         modal_coursework_form,
         modal_employment_form,
         modal_scholarship_form,
-        modal_volunteer_form;
+        modal_volunteer_form,
+        states;
 
     $http.get('json/form_application.json').success(function (data) {
         application_form = data;
@@ -40,6 +41,9 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
     $http.get('json/form_modal_volunteer.json').success(function (data) {
         modal_volunteer_form = data;
     });
+    $http.get('json/states.json').success(function (data) {
+        states = data;
+    });
 
     return {
 
@@ -61,6 +65,9 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                     return modal_volunteer_form;
             }
         },
+        getStates: function() {
+            return states;
+        },
 
         
         getAllItems: function (acType) {
@@ -79,6 +86,20 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                 }
             );
 
+        },
+        getItem: function (type, item_id) {
+            return Restangular.one(type, item_id).get().then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    return result[0];
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving data for type " + type, {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
         },
         addItem: function (type, item) {
 
@@ -99,6 +120,8 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
             );
         },
         updateItem: function (type, item_id, item) {
+            
+            localStorage.setItem(type, item);
 
             return Restangular.all(type).all(item_id).post(item).then(
                 function (result) {
@@ -114,6 +137,12 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                     });
                 }
             );
+        },
+        storeItem: function (type, item) {
+            
+            localStorage.setItem(type, item);
+            return true;
+
         },
         deleteItem: function (type, item_id) {
 

@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService, application) {
     'use strict';
 
     $scope.date = new Date();
@@ -32,78 +32,64 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
-    //Load some variables
-    $http.get('json/states.json').success(function (data) {
-        $scope.states = data;
-    });
-
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
-
-
-
-
+    
+    $scope.states = DataService.getStates();
     $scope.myVariables = {
         current_mode: 'Add',
         problems: 'false'
     };
 
-    $scope.myapplication = {};
+   
     $scope.myscholarships = {};
     $scope.myuniversities = {};
     $scope.mychildren = {};
 
-    // GET 
-    ApplicationService.getApplication($stateParams.applicationId).then(
-        function (result) {
-            if ($stateParams.applicationId !== "") {
-                $scope.myapplication = result;
-                //set selected state
-                if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
-                    $scope.test = $filter('filter')($scope.states, {
-                        name: $scope.myapplication.state
-                    }, true);
-                    $scope.myVariables.myState = $scope.test[0];
-                } else {
-                    $scope.myVariables.myState = $scope.states[50];
-                }
-                //set selected mail options
-                if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
-                    $scope.test = $filter('filter')($scope.mail_options, {
-                        name: $scope.myapplication.app_uh_method
-                    }, true);
-                    $scope.myVariables.myuhappMailOption = $scope.test[0];
-                } else {
-                    $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
-                }
-                if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
-                    $scope.test = $filter('filter')($scope.mail_options, {
-                        name: $scope.myapplication.transcript_method
-                    }, true);
-                    $scope.myVariables.mytranscriptMailOption = $scope.test[0];
-                } else {
-                    $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
-                }
-                if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
-                    $scope.test = $filter('filter')($scope.mail_options, {
-                        name: $scope.myapplication.fafsa_method
-                    }, true);
-                    $scope.myVariables.myfafsaMailOption = $scope.test[0];
-                } else {
-                    $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
-                }
-                if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
-                    $scope.test = $filter('filter')($scope.mail_options, {
-                        name: $scope.myapplication.housing_method
-                    }, true);
-                    $scope.myVariables.myhousingMailOption = $scope.test[0];
-                } else {
-                    $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
-                }
-            }
+        $scope.myapplication = application;
+        //set selected state
+        if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
+            $scope.test = $filter('filter')($scope.states, {
+                name: $scope.myapplication.state
+            }, true);
+            $scope.myVariables.myState = $scope.test[0];
+        } else {
+            $scope.myVariables.myState = $scope.states[50];
         }
-    );
+        //set selected mail options
+        if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
+            $scope.test = $filter('filter')($scope.mail_options, {
+                name: $scope.myapplication.app_uh_method
+            }, true);
+            $scope.myVariables.myuhappMailOption = $scope.test[0];
+        } else {
+            $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
+        }
+        if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
+            $scope.test = $filter('filter')($scope.mail_options, {
+                name: $scope.myapplication.transcript_method
+            }, true);
+            $scope.myVariables.mytranscriptMailOption = $scope.test[0];
+        } else {
+            $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
+        }
+        if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
+            $scope.test = $filter('filter')($scope.mail_options, {
+                name: $scope.myapplication.fafsa_method
+            }, true);
+            $scope.myVariables.myfafsaMailOption = $scope.test[0];
+        } else {
+            $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
+        }
+        if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
+            $scope.test = $filter('filter')($scope.mail_options, {
+                name: $scope.myapplication.housing_method
+            }, true);
+            $scope.myVariables.myhousingMailOption = $scope.test[0];
+        } else {
+            $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
+        }
+            
+        
+    
 
     // GET 
     DataService.getAllItems('university').then(
@@ -556,7 +542,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     type: 'success'
                 });
                 //if succesful => send to next page
-                $state.go('tabs.myapplications');
+                $state.go('tabs.applications');
             },
             function (error) {
                 ngNotify.set("Could not contact server to save application!", {
@@ -566,37 +552,37 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             }
         );
     };
-    
-    //detect state change from sidemenu
-    $scope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        $scope.save(toState);
-        
-    });
 
-    // callback for ng-submit 'save': save application updates to server
-    $scope.save = function (nextstate) {
+    // callback for ng-submit 'next': moves to next state
+    $scope.next = function (nextState) {
         $scope.myapplication.state = $scope.myVariables.myState.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
 
-        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
-            function (result) {
-                ngNotify.set("Saved to server.", {
-                    position: 'bottom',
-                    type: 'success'
-                });
-                //if succesful => send to next page
-                $state.go(nextstate);
-            },
-            function (error) {
-                ngNotify.set("Could not contact server to save application!", {
-                    position: 'bottom',
-                    type: 'error'
-                });
-            }
-        );
+        if ($state.current.name.charAt(18) !== 't') {
+            DataService.storeItem('application', $scope.myapplication);
+            $state.go(nextState);      
+        } else {
+            DataService.storeItem('transferApplication', $scope.myapplication);
+            $state.go(nextState);    
+        }
+    };
+    
+    // callback for ng-submit 'save': save application updates to server
+    $scope.save = function () {
+        $scope.myapplication.state = $scope.myVariables.myState.name;
+        if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
+            $scope.myapplication.permanent_resident = 'false';
+            $scope.myapplication.permanent_resident_card = 'false';
+        }
+        
+        if ($state.current.name.charAt(18) !== 't') {
+            DataService.updateItem('application', $scope.myapplication.id, $scope.myapplication);
+        } else {
+            DataService.updateItem('transferApplication', $scope.myapplication.id, $scope.myapplication);
+        }
     };
 
     $scope.mail_options = [
