@@ -1,85 +1,55 @@
 <!DOCTYPE html>
-<ion-view title="Terry Scholarship Application for Transfer Students 2015/2016">
-
-    <!-- The nav bar that will be updated as we navigate between views.-->
-    <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
-    </ion-nav-buttons>
+<ion-view>
 
     <ion-header-bar class="bar-subheader">
         <h1 class="title">Employment, Activities, Service and Awards</h1>
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-header-bar>
 
     <ion-content>
+        <form name="employment" class="submit" novalidate on-valid-submit="save()">
+            <div class="row">
+                <div class="col">
+                    <p><b>EMPLOYMENT</b></p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label class="item">
+                        <span class="input-label">Are you currently employed?<span style="color: red;">*</span></span>
+                        <ion-radio name="currently_employed" ng-model="myapplication.currently_employed" ng-value="'true'">Yes</ion-radio>
+                        <ion-radio name="currently_employed" ng-model="myapplication.currently_employed" ng-value="'false'">No</ion-radio>
+                    </label>
+                </div>
+            </div>
+            
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-            Fill all sections provided. Use the "Add" button in each section to add individual items. Do not submit a resume in lieu of completing sections listed here. <b>Important:</b> If you are a recruited athlete, DO NOT include any information about your athletic participation or achievements on this application.
+            List <b>all</b> of your current and previous employers since high school. Include your job title, your employer’s name, how many hours per week you worked, and the dates of employment. <b>List your most recent employment first.</b>
         </p>
 
         <div class="item item-button-left dark">
             Employment
             <span style="color: red;">*</span>
-            <button title="Add employment" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('employment')"></button>
+            <button type="button" title="Add employment" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('employment')"></button>
         </div>
 
         <div class="list list-inset">
-            <div class="item" ng-repeat="item in myemployments" item="item">
-                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('employment', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.position}} {{item.employer}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
+            <div class="item" ng-repeat="item in listings.employment" item="item">
+                <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('employment', item.id)"></button>
+                <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;Position: {{item.position}} at: {{item.employer}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
             </div>
         </div>
-
-        <div class="item item-button-left dark">
-            Leadership Activities
-            <span style="color: red;">*</span>
-            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('activity')"></button>
-        </div>
-
-        <div class="list list-inset">
-            <div class="item" ng-repeat="item in myactivities" item="item">
-                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('activity', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
-            </div>
-        </div>
-
-        <div class="item item-button-left dark">
-            Church,Community and Volunteer Service
-            <span style="color: red;">*</span>
-            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('volunteer')"></button>
-        </div>
-
-        <div class="list list-inset">
-            <div class="item" ng-repeat="item in myvolunteers" item="item">
-                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('volunteer', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} Hours per week/{{item.hours_total}} Hours total Date: {{item.date_from}}-{{item.date_to}}</button>
-            </div>
-        </div>
-
-        <div class="item item-button-left dark">
-            Awards, Special Honors, and Distinctions
-            <span style="color: red;">*</span>
-            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('award')"></button>
-        </div>
-
-        <div class="list list-inset">
-            <div class="item" ng-repeat="item in myawards" item="item">
-                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('award', item.id)"></button>
-                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp; Service: {{item.service_branch}} Dates: {{item.date_from}} - {{item.date_to}} {{item.description}} Mode: {{item.mode}} Status: {{item.status}} Location: {{item.station_location}}</button>
-            </div>
-        </div>
-
 
         <div class="row">
             <div class="col">
-                <p><b>MILITARY SERVICE </b>
-                </p>
+                <p><b>MILITARY SERVICE </b></p>
             </div>
         </div>
 
         <div class="row">
             <div class="col col-50">
-
                 <label class="item">
-
                     <span class="input-label">Are you currently serving in the Reserves or the National Gaurd?<span style="color: red;">*</span></span>
                     <ion-radio name="currently_serving" ng-model="myapplication.currently_serving" ng-value="'true'">Yes</ion-radio>
                     <ion-radio name="currently_serving" ng-model="myapplication.currently_serving" ng-value="'false'">No</ion-radio>
@@ -97,7 +67,6 @@
         <div class="row">
             <div class="col">
                 <label class="item">
-
                     <span class="input-label">Have you previously served on active duty in a uniformed service of the United States?<span style="color: red;">*</span></span>
                     <ion-radio name="previously_served" ng-model="myapplication.previously_served" ng-value="'true'">Yes</ion-radio>
                     <ion-radio name="previously_served" ng-model="myapplication.previously_served" ng-value="'false'">No</ion-radio>
@@ -111,6 +80,7 @@
                     If "YES", please add your services.
                     <span style="color: red;">*</span>
                     <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('military')"></button>
+                </label>
             </div>
         </div>
 
@@ -212,12 +182,55 @@
                 </label>
             </div>
         </div>
+            
+            <div class="item item-button-left dark">
+            Leadership Activities
+            <span style="color: red;">*</span>
+            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('activity')"></button>
+        </div>
 
-        <!-- Next button -->
-        <div class="row">
-            <div class="col col-25 col-offset-75">
-                <a type="button" class="button button-block button-positive" ui-sref="tabs.myapplication.financial_information">Next</a>
+        <div class="list list-inset">
+            <div class="item" ng-repeat="item in myactivities" item="item">
+                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('activity', item.id)"></button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
             </div>
         </div>
+
+        <div class="item item-button-left dark">
+            Church,Community and Volunteer Service
+            <span style="color: red;">*</span>
+            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('volunteer')"></button>
+        </div>
+
+        <div class="list list-inset">
+            <div class="item" ng-repeat="item in myvolunteers" item="item">
+                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('volunteer', item.id)"></button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} Hours per week/{{item.hours_total}} Hours total Date: {{item.date_from}}-{{item.date_to}}</button>
+            </div>
+        </div>
+
+        <div class="item item-button-left dark">
+            Awards, Special Honors, and Distinctions
+            <span style="color: red;">*</span>
+            <button title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddData('award')"></button>
+        </div>
+
+        <div class="list list-inset">
+            <div class="item" ng-repeat="item in myawards" item="item">
+                <button title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('award', item.id)"></button>
+                <button title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp; Service: {{item.service_branch}} Dates: {{item.date_from}} - {{item.date_to}} {{item.description}} Mode: {{item.mode}} Status: {{item.status}} Location: {{item.station_location}}</button>
+            </div>
+        </div>
+
+        <!-- Next/Save button -->
+            <div class="row">
+                <div class="col col-25 col-offset-50">
+                    <button type="submit" class="button button-block button-positive">Save to Server</button>
+                </div>
+                <div class="col col-25">
+                    <button type="button" class="button button-block button-positive" ng-click="next()">Next</button>
+                </div>
+            </div>
+        </form>
     </ion-content>
 </ion-view>

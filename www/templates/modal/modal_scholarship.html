@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">{{myVariables.current_mode}} Scholarship</h1>
+        <h1 class="title">{{myVariables.current_modal_mode}} Scholarship</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
         <form novalidate class="submit" on-valid-submit="saveModal('scholarship')">
             <div class="row">
-                <div class="col">
+                <div class="col" ng-show="myscholarship.applied_recieved">
                     <label class="item item-input validated">
-                        <span class="input-label">Scholarship{{myVariables.label_name}} Name:</span>
+                        <span class="input-label">Scholarship Name:</span>
+                        <input name="name" ng-model="myscholarship.name" type="text" placeholder="name" required>
+                    </label>
+                </div>
+                <div class="col" ng-hide="myscholarship.applied_recieved">
+                    <label class="item item-input validated">
+                        <span class="input-label">Scholarship or Grant Name:</span>
                         <input name="name" ng-model="myscholarship.name" type="text" placeholder="name" required>
                     </label>
                 </div>

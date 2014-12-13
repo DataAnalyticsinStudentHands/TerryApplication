@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<ion-view title="Terry Scholarship Application 2015/2016">
-
-
-
+<ion-view>
     <ion-header-bar class="bar-subheader">
         <h1 class="title">Student Information</h1>
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-header-bar>
+
     <ion-content>
 
-        <form name="student_information" novalidate class="submit" on-valid-submit="save('tabs.applications.application.highschool_information')">
-
+        <form name="student_information" novalidate class="submit" on-valid-submit="save()">
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
@@ -213,7 +211,6 @@
                         <span>Max 40 characters allowed</span>
                     </div>
                 </div>
-
             </div>
 
             <div class="row">
@@ -240,8 +237,11 @@
             </div>
             <!-- Next/Save button -->
             <div class="row">
-                <div class="col col-25 col-offset-75">
-                    <button type="submit" class="button button-block button-positive">Next</button>
+                <div class="col col-25 col-offset-50">
+                    <button type="submit" class="button button-block button-positive">Save to Server</button>
+                </div>
+                <div class="col col-25">
+                    <button type="button" class="button button-block button-positive" ng-click="next()">Next</button>
                 </div>
             </div>
         </form>

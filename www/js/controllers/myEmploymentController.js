@@ -16,10 +16,6 @@ angular.module('Controllers').controller('MyEmploymentController', function ($sc
         acType: 'employment'
     };
 
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
-
     $scope.myemployments = {};
     $scope.myemployment = {};
     $scope.myactivities = {};

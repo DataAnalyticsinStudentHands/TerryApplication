@@ -7,7 +7,7 @@
  * # ApplicationService
  * Sevice of the terry
  */
-angular.module('Services').factory('ApplicationService', function (Restangular, ngNotify) {
+angular.module('Services').factory('ApplicationService', function (Restangular, ngNotify, DataService) {
     'use strict';
 
     return {
@@ -25,13 +25,19 @@ angular.module('Services').factory('ApplicationService', function (Restangular, 
                 }
             );
         },
-        getApplication: function (application_id) {
-            return Restangular.all("applications").get(application_id).then(
+        getApplication: function (type, application_id) {
+            return Restangular.one(type).get(application_id).then(
                 function (result) {
                     result = Restangular.stripRestangular(result);
-                    return result;
+                    
+                    var application = result[0];
+                    //check for NA
+                    if (application.highschool_graduation_date_na === 'true')
+                        application.highschool_graduation_date = "NA";
+                    
+                    return application;
                 },
-                function (error) {
+                function (application) {
                     ngNotify.set("Something went wrong retrieving data for application", {
                         position: 'bottom',
                         type: 'error'

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_modal_mode}} Institution</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <form name="institution" novalidate class="submit" on-valid-submit="saveModal('institution')">
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Institution:<span style="color: red;">*</span></span>
+                            <input name="institution.name" ng-model="lists.institution.name" type="text" placeholder="description" required>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Online Institution?<span style="color: red;">*</span></span>
+                            <ion-radio name="online_institution" ng-model="lists.institution.online" ng-value="'true'">Yes</ion-radio>
+                            <ion-radio name="online_institution" ng-model="lists.institution.online" ng-value="'false'">No</ion-radio>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-50">
+                        <label class="item item-input validated">
+                            <span class="input-label">City:<span style="color: red;">*</span></span>
+                            <input name="city" type="text" ng-model="lists.institution.city" placeholder="City" required>
+                        </label>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input validated">
+                            <span class="input-label">Semesters Attended (ex: F11-S12):<span style="color: red;">*</span></span>
+                            <input name="semesters" ng-model="lists.institution.semesters" type="text" placeholder="semesters" required>
+                        </label>
+                    </div>
+                </div>
+                
+                    <div class="row">
+                        <div class="col col-50">
+                            <label class="item item-input validated">
+                                <span class="input-label">Hours Attempted:<span style="color: red;">*</span></span>
+                                <input name="hours_attempted" ng-model="lists.institution.hours_attempted" type="text" placeholder="hours attempted" required>
+                            </label>
+                        </div>
+
+                        <div class="col col-50">
+                            <label class="item item-input validated">
+                                <span class="input-label">Hours Completed:<span style="color: red;">*</span></span>
+                                <input name="hours_completed" ng-model="lists.institution.hours_completed" type="text" placeholder="hours completed" required>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-input validated">
+                                <span class="input-label">Cum GPA:<span style="color: red;">*</span></span>
+                                <input type="number" name="cum_gpa" ng-model="lists.institution.cum_gpa"  placeholder="cumulative gpa" required>
+                            </label>
+                            <div class="item item-icon-left" ng-show="institution.cum_gpa.$error.number">
+                        <i class="icon ion-alert-circled error"></i>
+                        <span>This should be a number</span>
+                    </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col col-25 col-offset-75">
+                            <button class="button button-full button-positive" type="submit">Save</button>
+                        </div>
+                    </div>
+            </form>
+            </div>
+    </ion-content>
+</ion-modal-view>

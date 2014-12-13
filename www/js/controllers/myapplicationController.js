@@ -8,20 +8,10 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, UserService, application) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, application, universities, scholarships, children, institutions, employment) {
     'use strict';
 
     $scope.date = new Date();
-
-    $scope.user = {};
-
-    UserService.getUser().then(
-        function (result) {
-            result = Restangular.stripRestangular(result)[0];
-            $scope.user = result;
-        },
-        function (error) {}
-    );
 
     $scope.mail_options = [
         {
@@ -32,87 +22,75 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
+    $scope.myapplication = application;
     
-    $scope.states = DataService.getStates();
     $scope.myVariables = {
-        current_mode: 'Add',
+        curent_mode: 'freshman',
+        current_modal_mode: 'Add',
         problems: 'false'
     };
-
-   
-    $scope.myscholarships = {};
-    $scope.myuniversities = {};
-    $scope.mychildren = {};
-
-        $scope.myapplication = application;
-        //set selected state
-        if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
-            $scope.test = $filter('filter')($scope.states, {
-                name: $scope.myapplication.state
-            }, true);
-            $scope.myVariables.myState = $scope.test[0];
-        } else {
-            $scope.myVariables.myState = $scope.states[50];
-        }
-        //set selected mail options
-        if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
-            $scope.test = $filter('filter')($scope.mail_options, {
-                name: $scope.myapplication.app_uh_method
-            }, true);
-            $scope.myVariables.myuhappMailOption = $scope.test[0];
-        } else {
-            $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
-        }
-        if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
-            $scope.test = $filter('filter')($scope.mail_options, {
-                name: $scope.myapplication.transcript_method
-            }, true);
-            $scope.myVariables.mytranscriptMailOption = $scope.test[0];
-        } else {
-            $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
-        }
-        if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
-            $scope.test = $filter('filter')($scope.mail_options, {
-                name: $scope.myapplication.fafsa_method
-            }, true);
-            $scope.myVariables.myfafsaMailOption = $scope.test[0];
-        } else {
-            $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
-        }
-        if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
-            $scope.test = $filter('filter')($scope.mail_options, {
-                name: $scope.myapplication.housing_method
-            }, true);
-            $scope.myVariables.myhousingMailOption = $scope.test[0];
-        } else {
-            $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
-        }
-            
-        
     
+    if ($state.current.name.charAt(18) !== 't') {
+        $scope.myVariables.current_mode = 'freshman';
+    } else {
+        $scope.myVariables.current_mode = 'transfer';
+    }
+    
+    $scope.states = DataService.getStates();
+    
+    //variables for lists
+    $scope.lists = {};
+    $scope.listings = {};
+    $scope.listings.universities = universities;
+    $scope.listings.scholarships = scholarships;
+    $scope.listings.children = children;
+    $scope.listings.institution = institutions;
+    $scope.listings.employment = employment;
+    
+    //set selected state
+    if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
+        $scope.test = $filter('filter')($scope.states, {
+            name: $scope.myapplication.state
+        }, true);
+        $scope.myVariables.myState = $scope.test[0];
+    } else {
+        $scope.myVariables.myState = $scope.states[50];
+    }
+    //set selected mail options
+    if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
+        $scope.test = $filter('filter')($scope.mail_options, {
+            name: $scope.myapplication.app_uh_method
+        }, true);
+        $scope.myVariables.myuhappMailOption = $scope.test[0];
+    } else {
+        $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
+    }
+    if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
+        $scope.test = $filter('filter')($scope.mail_options, {
+            name: $scope.myapplication.transcript_method
+        }, true);
+        $scope.myVariables.mytranscriptMailOption = $scope.test[0];
+    } else {
+        $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
+    }
+    if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
+        $scope.test = $filter('filter')($scope.mail_options, {
+            name: $scope.myapplication.fafsa_method
+        }, true);
+        $scope.myVariables.myfafsaMailOption = $scope.test[0];
+    } else {
+        $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
+    }
+    if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
+        $scope.test = $filter('filter')($scope.mail_options, {
+            name: $scope.myapplication.housing_method
+        }, true);
+        $scope.myVariables.myhousingMailOption = $scope.test[0];
+    } else {
+        $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
+    }
 
-    // GET 
-    DataService.getAllItems('university').then(
-        function (result) {
-            $scope.myuniversities = result;
-        }
-    );
-
-    // GET 
-    DataService.getAllItems('scholarship').then(
-        function (result) {
-            $scope.myscholarships = result;
-        }
-    );
-
-    // GET 
-    DataService.getAllItems('child').then(
-        function (result) {
-            $scope.mychildren = result;
-        }
-    );
-
-    // Open a popup to add data
+    // Open a popup to add universities
     $scope.showAddData = function (acType) {
         $scope.myVariables.university = '';
         var myPopup = $ionicPopup.show({
@@ -129,7 +107,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     type: 'button-positive',
                     onTap: function (e) {
                         if (!$scope.myVariables.university) {
-                            //don't allow the user to close unless he enters wifi password
+                            //don't allow the user to close unless he enters something
                             e.preventDefault();
                         } else {
                             $scope.myuniversity = {};
@@ -138,7 +116,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                             $scope.myuniversity.rank = $scope.myuniversities.length;
                             DataService.addItem(acType, $scope.myuniversity).then(
                                 function (success) {
-                                    $scope.updateList(acType);
+                                    updateList(acType);
                                 }
                             );
                         }
@@ -151,21 +129,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-click 'showAddModal':
     $scope.showAddModal = function (acType, applied_received) {
 
-        $scope.myVariables.current_mode = "Add";
-        $scope.myscholarship = {};
-        $scope.mychild = {};
+        $scope.myVariables.current_modal_mode = "Add";
+        $scope.lists[acType] = {};
 
-        if (applied_received !== undefined) {
-            $scope.myscholarship.applied_received = applied_received;
-            if (applied_received) {
-                $scope.myVariables.label_name = "";
-            } else {
-                $scope.myVariables.label_name = " or Grant";
-
-            }
-        }
-
-        $ionicModal.fromTemplateUrl('templates/modal_' + acType + '.html', {
+        $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function (modal) {
@@ -176,9 +143,8 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-click 'editData'
     $scope.editData = function (acType, item) {
-        $scope.myVariables.current_mode = "Edit";
-        switch (acType) {
-        case 'university':
+        $scope.myVariables.current_modal_mode = "Edit";
+        if (acType === 'university') {
             $scope.myuniversity = item;
             $scope.myVariables.university = $scope.myuniversity.name;
             var myPopup = $ionicPopup.show({
@@ -201,69 +167,58 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                                 $scope.myuniversity.application_id = $stateParams.applicationId;
                                 $scope.myuniversity.name = $scope.myVariables.university;
                                 DataService.updateItem(acType, $scope.myuniversity.id, $scope.myuniversity);
-                                $scope.updateList(acType);
+                                updateList(acType);
                             }
                         }
                     }
                 ]
             });
-            break;
-        case 'scholarship':
-            $scope.myscholarship = item;
-            if ($scope.myscholarship.applied_received) {
-                $scope.myVariables.label_name = "";
-            } else {
-                $scope.myVariables.label_name = " or Grant";
-            }
-            $ionicModal.fromTemplateUrl('templates/modal_scholarship.html', {
+        } else {
+            $scope.lists[acType] = item;
+            $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
             }).then(function (modal) {
                 $scope.modal = modal;
                 $scope.modal.show();
             });
-            break;
-        case 'child':
-            $scope.mychild = item;
-            $ionicModal.fromTemplateUrl('templates/modal_child.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                $scope.modal.show();
-            });
-            break;
+        }           
+    };
+    
+    // callback for ng-click 'saveModal':
+    $scope.saveModal = function (acType) {
+        
+        $scope.lists[acType].application_id = $stateParams.applicationId;
+        if ($scope.myVariables.current_mode === 'transfer')
+            $scope.lists[acType].transfer = true;
+        else
+            $scope.lists[acType].transfer = false;
+
+        if ($scope.myVariables.current_modal_mode === 'Add') {
+            DataService.addItem(acType, $scope.lists[acType]).then(
+                function (success) {
+                    updateList(acType);
+                    $scope.modal.hide();
+                }
+            );
+        } else {
+            DataService.updateItem(acType, $scope.lists[acType].id, $scope.lists[acType]).then(
+                function (success) {
+                    updateList(acType);
+                    $scope.modal.hide();
+                }
+            );
         }
     };
 
-    $scope.updateList = function (acType) {
-        switch (acType) {
-        case 'university':
-            // GET 
-            DataService.getAllItems(acType).then(
-                function (result) {
-                    $scope.myuniversities = result;
-                }
-            );
-            break;
-        case 'scholarship':
-            // GET 
-            DataService.getAllItems(acType).then(
-                function (result) {
-                    $scope.myscholarships = result;
-                }
-            );
-            break;
-        case 'child':
-            // GET 
-            DataService.getAllItems(acType).then(
-                function (result) {
-                    $scope.mychildren = result;
-                }
-            );
-            break;
-        }
-    };
+    function updateList(acType) {
+        // GET 
+        DataService.getAllItems(acType).then(
+            function (result) {
+                $scope.listings[acType] = result;
+            }
+        );
+    }
 
     $scope.data = {
         showReorder: false
@@ -278,51 +233,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             $scope.myuniversities[i].rank = i;
             DataService.updateItem('university', $scope.myuniversities[i].id, $scope.myuniversities[i]);
         }
-        $scope.updateList('university');
-        
-    };
-
-    // callback for ng-click 'saveModal':
-    $scope.saveModal = function (acType) {
-
-        switch (acType) {
-        case 'scholarship':
-            $scope.myscholarship.application_id = $stateParams.applicationId;
-
-            if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addItem(acType, $scope.myscholarship).then(
-                    function (success) {
-                        $scope.updateList(acType);
-                        $scope.modal.hide();
-                    }
-                );
-            } else {
-                DataService.updateItem(acType, $scope.myscholarship.id, $scope.myscholarship).then(
-                    function (success) {
-                        $scope.modal.hide();
-                    }
-                );
-            }
-            break;
-        case 'child':
-            $scope.mychild.application_id = $stateParams.applicationId;
-
-            if ($scope.myVariables.current_mode === 'Add') {
-                DataService.addItem(acType, $scope.mychild).then(
-                    function (success) {
-                        $scope.updateList(acType);
-                        $scope.modal.hide();
-                    }
-                );
-            } else {
-                DataService.updateItem(acType, $scope.mychild.id, $scope.mychild).then(
-                    function (success) {
-                        $scope.modal.hide();
-                    }
-                );
-            }
-            break;
-        }
+        updateList('university');
     };
 
     // callback for ng-click 'deleteData':
@@ -335,7 +246,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             if (res) {
                 DataService.deleteItem(acType, item_id).then(
                     function (success) {
-                        $scope.updateList(acType);
+                        updateList(acType);
                     }
                 );
             } else {
@@ -344,7 +255,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         });
     };
 
-    $scope.openDatePicker = function (title, acType) {
+    $scope.openDatePicker = function (title, acType, variable) {
         $scope.tmp = {};
 
         var datePopup = $ionicPopup.show({
@@ -360,13 +271,16 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     type: 'button-positive',
                     onTap: function (e) {
                         var test = $filter('date')($scope.tmp.newDate, 'MM/dd/yyyy');
-                        $scope.myapplication[acType] = test;
+                        if (variable !== undefined) {
+                            $scope.lists[acType][variable] = test;
+                        } else {
+                            $scope.myapplication[acType] = test;
+                        }
                     }
                 }
             ]
         });
     };
-
 
     $scope.saveToserver = function () {
         //save data to server
@@ -394,10 +308,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         return formObjects.filter(function (obj) {
             return obj.form === type;
         });
-    };
-
-    $scope.testFunction = function (something) {
-
     };
 
     // callback for ng-submit 'check': check application 
@@ -554,24 +464,80 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     };
 
     // callback for ng-submit 'next': moves to next state
-    $scope.next = function (nextState) {
+    $scope.next = function () {
         $scope.myapplication.state = $scope.myVariables.myState.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
 
+        //store data to local storage
         if ($state.current.name.charAt(18) !== 't') {
             DataService.storeItem('application', $scope.myapplication);
-            $state.go(nextState);      
+                 
         } else {
-            DataService.storeItem('transferApplication', $scope.myapplication);
-            $state.go(nextState);    
+            DataService.storeItem('transferApplication', $scope.myapplication);   
+        }
+        
+        //logic for next state
+        switch ($state.current.name) {
+            //freshaman app
+            case 'tabs.applications.application.student_information':
+                $state.go('tabs.applications.application.highschool_information');
+                break;
+            case 'tabs.applications.application.highschool_information':
+                $state.go('tabs.applications.application.employment');
+                break;
+            case 'tabs.applications.application.employment':
+                $state.go('tabs.applications.application.college_plans');
+                break;
+            case 'tabs.applications.application.college_plans':
+                $state.go('tabs.applications.application.financial_information');
+                break;
+            case 'tabs.applications.application.financial_information':
+                $state.go('tabs.applications.application.scholarship_information');
+                break;
+            case 'tabs.applications.application.scholarship_information':
+                $state.go('tabs.applications.application.essays');
+                break;
+            case 'tabs.applications.application.essays':
+                $state.go('tabs.applications.application.submit');
+                break;
+            case 'tabs.applications.application.submit':
+                $state.go('tabs.applications.application.confirmation');
+                break;
+            //transfer app
+            case 'tabs.applications.transfer_application.student_information':
+                $state.go('tabs.applications.transfer_application.education');
+                break;
+            case 'tabs.applications.transfer_application.education':
+                $state.go('tabs.applications.transfer_application.employment');
+                break;
+            case 'tabs.applications.transfer_application.employment':
+                $state.go('tabs.applications.transfer_application.financial_information');
+                break;
+            default:
+                $state.go('signin');
+                break;
         }
     };
     
+    function cleanOut() {
+        //clean out
+        if ($scope.myapplication.highschool_graduation_date === "") {
+            delete $scope.myapplication.highschool_graduation_date;
+        } else if ($scope.myapplication.highschool_graduation_date === "NA") {
+            $scope.myapplication.highschool_graduation_date_na = true;
+        } else {
+            $scope.myapplication.highschool_graduation_date_na = false;
+        }
+    }
+    
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function () {
+        
+        cleanOut();
+        
         $scope.myapplication.state = $scope.myVariables.myState.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
@@ -584,13 +550,4 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             DataService.updateItem('transferApplication', $scope.myapplication.id, $scope.myapplication);
         }
     };
-
-    $scope.mail_options = [
-        {
-            "name": "online"
-        },
-        {
-            "name": "US mail"
-        }
-    ];
 });

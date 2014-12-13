@@ -123,7 +123,7 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
             
             localStorage.setItem(type, item);
 
-            return Restangular.all(type).all(item_id).post(item).then(
+            return Restangular.all(type).customPUT(item, item.id).then(
                 function (result) {
                     ngNotify.set("Succesfully updated your " + type + " on the server.", {
                         position: 'bottom',
@@ -148,13 +148,13 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
 
             return Restangular.all(type).all(item_id).remove().then(
                 function (result) {
-                    ngNotify.set("Succesfully deleted your " + type + " .", {
+                    ngNotify.set("Succesfully deleted your " + type + ".", {
                         position: 'bottom',
                         type: 'success'
                     });
                 },
                 function (error) {
-                    ngNotify.set("Could not contact server to delete " + type + " !", {
+                    ngNotify.set("Could not contact server to delete " + type + "!", {
                         position: 'bottom',
                         type: 'error'
                     });
