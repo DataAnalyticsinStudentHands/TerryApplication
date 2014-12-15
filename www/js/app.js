@@ -81,7 +81,7 @@ angular.module('HonorsApplications', [
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('signin', {
-            url: '/sign-in',
+            url: '/signin',
             templateUrl: 'templates/signin.html',
             controller: 'loginCtrl',
             authenticate: false
@@ -266,11 +266,23 @@ angular.module('HonorsApplications', [
                 scholarships: function (DataService) {
                     return DataService.getAllItems('scholarship');
                 },
-                children: function (DataService) {
+                child: function (DataService) {
                     return DataService.getAllItems('child');
                 },
                 employment: function (DataService) {
                     return DataService.getAllItems('employment');
+                },
+                military: function (DataService) {
+                    return DataService.getAllItems('military');
+                },
+                transfer_activity: function (DataService) {
+                    return DataService.getAllItems('transfer_activity');
+                },
+                volunteer: function (DataService) {
+                    return DataService.getAllItems('volunteer');
+                },
+                award: function (DataService) {
+                    return DataService.getAllItems('award');
                 }
             },
             authenticate: true           
@@ -299,7 +311,7 @@ angular.module('HonorsApplications', [
         })
     
         .state('tabs.applications.transfer_application.employment', {
-            url: '/education',
+            url: '/employment',
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/employment.html',
@@ -310,7 +322,7 @@ angular.module('HonorsApplications', [
         })
     
         .state('tabs.applications.transfer_application.financial_information', {
-            url: '/education',
+            url: '/financial_information',
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/financial_information.html',
@@ -339,5 +351,5 @@ angular.module('HonorsApplications', [
             }
         });
 
-    $urlRouterProvider.otherwise('signin');
+    $urlRouterProvider.otherwise('/signin');
 });

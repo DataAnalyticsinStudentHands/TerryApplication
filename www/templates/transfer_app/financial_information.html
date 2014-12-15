@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<ion-view title="Terry Scholarship Application for Transfer Students 2015/2016">
-
-    <!-- The nav bar that will be updated as we navigate between views.-->
-    <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
-    </ion-nav-buttons>
+<ion-view>
 
     <ion-header-bar class="bar-subheader">
         <h1 class="title">FINANCIAL INFORMATION</h1>
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-header-bar>
     <ion-content>
         <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
@@ -40,11 +36,11 @@
 
             <div class="item item-button-left dark">
                 List Dependents
-                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('child')"></button>
+                <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('transfer_child')"></button>
             </div>
 
             <div class="list list-inset">
-                <div class="item" ng-repeat="item in mychildren" item="item">
+                <div class="item" ng-repeat="item in listings.child" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('child', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.year}}</button>
                 </div>

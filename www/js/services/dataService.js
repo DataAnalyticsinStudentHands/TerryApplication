@@ -112,6 +112,7 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                     });
                 },
                 function (error) {
+                    console.log(error);
                     ngNotify.set("Could not contact server to add " + type + " !", {
                         position: 'bottom',
                         type: 'error'

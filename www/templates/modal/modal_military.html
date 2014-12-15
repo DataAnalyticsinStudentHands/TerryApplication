@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_modal_mode}} Military Service</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        
+        <form novalidate class="submit" on-valid-submit="saveModal('military')">
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input validated">
+                        <span class="input-label">Service Branch:</span>
+                        <input name="branch" ng-model="lists.military.branch" type="text" placeholder="Service Branch">
+                    </label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input validated">
+                        <span class="input-label">Dates of Service:</span>
+                        <input name="service_dates" ng-model="lists.military.service_dates" type="text" placeholder="Dates of Service">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-50">
+                    <label class="item item-input validated">
+                        <span class="input-label">Active or Reserve:</span>
+                        <input name="active" ng-model="lists.military.active" type="text" placeholder="Active or Reserve">
+                    </label>
+                </div>
+
+                <div class="col col-50">
+                    <label class="item item-input validated">
+                        <span class="input-label">Current Status:</span>
+                        <input name="status" ng-model="lists.military.status" type="text" placeholder="status">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label validated">
+                        <span class="input-label">Station Locations + Dates:</span>
+                        <input name="locations" ng-model="lists.military.locations" type="text" placeholder="Station Locations and Dates">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button class="button button-full button-positive" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

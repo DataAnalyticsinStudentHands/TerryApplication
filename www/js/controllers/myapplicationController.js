@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, application, universities, scholarships, children, institutions, employment) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, application, universities, scholarships, child, institutions, employment, military, transfer_activity, volunteer, award) {
     'use strict';
 
     $scope.date = new Date();
@@ -19,6 +19,25 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         },
         {
             "name": "US mail"
+        }
+    ];
+    
+    $scope.yearInSchoolList = [
+        {
+            text: "Freshman",
+            checked: true
+        },
+        {
+            text: "Sophomore",
+            checked: false
+        },
+        {
+            text: "Junior",
+            checked: false
+        },
+        {
+            text: "Senior",
+            checked: false
         }
     ];
 
@@ -43,9 +62,13 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.listings = {};
     $scope.listings.universities = universities;
     $scope.listings.scholarships = scholarships;
-    $scope.listings.children = children;
+    $scope.listings.child = child;
     $scope.listings.institution = institutions;
     $scope.listings.employment = employment;
+    $scope.listings.military = employment;
+    $scope.listings.transfer_activity = transfer_activity;
+    $scope.listings.volunteer= volunteer;
+    $scope.listings.award = award;
     
     //set selected state
     if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
@@ -189,6 +212,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.saveModal = function (acType) {
         
         $scope.lists[acType].application_id = $stateParams.applicationId;
+        
+        if ($scope.lists[acType].award !== undefined)
+            $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
+        
         if ($scope.myVariables.current_mode === 'transfer')
             $scope.lists[acType].transfer = true;
         else
