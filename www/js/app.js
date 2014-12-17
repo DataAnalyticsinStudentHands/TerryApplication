@@ -298,23 +298,8 @@ angular.module('HonorsApplications', [
                 application: function (DataService, $stateParams) {
                     return DataService.getItem('transferApplication', $stateParams.applicationID);
                 },
-                activity: function (DataService) {
-                    return DataService.getAllItems('activity');
-                },
-                coursework: function (DataService) {
-                    return DataService.getAllItems('coursework');
-                },
                 institution: function (DataService) {
                     return DataService.getAllItems('institution');
-                },
-                university: function (DataService) {
-                    return DataService.getAllItems('university');
-                },
-                scholarship: function (DataService) {
-                    return DataService.getAllItems('scholarship');
-                },
-                child: function (DataService) {
-                    return DataService.getAllItems('child');
                 },
                 employment: function (DataService) {
                     return DataService.getAllItems('employment');
@@ -330,6 +315,21 @@ angular.module('HonorsApplications', [
                 },
                 award: function (DataService) {
                     return DataService.getAllItems('award');
+                },
+                child: function (DataService) {
+                    return DataService.getAllItems('child');
+                },
+                activity: function () {
+                    return;
+                },
+                coursework: function () {
+                    return;
+                },
+                university: function () {
+                    return;
+                },
+                scholarship: function () {
+                    return;
                 }
             },
             authenticate: true           
@@ -348,6 +348,11 @@ angular.module('HonorsApplications', [
     
         .state('tabs.applications.transfer_application.education', {
             url: '/education',
+            reslove: {
+                institution: function (DataService) {
+                    return DataService.getAllItems('institution');
+                }
+            },
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/education.html',
@@ -359,6 +364,23 @@ angular.module('HonorsApplications', [
     
         .state('tabs.applications.transfer_application.employment', {
             url: '/employment',
+            resolve: {
+                employment: function (DataService) {
+                    return DataService.getAllItems('employment');
+                },
+                military: function (DataService) {
+                    return DataService.getAllItems('military');
+                },
+                transfer_activity: function (DataService) {
+                    return DataService.getAllItems('transfer_activity');
+                },
+                volunteer: function (DataService) {
+                    return DataService.getAllItems('volunteer');
+                },
+                award: function (DataService) {
+                    return DataService.getAllItems('award');
+                }
+            },
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/employment.html',
@@ -370,6 +392,11 @@ angular.module('HonorsApplications', [
     
         .state('tabs.applications.transfer_application.financial_information', {
             url: '/financial_information',
+            resolve: {
+                child: function (DataService) {
+                    return DataService.getAllItems('child');
+                }
+            },
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/financial_information.html',
@@ -408,6 +435,44 @@ angular.module('HonorsApplications', [
     
         .state('tabs.applications.transfer_application.submit', {
             url: '/submit',
+            resolve: {
+                application: function (DataService, $stateParams) {
+                    return DataService.getItem('transferApplication', $stateParams.applicationID);
+                },
+                institution: function (DataService) {
+                    return DataService.getAllItems('institution');
+                },
+                employment: function (DataService) {
+                    return DataService.getAllItems('employment');
+                },
+                military: function (DataService) {
+                    return DataService.getAllItems('military');
+                },
+                transfer_activity: function (DataService) {
+                    return DataService.getAllItems('transfer_activity');
+                },
+                volunteer: function (DataService) {
+                    return DataService.getAllItems('volunteer');
+                },
+                award: function (DataService) {
+                    return DataService.getAllItems('award');
+                },
+                child: function (DataService) {
+                    return DataService.getAllItems('child');
+                },
+                activity: function () {
+                    return;
+                },
+                coursework: function () {
+                    return;
+                },
+                university: function () {
+                    return;
+                },
+                scholarship: function () {
+                    return;
+                }
+            },
             views: {
                 'main_content': {
                         templateUrl: 'templates/transfer_app/submit.html',

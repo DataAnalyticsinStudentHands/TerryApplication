@@ -40,7 +40,7 @@
                     </p>
                 </div>
                 <div class="col item item-select">
-                    <select ng-model="myVariables.myuhappMailOption" ng-options="option.name for option in mail_options">
+                    <select ng-model="myVariables.app_uh_method" ng-options="option.name for option in mail_options">
                     </select>
                 </div>
                 <div class="col item">
@@ -67,7 +67,7 @@
                     </p>
                 </div>
                 <div class="col item item-select">
-                    <select ng-model="myVariables.myfafsaMailOption" ng-options="option.name for option in mail_options">
+                    <select ng-model="myVariables.fafsa_method" ng-options="option.name for option in mail_options">
                     </select>
                 </div>
                 <div class="col item">
@@ -94,7 +94,7 @@
                     </p>
                 </div>
                 <div class="col item item-select">
-                    <select ng-model="myVariables.mytranscriptMailOption" ng-options="option.name for option in mail_options">
+                    <select ng-model="myVariables.transcript_method" ng-options="option.name for option in mail_options">
                     </select>
                 </div>
                 <div class="col item">
@@ -120,7 +120,7 @@
                     </p>
                 </div>
                 <div class="col item item-select">
-                    <select ng-model="myVariables.myhousingMailOption" ng-options="option.name for option in mail_options">
+                    <select ng-model="myVariables.housing_method" ng-options="option.name for option in mail_options">
                     </select>
                 </div>
                 <div class="col item">
@@ -137,7 +137,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col col-25 col-offset-75">
+                <div class="col col-25 col-offset-50">
+                    <button type="button" class="button button-block button-positive" ng-click="save()">Save to Server</button>
+                </div>
+                <div class="col col-25">
                     <button class="button button-full button-positive" type="submit">Check Application</button>
                 </div>
             </div>

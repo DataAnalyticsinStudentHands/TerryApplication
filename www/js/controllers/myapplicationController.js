@@ -89,7 +89,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         //list of selector fields
         var list = ['state',
                     'marital_status'
-        ];
+                ];
         for (var i = 0; i < list.length; i++) {
             var field = list[i] + 's';
             if ($scope.myapplication[list[i]] !== undefined && $scope.myapplication[list[i]] !== null) {
@@ -105,44 +105,27 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     $scope.myVariables[list[i]] = $scope.myVariables[field][0];
                 }
             }
-        }
+        };
+        
+        //list of fields with mail_options
+        var list2 = ['app_uh_method',
+                     'transcript_method',
+                     'fafsa_method',
+                     'housing_method'
+                    ];
+        for (var i = 0; i < list2.length; i++) {
+            if ($scope.myapplication[list2[i]] !== undefined) {
+                $scope.test = $filter('filter')($scope.mail_options, {
+                    name: $scope.myapplication[list2[i]]
+                }, true);
+                $scope.myVariables[list2[i]] = $scope.test[0];
+            } else {
+                $scope.myVariables[list2[i]] = $scope.mail_options[0].name;
+            }
+        };
     }
     
     setSelectedValues();
-
-    //set selected mail options
-    if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
-        $scope.test = $filter('filter')($scope.mail_options, {
-            name: $scope.myapplication.app_uh_method
-        }, true);
-        $scope.myVariables.myuhappMailOption = $scope.test[0];
-    } else {
-        $scope.myVariables.myuhappMailOption = $scope.mail_options[0];
-    }
-    if ($scope.myapplication.transcript_method !== undefined && $scope.transcript_method !== null) {
-        $scope.test = $filter('filter')($scope.mail_options, {
-            name: $scope.myapplication.transcript_method
-        }, true);
-        $scope.myVariables.mytranscriptMailOption = $scope.test[0];
-    } else {
-        $scope.myVariables.mytranscriptMailOption = $scope.mail_options[0];
-    }
-    if ($scope.myapplication.fafsa_method !== undefined && $scope.fafsa_method !== null) {
-        $scope.test = $filter('filter')($scope.mail_options, {
-            name: $scope.myapplication.fafsa_method
-        }, true);
-        $scope.myVariables.myfafsaMailOption = $scope.test[0];
-    } else {
-        $scope.myVariables.myfafsaMailOption = $scope.mail_options[0];
-    }
-    if ($scope.myapplication.housing_method !== undefined && $scope.housing_method !== null) {
-        $scope.test = $filter('filter')($scope.mail_options, {
-            name: $scope.myapplication.housing_method
-        }, true);
-        $scope.myVariables.myhousingMailOption = $scope.test[0];
-    } else {
-        $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
-    }
 
     //list of things that should be checked for NA values, so we can set the visible values to "NA"   
     $scope.thingsToNA = ['highschool_graduation_date',
@@ -333,10 +316,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-submit 'check': check application 
     $scope.checkFreshmanApp = function () {
         //save data to server
-        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
-        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
+        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
+        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
 
         $scope.save();
 
@@ -462,10 +445,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-submit 'check': check application 
     $scope.checkTransferApp = function () {
         //save data to server
-        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
-        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
+        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
+        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
 
         $scope.save();
 
@@ -736,6 +719,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             $scope.myapplication.permanent_resident_card = 'false';
         }
         $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
+        
+        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
+        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
 
         if ($stateParams.appType === 'freshman') {
             DataService.updateItem('application', $scope.myapplication.id, $scope.myapplication);
