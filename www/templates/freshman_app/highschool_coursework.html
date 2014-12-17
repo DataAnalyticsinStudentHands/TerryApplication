@@ -18,7 +18,7 @@
         </div>
 
         <div class="list list-inset">
-            <div class="item" ng-repeat="course in mycourses | filter: {level:'sophomore'}" item="course">
+            <div class="item" ng-repeat="course in listings.coursework | filter: {level:'sophomore'}" item="course">
                 <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteCourse(course.id)"></button>
                 <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editCourse(course)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>

@@ -18,37 +18,7 @@ angular.module('Controllers').controller('MyCourseworkController', function ($sc
         $scope.grades = data;
     });
 
-    $scope.myVariables = {
-        current_mode: 'Add'
-    };
-
-    $scope.mycourses = {};
-    $scope.mycourse = {};
-
-    // GET
-    DataService.getAllItems('coursework').then(
-        function (result) {
-            $scope.mycourses = result;
-        }
-    );
-
-    // callback for ng-click 'deleteCourse':
-    $scope.deleteCourse = function (course_Id) {
-        $ionicPopup.confirm({
-            title: 'Confirm Delete',
-            template: 'Are you sure you want to delete your course from the list?'
-        }).then(function (res) {
-            if (res) {
-                DataService.deleteItem('coursework', course_Id).then(
-                    function (success) {
-                        $scope.updateLists();
-                    }
-                );
-            } else {
-                console.log('User are not sure to delete');
-            }
-        });
-    };
+    
 
     // callback for ng-click 'editCourse':
     $scope.editCourse = function (course) {
@@ -117,13 +87,6 @@ angular.module('Controllers').controller('MyCourseworkController', function ($sc
         }
     };
 
-    // callback for ng-click 'modal'- open Modal dialog to add a new course
-    $ionicModal.fromTemplateUrl('templates/modal_coursework.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modal = modal;
-    });
 
     // Open the modal
     $scope.showAddCourse = function (level) {
@@ -134,14 +97,5 @@ angular.module('Controllers').controller('MyCourseworkController', function ($sc
         $scope.mycourse = {};
         $scope.modal.show();
         $scope.currentLevel = level;
-    };
-
-    // Update lists
-    $scope.updateLists = function () {
-        DataService.getAllItems('coursework').then(
-            function (result) {
-                $scope.mycourses = result;
-            }
-        );
     };
 });

@@ -1,10 +1,15 @@
 BUILD_DIR := ./dist
 PROD_REPO = ssh://plindner@housuggest.org/~/terry2015.git
+STAGING_REPO = ssh://plindner@housuggest.org/~/terrytest.git
 
 # Deploy tasks
+staging: build git-staging deploy
+	@ git tag -f staging
+	@ echo "Staging deploy complete"
+
 
 prod: build git-prod deploy
-	@ git tag -f production
+	@ git tag -f production 
 	@ echo "Production deploy complete"
 
 # Build tasks
@@ -12,7 +17,7 @@ prod: build git-prod deploy
 build: 
 	@ find www/ -name ".DS_Store" -depth -exec rm {} \;
 	@ cp -R www/ $(BUILD_DIR) && \
-    rm -rf $(BUILD_DIR)/lib
+    	rm -rf $(BUILD_DIR)/lib
 
 # Sub-tasks
 
@@ -23,9 +28,16 @@ git-prod:
 	@ cd $(BUILD_DIR) && \
 	git init && \
 	git remote add origin $(PROD_REPO)
-	@ cd $(BUILD_DIR) && \
-	git add -A && \
-	git commit -m "Release" && \
-	git push -f origin +master:refs/heads/master
+
+git-staging:
+    	@ cd $(BUILD_DIR) && \
+    	git init && \
+    	git remote add origin $(STAGING_REPO)
+
+deploy:
+    	@ cd $(BUILD_DIR) && \
+    	git add -A && \
+    	git commit -m "Release" && \
+    	git push -f origin +master:refs/heads/master
 
 .PHONY: install build clean deploy git-prod prod

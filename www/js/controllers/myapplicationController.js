@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService, application, activity, university, scholarship, child, institutions, employment, military, transfer_activity, volunteer, award) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService, application, activity, coursework, university, scholarship, child, institution, employment, military, transfer_activity, volunteer, award) {
     'use strict';
 
     $scope.date = new Date();
@@ -41,7 +41,16 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
-    $scope.marital_statuses = [
+    
+
+    $scope.myapplication = application;
+
+    $scope.myVariables = {
+        current_modal_mode: 'Add',
+        problems: 'false'
+    };
+    
+    $scope.myVariables.marital_statuss = [
         {
             name: 'single'
         },
@@ -55,55 +64,52 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             name: 'widowed'
         }
     ];
-
-    $scope.myapplication = application;
-
-    $scope.myVariables = {
-        curent_mode: 'freshman',
-        current_modal_mode: 'Add',
-        problems: 'false'
-    };
-
-    if ($stateParams.appType === 'freshman') {
-        $scope.myVariables.current_mode = 'freshman';
-    } else {
-        $scope.myVariables.current_mode = 'transfer';
-    }
-
-    $scope.states = DataService.getStates();
+    //variables for selectors
+    $scope.myVariables.states = DataService.getStates();
+    $scope.grades = DataService.getGrades();
+    $scope.myVariables.course_types = DataService.getCourseTypes();
 
     //variables for lists
     $scope.lists = {};
     $scope.listings = {};
     $scope.listings.activity = activity;
+    $scope.listings.coursework = coursework;
     $scope.listings.university = university;
     $scope.listings.scholarship = scholarship;
     $scope.listings.child = child;
-    $scope.listings.institution = institutions;
+    $scope.listings.institution = institution;
     $scope.listings.employment = employment;
     $scope.listings.military = military;
     $scope.listings.transfer_activity = transfer_activity;
     $scope.listings.volunteer = volunteer;
     $scope.listings.award = award;
 
-    //set selected state
-    if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
-        $scope.test = $filter('filter')($scope.states, {
-            name: $scope.myapplication.state
-        }, true);
-        $scope.myVariables.myState = $scope.test[0];
-    } else {
-        $scope.myVariables.myState = $scope.states[50];
+    function setSelectedValues() {
+
+        //list of selector fields
+        var list = ['state',
+                    'marital_status'
+        ];
+        for (var i = 0; i < list.length; i++) {
+            var field = list[i] + 's';
+            if ($scope.myapplication[list[i]] !== undefined && $scope.myapplication[list[i]] !== null) {
+                $scope.test = $filter('filter')($scope.myVariables[field], {
+                    name: $scope.myapplication[list[i]]
+                }, true);
+                $scope.myVariables[list[i]] = $scope.test[0];
+            } else {
+                if (list[i] == 'state') {
+                    $scope.myVariables[list[i]] = $scope.myVariables.states[50];
+                }
+                else {
+                    $scope.myVariables[list[i]] = $scope.myVariables[field][0];
+                }
+            }
+        }
     }
-    //set selected marital_status
-    if ($scope.myapplication.marital_status !== undefined && $scope.myapplication.marital_status !== null) {
-        $scope.test = $filter('filter')($scope.marital_statuses, {
-            name: $scope.myapplication.marital_status
-        }, true);
-        $scope.myVariables.marital_status = $scope.test[0];
-    } else {
-        $scope.myVariables.marital_status = $scope.marital_statuses[0];
-    }
+    
+    setSelectedValues();
+
     //set selected mail options
     if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
         $scope.test = $filter('filter')($scope.mail_options, {
@@ -176,7 +182,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         $scope.myVariables.current_modal_mode = "Add";
         $scope.lists[acType] = {};
-        
+
         if (applied_received !== undefined) {
             $scope.lists[acType].applied_received = applied_received;
         }
@@ -192,10 +198,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-click 'editData'
     $scope.editData = function (acType, item) {
-        
+
         $scope.myVariables.current_modal_mode = "Edit";
         $scope.lists[acType] = item;
-        
+
         $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -216,11 +222,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         if ($scope.lists[acType].award !== undefined)
             $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
-        
+
         if (acType === 'university')
             $scope.lists[acType].rank = $scope.listings.university.length;
 
-        if ($scope.myVariables.current_mode === 'transfer')
+        if ($stateParams.appType === 'transfer')
             $scope.lists[acType].transfer = true;
         else
             $scope.lists[acType].transfer = false;
@@ -254,7 +260,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             }
         );
     }
-
 
     $scope.data = {
         showReorder: false
@@ -582,9 +587,9 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-submit 'save': save application updates to server
     $scope.confirmation = function () {
         $scope.myapplication.status = "submitted";
-        
+
         var acType;
-        
+
         if ($stateParams.appType === 'Freshman')
             acType = 'application';
         else
@@ -597,7 +602,9 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     type: 'success'
                 });
                 //if succesful => send to next page
-                $state.go('tabs.applications', {}, {reload: true});
+                $state.go('tabs.applications', {}, {
+                    reload: true
+                });
             },
             function (error) {
                 ngNotify.set("Could not contact server to save application!", {
@@ -610,11 +617,12 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-submit 'next': moves to next state
     $scope.next = function () {
-        $scope.myapplication.state = $scope.myVariables.myState.name;
+        $scope.myapplication.state = $scope.myVariables.state.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
+        $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
 
         //store data to local storage
         if ($stateParams.appType === 'freshman') {
@@ -721,7 +729,8 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         cleanOut($scope.thingsToNA);
 
-        $scope.myapplication.state = $scope.myVariables.myState.name;
+        //save values for selectors
+        $scope.myapplication.state = $scope.myVariables.state.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';

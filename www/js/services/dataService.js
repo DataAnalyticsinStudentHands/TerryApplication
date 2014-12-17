@@ -7,7 +7,7 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function (Restangular, $http, $q, ngNotify) {
+angular.module('Services').factory('DataService', function (Restangular, $http, $q, $ionicLoading, ngNotify) {
     'use strict';
 
     //Load data for form data for terry application
@@ -18,7 +18,9 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         modal_employment_form,
         modal_scholarship_form,
         modal_volunteer_form,
-        states;
+        states,
+        grades,
+        course_types;
 
     $http.get('json/form_application.json').success(function (data) {
         application_form = data;
@@ -44,6 +46,12 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
     $http.get('json/states.json').success(function (data) {
         states = data;
     });
+    $http.get('json/grades.json').success(function (data) {
+        grades = data;
+    });
+    $http.get('json/course_types.json').success(function (data) {
+        course_types = data;
+    });
 
     return {
 
@@ -68,17 +76,24 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         getStates: function() {
             return states;
         },
-
+        getGrades: function() {
+            return grades;
+        },
+        getCourseTypes: function() {
+            return course_types;
+        },
         
         getAllItems: function (acType) {
-
+            $ionicLoading.show();
             return Restangular.all(acType).getList().then(
                 function (result) {
+                    $ionicLoading.hide();
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
                     return result;
                 },
                 function (error) {
+                    $ionicLoading.hide();
                     ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'
@@ -88,12 +103,15 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
 
         },
         getItem: function (type, item_id) {
+            $ionicLoading.show();
             return Restangular.one(type, item_id).get().then(
                 function (result) {
+                    $ionicLoading.hide();
                     result = Restangular.stripRestangular(result);
                     return result[0];
                 },
                 function (error) {
+                    $ionicLoading.hide();
                     ngNotify.set("Something went wrong retrieving data for type " + type, {
                         position: 'bottom',
                         type: 'error'

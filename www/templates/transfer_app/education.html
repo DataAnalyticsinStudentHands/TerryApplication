@@ -42,7 +42,7 @@
 
                 <div class="col" ng-show="myapplication.highschool_diploma">
                     <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_graduation_date')">
-                        <span class="input-label">  If "YES", date of graduation<span style="color: red;">*</span></span>
+                        <span class="input-label">If "YES", date of graduation<span style="color: red;">*</span></span>
                         <input type="text" ng-model="myapplication.highschool_graduation_date" placeholder="Select">
 
                     </label>
@@ -60,7 +60,7 @@
 
                 <div class="col" ng-show="myapplication.highschool_ged">
                     <label class="item item-input item-stacked-label validated" ng-click="openDatePicker('Date of Graduation', 'highschool_GEDawarded_date')">
-                        <span class="input-label">  If "YES", date GED awarded<span style="color: red;">*</span></span>
+                        <span class="input-label">If "YES", date GED awarded<span style="color: red;">*</span></span>
                         <input type="text" ng-model="myapplication.highschool_GEDawarded_date" placeholder="Select">
                     </label>
                 </div>
@@ -98,7 +98,7 @@
                 <button type="button" title="Add Institution" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('institution')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.institution" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('institution', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('institution', item)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}} City: {{item.city}} Cumulative GPA: {{item.cum_gpa}}</button>

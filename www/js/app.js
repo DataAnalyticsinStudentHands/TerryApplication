@@ -136,7 +136,10 @@ angular.module('HonorsApplications', [
                 activity: function (DataService) {
                     return DataService.getAllItems('activity');
                 },
-                institutions: function (DataService) {
+                coursework: function (DataService) {
+                    return DataService.getAllItems('coursework');
+                },
+                institution: function (DataService) {
                     return DataService.getAllItems('institution');
                 },
                 university: function (DataService) {
@@ -298,7 +301,10 @@ angular.module('HonorsApplications', [
                 activity: function (DataService) {
                     return DataService.getAllItems('activity');
                 },
-                institutions: function (DataService) {
+                coursework: function (DataService) {
+                    return DataService.getAllItems('coursework');
+                },
+                institution: function (DataService) {
                     return DataService.getAllItems('institution');
                 },
                 university: function (DataService) {
