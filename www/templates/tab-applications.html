@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <ion-view title="My Application">
-    
-    
-    
+  
     <ion-content>
 
         <div id="desktop_form" class="list card" ng-hide="applications">
@@ -15,8 +13,8 @@
             </div>
         </div>
         
-        <!-- Card to show for Freshman Application -->
-        <div class="list card" ng-repeat="item in applications" ng-hide="transfer_applications.length == 1">            
+        <!-- Card to show for Application -->
+        <div class="list card" ng-repeat="item in applications">            
             <div class="item item-icon-left energized" ng-show="item.status == 'in progress' ">
                 <i class="icon ion-edit"></i>
                 <h2 ng-show="applications.type == 'application'">Terry Freshman Application 2015</h2>
@@ -26,18 +24,22 @@
             </div>
             <div class="item item-icon-left balanced" ng-show="item.status == 'submitted' ">
                 <i class="icon ion-email"></i>
-                <p>Application ID {{item.id}}: {{item.status}}</p>
+                <h2 ng-show="applications.type == 'application'">Terry Freshman Application 2015</h2>
+                <h2 ng-show="applications.type == 'transferApplication'">Terry Transfer Application 2015</h2>
+                <p>Application ID {{item.id}}</p>
                 <h2>{{item.first_name}} {{item.last_name}}</h2>
             </div>
             <div class="item item-body">
                 <p>Status: {{item.status}}</p>
-                <p>Please edit your application. Fill out each section of the application form completely, taking care to respond to each question in the space provided. </p>
+                <p ng-show="item.status == 'in progress'" >Please edit your application. Fill out each section of the application form completely, taking care to respond to each question in the space provided. </p>
+                <p ng-show="item.status == 'submitted'" >You have already submitted your application. If you have further questions about the Terry Foundation Scholarship at the University of Houston please contact Franco Martinez <a href="mailto:fsmartinez@uh.edu?Subject=Terry%20Application" target="_top">
+                fsmartinez@uh.edu</a>.</p>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left"
                  ng-show="applications.type == 'application'">
                 <a class="tab-item"
-                   ng-hide="item.allowEdit" 
-                   ui-sref="tabs.applications.application.student_information({ applicationId: item.id })">
+                   ng-hide="item.status == 'submitted'" 
+                   ui-sref="tabs.applications.application.student_information({ applicationId: item.id, appType: 'freshman' })">
                     <i class="icon ion-document-text"></i>
                     Edit Application
                 </a>
@@ -45,14 +47,13 @@
             <div class="item tabs tabs-secondary tabs-icon-left"
                  ng-show="applications.type == 'transferApplication'">
                 <a class="tab-item"
-                   ng-hide="item.allowEdit" 
-                   ui-sref="tabs.applications.transfer_application.student_information({ applicationId: item.id })">
+                   ng-hide="item.status == 'submitted'" 
+                   ui-sref="tabs.applications.transfer_application.student_information({ applicationId: item.id, appType: 'transfer' })">
                     <i class="icon ion-document-text"></i>
                     Edit Application
                 </a>
             </div>
         </div>
-        
         
     </ion-content>
 </ion-view>

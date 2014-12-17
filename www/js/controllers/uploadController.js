@@ -8,39 +8,21 @@
  * # UploadController
  * Controller for the terry
  */
-angular.module('Controllers').controller('UploadController', function ($filter, $scope, $ionicSideMenuDelegate, $http, $timeout, $upload, $stateParams, Restangular, ngNotify) {
+angular.module('Controllers').controller('UploadController', function ($filter, $scope, $http, $timeout, $upload, $stateParams, Restangular, ngNotify, fileNames) {
 
     'use strict';
     
     $scope.myVariables = {};
     
-    Restangular.all("applications").customGET("upload", {
-        applicationId: $stateParams.applicationId
-    }).then(
-        function (result) {
-            result = Restangular.stripRestangular(result);
-            $scope.myVariables.orig_fileEssay1 = $filter('filter')(result.fileName, 'essay1');
-            if ($scope.myVariables.orig_fileEssay1.length !== 0) {
-                $scope.myVariables.fileEssay1 = $scope.myVariables.orig_fileEssay1[0].substr(6);
-            }
-            $scope.myVariables.orig_fileEssay2 = $filter('filter')(result.fileName, 'essay2', 'true');
-            if ($scope.myVariables.orig_fileEssay2.length !== 0) {
-                $scope.myVariables.fileEssay2 = $scope.myVariables.orig_fileEssay2[0].substr(6);
-            }
-
-        },
-        function (error) {
-            ngNotify.set("Something went wrong retrieving uploaded file information.", {
-                position: 'bottom',
-                type: 'error'
-            });
-        }
-    );
-
-
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
+    //filter out existing files
+    $scope.myVariables.orig_fileEssay1 = $filter('filter')(fileNames.fileName, 'essay1');
+    if ($scope.myVariables.orig_fileEssay1.length !== 0) {
+        $scope.myVariables.fileEssay1 = $scope.myVariables.orig_fileEssay1[0].substr(6);
+    }
+    $scope.myVariables.orig_fileEssay2 = $filter('filter')(fileNames.fileName, 'essay2', 'true');
+    if ($scope.myVariables.orig_fileEssay2.length !== 0) {
+        $scope.myVariables.fileEssay2 = $scope.myVariables.orig_fileEssay2[0].substr(6);
+    }
 
     $scope.usingFlash = FileAPI && FileAPI.upload !== null;
     $scope.fileReaderSupported = window.FileReader !== null && (window.FileAPI === null || FileAPI.html5 !== false);
@@ -54,7 +36,7 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
         $scope.upload[index] = null;
     };
 
-    $scope.onFileSelect = function ($files, param) {
+    $scope.onFileSelect = function (acType, $files, param) {
 
         $scope.selectedFiles = [];
         $scope.progress = [];
@@ -87,19 +69,21 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
             }
             $scope.progress[i] = -1;
             if ($scope.uploadRightAway) {
-                $scope.start(i);
+                $scope.start(i, acType);
             }
         }
     };
 
-    $scope.start = function (index) {
+    $scope.start = function (index, acType) {
         $scope.progress[index] = 0;
         $scope.errorMsg = null;
+        
+        var uploadUrl = Restangular.configuration.baseUrl + '/' + acType + '/upload?id=' +         $stateParams.applicationId;
 
         //$upload.upload()
         $scope.upload[index] = $upload.upload({
-            url: 'http://www.housuggest.org:8080/terry/applications/upload?id=' + $stateParams.applicationId,
-            //url: 'http://127.0.0.1:8080/terry/applications/upload?id=' + $stateParams.applicationId,
+            //url: 'http://www.housuggest.org:8080/terry/applications/upload?id=' + $stateParams.applicationId,
+            url: uploadUrl,
             //method: $scope.httpMethod,
             //headers: {'my-header': 'my-header-value'},
             data: {
@@ -126,7 +110,7 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
         $scope.upload[index].then(function (response) {
             $timeout(function () {
                 $scope.uploadResult.push(response.data);
-                $scope.updateView();
+                $scope.updateView(acType);
             });
         }, function (response) {
 
@@ -139,12 +123,9 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
         $scope.upload[index].xhr(function (xhr) {
             //				xhr.upload.addEventListener('abort', function() {console.log('abort complete')}, false);
         });
-
-
-
     };
 
-    $scope.deleteFile = function (param) {
+    $scope.deleteFile = function (acType, param) {
         var deleteFile;
         if (param === 'essay1') {
            deleteFile = $scope.myVariables.orig_fileEssay1;
@@ -152,11 +133,11 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
            deleteFile = $scope.myVariables.orig_fileEssay2;
         }
 
-        Restangular.all("applications").all("upload").remove({"applicationId": $stateParams.applicationId, "fileName":  deleteFile}).then(
+        Restangular.all(acType).all("upload").remove({"applicationId": $stateParams.applicationId, "fileName":  deleteFile}).then(
 
             function (result) {
                 console.log(result);
-                $scope.updateView();
+                $scope.updateView(acType);
 
             },
             function (error) {
@@ -166,12 +147,10 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
                 });
             }
         );
-        
-
     };
 
-    $scope.updateView = function () {
-        Restangular.all("applications").customGET("upload", {
+    $scope.updateView = function (acType) {
+        Restangular.all(acType).customGET("upload", {
             applicationId: $stateParams.applicationId
         }).then(
             function (result) {

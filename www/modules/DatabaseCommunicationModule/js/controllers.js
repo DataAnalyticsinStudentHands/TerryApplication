@@ -48,13 +48,14 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
      };
  }]);
 
-databaseController.controller('registerCtrl', ['$scope', '$state', 'Auth', function($scope, $state, Auth) {
+databaseController.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngNotify', function($scope, $state, Auth, ngNotify) {
     $scope.register = {};
 
     $scope.registerUser = function() {
         Auth.setCredentials("Visitor", "test");
         $scope.salt = "nfp89gpe";
         $scope.register.password = new String(CryptoJS.SHA512($scope.register.password + $scope.register.username + $scope.salt));
+        $scope.register.email = $scope.register.username;
         $scope.$parent.Restangular().all("users").post($scope.register).then(
             function(success) {
                 Auth.clearCredentials();

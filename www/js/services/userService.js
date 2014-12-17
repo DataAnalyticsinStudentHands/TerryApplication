@@ -7,7 +7,7 @@
  * # UserService
  * Service for the terry
  */
-angular.module('Services').factory('UserService', function (Restangular, $q, $filter) {
+angular.module('Services').factory('UserService', function (Restangular, ngNotify, $q, $filter) {
     'use strict';
 
     var allUsers,
@@ -42,13 +42,36 @@ angular.module('Services').factory('UserService', function (Restangular, $q, $fi
             });
         },
         getUser: function () {
-            return Restangular.all("users").getList();
+            return Restangular.one("users").one("myUser").get().then(
+                function (success) {
+                    success = Restangular.stripRestangular(success);
+                    return success;
+                },
+                function (error) {
+                    ngNotify.set("Could not contact server to retrieve user information!", {
+                    position: 'bottom',
+                    type: 'error'
+                });
+                }
+            );
         },
         addUser: function (user) {
             return Restangular.all("users").post(user);
         },
         editUser: function (id, user) {
-            return Restangular.all("users").all(id).post(user);
+            return Restangular.all("users").all(id).post(user).then(
+                function (result) {
+                ngNotify.set("Saved updated user information to server.", {
+                    position: 'bottom',
+                    type: 'success'
+                });
+            },
+            function (error) {
+                ngNotify.set("Could not contact server to save new user information!", {
+                    position: 'bottom',
+                    type: 'error'
+                });
+            });
         },
         deleteUser: function (uid) {
             return Restangular.all("users").all(uid).remove();

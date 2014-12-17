@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, ApplicationService, DataService, application, universities, scholarships, child, institutions, employment, military, transfer_activity, volunteer, award) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService, application, activity, university, scholarship, child, institutions, employment, military, transfer_activity, volunteer, award) {
     'use strict';
 
     $scope.date = new Date();
@@ -21,7 +21,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             "name": "US mail"
         }
     ];
-    
+
     $scope.yearInSchoolList = [
         {
             text: "Freshman",
@@ -41,35 +41,51 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
+    $scope.marital_statuses = [
+        {
+            name: 'single'
+        },
+        {
+            name: 'married'
+        },
+        {
+            name: 'divorced'
+        },
+        {
+            name: 'widowed'
+        }
+    ];
+
     $scope.myapplication = application;
-    
+
     $scope.myVariables = {
         curent_mode: 'freshman',
         current_modal_mode: 'Add',
         problems: 'false'
     };
-    
-    if ($state.current.name.charAt(18) !== 't') {
+
+    if ($stateParams.appType === 'freshman') {
         $scope.myVariables.current_mode = 'freshman';
     } else {
         $scope.myVariables.current_mode = 'transfer';
     }
-    
+
     $scope.states = DataService.getStates();
-    
+
     //variables for lists
     $scope.lists = {};
     $scope.listings = {};
-    $scope.listings.universities = universities;
-    $scope.listings.scholarships = scholarships;
+    $scope.listings.activity = activity;
+    $scope.listings.university = university;
+    $scope.listings.scholarship = scholarship;
     $scope.listings.child = child;
     $scope.listings.institution = institutions;
     $scope.listings.employment = employment;
-    $scope.listings.military = employment;
+    $scope.listings.military = military;
     $scope.listings.transfer_activity = transfer_activity;
-    $scope.listings.volunteer= volunteer;
+    $scope.listings.volunteer = volunteer;
     $scope.listings.award = award;
-    
+
     //set selected state
     if ($scope.myapplication.state !== undefined && $scope.myapplication.state !== null) {
         $scope.test = $filter('filter')($scope.states, {
@@ -78,6 +94,15 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.myVariables.myState = $scope.test[0];
     } else {
         $scope.myVariables.myState = $scope.states[50];
+    }
+    //set selected marital_status
+    if ($scope.myapplication.marital_status !== undefined && $scope.myapplication.marital_status !== null) {
+        $scope.test = $filter('filter')($scope.marital_statuses, {
+            name: $scope.myapplication.marital_status
+        }, true);
+        $scope.myVariables.marital_status = $scope.test[0];
+    } else {
+        $scope.myVariables.marital_status = $scope.marital_statuses[0];
     }
     //set selected mail options
     if ($scope.myapplication.app_uh_method !== undefined && $scope.app_uh_method !== null) {
@@ -113,47 +138,48 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.myVariables.myhousingMailOption = $scope.mail_options[0];
     }
 
-    // Open a popup to add universities
-    $scope.showAddData = function (acType) {
-        $scope.myVariables.university = '';
-        var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="myVariables.university">',
-            title: 'Name University',
-            subTitle: 'You can reorder the list later',
-            scope: $scope,
-            buttons: [
-                {
-                    text: 'Cancel'
-                },
-                {
-                    text: '<b>Save</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        if (!$scope.myVariables.university) {
-                            //don't allow the user to close unless he enters something
-                            e.preventDefault();
-                        } else {
-                            $scope.myuniversity = {};
-                            $scope.myuniversity.application_id = $stateParams.applicationId;
-                            $scope.myuniversity.name = $scope.myVariables.university;
-                            $scope.myuniversity.rank = $scope.myuniversities.length;
-                            DataService.addItem(acType, $scope.myuniversity).then(
-                                function (success) {
-                                    updateList(acType);
-                                }
-                            );
-                        }
-                    }
-                }
-            ]
-        });
-    };
+    //list of things that should be checked for NA values, so we can set the visible values to "NA"   
+    $scope.thingsToNA = ['highschool_graduation_date',
+                            'app_uh_date_sub',
+                            'app_uh_date_int_sub',
+                            'fafsa_date_sub',
+                            'fafsa_date_int_sub',
+                            'transcript_date_sub',
+                            'transcript_date_int_sub',
+                            'housing_date_sub',
+                            'housing_date_int_sub',
+                           ];
+    if ($stateParams.appType === 'transfer') {
+        $scope.thingsToNA = ['highschool_graduation_date',
+                'highschool_ged_date',
+                'app_uh_date_sub',
+                'app_uh_date_int_sub',
+                'fafsa_date_sub',
+                'fafsa_date_int_sub',
+                'transcript_date_sub',
+                'transcript_date_int_sub',
+                'housing_date_sub',
+                'housing_date_int_sub',
+               ];
+    }
+
+
+    for (var i = 0, l = $scope.thingsToNA.length; i < l; i++) {
+        var NA_variable = $scope.thingsToNA[i] + '_na';
+        if ($scope.myapplication[NA_variable] === 'true') {
+            $scope.myapplication[$scope.thingsToNA[i]] = "NA";
+        }
+    }
 
     // callback for ng-click 'showAddModal':
     $scope.showAddModal = function (acType, applied_received) {
 
         $scope.myVariables.current_modal_mode = "Add";
         $scope.lists[acType] = {};
+        
+        if (applied_received !== undefined) {
+            $scope.lists[acType].applied_received = applied_received;
+        }
 
         $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
             scope: $scope,
@@ -166,60 +192,42 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-click 'editData'
     $scope.editData = function (acType, item) {
+        
         $scope.myVariables.current_modal_mode = "Edit";
-        if (acType === 'university') {
-            $scope.myuniversity = item;
-            $scope.myVariables.university = $scope.myuniversity.name;
-            var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="myVariables.university">',
-                title: 'Name University',
-                subTitle: 'You can reorder the list later',
-                scope: $scope,
-                buttons: [
-                    {
-                        text: 'Cancel'
-                    },
-                    {
-                        text: '<b>Save</b>',
-                        type: 'button-positive',
-                        onTap: function (e) {
-                            if (!$scope.myVariables.university) {
-                                //don't allow the user to close unless he enters wifi password
-                                e.preventDefault();
-                            } else {
-                                $scope.myuniversity.application_id = $stateParams.applicationId;
-                                $scope.myuniversity.name = $scope.myVariables.university;
-                                DataService.updateItem(acType, $scope.myuniversity.id, $scope.myuniversity);
-                                updateList(acType);
-                            }
-                        }
-                    }
-                ]
-            });
-        } else {
-            $scope.lists[acType] = item;
-            $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                $scope.modal.show();
-            });
-        }           
+        $scope.lists[acType] = item;
+        
+        $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+
     };
-    
+
     // callback for ng-click 'saveModal':
     $scope.saveModal = function (acType) {
-        
+
         $scope.lists[acType].application_id = $stateParams.applicationId;
-        
+
+        if (acType === 'activity')
+            $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
+
         if ($scope.lists[acType].award !== undefined)
             $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
         
+        if (acType === 'university')
+            $scope.lists[acType].rank = $scope.listings.university.length;
+
         if ($scope.myVariables.current_mode === 'transfer')
             $scope.lists[acType].transfer = true;
         else
             $scope.lists[acType].transfer = false;
+
+        //take care of NA values in dates
+        var datesToNA = ['date_to', 'date_from'];
+        cleanOutLists(acType, datesToNA);
 
         if ($scope.myVariables.current_modal_mode === 'Add') {
             DataService.addItem(acType, $scope.lists[acType]).then(
@@ -247,18 +255,19 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         );
     }
 
+
     $scope.data = {
         showReorder: false
     };
 
     //reorder items in a list
     $scope.moveItem = function (item, fromIndex, toIndex) {
-        $scope.myuniversities.splice(fromIndex, 1);
-        $scope.myuniversities.splice(toIndex, 0, item);
+        $scope.listings.university.splice(fromIndex, 1);
+        $scope.listings.university.splice(toIndex, 0, item);
         var i, l;
-        for (i = 0, l = $scope.myuniversities.length; i < l; i++) {
-            $scope.myuniversities[i].rank = i;
-            DataService.updateItem('university', $scope.myuniversities[i].id, $scope.myuniversities[i]);
+        for (i = 0, l = $scope.listings.university.length; i < l; i++) {
+            $scope.listings.university[i].rank = i;
+            DataService.updateItem('university', $scope.listings.university[i].id, $scope.listings.university[i]);
         }
         updateList('university');
     };
@@ -309,27 +318,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         });
     };
 
-    $scope.saveToserver = function () {
-        //save data to server
-        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
-        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
-
-        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
-            function (result) {
-                //do nothing
-            },
-            function (error) {
-                ngNotify.set("Could not contact server to save application!", {
-                    position: 'bottom',
-                    type: 'error'
-                });
-
-            }
-        );
-    };
-
     $scope.filterBy = function (type) {
         var formObjects = DataService.getForm('application');
         return formObjects.filter(function (obj) {
@@ -338,8 +326,14 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     };
 
     // callback for ng-submit 'check': check application 
-    $scope.check = function () {
-        $scope.saveToserver();
+    $scope.checkFreshmanApp = function () {
+        //save data to server
+        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
+        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
+
+        $scope.save();
 
         $scope.errors = {};
         $scope.error = {};
@@ -389,9 +383,9 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 }
             ));
         }
-        
+
         //check whether essays have been put in
-        listPromises.push(ApplicationService.getListofDocuments($stateParams.applicationId).then(
+        listPromises.push(DataService.getListofDocuments('application', $stateParams.applicationId).then(
             function (result) {
                 if (result.fileName.length < 2) {
                     $scope.error.essay = 'true';
@@ -426,7 +420,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     }
                     $scope.errors.college_plans.push('university list');
                 }
-            
+
                 //check the submission page
                 var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
                 $scope.errors.submission = [];
@@ -436,9 +430,9 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                         $scope.errors.submission.push(goThrough[j]);
                     }
                 }
-            
-                
-                
+
+
+
 
                 //update general problems value
                 var value;
@@ -449,7 +443,124 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 }
 
                 //display result of check
-                $ionicModal.fromTemplateUrl('templates/modal_check.html', {
+                $ionicModal.fromTemplateUrl('templates/modal/modal_check.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) {
+                    $scope.modal = modal;
+                    $scope.modal.show();
+                });
+                return values;
+            });
+    };
+
+    // callback for ng-submit 'check': check application 
+    $scope.checkTransferApp = function () {
+        //save data to server
+        $scope.myapplication.app_uh_method = $scope.myVariables.myuhappMailOption.name;
+        $scope.myapplication.transcript_method = $scope.myVariables.mytranscriptMailOption.name;
+        $scope.myapplication.fafsa_method = $scope.myVariables.myfafsaMailOption.name;
+        $scope.myapplication.housing_method = $scope.myVariables.myhousingMailOption.name;
+
+        $scope.save();
+
+        $scope.errors = {};
+        $scope.error = {};
+
+        //check using form.json
+        var i, j, l, k, key, objectsToCheck, obj, thingsToCheck = ['student_information', 'education', 'financial_information', 'personal_history'];
+
+        for (i = 0, l = thingsToCheck.length; i < l; i++) {
+            objectsToCheck = $scope.filterBy(thingsToCheck[i]);
+
+            $scope.errors[thingsToCheck[i]] = [];
+            for (key in objectsToCheck) {
+                if (objectsToCheck.hasOwnProperty(key)) {
+                    obj = objectsToCheck[key];
+
+                    if (obj.required === 'true') {
+                        if (!$scope.myapplication.hasOwnProperty(obj.name)) {
+                            $scope.errors[thingsToCheck[i]].push(obj.name);
+                        }
+                    }
+                }
+            }
+
+            if ($scope.errors[thingsToCheck[i]].length > 0) {
+                $scope.error[thingsToCheck[i]] = 'true';
+            }
+        }
+
+        //check the lists for not empty
+        var listsToCheck = ['transfer_activity', 'award', 'child', 'employment', 'university', 'volunteer'],
+            listPromises = [];
+        $scope.listerror = {};
+
+        for (j = 0, k = listsToCheck.length; j < k; j++) {
+            listPromises.push(DataService.getAllItems(listsToCheck[j]).then(
+                function (result) {
+                    $scope.listerror[result.type] = 'false';
+                    if (result.length === 0) {
+                        $scope.listerror[result.type] = 'true';
+                    }
+
+                    //we should check courses at each level
+                    if (result.type === 'coursework') {
+
+                        console.log("course " + result);
+                    }
+                }
+            ));
+        }
+
+        //check whether essay has been put in
+        listPromises.push(DataService.getListofDocuments('transferApplication', $stateParams.applicationId).then(
+            function (result) {
+                if (result.fileName.length < 1) {
+                    $scope.error.essay = 'true';
+                    $scope.errors.essay = [];
+                    $scope.errors.essay.push('One of the essays is missing.');
+                }
+            }
+        ));
+
+        //after checking individual lists, sift through the results
+        $scope.fromThen = $q.all(listPromises)
+            .then(function (values) {
+
+                //check coursework page TODO
+
+
+                //check employment page
+                var i, l, goThroughLists = ['transfer_activity', 'award', 'employment', 'volunteer'];
+                $scope.errors.employment = [];
+                for (i = 0, l = goThroughLists.length; i < l; i++) {
+                    if ($scope.listerror[goThroughLists[i]] === 'true') {
+                        $scope.error.employment = 'true';
+                        $scope.errors.employment.push(goThroughLists[i]);
+                    }
+                }
+
+                //check the submission page
+                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
+                $scope.errors.submission = [];
+                for (j = 0, k = goThrough.length; j < k; j++) {
+                    if ($scope.myapplication[goThrough[j]] === undefined) {
+                        $scope.error.submission = 'true';
+                        $scope.errors.submission.push(goThrough[j]);
+                    }
+                }
+
+                //update general problems value
+                var value;
+                for (value in $scope.error) {
+                    if ($scope.error[value] === 'true') {
+                        $scope.myVariables.problems = 'true';
+                    }
+                }
+
+                //display result of check
+                $ionicModal.fromTemplateUrl('templates/modal/modal_check_transfer.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function (modal) {
@@ -471,15 +582,22 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-submit 'save': save application updates to server
     $scope.confirmation = function () {
         $scope.myapplication.status = "submitted";
+        
+        var acType;
+        
+        if ($stateParams.appType === 'Freshman')
+            acType = 'application';
+        else
+            acType = 'transferApplication';
 
-        ApplicationService.updateApplication($scope.myapplication.id, $scope.myapplication).then(
+        DataService.updateItem(acType, $scope.myapplication.id, $scope.myapplication).then(
             function (result) {
                 ngNotify.set("Saved to server.", {
                     position: 'bottom',
                     type: 'success'
                 });
                 //if succesful => send to next page
-                $state.go('tabs.applications');
+                $state.go('tabs.applications', {}, {reload: true});
             },
             function (error) {
                 ngNotify.set("Could not contact server to save application!", {
@@ -499,79 +617,118 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
 
         //store data to local storage
-        if ($state.current.name.charAt(18) !== 't') {
+        if ($stateParams.appType === 'freshman') {
             DataService.storeItem('application', $scope.myapplication);
-                 
+
         } else {
-            DataService.storeItem('transferApplication', $scope.myapplication);   
+            DataService.storeItem('transferApplication', $scope.myapplication);
         }
-        
+
         //logic for next state
         switch ($state.current.name) {
             //freshaman app
-            case 'tabs.applications.application.student_information':
-                $state.go('tabs.applications.application.highschool_information');
-                break;
-            case 'tabs.applications.application.highschool_information':
-                $state.go('tabs.applications.application.employment');
-                break;
-            case 'tabs.applications.application.employment':
-                $state.go('tabs.applications.application.college_plans');
-                break;
-            case 'tabs.applications.application.college_plans':
-                $state.go('tabs.applications.application.financial_information');
-                break;
-            case 'tabs.applications.application.financial_information':
-                $state.go('tabs.applications.application.scholarship_information');
-                break;
-            case 'tabs.applications.application.scholarship_information':
-                $state.go('tabs.applications.application.essays');
-                break;
-            case 'tabs.applications.application.essays':
-                $state.go('tabs.applications.application.submit');
-                break;
-            case 'tabs.applications.application.submit':
-                $state.go('tabs.applications.application.confirmation');
-                break;
+        case 'tabs.applications.application.student_information':
+            $state.go('tabs.applications.application.highschool_information');
+            break;
+        case 'tabs.applications.application.highschool_information':
+            $state.go('tabs.applications.application.highschool_coursework');
+            break;
+        case 'tabs.applications.application.highschool_coursework':
+            $state.go('tabs.applications.application.employment');
+            break;
+        case 'tabs.applications.application.employment':
+            $state.go('tabs.applications.application.college_plans');
+            break;
+        case 'tabs.applications.application.college_plans':
+            $state.go('tabs.applications.application.financial_information');
+            break;
+        case 'tabs.applications.application.financial_information':
+            $state.go('tabs.applications.application.scholarship_information');
+            break;
+        case 'tabs.applications.application.scholarship_information':
+            $state.go('tabs.applications.application.essays');
+            break;
+        case 'tabs.applications.application.essays':
+            $state.go('tabs.applications.application.submit');
+            break;
+        case 'tabs.applications.application.submit':
+            $state.go('tabs.applications.application.confirmation');
+            break;
             //transfer app
-            case 'tabs.applications.transfer_application.student_information':
-                $state.go('tabs.applications.transfer_application.education');
-                break;
-            case 'tabs.applications.transfer_application.education':
-                $state.go('tabs.applications.transfer_application.employment');
-                break;
-            case 'tabs.applications.transfer_application.employment':
-                $state.go('tabs.applications.transfer_application.financial_information');
-                break;
-            default:
-                $state.go('signin');
-                break;
+        case 'tabs.applications.transfer_application.student_information':
+            $state.go('tabs.applications.transfer_application.education');
+            break;
+        case 'tabs.applications.transfer_application.education':
+            $state.go('tabs.applications.transfer_application.employment');
+            break;
+        case 'tabs.applications.transfer_application.employment':
+            $state.go('tabs.applications.transfer_application.financial_information');
+            break;
+        case 'tabs.applications.transfer_application.financial_information':
+            $state.go('tabs.applications.transfer_application.personal_history');
+            break;
+        case 'tabs.applications.transfer_application.personal_history':
+            $state.go('tabs.applications.transfer_application.essay');
+            break;
+        case 'tabs.applications.transfer_application.essay':
+            $state.go('tabs.applications.transfer_application.submit');
+            break;
+        default:
+            $state.go('signin');
+            break;
         }
     };
-    
-    function cleanOut() {
-        //clean out
-        if ($scope.myapplication.highschool_graduation_date === "") {
-            delete $scope.myapplication.highschool_graduation_date;
-        } else if ($scope.myapplication.highschool_graduation_date === "NA") {
-            $scope.myapplication.highschool_graduation_date_na = true;
-        } else {
-            $scope.myapplication.highschool_graduation_date_na = false;
+
+    //taking care of NA values in list data
+    function cleanOutLists(acType, thingsToNA) {
+
+        //list of things that should be checked for NA values, so we can update the variables in the database
+        for (i = 0, l = thingsToNA.length; i < l; i++) {
+            if ($scope.lists[acType][thingsToNA[i]] !== undefined) {
+                var NA_variable = thingsToNA[i] + '_na';
+                if ($scope.lists[acType][thingsToNA[i]] === "") {
+                    delete $scope.lists[acType][thingsToNA[i]];
+                    $scope.lists[acType][NA_variable] = false;
+                } else if ($scope.lists[acType][thingsToNA[i]] === "NA") {
+                    $scope.lists[acType][NA_variable] = true;
+                } else {
+                    $scope.lists[acType][NA_variable] = false;
+                }
+            }
         }
     }
-    
+
+
+    //taking care of NA values in application
+    function cleanOut(thingsToNA) {
+
+        //list of things that should be checked for NA values, so we can update the variables in the database
+        for (i = 0, l = thingsToNA.length; i < l; i++) {
+            var NA_variable = thingsToNA[i] + '_na';
+            if ($scope.myapplication[thingsToNA[i]] === "") {
+                delete $scope.myapplication[thingsToNA[i]];
+                $scope.myapplication[NA_variable] = false;
+            } else if ($scope.myapplication[thingsToNA[i]] === "NA") {
+                $scope.myapplication[NA_variable] = true;
+            } else {
+                $scope.myapplication[NA_variable] = false;
+            }
+        }
+    }
+
     // callback for ng-submit 'save': save application updates to server
     $scope.save = function () {
-        
-        cleanOut();
-        
+
+        cleanOut($scope.thingsToNA);
+
         $scope.myapplication.state = $scope.myVariables.myState.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
-        
-        if ($state.current.name.charAt(18) !== 't') {
+        $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
+
+        if ($stateParams.appType === 'freshman') {
             DataService.updateItem('application', $scope.myapplication.id, $scope.myapplication);
         } else {
             DataService.updateItem('transferApplication', $scope.myapplication.id, $scope.myapplication);

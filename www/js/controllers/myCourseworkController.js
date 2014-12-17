@@ -144,9 +144,4 @@ angular.module('Controllers').controller('MyCourseworkController', function ($sc
             }
         );
     };
-
-    // Toggle open/close side menu
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
 });

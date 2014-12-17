@@ -161,6 +161,22 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                     });
                 }
             );
+        },
+        getListofDocuments: function (type, application_id) {
+            return Restangular.one(type).customGET("upload", {
+                applicationId: application_id
+            }).then(
+                function (result) {
+                    result = Restangular.stripRestangular(result);
+                    return result;
+                },
+                function (error) {
+                    ngNotify.set("Something went wrong retrieving uploaded file information.", {
+                        position: 'bottom',
+                        type: 'error'
+                    });
+                }
+            );
         }
     };
 });

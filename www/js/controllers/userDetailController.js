@@ -7,36 +7,14 @@
  * # UserDetailController
  * Controller for the terry
  */
-angular.module('Controllers').controller('UserDetailController', function ($scope, Restangular, ngNotify, UserService) {
+angular.module('Controllers').controller('UserController', function ($scope, UserService, user) {
     'use strict';
 
-    $scope.user = {};
-
-    UserService.getUser().then(
-        function (result) {
-            result = Restangular.stripRestangular(result)[0];
-            $scope.user = result;
-        },
-        function (error) {
-        }
-    );
+    $scope.user = user;
 
     // callback for ng-submit 'save': save user updates to server
     $scope.save = function () {
-        UserService.editUser($scope.user.id, $scope.user).then(
-            function (result) {
-                ngNotify.set("Saved to server.", {
-                    position: 'bottom',
-                    type: 'success'
-                });
-            },
-            function (error) {
-                ngNotify.set("Could not contact server to save new user information!", {
-                    position: 'bottom',
-                    type: 'error'
-                });
-            }
-        );
+        UserService.editUser($scope.user.id, $scope.user);
     };
 
 });

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<ion-view>
+
+    <ion-header-bar class="bar-subheader">
+        <h1 class="title">Essay</h1>
+        <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
+    </ion-header-bar>
+    <ion-content>
+
+        <!-- Card to show for Essay -->
+        <div class="list card">
+            <div class="item item-divider">
+                Your story
+            </div>
+            <div class="item item-body">
+                <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+                    Please attach a typed essay of 250 words (minimum) in PDF or MS Word format. Your full name and UH ID should appear legibly at the top of each page of your essay.<span style="color: red;">*</span>
+                </p>
+                <div>As a transfer/non-traditional student, you have a story to tell about your educational journey. Some students describe a direct path from high school to community college, while others tell of a pathway that was less direct, but no less impactful, upon the person they have become. You might also describe a particular event or moment when you discovered what you wanted to acheive and realized what you neede to do to accomplish your goals. Please tell us your story of how you decided to study at the University of Houston.
+                </div>
+                <p class="item item-icon-left item-text-wrap" ng-show="myVariables.fileEssay1">
+                    <i class="icon ion-folder balanced"></i>
+                    Currently Uploaded File: {{myVariables.fileEssay1}}
+                </p>
+                <p class="item item-text-wrap" ng-hide="myVariables.fileEssay1">
+                    Currently there is no file uploaded. Pleause use the "Upload File" button to select a file.
+                </p>
+                
+                <div class="item" ng-show="selectedFiles != null">
+            <div class="sel-file" ng-repeat="f in selectedFiles">
+                <label>Progress for file upload:</label>
+                <span class="progress" ng-show="progress[$index] >= 0">						
+					<div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+				</span>	
+                <button class="button button-small button-positive" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Cancel Upload</button>
+                {{f.name}} - size: {{f.size}}B
+            </div>
+        </div>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <label for="file1" class="tab-item fileContainer" ng-show="!myVariables.fileEssay1">
+                    <i class="icon ion-filing"></i>
+                    Upload File
+                    <input id="file1" type="file" ng-file-select="onFileSelect('transferApplication', $files, 'essay1')" onclick="this.value=null" accept="application/pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                </label>
+                <a class="tab-item" ng-hide="!myVariables.fileEssay1" ng-click="deleteFile('transferApplication', 'essay1')">
+                    <i class="icon ion-trash-a"></i>
+                    Delete File
+                </a>
+            </div>
+        </div>
+
+        
+        
+        <!-- Next button -->
+        <div class="row">
+            <div class="col col-25 col-offset-75">
+                <button type="button" class="button button-block button-positive" ng-click="next()">Next</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

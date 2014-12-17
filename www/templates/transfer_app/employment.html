@@ -35,7 +35,7 @@
                 <button type="button" title="Add employment" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('employment')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.employment" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('employment', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('employment', item)">&nbsp;&nbsp;&nbsp;&nbsp;Position: {{item.position}} at: {{item.employer}} {{item.hours}} hours Date: {{item.date_from}} - {{item.date_to}}</button>
@@ -82,7 +82,7 @@
                 <button type="button" title="Add military service" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('military')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.military" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('military', item.id)"></button>
                     <button  type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('military', item)">&nbsp;&nbsp;&nbsp;&nbsp; Service Branch: {{item.branch}} {{item.service_dates}} {{item.status}} Current Status: {{item.status}} Locations: {{item.locations}}</button>
@@ -186,7 +186,7 @@
                 <button type="button" title="Add activities" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('transfer_activity')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.transfer_activity" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('transfer_activity', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('transfer_activity', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.activity}} as {{item.position}} {{item.hours_total}} total hours Date: {{item.date_from}} - {{item.date_to}}</button>
@@ -199,7 +199,7 @@
                 <button type="button" title="Add services" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('volunteer')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.volunteer" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('volunteer', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('volunteer', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.place}} {{item.description}} {{item.hours_week}} Hours per week/{{item.hours_total}} Hours total Date: {{item.date_from}}-{{item.date_to}}</button>
@@ -212,7 +212,7 @@
                 <button type="button" title="Add award" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('award')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.award" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('award', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('award', item)">&nbsp;&nbsp;&nbsp;&nbsp; Award: {{item.award}} {{item.description}} Level: {{item.level}}</button>

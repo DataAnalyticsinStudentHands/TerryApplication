@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">{{myVariables.current_modal_mode}} University</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        
+            <p class="item item-icon-left item-text-wrap">
+                <i class="icon ion-information"></i>Please eneter the name of a university. You can reorder the list later.
+        </p>
+            
+            <form novalidate class="submit" on-valid-submit="saveModal('university')">
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input validated">
+                        <span class="input-label">Name of University:</span>
+                        <input name="place" ng-model="lists.university.name" type="text" placeholder="name" required>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col col-25 col-offset-75">
+                    <button class="button button-full button-positive" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

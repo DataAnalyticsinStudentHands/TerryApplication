@@ -54,6 +54,4 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
             });
         }
     };
-    
-    
 });

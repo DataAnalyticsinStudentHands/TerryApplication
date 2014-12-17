@@ -13,19 +13,13 @@
             <br>Please complete all questions or your application cannot be considered. Financial information may be subject to verification from tax returns or other sources.
         </p>
 
-        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.personal_history')">
+        <form class="submit" novalidate on-valid-submit="save()">
 
             <div class="row">
-                <div class="col">
-                    <label class="item item-input item-stacked-label validated">
+                <div class="col col col-50">
+                    <label class="item item-input item-select">
                         <span class="input-label">Your marital status:<span style="color: red;">*</span></span>
-
-                        <select>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
+                        <select ng-model="myVariables.marital_status" ng-options="status.name for status in marital_statuses"></select>
                     </label>
                 </div>
             </div>
@@ -41,8 +35,8 @@
 
             <div class="list list-inset">
                 <div class="item" ng-repeat="item in listings.child" item="item">
-                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('child', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.year}}</button>
+                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('transfer_child', item.id)"></button>
+                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('transfer_child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.year}}</button>
                 </div>
             </div>
 
@@ -51,7 +45,7 @@
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your Occupation:<span style="color: red;">*</span></span>
 
-                        <input name="your_occupation" type="text" ng-model="myapplication.your_occupation" placeholder="Your Occupation" />
+                        <input name="occupation" type="text" ng-model="myapplication.occupation" placeholder="Your Occupation" />
                     </label>
                 </div>
                 <div class="col">
@@ -67,7 +61,7 @@
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your Employer:<span style="color: red;">*</span></span>
 
-                        <input name="your_employer" type="text" ng-model="myapplication.your_employer" placeholder="Your Employer">
+                        <input name="employer" type="text" ng-model="myapplication.employer" placeholder="Your Employer">
                     </label>
                 </div>
                 <div class="col">
@@ -82,13 +76,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your AGI for 2014:<span style="color: red;">*</span></span>
-                        <input name="your_AGI_2014" type="text" ng-model="myapplication.your_AGI_2014" placeholder="AGI in Dollar" ng-currency>
+                        <input name="agi_2014" type="text" ng-model="myapplication.agi_2014" placeholder="AGI in Dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Partner's AGI for 2014:<span style="color: red;">*</span></span>
-                        <input name="partner_AGI_2014" type="text" ng-model="myapplication.partner_AGI_2014" placeholder="AGI in Dollar" ng-currency>
+                        <input name="partner_agi_2014" type="text" ng-model="myapplication.partner_agi_2014" placeholder="AGI in Dollar" ng-currency>
                     </label>
                 </div>
             </div>
@@ -97,13 +91,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your educational debt to date:<span style="color: red;">*</span></span>
-                        <input name="your_educational_debt" type="text" ng-model="myapplication.your_educational_debt" placeholder="Educational Debt in Dollar" ng-currency>
+                        <input name="edu_debt" type="text" ng-model="myapplication.edu_debt" placeholder="Educational Debt in Dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Partner's educational debt to date:<span style="color: red;">*</span></span>
-                        <input name="partner_educational_debt" type="text" ng-model="myapplication.partner_educational_debt" placeholder="Educational Debt in Dollar" ng-currency>
+                        <input name="partner_edu_debt" type="text" ng-model="myapplication.partner_edu_debt" placeholder="Educational Debt in Dollar" ng-currency>
                     </label>
                 </div>
             </div>
@@ -112,7 +106,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your monthly child support received:<span style="color: red;">*</span></span>
-                        <input name="your_childsupport_received" type="text" ng-model="myapplication.your_childsupport_received" placeholder="Monthly Child Support Received in Dollar" ng-currency>
+                        <input name="childsupport_received" type="text" ng-model="myapplication.childsupport_received" placeholder="Monthly Child Support Received in Dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
@@ -127,7 +121,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your monthly child support payment:<span style="color: red;">*</span></span>
-                        <input name="your_childsupport_payment" type="text" ng-model="myapplication.your_childsupport_payment" placeholder="Monthly Child Support Payment in Dollar" ng-currency>
+                        <input name="childsupport_payment" type="text" ng-model="myapplication.childsupport_payment" placeholder="Monthly Child Support Payment in Dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
@@ -142,7 +136,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Your monthly child support expenses:<span style="color: red;">*</span></span>
-                        <input name="your_childsupport_expenses" type="text" ng-model="myapplication.your_childsupport_expenses" placeholder="Monthly Child Support Expenses in Dollar" ng-currency>
+                        <input name="childsupport_expenses" type="text" ng-model="myapplication.childsupport_expenses" placeholder="Monthly Child Support Expenses in Dollar" ng-currency>
                     </label>
                 </div>
                 <div class="col">
@@ -157,7 +151,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Are there other financial resources that you regularly receive or rely upon to support yourself and your family? If so, please describe and provide amounts: (max. 400 characters)<span style="color: red;">*</span></span>
-                        <textarea name="description_other_financial_resources" rows="5" maxlength="400" ng-model="myapplication.description_other_financial_resources" placeholder="description"></textarea>
+                        <textarea name="other_financial_resources" rows="5" maxlength="400" ng-model="myapplication.other_financial_resources" placeholder="description"></textarea>
                     </label>
                 </div>
             </div>
@@ -166,7 +160,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">If you provide financial support for another family (whether child, parent, sibling or other), please tell us about this family (max. 400 characters)<span style="color: red;">*</span></span>
-                        <textarea name="description_financialsupport_otherfamily" rows="5" maxlength="400" ng-model="myapplication.description_financialsupport_otherfamily" placeholder="description"></textarea>
+                        <textarea name="financialsupport_otherfamiliy" rows="5" maxlength="400" ng-model="myapplication.financialsupport_otherfamiliy" placeholder="description"></textarea>
                     </label>
                 </div>
             </div>
@@ -207,17 +201,17 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="myapplication.dependent_taxreturn_2015">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">If "YES" to either of the above questions, complete the following:</span> 
                         <ol>
                             <li>Name and Relationship of Claimant</li>
-                            <textarea rows="1" cols="100"></textarea>
+                            <textarea rows="1" cols="100" ng-model="myapplication.claimant"></textarea>
                             <li>Father/Stepfather Occupation.</li>
-                            <textarea rows="1" cols="100"></textarea>
+                            <textarea rows="1" cols="100" ng-model="myapplication.father_occupation"></textarea>
                             <li>Mother/Stepmother Occupation.</li>
-                            <textarea rows="1" cols="100"></textarea>
+                            <textarea rows="1" cols="100" ng-model="myapplication.mother_occupation"></textarea>
                         </ol>
                     </label>
                 </div>
@@ -245,17 +239,18 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Please describe any special circumstances that affect your family’s ability to fund your college expenses: (max. 300 characters)<span style="color: red;">*</span></span>
-                        <textarea name="description_additional_factors" rows="4" maxlength="300" ng-model="myapplication.description_additional_factors" placeholder="description"></textarea>
+                        <textarea name="additional_factors" rows="4" maxlength="300" ng-model="myapplication.additional_factors" placeholder="description"></textarea>
                     </label>
                 </div>
             </div>
 
-
-
-            <!-- Submit/Next button -->
+            <!-- Next/Save button -->
             <div class="row">
-                <div class="col col-25 col-offset-75">
-                    <button type="submit" class="button button-block button-positive">Next</button>
+                <div class="col col-25 col-offset-50">
+                    <button type="submit" class="button button-block button-positive">Save to Server</button>
+                </div>
+                <div class="col col-25">
+                    <button type="button" class="button button-block button-positive" ng-click="next()">Next</button>
                 </div>
             </div>
         </form>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Checking Application</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <p ng-hide="myVariables.problems" class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            We have checked your application and found no errors.
+        </p>
+        <p ng-show="myVariables.problems" class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
+            We have checked your application and found missing values. Please use the table below as an indicator to go back and fix the problems.
+        </p>
+        
+        
+        <div class="list">
+            <a ng-hide="error.student_information" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.student_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                I. Student Information 
+            </a>
+            <a ng-show="error.student_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.student_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                I. Student Information {{errors.student_information}}
+            </a>
+            <a ng-hide="error.education" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.highschool_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                II. High School Information
+            </a>
+            <a ng-show="error.education" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.highschool_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                II. High School Information {{errors.education}}
+            </a>
+            <a ng-hide="error.employment" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.employment" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                III. Employment
+            </a>
+            <a ng-show="error.employment" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.employment" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                III. Employment missing values in lists: {{errors.employment}}
+            </a>
+            <a ng-hide="error.financial_information" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.financial_information" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                IV. Financial Information
+            </a>
+            <a ng-show="error.financial_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.financial_information" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                IV. Financial Information {{errors.financial_information}}
+            </a>
+            <a ng-hide="error.personal_history" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.personal_history" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                V. Personal History
+            </a>
+            <a ng-show="error.personal_history" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.personal_history" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                V. Personal History {{errors.personal_history}}
+            </a>
+            <a ng-hide="error.essay" class="item item-icon-right" ui-sref="tabs.applications.application.essays" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                VIII. Essay
+            </a>
+            <a ng-show="error.essay" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.essays" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                VIII. Essay {{errors.essay}}
+            </a>
+            <a ng-hide="error.submission" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.submit" ng-click="modal.hide()">
+                <i class="icon ion-checkmark-round balanced"></i>
+                Submission
+            </a>
+            <a ng-show="error.submission" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.submit" ng-click="modal.hide()">
+                <i class="icon ion-close-round assertive"></i>
+                Submission {{errors.submission}}
+            </a>
+        </div>
+
+        <div class="row">
+            <div class="col col-25 col-offset-75">
+                <button class="button button-full button-positive" ng-click="checked('tabs.applications.transfer_application.confirmation')">Done</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

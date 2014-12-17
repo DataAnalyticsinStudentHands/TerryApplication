@@ -2,12 +2,12 @@
 <ion-view>
 
     <ion-header-bar class="bar-subheader">
-        <h1 class="title">College Plans</h1>
+        <h1 class="title">PERSONAL HISTORY</h1>
         <button class="button button-icon button-clear ion-navicon-round" ng-click="toggleRight()"></button>
     </ion-header-bar>
     <ion-content>
 
-        <form class="submit" novalidate on-valid-submit="save()">
+        <form class="submit" novalidate on-valid-submit="save('tabs.myapplication.essay')">
 
             <div class="row">
                 <div class="col">
@@ -16,9 +16,9 @@
                         <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'true'">Yes</ion-radio>
                         <ion-radio name="first_graduate" ng-model="myapplication.first_graduate" ng-value="'false'">No</ion-radio>
                     </label>
-
                 </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label">
@@ -28,31 +28,6 @@
                     </label>
                 </div>
             </div>
-
-            <p class="item item-icon-left item-text-wrap"> <i class="icon ion-information"></i>
-                List, in order of preference, the top six colleges or universities you are considering attending (be sure to rank the University of Houston among your choices). Use the <span class="ion-plus-circled"></span> button to add a university.</p>
-
-
-
-            <div class="item dark item-button-left">
-
-                <button type="button" name="addbutton" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('university')"></button>
-                <span class="item-button-right">
-               List Universities
-            <span style="color: red;">*</span>
-                <button type="button" name="reorderbutton" class="button" ng-click="data.showReorder = !data.showReorder">
-                    Reorder
-                </button>
-                </span>
-            </div>
-
-            <ion-list show-reorder="data.showReorder">
-                <ion-item ng-repeat="item in listings.university | orderBy:'rank'" item="item">
-                    <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
-                    <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('university', item.id)"></button>
-                    <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('university', item)">&nbsp;&nbsp;&nbsp;&nbsp;University Name: {{item.name}}</button>
-                </ion-item>
-            </ion-list>
 
             <div class="row">
                 <div class="col">
@@ -84,6 +59,35 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Has there been a particularly influential faculty member or personal contact that has been instrumental in your decision to attend the University of Houston? <br>If so, please relate: (max. 300 characters)<span style="color: red;">*</span></span>
+                        </br>
+
+                        <textarea name="influential_member" rows="5" maxlength="300" ng-model="myapplication.influential_member" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Transfer/non-traditional students often tell us that their prior experience has taught them lessons that helped them to be successful. What lessons have you learned that you would like to pass on to other students?  (max. 500 characters) <span style="color: red;">*</span></span>
+                        <textarea name="successful_lessons" rows="7" maxlength="500" ng-model="myapplication.successful_lessons" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Is there any additional information that you consider important for the committee to know in evaluating your application for scholarship consideration?(max. 500 characters)<span style="color: red;">*</span></span>
+
+                        <textarea name="scholarship_consideration" rows="7" maxlength="500" ng-model="myapplication.scholarship_consideration" placeholder="Write here."></textarea>
+                    </label>
+                </div>
+            </div>
             <!-- Next/Save button -->
             <div class="row">
                 <div class="col col-25 col-offset-50">
