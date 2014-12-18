@@ -37,16 +37,25 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
         if ($scope.myapplication.uh_id && $scope.myapplication.first_name && $scope.myapplication.last_name) {
             switch ($scope.main.application_type) {
             case 'Freshman':
-                DataService.addItem('application', $scope.myapplication);
-                $scope.applications = DataService.getAllItems('application');
+                DataService.addItem('application', $scope.myapplication).then(
+                    function (success) {
+                        $scope.applications = DataService.getAllItems('application');
+                        $scope.modal.hide();
+                        $state.go($state.current, {}, {reload: true});
+                    }
+                );
                 break;
             case 'Transfer':
-                DataService.addItem('transferApplication', $scope.myapplication);
-                $scope.applications = DataService.getAllItems('transferApplication');
+                DataService.addItem('transferApplication', $scope.myapplication).then (
+                    function (success) {
+                        $scope.applications = DataService.getAllItems('transferApplication');
+                        $scope.modal.hide();
+                        $state.go($state.current, {}, {reload: true});
+                    }
+                );
                 break;
             }
-            $scope.modal.hide();
-            $state.go($state.current, {}, {reload: true});
+            
         } else {
             ngNotify.set("Remember to fill in everything!", {
                 position: 'bottom',

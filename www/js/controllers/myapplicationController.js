@@ -66,7 +66,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     ];
     //variables for selectors
     $scope.myVariables.states = DataService.getStates();
-    $scope.grades = DataService.getGrades();
+    $scope.myVariables.grades = DataService.getGrades();
     $scope.myVariables.course_types = DataService.getCourseTypes();
 
     //variables for lists
@@ -161,13 +161,19 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     }
 
     // callback for ng-click 'showAddModal':
-    $scope.showAddModal = function (acType, applied_received) {
+    $scope.showAddModal = function (acType, applied_received, level) {
 
         $scope.myVariables.current_modal_mode = "Add";
         $scope.lists[acType] = {};
 
-        if (applied_received !== undefined) {
+        if (applied_received !== undefined && applied_received !== null) {
             $scope.lists[acType].applied_received = applied_received;
+        }
+        
+        if (level !== undefined) {
+            $scope.myVariables.course_type = $scope.myVariables.course_types[0];
+            $scope.myVariables.grade = $scope.myVariables.grades[0];
+            $scope.currentLevel = level;
         }
 
         $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {

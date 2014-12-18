@@ -9,16 +9,6 @@
  */
 angular.module('Controllers').controller('MyCourseworkController', function ($scope, $http, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService) {
     'use strict';
-    
-    //Load some variables
-    $http.get('json/course_types.json').success(function (data) {
-        $scope.course_types = data;
-    });
-    $http.get('json/grades.json').success(function (data) {
-        $scope.grades = data;
-    });
-
-    
 
     // callback for ng-click 'editCourse':
     $scope.editCourse = function (course) {
