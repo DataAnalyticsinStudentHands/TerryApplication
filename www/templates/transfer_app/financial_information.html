@@ -33,7 +33,7 @@
                 <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('transfer_child')"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.child" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('transfer_child', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('transfer_child', item)">&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}} {{item.age}} {{item.relationship}} {{item.year}}</button>

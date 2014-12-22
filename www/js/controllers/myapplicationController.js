@@ -88,8 +88,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         //list of selector fields
         var list = ['state',
-                    'marital_status'
-                ];
+                    'marital_status',
+                    'grade',
+                    'course_type'
+                    ];
         for (var i = 0; i < list.length; i++) {
             var field = list[i] + 's';
             if ($scope.myapplication[list[i]] !== undefined && $scope.myapplication[list[i]] !== null) {
@@ -171,8 +173,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
         
         if (level !== undefined) {
-            $scope.myVariables.course_type = $scope.myVariables.course_types[0];
-            $scope.myVariables.grade = $scope.myVariables.grades[0];
             $scope.currentLevel = level;
         }
 
@@ -214,6 +214,12 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         if (acType === 'university')
             $scope.lists[acType].rank = $scope.listings.university.length;
+        
+        if (acType === 'coursework') {
+            $scope.lists[acType].type = $scope.myVariables.course_type.abbreviation;
+            $scope.lists[acType].final_grade = $scope.myVariables.grade.grade;
+            $scope.lists[acType].level = $scope.currentLevel;
+        }
 
         if ($stateParams.appType === 'transfer')
             $scope.lists[acType].transfer = true;

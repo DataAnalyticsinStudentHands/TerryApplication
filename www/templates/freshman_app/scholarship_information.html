@@ -28,7 +28,7 @@
                 <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('scholarship', true)"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.scholarship | filter: {applied_received:'true'}" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('scholarship', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('scholarship', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}} {{item.duration}} Amount: {{item.amount}}</button>
@@ -41,7 +41,7 @@
                 <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('scholarship', false)"></button>
             </div>
 
-            <div class="list list-inset">
+            <div class="list">
                 <div class="item" ng-repeat="item in listings.scholarship | filter: {applied_received:'false'}" item="item">
                     <button type="button" title="Delete" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('scholarship', item.id)"></button>
                     <button type="button" title="Edit" class="button button-icon icon ion-compose" ng-click="editData('scholarship', item)">&nbsp;&nbsp;&nbsp;&nbsp;Name: {{item.name}} {{item.duration}} Amount: {{item.amount}}</button>
