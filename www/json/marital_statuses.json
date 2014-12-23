@@ -1,18 +1,18 @@
 [
     {
-        "id": "single",
-        "name": "single"
+        "id": "Single",
+        "name": "Single"
     },
     {
-        "id": "married",
-        "name": "married"
+        "id": "Married",
+        "name": "Married"
     },
     {
-        "id": "divorced",
-        "name": "divorced"
+        "id": "Divorced",
+        "name": "Divorced"
     },
     {
-        "id": "widowed",
-        "name": "widowed"
+        "id": "Widowed",
+        "name": "Widowed"
     }
 ]

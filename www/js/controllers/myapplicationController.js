@@ -15,9 +15,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     $scope.mail_options = [
         {
+            "id": "online",
             "name": "online"
         },
         {
+            "id": "US mail",
             "name": "US mail"
         }
     ];
@@ -41,8 +43,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
-
-
     $scope.myapplication = application;
 
     $scope.myVariables = {
@@ -54,9 +54,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.states = DataService.getStates();
     if ($scope.myapplication.state === undefined)
         $scope.myapplication.state = 'Texas';
+    
     $scope.marital_statuses = DataService.getMarital_statuses();
-    if ($scope.myapplication.state === undefined)
-        $scope.myapplication.marital_status = 'single';
+    if ($scope.myapplication.marital_status === undefined)
+        $scope.myapplication.marital_status = 'Single';
+    
     $scope.grades = DataService.getGrades();
     $scope.course_types = DataService.getCourseTypes();
 
@@ -74,48 +76,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.listings.transfer_activity = transfer_activity;
     $scope.listings.volunteer = volunteer;
     $scope.listings.award = award;
-
-    function setSelectedValues() {
-
-        //list of selector fields
-        var list = ['state',
-                    'marital_status'
-                   ];
-        for (var i = 0; i < list.length; i++) {
-            var field = list[i] + 's';
-            if ($scope.myapplication[list[i]] !== undefined && $scope.myapplication[list[i]] !== null) {
-                $scope.test = $filter('filter')($scope.myVariables[field], {
-                    name: $scope.myapplication[list[i]]
-                }, true);
-                $scope.myVariables[list[i]] = $scope.test[0];
-            } else {
-                if (list[i] == 'state') {
-                    $scope.myVariables[list[i]] = $scope.myVariables.states[50];
-                } else {
-                    $scope.myVariables[list[i]] = $scope.myVariables[field][0];
-                }
-            }
-        }
-
-        //list of fields with mail_options
-        var list2 = ['app_uh_method',
-                     'transcript_method',
-                     'fafsa_method',
-                     'housing_method'
-                    ];
-        for (var i = 0; i < list2.length; i++) {
-            if ($scope.myapplication[list2[i]] !== undefined) {
-                $scope.test = $filter('filter')($scope.mail_options, {
-                    name: $scope.myapplication[list2[i]]
-                }, true);
-                $scope.myVariables[list2[i]] = $scope.test[0];
-            } else {
-                $scope.myVariables[list2[i]] = $scope.mail_options[0].name;
-            }
-        }
-    }
-
-    //setSelectedValues();
 
     //list of things that should be checked for NA values, so we can set the visible values to "NA"   
     $scope.thingsToNA = ['highschool_graduation_date',
@@ -310,11 +270,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     // callback for ng-submit 'check': check application 
     $scope.checkFreshmanApp = function () {
         //save data to server
-        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
-        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
-
         $scope.save();
 
         $scope.errors = {};
@@ -438,12 +393,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-submit 'check': check application 
     $scope.checkTransferApp = function () {
-        //save data to server
-        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
-        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
-
+        
         $scope.save();
 
         $scope.errors = {};
@@ -594,13 +544,12 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     // callback for ng-submit 'next': moves to next state
     $scope.next = function () {
-        $scope.myapplication.state = $scope.myVariables.state.name;
+        //save some data
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
-        $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
-
+        
         //store data to local storage
         if ($stateParams.appType === 'freshman') {
             DataService.storeItem('application', $scope.myapplication);
@@ -706,19 +655,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         cleanOut($scope.thingsToNA);
 
-        //save values for selectors
-        //$scope.myapplication.state = $scope.myVariables.state.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
-        $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
-
-        $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
-        $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
-        $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;
-        $scope.myapplication.housing_method = $scope.myVariables.housing_method.name;
-
+        
         if ($stateParams.appType === 'freshman') {
             DataService.updateItem('application', $scope.myapplication.id, $scope.myapplication);
         } else {
