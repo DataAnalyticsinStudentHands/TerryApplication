@@ -41,7 +41,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
-    
+
 
     $scope.myapplication = application;
 
@@ -49,25 +49,16 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         current_modal_mode: 'Add',
         problems: 'false'
     };
-    
-    $scope.myVariables.marital_statuss = [
-        {
-            name: 'single'
-        },
-        {
-            name: 'married'
-        },
-        {
-            name: 'divorced'
-        },
-        {
-            name: 'widowed'
-        }
-    ];
+
     //variables for selectors
-    $scope.myVariables.states = DataService.getStates();
-    $scope.myVariables.grades = DataService.getGrades();
-    $scope.myVariables.course_types = DataService.getCourseTypes();
+    $scope.states = DataService.getStates();
+    if ($scope.myapplication.state === undefined)
+        $scope.myapplication.state = 'Texas';
+    $scope.marital_statuses = DataService.getMarital_statuses();
+    if ($scope.myapplication.state === undefined)
+        $scope.myapplication.marital_status = 'single';
+    $scope.grades = DataService.getGrades();
+    $scope.course_types = DataService.getCourseTypes();
 
     //variables for lists
     $scope.lists = {};
@@ -88,10 +79,8 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         //list of selector fields
         var list = ['state',
-                    'marital_status',
-                    'grade',
-                    'course_type'
-                    ];
+                    'marital_status'
+                   ];
         for (var i = 0; i < list.length; i++) {
             var field = list[i] + 's';
             if ($scope.myapplication[list[i]] !== undefined && $scope.myapplication[list[i]] !== null) {
@@ -102,13 +91,12 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             } else {
                 if (list[i] == 'state') {
                     $scope.myVariables[list[i]] = $scope.myVariables.states[50];
-                }
-                else {
+                } else {
                     $scope.myVariables[list[i]] = $scope.myVariables[field][0];
                 }
             }
-        };
-        
+        }
+
         //list of fields with mail_options
         var list2 = ['app_uh_method',
                      'transcript_method',
@@ -124,10 +112,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             } else {
                 $scope.myVariables[list2[i]] = $scope.mail_options[0].name;
             }
-        };
+        }
     }
-    
-    setSelectedValues();
+
+    //setSelectedValues();
 
     //list of things that should be checked for NA values, so we can set the visible values to "NA"   
     $scope.thingsToNA = ['highschool_graduation_date',
@@ -171,9 +159,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         if (applied_received !== undefined && applied_received !== null) {
             $scope.lists[acType].applied_received = applied_received;
         }
-        
+
         if (level !== undefined) {
-            $scope.currentLevel = level;
+            $scope.lists[acType].level = level;
+            $scope.lists[acType].final_grade = 'A';
+            $scope.lists[acType].type = 'AP';
         }
 
         $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
@@ -206,21 +196,13 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         $scope.lists[acType].application_id = $stateParams.applicationId;
 
-        if (acType === 'activity')
-            $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
-
-        if ($scope.lists[acType].award !== undefined)
+        if (acType === 'activity' || acType === 'award')
             $scope.lists[acType].year = angular.toJson($scope.yearInSchoolList);
 
         if (acType === 'university')
             $scope.lists[acType].rank = $scope.listings.university.length;
-        
-        if (acType === 'coursework') {
-            $scope.lists[acType].type = $scope.myVariables.course_type.abbreviation;
-            $scope.lists[acType].final_grade = $scope.myVariables.grade.grade;
-            $scope.lists[acType].level = $scope.currentLevel;
-        }
 
+        //set the type of application
         if ($stateParams.appType === 'transfer')
             $scope.lists[acType].transfer = true;
         else
@@ -725,13 +707,13 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         cleanOut($scope.thingsToNA);
 
         //save values for selectors
-        $scope.myapplication.state = $scope.myVariables.state.name;
+        //$scope.myapplication.state = $scope.myVariables.state.name;
         if ($scope.myapplication.citizen !== undefined && $scope.myapplication.citizen === 'true') {
             $scope.myapplication.permanent_resident = 'false';
             $scope.myapplication.permanent_resident_card = 'false';
         }
         $scope.myapplication.marital_status = $scope.myVariables.marital_status.name;
-        
+
         $scope.myapplication.app_uh_method = $scope.myVariables.app_uh_method.name;
         $scope.myapplication.transcript_method = $scope.myVariables.transcript_method.name;
         $scope.myapplication.fafsa_method = $scope.myVariables.fafsa_method.name;

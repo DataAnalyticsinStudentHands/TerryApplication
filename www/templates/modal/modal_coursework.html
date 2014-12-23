@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">{{myVariables.current_modal_mode}} {{current_level}} Coursework</h1>
+        <h1 class="title">{{myVariables.current_modal_mode}} {{lists.coursework.level}} level Coursework</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
         <div class="padding">
             <form novalidate class="submit" on-valid-submit="saveModal('coursework')">
+                
                 <div class="row">
                     <div class="col">
                         <label class="item item-input validated">
@@ -19,7 +20,7 @@
                     <div class="col">
                         <label class="item item-input item-select">
                             <span class="input-label">Type:</span>
-                            <select ng-model="myVariables.course_type" ng-options="type.abbreviation for type in myVariables.course_types">
+                            <select ng-model="lists.coursework.type" ng-options="type.id as type.name for type in course_types">
                             </select>
                         </label>
                     </div>
@@ -37,8 +38,8 @@
                     <div class="col">
                         <label class="item item-input item-select">
                             <span class="input-label">Final Grade:</span>
-                            <select ng-model="myVariables.grade" ng-options="item.grade for item in myVariables.grades">
-                            </select>
+                            <select ng-model="lists.coursework.final_grade" ng-options="grade.id as grade.name for grade in grades"></select>
+                            
                         </label>
                     </div>
 

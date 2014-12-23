@@ -12,6 +12,7 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
 
     //Load data for form data for terry application
     var application_form,
+        transfer_application_form,
         modal_award_form,
         modal_child_form,
         modal_coursework_form,
@@ -19,11 +20,15 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         modal_scholarship_form,
         modal_volunteer_form,
         states,
+        marital_statuses,
         grades,
         course_types;
 
     $http.get('json/form_application.json').success(function (data) {
         application_form = data;
+    });
+    $http.get('json/form_transfer_application.json').success(function (data) {
+        transfer_application_form = data;
     });
     $http.get('json/form_modal_award.json').success(function (data) {
         modal_award_form = data;
@@ -46,6 +51,9 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
     $http.get('json/states.json').success(function (data) {
         states = data;
     });
+    $http.get('json/marital_statuses.json').success(function (data) {
+        marital_statuses = data;
+    });
     $http.get('json/grades.json').success(function (data) {
         grades = data;
     });
@@ -59,6 +67,8 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
             switch (acType) {
                 case 'application':
                     return application_form;
+                case 'application':
+                    return transfer_application_form;
                 case 'award':
                     return modal_award_form;
                 case 'child':
@@ -75,6 +85,9 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         },
         getStates: function() {
             return states;
+        },
+        getMarital_statuses: function() {
+            return marital_statuses;
         },
         getGrades: function() {
             return grades;

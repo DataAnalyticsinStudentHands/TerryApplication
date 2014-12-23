@@ -1,18 +1,18 @@
 [
     {
-        "name": "Advanced Placement",
-        "abbreviation": "AP"
+        "id": "AP",
+        "name": "Advanced Placement"
     },
     {
-        "name": "International Baccalaureate Program",
-        "abbreviation": "IB"
+        "id": "IB",
+        "name": "International Baccalaureate Program"
     },
     {
-        "name": "Dual Credit",
-        "abbreviation": "DC"
+        "id": "DC",
+        "name": "Dual Credit"
     },
     {
-        "name": "Pre-AP",
-        "abbreviation": "Pre-AP"
+        "id": "Pre-AP",
+        "name": "Pre-AP"
     }
 ]

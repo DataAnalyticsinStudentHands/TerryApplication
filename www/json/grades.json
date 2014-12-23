@@ -1,20 +1,26 @@
 [
     {
-        "grade": "A"
+        "id": "A",
+        "name": "A"
     },
     {
-        "grade": "B"
+        "id": "B",
+        "name": "B"
     },
     {
-        "grade": "C"
+        "id": "C",
+        "name": "C"
     },
     {
-        "grade": "D"
+        "id": "D",
+        "name": "D"
     },
     {
-        "grade": "F"
+        "id": "F",
+        "name": "F"
     },
     {
-        "grade": "In Progress"
+        "id": "I",
+        "name": "In Progress"
     }
 ]

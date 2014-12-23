@@ -17,11 +17,11 @@
 
             <div class="row">
                 <div class="col">
-                    <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">Your marital status:</span> 
-                        
-                        <input name="marital_status" type="text" ng-model="myapplication.marital_status" placeholder="status">
-                    </label>
+                    <label class="item item-input item-select">
+                            <span class="input-label">Your marital status:</span>
+                            <select ng-model="myapplication.marital_status" ng-options="status.id as status.name for status in marital_statuses"></select>
+                            
+                        </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
