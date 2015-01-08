@@ -120,6 +120,17 @@ angular.module('HonorsApplications', [
             authenticate: true
         })
     
+        .state('tabs.applications.information', {
+            url: '/information',
+            views: {
+                'information-tab@tabs': {
+                    templateUrl: 'templates/tab-information.html',
+                    controller: 'MainController'
+                }
+            },
+            authenticate: true
+        })
+    
         .state('tabs.applications.application', {
             url: '/application/:applicationId?appType',
             abstract: true,
@@ -493,15 +504,9 @@ angular.module('HonorsApplications', [
             authenticate: true
         })
     
-        .state('tabs.information', {
-            url: '/information',
-            views: {
-                'information-tab': {
-                    templateUrl: 'templates/tab-information.html'
-                }
-            },
-            authenticate: true
-        })
+        
+    
+        
     
         .state('tabs.user', {
             url: '/user',

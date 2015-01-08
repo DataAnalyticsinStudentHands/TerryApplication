@@ -52,12 +52,14 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
     //variables for selectors
     $scope.states = DataService.getStates();
-    if ($scope.myapplication.state === undefined)
+    if ($scope.myapplication.state === undefined) {
         $scope.myapplication.state = 'Texas';
+    }
     
     $scope.marital_statuses = DataService.getMarital_statuses();
-    if ($scope.myapplication.marital_status === undefined)
+    if ($scope.myapplication.marital_status === undefined) {
         $scope.myapplication.marital_status = 'Single';
+    }
     
     $scope.grades = DataService.getGrades();
     $scope.course_types = DataService.getCourseTypes();
@@ -86,7 +88,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                             'transcript_date_sub',
                             'transcript_date_int_sub',
                             'housing_date_sub',
-                            'housing_date_int_sub',
+                            'housing_date_int_sub'
                            ];
     if ($stateParams.appType === 'transfer') {
         $scope.thingsToNA = ['highschool_graduation_date',
@@ -98,7 +100,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 'transcript_date_sub',
                 'transcript_date_int_sub',
                 'housing_date_sub',
-                'housing_date_int_sub',
+                'housing_date_int_sub'
                ];
     }
 
@@ -206,12 +208,19 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.moveItem = function (item, fromIndex, toIndex) {
         $scope.listings.university.splice(fromIndex, 1);
         $scope.listings.university.splice(toIndex, 0, item);
-        var i, l;
+        /*var i, l,
+            listPromises = [];
         for (i = 0, l = $scope.listings.university.length; i < l; i++) {
             $scope.listings.university[i].rank = i;
-            DataService.updateItem('university', $scope.listings.university[i].id, $scope.listings.university[i]);
+            listPromises.push(DataService.updateItem('university', $scope.listings.university[i].id, $scope.listings.university[i]));
         }
-        updateList('university');
+        
+        var test = $q.all(listPromises)
+            .then(function (success) {
+                console.log('finally ...');
+                updateList('university');
+        });*/
+        
     };
 
     // callback for ng-click 'deleteData':
