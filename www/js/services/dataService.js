@@ -7,7 +7,7 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function (Restangular, $http, $q, $ionicLoading, ngNotify) {
+angular.module('Services').factory('DataService', function (Restangular, $http, $q, ngNotify) {
     'use strict';
 
     //Load data for form data for terry application
@@ -97,16 +97,16 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         },
         
         getAllItems: function (acType) {
-            $ionicLoading.show();
+            
             return Restangular.all(acType).getList().then(
                 function (result) {
-                    $ionicLoading.hide();
+                    
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
                     return result;
                 },
                 function (error) {
-                    $ionicLoading.hide();
+                    
                     ngNotify.set("Something went wrong retrieving data for " + acType, {
                         position: 'bottom',
                         type: 'error'
@@ -116,15 +116,15 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
 
         },
         getItem: function (type, item_id) {
-            $ionicLoading.show();
+            
             return Restangular.one(type, item_id).get().then(
                 function (result) {
-                    $ionicLoading.hide();
+                    
                     result = Restangular.stripRestangular(result);
                     return result[0];
                 },
                 function (error) {
-                    $ionicLoading.hide();
+                    
                     ngNotify.set("Something went wrong retrieving data for type " + type, {
                         position: 'bottom',
                         type: 'error'

@@ -15,7 +15,7 @@ angular.module('HonorsApplications', [
     'ui.utils',
     'ng-currency',
     'angularFileUpload'
-]).run(function ($ionicPlatform, Restangular, $rootScope, $ionicSideMenuDelegate, Auth, $q, $state) {
+]).run(function ($ionicPlatform, Restangular, $rootScope, $ionicSideMenuDelegate, $ionicLoading, Auth, $q, $state) {
     'use strict';
 
     // Set Base URL to connect to DASH RESTFUL webservices
@@ -34,6 +34,7 @@ angular.module('HonorsApplications', [
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
         console.log("$stateChangeStart to state: " + toState.name);
+        $ionicLoading.show();
         //console.log($rootScope.isAuthenticated());
         if (toState.authenticate && !$rootScope.isAuthenticated()) {
             console.log("non-authed");
@@ -60,11 +61,13 @@ angular.module('HonorsApplications', [
 
     // Some watchdogs for fixing ui-route issues Credits: Adam's answer in http://stackoverflow.com/a/20786262/69362
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams) {
+        $ionicLoading.hide();
         console.log('$stateChangeError - fired when an error occurs during transition.');
         console.log(arguments);
     });
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $ionicLoading.hide();
         console.log('$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.');
     });
 

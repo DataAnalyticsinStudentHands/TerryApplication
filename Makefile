@@ -40,4 +40,4 @@ deploy:
     	git commit -m "Release" && \
     	git push -f origin +master:refs/heads/master
 
-.PHONY: install build clean deploy git-prod git-staging prod staging
+.PHONY: build clean deploy git-prod git-staging prod staging
