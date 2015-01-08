@@ -201,22 +201,26 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="myapplication.dependent_taxreturn_2015">
+            <div class="row" ng-show="myapplication.dependent_taxreturn_2014 == 'true' || myapplication.dependent_taxreturn_2015 == 'true'">
                 <div class="col">
-                    <label class="item item-input item-stacked-label validated">
-                        <span class="input-label">If "YES" to either of the above questions, complete the following:</span> 
-                        <ol>
-                            <li>Name and Relationship of Claimant</li>
-                            <textarea rows="1" cols="100" ng-model="myapplication.claimant"></textarea>
-                            <li>Father/Stepfather Occupation.</li>
-                            <textarea rows="1" cols="100" ng-model="myapplication.father_occupation"></textarea>
-                            <li>Mother/Stepmother Occupation.</li>
-                            <textarea rows="1" cols="100" ng-model="myapplication.mother_occupation"></textarea>
-                        </ol>
-                    </label>
+                    <div class="item item-input item-stacked-label">
+                        <p>If "YES" to either of the above questions, complete the following:</p>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Name and Relationship of Claimant:</span>
+                            <input name="claimant" type="text" ng-model="myapplication.claimant" placeholder="claimant">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Father/Stepfather Occupation:</span>
+                            <input name="father_occupation" type="text" ng-model="myapplication.father_occupation" placeholder="father occupation">
+                        </label>
+                        <label class="plain-item item-stacked-label validated">
+                            <span>Mother/Stepmother Occupation:</span>
+                            <input name="mother_occupation" type="text" ng-model="myapplication.mother_occupation" placeholder="mother occupation">
+                        </label>
+                    </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
