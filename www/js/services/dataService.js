@@ -7,7 +7,7 @@
  * # DataService
  * Service for the terry
  */
-angular.module('Services').factory('DataService', function (Restangular, $http, $q, ngNotify) {
+angular.module('Services').factory('DataService', function (Restangular, $http, $q, $ionicLoading, ngNotify) {
     'use strict';
 
     //Load data for form data for terry application
@@ -153,16 +153,18 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
         },
         updateItem: function (type, item_id, item) {
             
-            localStorage.setItem(type, item);
-
+            $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Updating data on server ...</div>'});
+            
             return Restangular.all(type).customPUT(item, item.id).then(
                 function (result) {
+                    $ionicLoading.hide();
                     ngNotify.set("Succesfully updated your " + type + " on the server.", {
                         position: 'bottom',
                         type: 'success'
                     });
                 },
                 function (error) {
+                    $ionicLoading.hide();
                     ngNotify.set("Could not contact server to update " + type + " !", {
                         position: 'bottom',
                         type: 'error'

@@ -42,7 +42,7 @@
                 <div class="col">
                     <label class="item item-input item-select">
                         <span class="input-label">Method:<span style="color: red;">*</span></span>
-                        <select ng-model="myVariables.app_uh_method" ng-options="option.name for option in mail_options">
+                        <select ng-model="myapplication.app_uh_method" ng-options="option.id as option.name for option in mail_options">
                         </select>
                     </label>
                 </div>
@@ -72,8 +72,8 @@
                 <div class="col">
                     <label class="item item-input item-select">
                         <span class="input-label">Method:<span style="color: red;">*</span></span>
-                        <select ng-model="myVariables.fafsa_method" ng-options="option.name for option in mail_options">
-                    </select>
+                        <select ng-model="myapplication.fafsa_method" ng-options="option.id as option.name for option in mail_options">
+                        </select>
                     </label>
                 </div>
                 <div class="col item">
@@ -101,8 +101,8 @@
                 <div class="col">
                     <label class="item item-input item-select">
                         <span class="input-label">Method:<span style="color: red;">*</span></span>
-                        <select ng-model="myVariables.transcript_method" ng-options="option.name for option in mail_options">
-                    </select>
+                        <select ng-model="myapplication.transcript_method" ng-options="option.id as option.name for option in mail_options">
+                        </select>
                     </label>
                 </div>
                 <div class="col item">
@@ -130,7 +130,7 @@
                 <div class="col">
                     <label class="item item-input item-select">
                         <span class="input-label">Method:<span style="color: red;">*</span></span>
-                        <select ng-model="myVariables.housing_method" ng-options="option.name for option in mail_options">
+                        <select ng-model="myapplication.transcript_method" ng-options="option.id as option.name for option in mail_options">
                         </select>
                     </label>
                 </div>

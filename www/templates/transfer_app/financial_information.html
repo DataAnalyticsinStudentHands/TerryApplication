@@ -19,7 +19,7 @@
                 <div class="col col col-50">
                     <label class="item item-input item-select">
                         <span class="input-label">Your marital status:<span style="color: red;">*</span></span>
-                        <select ng-model="myVariables.marital_status" ng-options="status.name for status in myVariables.marital_statuss"></select>
+                        <select ng-model="myapplication.marital_status" ng-options="status.id as status.name for status in marital_statuses"></select>
                     </label>
                 </div>
             </div>

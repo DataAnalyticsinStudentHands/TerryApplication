@@ -34,7 +34,7 @@ angular.module('HonorsApplications', [
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
         //console.log("$stateChangeStart to state: " + toState.name);
-        $ionicLoading.show();
+        $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Loading page ...</div>'});
         //console.log($rootScope.isAuthenticated());
         if (toState.authenticate && !$rootScope.isAuthenticated()) {
             console.log("non-authed");
