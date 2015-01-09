@@ -30,7 +30,7 @@ databaseServices.factory('Auth', ['Base64', '$http', function (Base64, $http) {
             return (ls && lsc && ls != "VmlzaXRvcjp0ZXN0");
         },
         confirmCredentials: function() {
-            console.log("confirming");
+            //console.log("confirming");
             localStorage.setItem("authdata-conf", true);
         }
     };

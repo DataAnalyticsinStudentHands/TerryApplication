@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <label class="item item-input item-stacked-label" validated>
+                    <label class="item item-input item-stacked-label validated" >
                         <span class="input-label">Middle Name:</span> 
                         <input name="middle_name" type="text" ng-model="myapplication.middle_name" ng-maxlength="40" placeholder="Middlename">
                     </label>
@@ -124,13 +124,13 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Home Phone:<span style="color: red;">*</span></span>
-                        <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit" />
+                        <input ng-model="myapplication.home_phone" ui-mask="{{'(999) 999-9999'}}" type="text" />
                     </label>
                 </div>
                 <div class="col">
                     <label class="item item-input item-stacked-label validated">
                         <span class="input-label">Alternate/Cell Phone:</span>
-                        <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" ng-required="finalSubmit" />
+                        <input ng-model="myapplication.alt_cell_phone" ui-mask="{{'(999) 999-9999'}}" type="text" />
                     </label>
                 </div>
             </div>
