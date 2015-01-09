@@ -136,9 +136,7 @@ angular.module('Controllers').controller('UploadController', function ($filter, 
         Restangular.all(acType).all("upload").remove({"applicationId": $stateParams.applicationId, "fileName":  deleteFile}).then(
 
             function (result) {
-                console.log(result);
                 $scope.updateView(acType);
-
             },
             function (error) {
                 ngNotify.set("Could not delete your file on server.", {

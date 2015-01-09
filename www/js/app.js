@@ -33,7 +33,7 @@ angular.module('HonorsApplications', [
     };
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-        console.log("$stateChangeStart to state: " + toState.name);
+        //console.log("$stateChangeStart to state: " + toState.name);
         $ionicLoading.show();
         //console.log($rootScope.isAuthenticated());
         if (toState.authenticate && !$rootScope.isAuthenticated()) {
@@ -53,7 +53,6 @@ angular.module('HonorsApplications', [
     //Logout user by clearing credentials
     $rootScope.logout = function () {
         Auth.clearCredentials();
-        console.log("log out");
         $state.go('signin', {}, {
             reload: true
         });
@@ -68,7 +67,7 @@ angular.module('HonorsApplications', [
 
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         $ionicLoading.hide();
-        console.log('$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.');
+        //console.log('$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.');
     });
 
     $rootScope.$on('$viewContentLoaded', function (event) {

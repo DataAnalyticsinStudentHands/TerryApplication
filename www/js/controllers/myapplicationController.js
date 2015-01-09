@@ -208,7 +208,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     $scope.moveItem = function (item, fromIndex, toIndex) {
         $scope.listings.university.splice(fromIndex, 1);
         $scope.listings.university.splice(toIndex, 0, item);
-        /*var i, l,
+        var i, l,
             listPromises = [];
         for (i = 0, l = $scope.listings.university.length; i < l; i++) {
             $scope.listings.university[i].rank = i;
@@ -217,9 +217,8 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         
         var test = $q.all(listPromises)
             .then(function (success) {
-                console.log('finally ...');
                 updateList('university');
-        });*/
+        });
         
     };
 
@@ -236,8 +235,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                         updateList(acType);
                     }
                 );
-            } else {
-                console.log('Delete canceled.');
             }
         });
     };
@@ -321,11 +318,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                         $scope.listerror[result.type] = 'true';
                     }
 
-                    //we should check courses at each level
+                    /*we should check courses at each level
                     if (result.type === 'coursework') {
 
-                        console.log("course " + result);
-                    }
+                        
+                    }*/
                 }
             ));
         }
@@ -445,11 +442,11 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                         $scope.listerror[result.type] = 'true';
                     }
 
-                    //we should check courses at each level
+                    /*we should check courses at each level
                     if (result.type === 'coursework') {
 
-                        console.log("course " + result);
-                    }
+                        
+                    }*/
                 }
             ));
         }
@@ -460,7 +457,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 if (result.fileName.length < 1) {
                     $scope.error.essay = 'true';
                     $scope.errors.essay = [];
-                    $scope.errors.essay.push('One of the essays is missing.');
+                    $scope.errors.essay.push('Your essay is missing.');
                 }
             }
         ));
