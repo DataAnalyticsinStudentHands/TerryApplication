@@ -299,7 +299,7 @@ angular.module('HonorsApplications', [
         })
     
         .state('tabs.applications.transfer_application', {
-            url: '/transfer_application/:applicationId',
+            url: '/transfer_application/:applicationId?appType',
             abstract: true,
             views: {
                 'applications-tab@tabs': {
