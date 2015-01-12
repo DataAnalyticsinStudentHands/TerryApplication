@@ -365,12 +365,21 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 }
 
                 //check the submission page
-                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
+                var j, k, goThrough = ['app_uh', 'transcript', 'fafsa', 'housing'];
+            
+            var orig = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
                 $scope.errors.submission = [];
                 for (j = 0, k = goThrough.length; j < k; j++) {
-                    if ($scope.myapplication[goThrough[j]] === undefined) {
+                    var toTest = goThrough[j] + '_method';
+                    if ($scope.myapplication[toTest] === undefined) {
                         $scope.error.submission = 'true';
-                        $scope.errors.submission.push(goThrough[j]);
+                        $scope.errors.submission.push(toTest);
+                    }
+                    var subDate = goThrough[j] + '_date_sub';
+                    var intDate = goThrough[j] + '_date_int_sub';
+                    if ($scope.myapplication[subDate] === undefined && $scope.myapplication[subDate] === undefined) {
+                        $scope.error.submission = 'true';
+                        $scope.errors.submission.push('Missing ' + subDate + ' or ' + subDate);
                     }
                 }
 
@@ -480,14 +489,24 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 }
 
                 //check the submission page
-                var j, k, goThrough = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
+                var j, k, goThrough = ['app_uh', 'transcript', 'fafsa', 'housing'];
+            
+            var orig = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
                 $scope.errors.submission = [];
                 for (j = 0, k = goThrough.length; j < k; j++) {
-                    if ($scope.myapplication[goThrough[j]] === undefined) {
+                    var toTest = goThrough[j] + '_method';
+                    if ($scope.myapplication[toTest] === undefined) {
                         $scope.error.submission = 'true';
-                        $scope.errors.submission.push(goThrough[j]);
+                        $scope.errors.submission.push(toTest);
+                    }
+                    var subDate = goThrough[j] + '_date_sub';
+                    var intDate = goThrough[j] + '_date_int_sub';
+                    if ($scope.myapplication[subDate] === undefined && $scope.myapplication[intDate] === undefined) {
+                        $scope.error.submission = 'true';
+                        $scope.errors.submission.push('Missing ' + subDate + ' or ' + intDate);
                     }
                 }
+
 
                 //update general problems value
                 var value;
