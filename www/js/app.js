@@ -20,7 +20,8 @@ angular.module('HonorsApplications', [
 
     // Set Base URL to connect to DASH RESTFUL webservices
     //Restangular.setBaseUrl("http://127.0.0.1:8080/terrytest/"); // localhost
-    Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
+    //Restangular.setBaseUrl("http://www.housuggest.org:8080/terrytest/");
+    Restangular.setBaseUrl("https://www.housuggest.org:8443/terrytest/");
     //Restangular.setDefaultHttpFields({cache: true});
 
     // have Restangular available whereever we need it

@@ -414,9 +414,14 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.errors = {};
         $scope.error = {};
 
-        //check using form.json
-        var i, j, l, k, key, objectsToCheck, obj, thingsToCheck = ['student_information', 'education', 'financial_information', 'personal_history'];
+        
+        var i, j, l, k, 
+            key, 
+            objectsToCheck, 
+            obj, 
+            thingsToCheck = ['student_information', 'education', 'financial_information', 'personal_history'];
 
+        //check using form_transfer_application.json
         for (i = 0, l = thingsToCheck.length; i < l; i++) {
             objectsToCheck = $scope.filterBy(thingsToCheck[i]);
 
@@ -437,25 +442,37 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                 $scope.error[thingsToCheck[i]] = 'true';
             }
         }
+        
+        //check the submission page
+        var j, k, goThrough = ['app_uh', 'transcript', 'fafsa', 'housing'];
 
-        //check the lists for not empty
-        var listsToCheck = ['transfer_activity', 'award', 'child', 'employment', 'university', 'volunteer'],
+        $scope.errors.submission = [];
+        for (j = 0, k = goThrough.length; j < k; j++) {
+            var toTest = goThrough[j] + '_method';
+            if ($scope.myapplication[toTest] === undefined) {
+                $scope.error.submission = 'true';
+                $scope.errors.submission.push(toTest);
+            }
+            var subDate = goThrough[j] + '_date_sub';
+            var intDate = goThrough[j] + '_date_int_sub';
+            if ($scope.myapplication[subDate] === undefined && $scope.myapplication[intDate] === undefined) {
+                $scope.error.submission = 'true';
+                $scope.errors.submission.push('Missing ' + subDate + ' or ' + intDate);
+            }
+        }
+
+        //prepare check the lists for not empty
+        var listsToCheck = ['transfer_activity', 'military', 'institution', 'award', 'child', 'employment', 'volunteer', ],
             listPromises = [];
-        $scope.listerror = {};
+        $scope.listempty = {};
 
         for (j = 0, k = listsToCheck.length; j < k; j++) {
             listPromises.push(DataService.getAllItems(listsToCheck[j]).then(
                 function (result) {
-                    $scope.listerror[result.type] = 'false';
+                    $scope.listempty[result.type] = 'false';
                     if (result.length === 0) {
-                        $scope.listerror[result.type] = 'true';
+                        $scope.listempty[result.type] = 'true';
                     }
-
-                    /*we should check courses at each level
-                    if (result.type === 'coursework') {
-
-                        
-                    }*/
                 }
             ));
         }
@@ -471,42 +488,22 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
             }
         ));
 
-        //after checking individual lists, sift through the results
+        //after resolving promises, sift through the results
         $scope.fromThen = $q.all(listPromises)
             .then(function (values) {
 
-                //check coursework page TODO
-
-
                 //check employment page
-                var i, l, goThroughLists = ['transfer_activity', 'award', 'employment', 'volunteer'];
+                var i, l, 
+                    goThroughLists = ['transfer_activity', 'award', 'employment', 'volunteer'];
                 $scope.errors.employment = [];
                 for (i = 0, l = goThroughLists.length; i < l; i++) {
-                    if ($scope.listerror[goThroughLists[i]] === 'true') {
+                    if ($scope.listempty[goThroughLists[i]] === 'true') {
                         $scope.error.employment = 'true';
                         $scope.errors.employment.push(goThroughLists[i]);
                     }
                 }
 
-                //check the submission page
-                var j, k, goThrough = ['app_uh', 'transcript', 'fafsa', 'housing'];
-            
-            var orig = ['app_uh_date_sub', 'app_uh_date_int_sub', 'transcript_date_sub', 'transcript_date_int_sub', 'fafsa_date_sub', 'fafsa_date_int_sub', 'housing_date_sub', 'housing_date_int_sub'];
-                $scope.errors.submission = [];
-                for (j = 0, k = goThrough.length; j < k; j++) {
-                    var toTest = goThrough[j] + '_method';
-                    if ($scope.myapplication[toTest] === undefined) {
-                        $scope.error.submission = 'true';
-                        $scope.errors.submission.push(toTest);
-                    }
-                    var subDate = goThrough[j] + '_date_sub';
-                    var intDate = goThrough[j] + '_date_int_sub';
-                    if ($scope.myapplication[subDate] === undefined && $scope.myapplication[intDate] === undefined) {
-                        $scope.error.submission = 'true';
-                        $scope.errors.submission.push('Missing ' + subDate + ' or ' + intDate);
-                    }
-                }
-
+                
 
                 //update general problems value
                 var value;
