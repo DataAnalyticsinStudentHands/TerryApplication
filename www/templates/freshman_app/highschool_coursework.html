@@ -31,7 +31,7 @@
         </div>
 
         <div class="list">
-            <div class="item" ng-repeat="course in mycourses | filter: {level:'junior'}" item="course">
+            <div class="item" ng-repeat="course in listings.coursework | filter: {level:'junior'}" item="course">
                 <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('coursework', course.id)"></button>
                 <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editData('coursework', course)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="list">
-            <div class="item" ng-repeat="course in mycourses | filter: {level:'senior'}" item="course">
+            <div class="item" ng-repeat="course in listings.coursework | filter: {level:'senior'}" item="course">
                 <button title="Delete Course" class="button icon ion-minus-circled button-clear button-dark" ng-click="deleteData('coursework', course.id)"></button>
                 <button title="Edit Course" class="button button-icon icon ion-compose" ng-click="editData('coursework', course)">&nbsp;&nbsp;&nbsp;&nbsp;{{course.name}} {{course.type}} {{course.credit_hours}} {{course.final_grade}}</button>
             </div>
