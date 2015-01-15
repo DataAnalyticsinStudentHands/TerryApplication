@@ -8,7 +8,7 @@
  * # MyApplicationController
  * Controller for the terry
  */
-angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, DataService, application, activity, coursework, university, scholarship, child, institution, employment, military, transfer_activity, volunteer, award) {
+angular.module('Controllers').controller('MyApplicationController', function ($scope, $http, $q, Restangular, ngNotify, $stateParams, $state, $filter, $ionicSideMenuDelegate, $ionicModal, $ionicPopup, $ionicLoading, DataService, application, activity, coursework, university, scholarship, child, institution, employment, military, transfer_activity, volunteer, award) {
     'use strict';
 
     $scope.date = new Date();
@@ -192,10 +192,14 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     };
 
     function updateList(acType) {
-        // GET 
+        $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Updating data from server ...</div>'});
         DataService.getAllItems(acType).then(
-            function (result) {
-                $scope.listings[acType] = result;
+            function (success) {
+                $ionicLoading.hide();
+                $scope.listings[acType] = success;
+            },
+            function (error) {
+                $ionicLoading.hide();
             }
         );
     }
@@ -390,9 +394,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     }
                 }
 
-
-
-
                 //update general problems value
                 var value;
                 for (value in $scope.error) {
@@ -422,10 +423,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.error = {};
         
         var i, j, l, k, 
-            key, 
+            key, anotherkey,
             objectsToCheck, 
-            obj, 
-            thingsToCheck = ['student_information', 'education', 'financial_information', 'personal_history'];
+            obj, depObj,
+            thingsToCheck = ['student_information', 'education', 'employment', 'financial_information', 'personal_history'];
 
         //check using form_transfer_application.json
         for (i = 0, l = thingsToCheck.length; i < l; i++) {
@@ -437,8 +438,26 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     obj = objectsToCheck[key];
 
                     if (obj.required === 'true') {
-                        if (!$scope.myapplication.hasOwnProperty(obj.name)) {
+                        if (!$scope.myapplication.hasOwnProperty(obj.name) || $scope.myapplication.hasOwnProperty(obj.name) === '') {
                             $scope.errors[thingsToCheck[i]].push(obj.name);
+                        }
+                    }
+                    //go through items to find out whether this needs to be filled out, only if true in origin
+                    if (obj.triggers !== undefined) {
+                        if ($scope.myapplication.hasOwnProperty(obj.name) && $scope.myapplication[obj.name] === 'true') {
+                            for (var x = 0; x < obj.triggers.length; x++) {
+                                for (anotherkey in objectsToCheck) {
+                                    if (objectsToCheck.hasOwnProperty(anotherkey)) {
+                                        depObj = objectsToCheck[anotherkey];
+                                        if (depObj.id === obj.triggers[x]) {
+                                            if (depObj.required_by_trigger === 'true' && (!$scope.myapplication.hasOwnProperty(depObj.name) || $scope.myapplication.hasOwnProperty(obj.name) === '')) {
+                                                $scope.errors[thingsToCheck[i]].push(depObj.name);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -468,7 +487,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
 
         //prepare check the lists for not empty
-        var listsToCheck = ['transfer_activity', 'military', 'institution', 'award', 'child', 'employment', 'volunteer', ],
+        var listsToCheck = ['transfer_activity', 'military', 'institution', 'award', 'child', 'employment', 'volunteer'],
             listPromises = [];
         $scope.listempty = {};
 
@@ -498,18 +517,16 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.fromThen = $q.all(listPromises)
             .then(function (values) {
 
-                //check employment page
+                //feedback for empty lists ToDo
                 var i, l, 
                     goThroughLists = ['transfer_activity', 'award', 'employment', 'volunteer'];
-                $scope.errors.employment = [];
+                /*$scope.errors.employment = [];
                 for (i = 0, l = goThroughLists.length; i < l; i++) {
                     if ($scope.listempty[goThroughLists[i]] === 'true') {
-                        $scope.error.employment = 'true';
+                        $scope.error.employment = 'empty';
                         $scope.errors.employment.push(goThroughLists[i]);
                     }
-                }
-
-                
+                }*/
 
                 //update general problems value
                 var value;

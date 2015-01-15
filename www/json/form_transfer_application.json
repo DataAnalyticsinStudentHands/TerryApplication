@@ -133,7 +133,8 @@
         "form": "student_information",
         "id": 17,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 18 ]
     },
     {
         "name": "permanent_resident",
@@ -141,8 +142,9 @@
         "form": "student_information",
         "id": 18,
         "type": "text",
-        "required": "true",
-        "dependency": 17
+        "required": "false",
+        "required_by_trigger": "true",
+        "triggers": [ 19 ]
     },
     {
         "name": "permanent_resident_card",
@@ -150,8 +152,8 @@
         "form": "student_information",
         "id": 19,
         "type": "text",
-        "required": "true",
-        "dependency": 18
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "texas_resident",
@@ -207,7 +209,8 @@
         "form": "education",
         "id": 26,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 28 ]
     },
     {
         "name": "highschool_ged",
@@ -215,7 +218,8 @@
         "form": "education",
         "id": 27,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 30 ]
     },
     {
         "name": "highschool_graduation_date",
@@ -223,8 +227,8 @@
         "form": "education",
         "id": 28,
         "type": "date",
-        "required": "true",
-        "dependency": 26
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "highschool_graduation_na",
@@ -240,8 +244,8 @@
         "form": "education",
         "id": 30,
         "type": "date",
-        "required": "true",
-        "dependency": 27
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "highschool_ged_date_na",
@@ -281,7 +285,8 @@
         "form": "education",
         "id": 35,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 36 ]
     },
     {
         "name": "induction_semester",
@@ -289,8 +294,8 @@
         "form": "education",
         "id": 36,
         "type": "text",
-        "required": "true",
-        "dependency": 35
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "currently_employed",
@@ -306,7 +311,8 @@
         "form": "employment",
         "id": 38,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 39 ]
     },
     {
         "name": "unit_location",
@@ -314,8 +320,8 @@
         "form": "employment",
         "id": 39,
         "type": "text",
-        "required": "true",
-        "dependency": 38
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "previously_served",
@@ -323,7 +329,8 @@
         "form": "employment",
         "id": 40,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "triggers": [ 41, 42, 43, 44, 45, 48 ]
     },
     {
         "name": "mos",
@@ -331,8 +338,8 @@
         "form": "employment",
         "id":41,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "additional_specialized_training",
@@ -340,8 +347,8 @@
         "form": "employment",
         "id": 42,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "medals",
@@ -349,8 +356,8 @@
         "form": "employment",
         "id": 43,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "wounded_warrior",
@@ -358,8 +365,8 @@
         "form": "employment",
         "id": 44,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "education_benefits",
@@ -367,8 +374,9 @@
         "form": "employment",
         "id": 45,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true",
+        "triggers": [ 46 ]
     },
     {
         "name": "education_benefits_remaining",
@@ -377,7 +385,8 @@
         "id": 46,
         "type": "text",
         "required": "false",
-        "dependency": 40
+        "required_by_trigger": "true",
+        "triggers": 47
     },
     {
         "name": "details_gibill",
@@ -385,8 +394,8 @@
         "form": "employment",
         "id": 47,
         "type": "text",
-        "required": "true",
-        "dependency": 46
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "hazlewood_act_benefits",
@@ -394,17 +403,19 @@
         "form": "employment",
         "id": 48,
         "type": "text",
-        "required": "true",
-        "dependency": 40
+        "required": "false",
+        "required_by_trigger": "true",
+        "triggers": [ 49 ]
     },
     {
-        "name": "halewood_act__benefits_remaining",
+        "name": "hazlewood_act_benefits_remaining",
         "label": "If YES, do you have any Hazlewood Act benefits remaining?",
         "form": "employment",
         "id": 49,
         "type": "text",
-        "required": "true",
-        "dependency": 48
+        "required": "false",
+        "required_by_trigger": "true",
+        "triggers": [ 50 ]
     },
     {
         "name": "details_hazlewoodact",
@@ -412,8 +423,8 @@
         "form": "employment",
         "id": 50,
         "type": "text",
-        "required": "true",
-        "dependency": 49
+        "required": "false",
+        "required_by_trigger": "true"
     },
     {
         "name": "marital_status",

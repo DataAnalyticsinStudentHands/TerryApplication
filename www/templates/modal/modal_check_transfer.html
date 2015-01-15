@@ -12,7 +12,6 @@
             We have checked your application and found missing values. Please use the table below as an indicator to go back and fix the problems.
         </p>
         
-        
         <div class="list">
             <a ng-hide="error.student_information" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.student_information" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
@@ -36,7 +35,7 @@
             </a>
             <a ng-show="error.employment" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.employment" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                III. Employment missing values in lists: {{errors.employment}}
+                III. Employment: {{errors.employment}}
             </a>
             <a ng-hide="error.financial_information" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.financial_information" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
@@ -44,7 +43,7 @@
             </a>
             <a ng-show="error.financial_information" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.financial_information" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                IV. Financial Information {{errors.financial_information}}
+                IV. Financial Information: {{errors.financial_information}}
             </a>
             <a ng-hide="error.personal_history" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.personal_history" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
@@ -52,23 +51,23 @@
             </a>
             <a ng-show="error.personal_history" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.personal_history" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                V. Personal History {{errors.personal_history}}
+                V. Personal History: {{errors.personal_history}}
             </a>
             <a ng-hide="error.essay" class="item item-icon-right" ui-sref="tabs.applications.application.essays" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
-                VIII. Essay
+                VI. Essay
             </a>
             <a ng-show="error.essay" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.essays" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                VIII. Essay {{errors.essay}}
+                VI. Essay {{errors.essay}}
             </a>
             <a ng-hide="error.submission" class="item item-icon-right" ui-sref="tabs.applications.transfer_application.submit" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>
-                Submission
+                VII. Submission
             </a>
             <a ng-show="error.submission" class="item item-icon-right item-text-wrap" ui-sref="tabs.applications.transfer_application.submit" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                Submission {{errors.submission}}
+                VII. Submission {{errors.submission}}
             </a>
         </div>
 
