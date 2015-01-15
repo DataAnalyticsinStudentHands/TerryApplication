@@ -1,6 +1,4 @@
 [
-
-
     {
         "name": "first_name",
         "label": "First Name:",
@@ -102,7 +100,7 @@
         "label": "Home Phone:",
         "form": "student_information",
         "id": 13,
-        "type": "number",
+        "type": "text",
         "required": "true"
     },
     {
@@ -110,7 +108,7 @@
         "label": "Alternate/Cell Phone:",
         "form": "student_information",
         "id": 14,
-        "type": "number",
+        "type": "text",
         "required": "false"
     },
     {
@@ -119,6 +117,7 @@
         "form": "student_information",
         "id": 15,
         "type": "text",
+        "required": "true"
     },
     {
         "name": "email",
@@ -142,7 +141,8 @@
         "form": "student_information",
         "id": 18,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 17
     },
     {
         "name": "permanent_resident_card",
@@ -150,7 +150,8 @@
         "form": "student_information",
         "id": 19,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 18
     },
     {
         "name": "texas_resident",
@@ -222,7 +223,8 @@
         "form": "education",
         "id": 28,
         "type": "date",
-        "required": "true"
+        "required": "true",
+        "dependency": 26
     },
     {
         "name": "highschool_graduation_na",
@@ -238,7 +240,8 @@
         "form": "education",
         "id": 30,
         "type": "date",
-        "required": "true"
+        "required": "true",
+        "dependency": 27
     },
     {
         "name": "highschool_ged_date_na",
@@ -253,7 +256,7 @@
         "label": "Hours in Progress:",
         "form": "education",
         "id": 32,
-        "type": "number",
+        "type": "text",
         "required": "true"
     },
     {
@@ -286,7 +289,8 @@
         "form": "education",
         "id": 36,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 35
     },
     {
         "name": "currently_employed",
@@ -310,7 +314,8 @@
         "form": "employment",
         "id": 39,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 38
     },
     {
         "name": "previously_served",
@@ -326,7 +331,8 @@
         "form": "employment",
         "id":41,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "additional_specialized_training",
@@ -334,7 +340,8 @@
         "form": "employment",
         "id": 42,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "medals",
@@ -342,7 +349,8 @@
         "form": "employment",
         "id": 43,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "wounded_warrior",
@@ -350,7 +358,8 @@
         "form": "employment",
         "id": 44,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "education_benefits",
@@ -358,7 +367,8 @@
         "form": "employment",
         "id": 45,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "education_benefits_remaining",
@@ -366,7 +376,8 @@
         "form": "employment",
         "id": 46,
         "type": "text",
-        "required": "false"
+        "required": "false",
+        "dependency": 40
     },
     {
         "name": "details_gibill",
@@ -374,7 +385,8 @@
         "form": "employment",
         "id": 47,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 46
     },
     {
         "name": "hazlewood_act_benefits",
@@ -382,7 +394,8 @@
         "form": "employment",
         "id": 48,
         "type": "text",
-        "required": "true"
+        "required": "true",
+        "dependency": 40
     },
     {
         "name": "halewood_act__benefits_remaining",
@@ -390,7 +403,8 @@
         "form": "employment",
         "id": 49,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 48
     },
     {
         "name": "details_hazlewoodact",
@@ -398,157 +412,158 @@
         "form": "employment",
         "id": 50,
         "type": "text",
-        "required": "false"
+        "required": "true",
+        "dependency": 49
     },
     {
         "name": "marital_status",
         "label": "Your marital status:",
         "form": "financial_information",
-        "id": 58,
+        "id": 51,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "occupation",
         "label": "Your occupation:",
         "form": "financial_information",
-        "id": 59,
+        "id": 52,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "partner_occupation",
         "label": "Partner's occupation:",
         "form": "financial_information",
-        "id": 60,
+        "id": 53,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "employer",
         "label": "Your employer:",
         "form": "financial_information",
-        "id": 61,
+        "id": 54,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "partner_employer",
         "label": "Partner's employer:",
         "form": "financial_information",
-        "id": 62,
+        "id": 55,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "agi_2014",
         "label": "Your AGI for 2014:",
         "form": "financial_information",
-        "id": 63,
-        "type": "number",
-        "required": "false"
+        "id": 56,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "partner_agi_2014",
         "label": "Partner's AGI for 2014",
         "form": "financial_information",
-        "id": 64,
-        "type": "number",
-        "required": "false"
+        "id": 57,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "edu_debt",
         "label": "Your educational debt:",
         "form": "financial_information",
-        "id": 65,
-        "type": "number",
-        "required": "false"
+        "id": 58,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "partner_edu_debt",
         "label": "Partner's educational debt:",
         "form": "financial_information",
-        "id": 66,
-        "type": "number",
-        "required": "false"
+        "id": 59,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "childsupport_received",
         "label": "Your monthly child support received:",
         "form": "financial_information",
-        "id": 67,
-        "type": "number",
-        "required": "false"
+        "id": 60,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "partner_childsupport_received",
         "label": "Partner's monthly child support received:",
         "form": "financial_information",
-        "id": 68,
-        "type": "number",
-        "required": "false"
+        "id": 61,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "childsupport_payment",
         "label": "Your monthly child support payment:",
         "form": "financial_information",
-        "id": 69,
-        "type": "number",
-        "required": "false"
+        "id": 62,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "partner_childsupport_payment",
         "label": "Partner's monthly child support payment:",
         "form": "financial_information",
-        "id": 70,
-        "type": "number",
-        "required": "false"
+        "id": 63,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "childsupport_expenses",
         "label": "Your monthly childcare expenses:",
         "form": "financial_information",
-        "id": 71,
-        "type": "number",
-        "required": "false"
+        "id": 64,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "partner_childsupport_expenses",
         "label": "Partner's monthly childcare expenses:",
         "form": "financial_information",
-        "id": 72,
-        "type": "number",
-        "required": "false"
+        "id": 65,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "other_financial_resources",
         "label": "Are there other financial resources that you regularly receive or rely upon to support yourself? If so, please describe and provide amounts:",
         "form": "financial_information",
-        "id": 73,
+        "id": 66,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "financialsupport_otherfamily",
         "label": "If you provide financial support for another family, please tell us about this family:",
         "form": "financial_information",
-        "id": 74,
+        "id": 67,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "description_special_circumstances",
         "label": "Please describe any special circumstances or additional factors that affect your family's ability to fund your college expenses:",
         "form": "financial_information",
-        "id": 75,
+        "id": 68,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "dependent_taxreturn_2014",
         "label": "Were you listed as a dependent on someone else's tax return for 2014?",
         "form": "financial_information",
-        "id": 76,
+        "id": 69,
         "type": "text",
         "required": "true"
     },
@@ -556,7 +571,7 @@
         "name": "dependent_taxreturn_2015",
         "label": "Will you be listed as a dependent on someone else's tax return for 2015?",
         "form": "financial_information",
-        "id": 77,
+        "id": 70,
         "type": "text",
         "required": "true"
     },
@@ -564,7 +579,7 @@
         "name": "claimant",
         "label": "Name and relationship of claimant:",
         "form": "financial_information",
-        "id": 78,
+        "id": 71,
         "type": "text",
         "required": "false"
     },
@@ -572,47 +587,47 @@
         "name": "father_occupation",
         "label": "Father/stepfather occupation:",
         "form": "financial_information",
-        "id": 79,
+        "id": 72,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "mother_occupation",
         "label": "Mother/stepmother occupation:",
         "form": "financial_information",
-        "id": 80,
+        "id": 73,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "adjusted_cross_income",
         "label": "Your parent(s)', stepparent(s)', or guardians' adjustd Gross Income for 2014:",
         "form": "financial_information",
-        "id": 81,
-        "type": "number",
-        "required": "false"
+        "id": 74,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "family_support",
         "label": "Amount of financial support reveiced by you from family (not your partner) in 2014?",
         "form": "financial_information",
-        "id": 82,
-        "type": "number",
-        "required": "false"
+        "id": 75,
+        "type": "text",
+        "required": "true"
     },
     {
         "name": "additional_factors",
         "label": "Please describe any special circumstances that affect your family's ability to fund your college expenses:",
         "form": "financial_information",
-        "id": 83,
+        "id": 76,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "first_graduate",
         "label": "Will you be the first in your family to graduate college?",
         "form": "personal_history",
-        "id": 53,
+        "id": 77,
         "type": "text",
         "required": "true"
     },
@@ -620,7 +635,7 @@
         "name": "why_apply",
         "label": "Why have you chosen to apply to the University of Houston?",
         "form": "personal_history",
-        "id": 54,
+        "id": 78,
         "type": "text",
         "required": "true"
     },
@@ -628,7 +643,7 @@
         "name": "why_major",
         "label": "Why have you chosen your academic major(s)?",
         "form": "personal_history",
-        "id": 55,
+        "id": 79,
         "type": "text",
         "required": "true"
     },
@@ -636,7 +651,7 @@
         "name": "educational_plans",
         "label": "Briefly describe any educational plans you have beyond earning your Bachelor’s degree:",
         "form": "personal_history",
-        "id": 56,
+        "id": 80,
         "type": "text",
         "required": "true"
     },
@@ -644,7 +659,7 @@
         "name": "life_goals",
         "label": "What are some of your life’s goals and objectives?",
         "form": "personal_history",
-        "id": 57,
+        "id": 81,
         "type": "text",
         "required": "true"
     },
@@ -653,7 +668,7 @@
         "name": "influential_member",
         "label": "Has there been a particularly influential faculty member or personal contact that has been instrumental in your decision to attend the University of Houston? If so, please relate:",
         "form": "scholarship_information",
-        "id": 58,
+        "id": 82,
         "type": "text",
         "required": "false"
     },
@@ -661,31 +676,23 @@
         "name": "successful_lessons",
         "label": "Transfer/non-traditional students often tell us that their prior experience has taught them lessons that helped them be successful. What lessons have you learned that you would like to pass on to other students?",
         "form": "scholarship_information",
-        "id": 59,
+        "id": 83,
         "type": "text",
         "required": "true"
     },
     {
         "name": "scholarship_consideration",
-        "label": "Is there any additional information that you consider improtant for the committee to know in evaluating your application for scholarship consideration?",
+        "label": "Is there any additional information that you consider important for the committee to know in evaluating your application for scholarship consideration?",
         "form": "scholarship_information",
-        "id": 60,
+        "id": 84,
         "type": "text",
         "required": "false"
-    },
-    {
-        "name": "status",
-        "label": "",
-        "form": "",
-        "id": 61,
-        "type": "",
-        "required": ""
     },
     {
         "name": "app_uh_method",
         "label": "Method of Application UH:",
         "form": "submit",
-        "id": 101,
+        "id": 85,
         "type": "text",
         "required": "true"
     },
@@ -693,15 +700,15 @@
         "name": "app_uh_date_sub",
         "label": "UH Application submission date:",
         "form": "submit",
-        "id": 102,
+        "id": 86,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "app_uh_date_sub_na",
         "label": "UH Application submission date:",
         "form": "submit",
-        "id": 102,
+        "id": 87,
         "type": "text",
         "required": "false"
     },
@@ -709,15 +716,15 @@
         "name": "app_uh_date_int_sub",
         "label": "UH Application anticipated submission date:",
         "form": "submit",
-        "id": 103,
+        "id": 88,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "app_uh_date_int_sub_na",
         "label": "UH Application anticipated submission date:",
         "form": "submit",
-        "id": 103,
+        "id": 89,
         "type": "test",
         "required": "false"
     },
@@ -725,7 +732,7 @@
         "name": "transcript_method",
         "label": "Method of sending Transcripts:",
         "form": "submit",
-        "id": 104,
+        "id": 90,
         "type": "text",
         "required": "true"
     },
@@ -733,15 +740,15 @@
         "name": "transcript_date_sub",
         "label": "Transcripts submission date:",
         "form": "submit",
-        "id": 105,
+        "id": 91,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "transcript_date_sub",
         "label": "Transcripts submission date:",
         "form": "submit",
-        "id": 105,
+        "id": 92,
         "type": "text",
         "required": "false"
     },
@@ -751,13 +758,13 @@
         "form": "submit",
         "id": 106,
         "type": "date",
-        "required": "true"
+        "required": "false"
     },
     {
         "name": "transcript_date_int_sub_na",
         "label": "Transcripts anticipated submission date:",
         "form": "submit",
-        "id": 106,
+        "id": 93,
         "type": "text",
         "required": "false"
     },
@@ -765,15 +772,15 @@
         "name": "fafsa_method",
         "label": "Method of Application FAFSA:",
         "form": "submit",
-        "id": 107,
+        "id": 94,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "fafsa_date_sub",
         "label": "FAFSA application submission date:",
         "form": "submit",
-        "id": 108,
+        "id": 95,
         "type": "date",
         "required": "false"
     },
@@ -781,7 +788,7 @@
         "name": "fafsa_date_sub_na",
         "label": "FAFSA application submission date:",
         "form": "submit",
-        "id": 108,
+        "id": 96,
         "type": "text",
         "required": "false"
     },
@@ -789,7 +796,7 @@
         "name": "fafsa_date_int_sub",
         "label": "FAFSA application anticipated submission date:",
         "form": "submit",
-        "id": 109,
+        "id": 99,
         "type": "date",
         "required": "false"
     },
@@ -797,7 +804,7 @@
         "name": "fafsa_date_int_sub_na",
         "label": "FAFSA application anticipated submission date:",
         "form": "submit",
-        "id": 109,
+        "id": 100,
         "type": "text",
         "required": "false"
     },
@@ -805,15 +812,15 @@
         "name": "housing_method",
         "label": "Method of Application UH Housing:",
         "form": "submit",
-        "id": 110,
+        "id": 101,
         "type": "text",
-        "required": "false"
+        "required": "true"
     },
     {
         "name": "housing_date_sub",
         "label": "UH Housing application submission date:",
         "form": "submit",
-        "id": 111,
+        "id": 102,
         "type": "date",
         "required": "false"
     },
@@ -821,7 +828,7 @@
         "name": "housing_date_sub_na",
         "label": "UH Housing application submission date:",
         "form": "submit",
-        "id": 111,
+        "id": 103,
         "type": "text",
         "required": "false"
     },
@@ -829,7 +836,7 @@
         "name": "housing_date_int_sub",
         "label": "UH Housing application anticipated submission date:",
         "form": "submit",
-        "id": 112,
+        "id": 104,
         "type": "date",
         "required": "false"
     },
@@ -837,7 +844,7 @@
         "name": "housing_date_int_sub_na",
         "label": "UH Housing application anticipated submission date:",
         "form": "submit",
-        "id": 112,
+        "id": 105,
         "type": "text",
         "required": "false"
     }

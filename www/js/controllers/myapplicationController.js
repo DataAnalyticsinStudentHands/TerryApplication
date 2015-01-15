@@ -267,7 +267,14 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     };
 
     $scope.filterBy = function (type) {
-        var formObjects = DataService.getForm('application');
+        var formObjects;
+        
+        if ($stateParams.appType === 'freshman') {
+            formObjects = DataService.getForm('application');
+        } else {
+            formObjects = DataService.getForm('transfer_application');
+        }
+        
         return formObjects.filter(function (obj) {
             return obj.form === type;
         });
@@ -413,7 +420,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         $scope.errors = {};
         $scope.error = {};
-
         
         var i, j, l, k, 
             key, 

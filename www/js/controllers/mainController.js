@@ -13,10 +13,11 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
     $scope.main = {};
     $scope.main.application_type = 'Freshman';
 
-    if (freshman_applications.length !== 0)
+    if (freshman_applications.length !== 0) {
         $scope.applications = freshman_applications;
-    else 
+    } else {
         $scope.applications = transfer_applications;
+    }
     
     $scope.myapplication = {};
 
@@ -46,7 +47,7 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
                 );
                 break;
             case 'Transfer':
-                DataService.addItem('transferApplication', $scope.myapplication).then (
+                DataService.addItem('transferApplication', $scope.myapplication).then(
                     function (success) {
                         $scope.applications = DataService.getAllItems('transferApplication');
                         $scope.modal.hide();

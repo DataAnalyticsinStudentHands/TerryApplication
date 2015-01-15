@@ -79,9 +79,9 @@ angular.module('HonorsApplications', [
         console.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
         console.log(unfoundState, fromState, fromParams);
     });
-})
-
-.config(function ($stateProvider, $urlRouterProvider) {
+}).config(function ($stateProvider, $urlRouterProvider) {
+    'use strict';
+    
     $stateProvider
         .state('signin', {
             url: '/signin',
@@ -138,9 +138,9 @@ angular.module('HonorsApplications', [
             url: '/application/:applicationId?appType',
             abstract: true,
             views: {
-                'applications-tab@tabs': {                    
-                        templateUrl: 'templates/abstract_application.html',
-                        controller: 'MyApplicationController' 
+                'applications-tab@tabs': {
+                    templateUrl: 'templates/abstract_application.html',
+                    controller: 'MyApplicationController'
                 }
             },
             resolve: {
@@ -181,7 +181,7 @@ angular.module('HonorsApplications', [
                     return DataService.getAllItems('award');
                 }
             },
-            authenticate: true           
+            authenticate: true
         })
     
         .state('tabs.applications.application.student_information', {
@@ -304,8 +304,8 @@ angular.module('HonorsApplications', [
             abstract: true,
             views: {
                 'applications-tab@tabs': {
-                        templateUrl: 'templates/abstract_transfer_application.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/abstract_transfer_application.html',
+                    controller: 'MyApplicationController'
                 }
             },
             resolve: {
@@ -346,15 +346,15 @@ angular.module('HonorsApplications', [
                     return;
                 }
             },
-            authenticate: true           
+            authenticate: true
         })
     
         .state('tabs.applications.transfer_application.student_information', {
             url: '/student_information',
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/student_information.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/student_information.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -369,8 +369,8 @@ angular.module('HonorsApplications', [
             },
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/education.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/education.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -397,8 +397,8 @@ angular.module('HonorsApplications', [
             },
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/employment.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/employment.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -413,8 +413,8 @@ angular.module('HonorsApplications', [
             },
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/financial_information.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/financial_information.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -424,8 +424,8 @@ angular.module('HonorsApplications', [
             url: '/personal_history',
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/personal_history.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/personal_history.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -440,8 +440,8 @@ angular.module('HonorsApplications', [
             },
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/essay.html',
-                        controller: 'UploadController'
+                    templateUrl: 'templates/transfer_app/essay.html',
+                    controller: 'UploadController'
                 }
             },
             authenticate: true
@@ -489,8 +489,8 @@ angular.module('HonorsApplications', [
             },
             views: {
                 'main_content': {
-                        templateUrl: 'templates/transfer_app/submit.html',
-                        controller: 'MyApplicationController'
+                    templateUrl: 'templates/transfer_app/submit.html',
+                    controller: 'MyApplicationController'
                 }
             },
             authenticate: true
@@ -506,10 +506,6 @@ angular.module('HonorsApplications', [
             },
             authenticate: true
         })
-    
-        
-    
-        
     
         .state('tabs.user', {
             url: '/user',
