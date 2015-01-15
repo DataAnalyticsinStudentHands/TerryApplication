@@ -3,7 +3,7 @@ PROD_REPO = ssh://plindner@housuggest.org/~/terry2015.git
 STAGING_REPO = ssh://plindner@housuggest.org/~/terrytest.git
 
 # Deploy tasks
-staging: build git-staging deploy
+staging: clean build git-staging deploy
 	@ git tag -f staging
 	@ echo "Staging deploy complete"
 
@@ -17,7 +17,7 @@ prod: build git-prod deploy
 build: 
 	@ find www/ -name ".DS_Store" -depth -exec rm {} \;
 	@ cp -R www/ $(BUILD_DIR) && \
-    	rm -rf $(BUILD_DIR)/lib
+	rm -rf $(BUILD_DIR)/lib
 
 # Sub-tasks
 
@@ -30,14 +30,14 @@ git-prod:
 	git remote add origin $(PROD_REPO)
 
 git-staging:
-    	@ cd $(BUILD_DIR) && \
-    	git init && \
-    	git remote add origin $(STAGING_REPO)
+	@ cd $(BUILD_DIR) && \
+	git init && \
+	git remote add origin $(STAGING_REPO)
 
 deploy:
-    	@ cd $(BUILD_DIR) && \
-    	git add -A && \
-    	git commit -m "Release" && \
-    	git push -f origin +master:refs/heads/master
+	@ cd $(BUILD_DIR) && \
+	git add -A && \
+	git commit -m "Release" && \
+	git push -f origin +master:refs/heads/master
 
 .PHONY: build clean deploy git-prod git-staging prod staging
