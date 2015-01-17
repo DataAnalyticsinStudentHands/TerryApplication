@@ -304,7 +304,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     obj = objectsToCheck[key];
 
                     if (obj.required === 'true') {
-                        if (!$scope.myapplication.hasOwnProperty(obj.name)) {
+                        if (!$scope.myapplication.hasOwnProperty(obj.name) || $scope.myapplication[obj.name] === "") {
                             $scope.errors[thingsToCheck[i]].push(obj.name);
                         }
                     }
