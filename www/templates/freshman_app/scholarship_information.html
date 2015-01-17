@@ -15,7 +15,7 @@
                 <div class="col">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Please indicate any college or departmental scholarships specific to your intended major for which you are applying:(max. 200 characters)
-                        <span style="color: red;">*</span></span>
+                        </span>
                         
                         <textarea name="award" ng-model="myapplication.department_scholarship" rows="3" maxlength="200" placeholder="college/departmental scholarships"></textarea>
                     </label>
@@ -24,7 +24,6 @@
 
             <div class="item item-button-left dark">
                 List other scholarships for which you have <u>applied</u> for the 2015-2016 academic year
-                <span style="color: red;">*</span>
                 <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('scholarship', true)"></button>
             </div>
 
@@ -37,7 +36,6 @@
             
             <div class="item item-button-left dark">
                 List other scholarships or grants you will <u>receive</u> for the 2015-2016 academic year
-                <span style="color: red;">*</span>
                 <button type="button" class="button icon ion-plus-circled button-clear button-dark" ng-click="showAddModal('scholarship', false)"></button>
             </div>
 
