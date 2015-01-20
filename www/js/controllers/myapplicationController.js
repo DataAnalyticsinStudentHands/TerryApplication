@@ -379,7 +379,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
                     }
                     var subDate = goThrough[j] + '_date_sub';
                     var intDate = goThrough[j] + '_date_int_sub';
-                    if ($scope.myapplication[subDate] === undefined && $scope.myapplication[intDate] === undefined) {
+                    if (($scope.myapplication[subDate] === undefined || $scope.myapplication[subDate] === "") && ($scope.myapplication[intDate] === undefined || $scope.myapplication[intDate] === "")) {
                         $scope.error.submission = 'true';
                         $scope.errors.submission.push('Missing ' + subDate + ' or ' + intDate);
                     }
