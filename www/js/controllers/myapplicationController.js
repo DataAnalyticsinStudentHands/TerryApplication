@@ -317,23 +317,17 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
 
         //check the lists for not empty
-        var listsToCheck = ['activity', 'award', 'child', 'coursework', 'employment', 'scholarship', 'university', 'volunteer'],
+        var listsToCheck = ['activity', 'award', 'child', 'coursework', 'scholarship', 'university', 'volunteer'],
             listPromises = [];
-        $scope.listerror = {};
+        $scope.listempty = {};
 
         for (j = 0, k = listsToCheck.length; j < k; j++) {
             listPromises.push(DataService.getAllItems(listsToCheck[j]).then(
                 function (result) {
-                    $scope.listerror[result.type] = 'false';
+                    $scope.listempty[result.type] = 'false';
                     if (result.length === 0) {
-                        $scope.listerror[result.type] = 'true';
+                        $scope.listempty[result.type] = 'true';
                     }
-
-                    /*we should check courses at each level
-                    if (result.type === 'coursework') {
-
-                        
-                    }*/
                 }
             ));
         }
@@ -353,21 +347,18 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.fromThen = $q.all(listPromises)
             .then(function (values) {
 
-                //check coursework page TODO
-
-
-                //check employment page
+                //check lists
                 var i, l, goThroughLists = ['activity', 'award', 'employment', 'volunteer'];
-                $scope.errors.employment = [];
+                /*$scope.errors.employment = [];
                 for (i = 0, l = goThroughLists.length; i < l; i++) {
                     if ($scope.listerror[goThroughLists[i]] === 'true') {
                         $scope.error.employment = 'true';
                         $scope.errors.employment.push(goThroughLists[i]);
                     }
-                }
+                }*/
 
                 //additional check for college plans page: list universities
-                if ($scope.listerror.university === 'true') {
+                if ($scope.listempty.university === 'true') {
                     $scope.error.college_plans = 'true';
                     if ($scope.errors.college_plans === undefined) {
                         $scope.errors.college_plans = [];
@@ -487,7 +478,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
 
         //prepare check the lists for not empty
-        var listsToCheck = ['transfer_activity', 'military', 'institution', 'award', 'child', 'employment', 'volunteer'],
+        var listsToCheck = ['transfer_activity', 'military', 'institution', 'award', 'child', 'volunteer'],
             listPromises = [];
         $scope.listempty = {};
 
