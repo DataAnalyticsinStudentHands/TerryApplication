@@ -36,7 +36,7 @@
             </a>
             <a ng-show="error.coursework" class="item item-icon-right" ui-sref="tabs.applications.application.highschool_coursework" ng-click="modal.hide()">
                 <i class="icon ion-close-round assertive"></i>
-                III. High School Coursework 
+                III. High School Coursework {{errors.coursework}}
             </a>
             <a ng-hide="error.employment" class="item item-icon-right" ui-sref="tabs.applications.application.employment" ng-click="modal.hide()">
                 <i class="icon ion-checkmark-round balanced"></i>

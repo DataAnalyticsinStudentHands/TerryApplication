@@ -347,17 +347,16 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         $scope.fromThen = $q.all(listPromises)
             .then(function (values) {
 
-                //check lists
-                var i, l, goThroughLists = ['activity', 'award', 'employment', 'volunteer'];
-                /*$scope.errors.employment = [];
-                for (i = 0, l = goThroughLists.length; i < l; i++) {
-                    if ($scope.listerror[goThroughLists[i]] === 'true') {
-                        $scope.error.employment = 'true';
-                        $scope.errors.employment.push(goThroughLists[i]);
+                //check for list courses
+                if ($scope.listempty.coursework === 'true') {
+                    $scope.error.coursework = 'true';
+                    if ($scope.errors.coursework === undefined) {
+                        $scope.errors.coursework = [];
                     }
-                }*/
+                    $scope.errors.coursework.push('It seems you have not listed any courses.');
+                }
 
-                //additional check for college plans page: list universities
+                //check for college plans page: list universities
                 if ($scope.listempty.university === 'true') {
                     $scope.error.college_plans = 'true';
                     if ($scope.errors.college_plans === undefined) {
@@ -553,7 +552,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         var acType;
 
-        if ($stateParams.appType === 'Freshman')
+        if ($stateParams.appType === 'freshman')
             acType = 'application';
         else
             acType = 'transferApplication';
