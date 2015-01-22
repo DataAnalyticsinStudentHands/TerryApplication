@@ -23,20 +23,24 @@
                     <span>Please enter a valid email address.</span>
                 </div>
                 <label class="item item-input validated">
-                    <input type="text" ng-model="register.firstName" placeholder="First Name" required>
+                    <input name="firstName" type="text" ng-model="register.firstName" placeholder="First Name" required>
                 </label>
 
                 <label class="item item-input validated">
-                    <input type="text" ng-model="register.lastName" placeholder="Last Name" required>
+                    <input name="lastName" type="text" ng-model="register.lastName" placeholder="Last Name" required>
                 </label>
 
                 <label class="item item-input validated">
-                    <input type="password" ng-model="register.password" placeholder="Password" minlength="8" required>
+                    <input name="password" type="password" ng-model="password.password" placeholder="Password" minlength="8" required>
                 </label>
                 <div class="item item-icon-left" ng-show="registerform.username.$error.minlength">
                     <i class="icon ion-alert-circled error"></i>
                     <span>Password has a minimum length of 8!</span>
                 </div>
+                
+                <label class="item item-input validated">
+                    <input name="confirmed" type="password" ng-model="password.confirm" placeholder="Confirm Password" required>
+                </label>
             </div>
             <div>
                 <button type="submit" class="button button-block button-positive">Register</button>
