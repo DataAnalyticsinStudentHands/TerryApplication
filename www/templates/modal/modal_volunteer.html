@@ -5,40 +5,55 @@
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
-        
+        <form name="volunteer" novalidate class="submit" on-valid-submit="saveModal('volunteer')">
+
             <p class="item item-icon-left item-text-wrap">
                 <i class="icon ion-information"></i>Describe your role in the organization, the type of organization you were associated with, how many hours of service you devoted each week, and when you participated in each activity. <b>List your most recent service first.</b>
-        </p>
-            
-            <form novalidate class="submit" on-valid-submit="saveModal('volunteer')">
+            </p>
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">
-                        <span class="input-label">Place of Service:</span>
-                        <input name="place" ng-model="lists.volunteer.place" type="text" placeholder="place" required>
+                        <span class="input-label">Place of Service:<span style="color: red;">*</span></span>
+                        <input name="place" ng-model="lists.volunteer.place" type="text" placeholder="place" ng-maxlength="100" required>
                     </label>
+                    <div class="item item-icon-left" ng-show="volunteer.place.$error.maxlength">
+                        <i class="icon ion-alert-circled error"></i>
+                        <span>Max 100 characters allowed</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label class="item item-input validated">
-                        <span class="input-label">Description of Service:</span>
-                        <input name="description" ng-model="lists.volunteer.description" type="text" placeholder="description" required>
+                        <span class="input-label">Description of Service:<span style="color: red;">*</span></span>
+                        <input name="description" ng-model="lists.volunteer.description" type="text" placeholder="description" ng-maxlength="100" required>
                     </label>
+                    <div class="item item-icon-left" ng-show="volunteer.description.$error.maxlength">
+                        <i class="icon ion-alert-circled error"></i>
+                        <span>Max 100 characters allowed</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <label class="item item-input">
+                    <label class="item item-input validated">
                         <span class="input-label">Hours per Week:</span>
                         <input name="hours_week" ng-model="lists.volunteer.hours_week" type="number" placeholder="hours">
                     </label>
+                    <div class="item item-icon-left" ng-show="volunteer.hours_week.$error.number">
+                        <i class="icon ion-alert-circled error"></i>
+                        <span>Input must be a number</span>
+                    </div>
                 </div>
                 <div class="col">
                     <label class="item item-input validated">
                         <span class="input-label">Total Hours:</span>
                         <input name="hours_total" ng-model="lists.volunteer.hours_total" type="number" placeholder="hours">
                     </label>
+                    <div class="item item-icon-left" ng-show="volunteer.hours_total.$error.number">
+                        <i class="icon ion-alert-circled error"></i>
+                        <span>Input must be a number</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
