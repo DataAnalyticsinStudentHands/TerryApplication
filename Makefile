@@ -37,7 +37,7 @@ git-staging:
 deploy:
 	@ cd $(BUILD_DIR) && \
 	git add -A && \
-	git commit -m "fixes Jan 21" && \
+	git commit -m "fixes Jan 23" && \
 	git push -f origin +master:refs/heads/master
 
 .PHONY: build clean deploy git-prod git-staging prod staging
