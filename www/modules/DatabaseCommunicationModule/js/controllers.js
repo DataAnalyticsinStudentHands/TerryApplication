@@ -28,11 +28,18 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
                     ngNotify.set($scope.loginMsg, 'success');
                     $state.go('tabs.applications');
                 }, function (error) {
-                    $scope.loginMsg = "Wrong username or password!";
-                    ngNotify.set($scope.loginMsg, {
-                        position: 'bottom',
-                        type: 'error'
-                    });
+                    if (error.status === 0) {
+                        ngNotify.set("Internet or Server not available", {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    } else {
+                        $scope.loginMsg = "Wrong username or password!";
+                        ngNotify.set($scope.loginMsg, {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    }
                     Auth.clearCredentials();
                 });
                 $scope.signin.userName = '';
@@ -65,7 +72,7 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
 databaseController.controller('registerCtrl', ['$scope', '$state', 'Auth', 'ngNotify', '$ionicLoading',
     function ($scope, $state, Auth, ngNotify, $ionicLoading) {
         'use strict';
-        
+
         $scope.register = {};
         $scope.password = {};
 
