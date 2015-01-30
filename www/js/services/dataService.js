@@ -41,54 +41,60 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
 
         getForm: function (acType) {
             switch (acType) {
-                case 'application':
-                    return application_form;
-                case 'transfer_application':
-                    return transfer_application_form;
+            case 'application':
+                return application_form;
+            case 'transfer_application':
+                return transfer_application_form;
             }
         },
-        getStates: function() {
+        getStates: function () {
             return states;
         },
-        getMarital_statuses: function() {
+        getMarital_statuses: function () {
             return marital_statuses;
         },
-        getGrades: function() {
+        getGrades: function () {
             return grades;
         },
-        getCourseTypes: function() {
+        getCourseTypes: function () {
             return course_types;
         },
-        
+
         getAllItems: function (acType) {
-            
+
             return Restangular.all(acType).getList().then(
                 function (result) {
-                    
+
                     result = Restangular.stripRestangular(result);
                     result.type = acType;
                     return result;
                 },
                 function (error) {
-                    
-                    ngNotify.set("Something went wrong retrieving data for " + acType, {
-                        position: 'bottom',
-                        type: 'error'
-                    });
+                    if (error.status === 0) {
+                        ngNotify.set("Internet or Server not available", {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    } else {
+                        ngNotify.set("Something went wrong retrieving data for " + acType, {
+                            position: 'bottom',
+                            type: 'error'
+                        });
+                    }
                 }
             );
 
         },
         getItem: function (type, item_id) {
-            
+
             return Restangular.one(type, item_id).get().then(
                 function (result) {
-                    
+
                     result = Restangular.stripRestangular(result);
                     return result[0];
                 },
                 function (error) {
-                    
+
                     ngNotify.set("Something went wrong retrieving data for type " + type, {
                         position: 'bottom',
                         type: 'error'
@@ -116,9 +122,11 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
             );
         },
         updateItem: function (type, item_id, item) {
-            
-            $ionicLoading.show({template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Updating data on server ...</div>'});
-            
+
+            $ionicLoading.show({
+                template: '<div class="item item-icon-left"><i class="icon ion-loading-c"></i>Updating data on server ...</div>'
+            });
+
             return Restangular.all(type).customPUT(item, item.id).then(
                 function (result) {
                     $ionicLoading.hide();
@@ -137,7 +145,7 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
             );
         },
         storeItem: function (type, item) {
-            
+
             localStorage.setItem(type, item);
             return true;
 
