@@ -24,25 +24,6 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
         }
     ];
 
-    $scope.yearInSchoolList = [
-        {
-            text: "Freshman",
-            checked: true
-        },
-        {
-            text: "Sophomore",
-            checked: false
-        },
-        {
-            text: "Junior",
-            checked: false
-        },
-        {
-            text: "Senior",
-            checked: false
-        }
-    ];
-
     $scope.myapplication = application;
 
     $scope.myVariables = {
@@ -63,6 +44,26 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
     
     $scope.grades = DataService.getGrades();
     $scope.course_types = DataService.getCourseTypes();
+    
+    //variable for multi selects
+    $scope.yearInSchool = [
+        {
+            text: "Freshman",
+            checked: false
+        },
+        {
+            text: "Sophomore",
+            checked: false
+        },
+        {
+            text: "Junior",
+            checked: false
+        },
+        {
+            text: "Senior",
+            checked: false
+        }
+    ];
 
     //variables for lists
     $scope.lists = {};
@@ -117,6 +118,7 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         $scope.myVariables.current_modal_mode = "Add";
         $scope.lists[acType] = {};
+        $scope.yearInSchoolList = $scope.yearInSchool;
 
         if (applied_received !== undefined && applied_received !== null) {
             $scope.lists[acType].applied_received = applied_received;
@@ -142,6 +144,10 @@ angular.module('Controllers').controller('MyApplicationController', function ($s
 
         $scope.myVariables.current_modal_mode = "Edit";
         $scope.lists[acType] = item;
+        
+        if (acType === 'activity' || acType === 'award') {
+            $scope.yearInSchoolList = angular.fromJson($scope.lists[acType].year);
+        }
 
         $ionicModal.fromTemplateUrl('templates/modal/modal_' + acType + '.html', {
             scope: $scope,

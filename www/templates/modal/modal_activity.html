@@ -5,16 +5,17 @@
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
     </ion-header-bar>
     <ion-content>
-        <p class="item item-icon-left item-text-wrap">
+        
+        <form name="activity" novalidate class="submit" on-valid-submit="saveModal('activity')">
+            <p class="item item-icon-left item-text-wrap">
                 <i class="icon ion-information"></i>
                 <b>In order of importance to you</b>, list your top six extracurricular activities (include band, clubs, affiliations, etc.) and the position(s) you held.
             </p>
-        <form novalidate class="submit" on-valid-submit="saveModal('activity')">
             
                 <div class="row">
                     <div class="col">
                         <label class="item item-input validated">
-                            <span class="input-label">Organization/Activity:</span>
+                            <span class="input-label">Organization/Activity:<span style="color: red;">*</span></span>
                             <input name="activity" ng-model="lists.activity.activity" type="text" placeholder="activity" required>
                         </label>
                     </div>
@@ -22,7 +23,7 @@
                 <div class="row">
                     <div class="col">
                         <label class="item item-input validated">
-                            <span class="input-label">Position(s) held<br>[e.g. member]:</span>
+                            <span class="input-label">Position(s) held<br>[e.g. member]:<span style="color: red;">*</span></span>
                             <input name="position" ng-model="lists.activity.position" type="text" placeholder="position" required>
                         </label>
                     </div>
@@ -30,7 +31,7 @@
                 <div class="row">
                     <div class="col">
                         <label class="item item-input validated">
-                            <span class="input-label">Description of Activity:</span>
+                            <span class="input-label">Description of Activity:<span style="color: red;">*</span></span>
                             <input name="description" ng-model="lists.activity.description" type="text" placeholder="description" required>
                         </label>
                     </div>
@@ -38,6 +39,7 @@
 
                 <div class="row">
                     <div class="col">
+                        <div class="item item-divider">During what year(s)?<span style="color: red;">*</span></div>
                         <ion-checkbox ng-repeat="item in yearInSchoolList"
                                 ng-model="item.checked" 
                                 ng-checked="item.checked">
