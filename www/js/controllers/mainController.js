@@ -13,12 +13,16 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
     $scope.main = {};
     $scope.main.application_type = 'Freshman';
 
-    if (freshman_applications.length !== 0) {
-        $scope.applications = freshman_applications;
+    if (freshman_applications === undefined && transfer_applications === undefined) {
+        $scope.applications = "error";
     } else {
-        $scope.applications = transfer_applications;
+        if (freshman_applications.length !== 0) {
+            $scope.applications = freshman_applications;
+        } else(transfer_applications.length !== 0) {
+            $scope.applications = transfer_applications;
+        }
     }
-    
+
     $scope.myapplication = {};
 
     // callback for ng-click 'createApplication'- open Modal dialog to create a new application
@@ -42,7 +46,9 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
                     function (success) {
                         $scope.applications = DataService.getAllItems('application');
                         $scope.modal.hide();
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
                     }
                 );
                 break;
@@ -51,12 +57,14 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
                     function (success) {
                         $scope.applications = DataService.getAllItems('transferApplication');
                         $scope.modal.hide();
-                        $state.go($state.current, {}, {reload: true});
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
                     }
                 );
                 break;
             }
-            
+
         } else {
             ngNotify.set("Remember to fill in everything!", {
                 position: 'bottom',

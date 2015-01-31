@@ -29,9 +29,10 @@ databaseController.controller('loginCtrl', ['$scope', 'Auth', '$state', 'ngNotif
                     $state.go('tabs.applications');
                 }, function (error) {
                     if (error.status === 0) {
-                        ngNotify.set("Internet or Server not available", {
+                        ngNotify.set("Internet or Server not available, we can't process your login. Please make sure you have internet connection.", {
                             position: 'bottom',
-                            type: 'error'
+                            type: 'error',
+                            sticky: true
                         });
                     } else {
                         $scope.loginMsg = "Wrong username or password!";
