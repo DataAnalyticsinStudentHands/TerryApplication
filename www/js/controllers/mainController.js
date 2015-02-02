@@ -18,7 +18,7 @@ angular.module('Controllers').controller('MainController', function ($scope, $st
     } else {
         if (freshman_applications.length !== 0) {
             $scope.applications = freshman_applications;
-        } else(transfer_applications.length !== 0) {
+        } else {
             $scope.applications = transfer_applications;
         }
     }

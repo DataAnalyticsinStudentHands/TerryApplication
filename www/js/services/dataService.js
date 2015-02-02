@@ -71,7 +71,7 @@ angular.module('Services').factory('DataService', function (Restangular, $http, 
                 },
                 function (error) {
                     if (error.status === 0) {
-                        ngNotify.set("Internet or Server not available", {
+                        ngNotify.set("Internet or Server not available. Please make sure you have internet connection.", {
                             position: 'bottom',
                             type: 'error'
                         });
